@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GpsNote.Converters"
+             x:Class="GpsNote.Views.SignInPage"
+             Title ="{Binding Title}">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Margin="30, 50, 30, 30"
+                     Spacing="20"
+                     VerticalOptions="CenterAndExpand">
+            <Entry x:Name="name"
+                   Text="{Binding Name}"
+                   Placeholder="Enter name" />
+            <Entry x:Name="password"
+                   Text="{Binding Password}"
+                   Placeholder="Enter password" />
+        </StackLayout>
+
+        <StackLayout Grid.Row="1"
+                     Margin="30">
+            <Button Text="SIGNIN"
+                    BorderWidth="1"
+                    IsEnabled="{Binding IsSignInButtonEnabled}">
+               
+            </Button>
+
+            <Label HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <FormattedString.Spans>
+                            <Span Text="SignUp" 
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnSignUpTapCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString.Spans>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+    </Grid>
+
+</ContentPage>

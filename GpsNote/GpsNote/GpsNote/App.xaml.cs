@@ -1,3 +1,4 @@
+using GpsNote.Services.Repository;
 using GpsNote.ViewModels;
 using GpsNote.Views;
 using Prism;
@@ -19,15 +20,28 @@ namespace GpsNote
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/SignInPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
+
+            #region service registry
+
+            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<RepositoryService>());
+
+            #endregion
+
+
+            #region navigation registry
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
+
+            #endregion
         }
     }
 }
