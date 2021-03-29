@@ -47,7 +47,6 @@ namespace GpsNote.ViewModels
 
 
 
-
         #region -- Overrides --
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
@@ -56,7 +55,7 @@ namespace GpsNote.ViewModels
 
             if (args.PropertyName == nameof(Password) || args.PropertyName == nameof(Email))
             {
-                if (Email.Length > 0 && Password.Length > 0)
+                if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
                     IsSignInButtonEnabled = true;
                 else
                     IsSignInButtonEnabled = false;
@@ -64,6 +63,7 @@ namespace GpsNote.ViewModels
         }
 
         #endregion
+
 
 
         #region Private helpers

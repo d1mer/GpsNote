@@ -1,4 +1,5 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,7 +53,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignUpButtonEnabled, value);
         }
 
+
+        public DelegateCommand OnSignUpCommand => new DelegateCommand(RegistrationUser, CanExecute);
+
         #endregion
+
 
 
         #region -- Overrides --
@@ -61,16 +66,29 @@ namespace GpsNote.ViewModels
         {
             base.OnPropertyChanged(args);
 
-            if(args.PropertyName == nameof(Name) || 
+            if (args.PropertyName == nameof(Name) ||
                 args.PropertyName == nameof(Email) ||
                 args.PropertyName == nameof(Password) ||
                 args.PropertyName == nameof(ConfirmPassword))
             {
-                if (Name.Length > 0 && Email.Length > 0 && Password.Length > 0 && ConfirmPassword.Length > 0)
+                if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
                     IsSignUpButtonEnabled = true;
                 else
                     IsSignUpButtonEnabled = false;
             }
+        }
+
+        #endregion
+
+
+
+        #region -- Private helpers --
+
+        private bool CanExecute() => IsSignUpButtonEnabled;
+
+        private async void RegistrationUser()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

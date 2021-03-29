@@ -30,7 +30,8 @@
                      Margin="30, 10, 30, 30">
             <Button Text="SIGNUP"
                     BorderWidth="1"
-                    IsEnabled="{Binding IsSignUpButtonEnabled}">
+                    IsEnabled="{Binding IsSignUpButtonEnabled}"
+                    Command="{Binding OnSignUpCommand}">
 
             </Button>
         </StackLayout>
