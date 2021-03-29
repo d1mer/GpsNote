@@ -19,11 +19,11 @@ namespace GpsNote.ViewModels
 
         #region -- Publics -- 
 
-        private string _name = "";
-        public string Name 
+        private string _email = "";
+        public string Email 
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _email;
+            set => SetProperty(ref _email, value);
         }
 
         private string _password = "";
@@ -54,9 +54,9 @@ namespace GpsNote.ViewModels
         {
             base.OnPropertyChanged(args);
 
-            if (args.PropertyName == nameof(Password) || args.PropertyName == nameof(Name))
+            if (args.PropertyName == nameof(Password) || args.PropertyName == nameof(Email))
             {
-                if (Name.Length > 0 && Password.Length > 0)
+                if (Email.Length > 0 && Password.Length > 0)
                     IsSignInButtonEnabled = true;
                 else
                     IsSignInButtonEnabled = false;

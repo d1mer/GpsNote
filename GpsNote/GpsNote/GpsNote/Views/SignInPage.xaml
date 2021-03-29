@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:GpsNote.Converters"
              x:Class="GpsNote.Views.SignInPage"
              Title ="{Binding Title}">
 
@@ -15,9 +14,9 @@
         <StackLayout Margin="30, 50, 30, 30"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
-            <Entry x:Name="name"
-                   Text="{Binding Name}"
-                   Placeholder="Enter name" />
+            <Entry x:Name="email"
+                   Text="{Binding Email}"
+                   Placeholder="Enter email" />
             <Entry x:Name="password"
                    Text="{Binding Password}"
                    Placeholder="Enter password" />

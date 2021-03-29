@@ -16,14 +16,14 @@ namespace GpsNote.ViewModels
 
         #region -- Publics --
 
-        private string _name;
+        private string _name = "";
         public string Name 
         { 
             get => _name;
             set => SetProperty(ref _name, value);
         }
 
-        private string _email;
+        private string _email = "";
         public string Email
         {
             get => _email;
@@ -31,21 +31,21 @@ namespace GpsNote.ViewModels
         }
 
 
-        private string _password;
+        private string _password = "";
         public string Password
         {
             get => _password;
             set => SetProperty(ref _password, value);
         }
 
-        private string _confirmPassword;
+        private string _confirmPassword = "";
         public string ConfirmPassword
         {
             get => _confirmPassword;
             set => SetProperty(ref _confirmPassword, value);
         }
 
-        private bool _isSignUpButtonEnabled;
+        private bool _isSignUpButtonEnabled = false;
         public bool IsSignUpButtonEnabled 
         {
             get => _isSignUpButtonEnabled;
