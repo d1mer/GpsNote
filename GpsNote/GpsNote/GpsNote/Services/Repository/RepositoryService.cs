@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using GpsNote.Models;
 using SQLite;
 
@@ -9,24 +9,34 @@ namespace GpsNote.Services.Repository
 {
     public class RepositoryService : IRepository
     {
-        #region fields
+        #region -- Private fields --
 
-        private Lazy<SQLiteAsyncConnection> database;
+        private Lazy<SQLiteAsyncConnection> _database;
 
         #endregion
 
         public RepositoryService()
         {
-            database = new Lazy<SQLiteAsyncConnection>(() =>
+            _database = new Lazy<SQLiteAsyncConnection>(() =>
             {
                 string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "dbNote.db3");
 
-                SQLiteAsyncConnection _database = new SQLiteAsyncConnection(path);
+                SQLiteAsyncConnection database = new SQLiteAsyncConnection(path);
 
-                _database.CreateTableAsync<User>().Wait();
-                return _database;
+                database.CreateTableAsync<User>().Wait();
+                return database;
             });
         }
 
+        #region -- IRepository implementation --
+
+        public Task<T> GetEntityAsync<T>(Expression<Func<T, bool>> predicate) 
+            where T : IEntityBase, new() =>
+            _database.Value.FindAsync<T>(predicate);
+
+        public Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new() =>
+            _database.Value.InsertAsync(entity);
+
+        #endregion
     }
 }
