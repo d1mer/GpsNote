@@ -9,6 +9,9 @@ using Prism.Services;
 using GpsNote.Services.Authorization;
 using GpsNote.Models;
 using GpsNote.Helpers;
+using Xamarin.Forms;
+using GpsNote.Services.Settings;
+using GpsNote.Services.Repository;
 
 namespace GpsNote.ViewModels
 {
@@ -19,13 +22,17 @@ namespace GpsNote.ViewModels
 
         IPageDialogService _dialogService;
         IAuthorization _authorization;
+        ISettings _settings;
+        IRepository _repository;
 
         #endregion
 
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorization authorization) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorization authorization, IRepository repository, ISettings settings) : base(navigationService)
         {
             _dialogService = dialogService;
             _authorization = authorization;
+            _repository = repository;
+            _settings = settings;
 
             Title = "SignIn";      
         }
@@ -142,6 +149,9 @@ namespace GpsNote.ViewModels
             }
 
 
+            User existUser = await _repository.GetEntityAsync<User>((s) => Email == s.Email);
+            _settings.LoggedUser = existUser.Id;
+            await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
         }
 
         #endregion

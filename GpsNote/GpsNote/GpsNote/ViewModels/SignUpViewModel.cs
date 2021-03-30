@@ -181,6 +181,7 @@ namespace GpsNote.ViewModels
             };
 
             await NavigationService.GoBackAsync(parameters);
+            
            
         }
 
