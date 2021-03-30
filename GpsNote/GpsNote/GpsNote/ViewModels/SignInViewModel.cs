@@ -152,7 +152,7 @@ namespace GpsNote.ViewModels
             User existUser = await _repository.GetEntityAsync<User>((s) => Email == s.Email);
             _settings.LoggedUser = existUser.Id;
             //await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
-            await NavigationService.NavigateAsync(nameof(MainTabbedPage));
+            await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
         }
 
         #endregion
