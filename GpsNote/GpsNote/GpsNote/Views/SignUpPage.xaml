@@ -20,10 +20,12 @@
                    Text="{Binding Email}" />
             <Entry x:Name="password"
                    Text="{Binding Password}"
-                   Placeholder="Enter password" />
+                   Placeholder="Enter password"
+                   IsPassword="True" />
             <Entry x:Name="confirmPassword"
                    Text="{Binding ConfirmPassword}"
-                   Placeholder="Confirm password" />
+                   Placeholder="Confirm password"
+                   IsPassword="True" />
         </StackLayout>
 
         <StackLayout Grid.Row="1"

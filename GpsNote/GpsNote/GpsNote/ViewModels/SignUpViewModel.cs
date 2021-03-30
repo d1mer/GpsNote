@@ -1,5 +1,9 @@
-﻿using Prism.Commands;
+﻿using GpsNote.Helpers;
+using GpsNote.Models;
+using GpsNote.Services.Registration;
+using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,8 +13,19 @@ namespace GpsNote.ViewModels
 {
     public class SignUpViewModel : ViewModelBase
     {
-        public SignUpViewModel(INavigationService navigationService) : base(navigationService)
+        #region -- Private fields --
+
+        IRegistration _registration;
+        IPageDialogService _dialogService;
+
+        #endregion
+
+
+        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IRegistration registration) : base(navigationService)
         {
+            _registration = registration;
+            _dialogService = dialogService;
+
             Title = "SignUp";
         }
 
@@ -88,7 +103,81 @@ namespace GpsNote.ViewModels
 
         private async void RegistrationUser()
         {
-            throw new NotImplementedException();
+            Name = Name.Trim();
+            Email = Email.Trim();
+            Password = Password.Trim();
+            ConfirmPassword = ConfirmPassword.Trim();
+
+            if(!Validator.Validate(Name, Validator.patternName))
+            {
+                await _dialogService.DisplayAlertAsync("Error", 
+                                                       "Invalid login. Login must be from 4 to 16 characters and must not start with a number", 
+                                                       "Cancel");
+                Name = "";
+                Password = "";
+                ConfirmPassword = "";
+                return;
+            }
+
+            if (!Validator.Validate(Email, Validator.patternEmail))
+            {
+                await _dialogService.DisplayAlertAsync("Error", 
+                                                       "Invalid email. Try again", 
+                                                       "Cancel");
+                Email = "";
+                Password = "";
+                ConfirmPassword = "";
+                return;
+            }
+
+            if (!Validator.Validate(Password, Validator.patternPassword))
+            {
+                await _dialogService.DisplayAlertAsync("Error", 
+                                                       "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number", 
+                                                       "Cancel");
+                Password = "";
+                ConfirmPassword = "";
+                return;
+            }
+
+            if(Password != ConfirmPassword)
+            {
+                await _dialogService.DisplayAlertAsync("Error",
+                                                       "Passwords mismatch. Re-enter passwords",
+                                                       "Cancel");
+                Password = "";
+                ConfirmPassword = "";
+                return;
+            }
+
+            User newUser = new User
+            {
+                Name = Name,
+                Email = Email,
+                Password = Password
+            };
+
+            bool result = await _registration.IsRegistration(newUser);
+
+            if (!result)
+            {
+                await _dialogService.DisplayAlertAsync("Error",
+                                                       "This email is already taken. Come up with another",
+                                                       "Cancel");
+                Name = "";
+                Email = "";
+                Password = "";
+                ConfirmPassword = "";
+                return;
+            }
+
+            NavigationParameters parameters = new NavigationParameters
+            {
+                {"newUserEmail", newUser.Email }
+            };
+
+            await NavigationService.GoBackAsync(parameters);
+           
         }
 
         #endregion

@@ -1,3 +1,4 @@
+using GpsNote.Services.Registration;
 using GpsNote.Services.Repository;
 using GpsNote.ViewModels;
 using GpsNote.Views;
@@ -31,6 +32,7 @@ namespace GpsNote
             #region service registry
 
             containerRegistry.RegisterInstance<IRepository>(Container.Resolve<RepositoryService>());
+            containerRegistry.RegisterInstance<IRegistration>(Container.Resolve<RegistrationService>());
 
             #endregion
 

@@ -19,7 +19,8 @@
                    Placeholder="Enter email" />
             <Entry x:Name="password"
                    Text="{Binding Password}"
-                   Placeholder="Enter password" />
+                   Placeholder="Enter password"
+                   IsPassword="True" />
         </StackLayout>
 
         <StackLayout Grid.Row="1"
