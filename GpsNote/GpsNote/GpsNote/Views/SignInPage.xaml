@@ -27,8 +27,8 @@
                      Margin="30">
             <Button Text="SIGNIN"
                     BorderWidth="1"
-                    IsEnabled="{Binding IsSignInButtonEnabled}">
-               
+                    IsEnabled="{Binding IsSignInButtonEnabled}"
+                    Command="{Binding OnSignInButtonTapCommand}">
             </Button>
 
             <Label HorizontalOptions="CenterAndExpand"

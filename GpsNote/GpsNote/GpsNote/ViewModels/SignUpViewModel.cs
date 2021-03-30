@@ -171,6 +171,10 @@ namespace GpsNote.ViewModels
                 return;
             }
 
+            await _dialogService.DisplayAlertAsync("SUCCESS",
+                                                       "Account created!!!",
+                                                       "Cancel");
+
             NavigationParameters parameters = new NavigationParameters
             {
                 {"newUserEmail", newUser.Email }
