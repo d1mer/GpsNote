@@ -7,5 +7,6 @@
     <TabbedPage.Children>
         <local:MapPage />
         <local:NotesPage/>
+        <local:SettingsPage/>
     </TabbedPage.Children>
 </TabbedPage>

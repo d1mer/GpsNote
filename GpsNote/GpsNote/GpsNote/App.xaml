@@ -7,5 +7,12 @@
 
     <!-- Application resource dictionary -->
 
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor"
+                    Value="{DynamicResource NavigationBarColor}"/>
+            <Setter Property="BarTextColor"
+                    Value="{DynamicResource Secondarytextcolor}" />
+        </Style> 
+
   </Application.Resources>
 </prism:PrismApplication>

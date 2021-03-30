@@ -9,25 +9,33 @@ using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using GpsNote.Services.Settings;
+using System.Collections;
+using System.Collections.Generic;
+using GpsNote.Themes;
 
 namespace GpsNote
 {
     public partial class App
     {
+        private ISettings _settings;
+
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
         }
 
+
         protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            ISettings settings = Container.Resolve<SettingsService>();
-            if(settings.LoggedUser == -1)
+            _settings = Container.Resolve<SettingsService>();
+
+
+            if (_settings.LoggedUser == -1)
                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
             else
-                await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage");
+                await NavigationService.NavigateAsync(nameof(MainTabbedPage));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -51,8 +59,31 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<MainTabbedPage>();
+            containerRegistry.RegisterForNavigation<MapPage, MapViewModel>();
+            containerRegistry.RegisterForNavigation<NotesPage, NotesViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
 
             #endregion
         }
+
+
+        #region -- Private helpers --
+
+        private void ResourceLoader()
+        {
+            ICollection<ResourceDictionary> mergedDictionaries =                   Application.Current.Resources.MergedDictionaries;
+
+            switch (_settings.DarkTheme)
+            {
+                case false:
+                    mergedDictionaries.Add(new LightTheme());
+                    break;
+                case true:
+                    mergedDictionaries.Add(new DarkTheme());
+                    break;
+            }
+        }
+
+        #endregion
     }
 }
