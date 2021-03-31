@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              Title="Map">
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
-        <maps:Map x:Name="map"
-                  VerticalOptions="FillAndExpand"/>
+        <controls:CustomMap x:Name="map"
+                  MyLocationEnabled="True"
+                  VerticalOptions="FillAndExpand"
+                  IsShowingUser="True"
+                  HasScrollEnabled="True"
+                  HasZoomEnabled="True" />
     </Grid>
 </ContentPage>

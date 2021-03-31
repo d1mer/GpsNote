@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpsNote", "GpsNote\GpsNote\GpsNote.csproj", "{6E8579EA-7139-477E-A723-A86A2A7A78B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsNote", "GpsNote\GpsNote\GpsNote.csproj", "{6E8579EA-7139-477E-A723-A86A2A7A78B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpsNote.Android", "GpsNote\GpsNote.Android\GpsNote.Android.csproj", "{88AC1EA1-CEAE-4BEB-85A8-FFEA7AEBD057}"
 EndProject
@@ -98,6 +98,7 @@ Global
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|iPhone.Build.0 = Debug|iPhone
+		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{32F00DC6-62A8-4C71-B84C-019C5A2C33F3}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator

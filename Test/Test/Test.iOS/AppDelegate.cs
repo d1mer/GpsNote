@@ -1,10 +1,11 @@
-﻿using Foundation;
-using Prism;
-using Prism.Ioc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using Foundation;
 using UIKit;
 
-
-namespace GpsNote.iOS
+namespace Test.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
@@ -22,18 +23,9 @@ namespace GpsNote.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            Xamarin.FormsGoogleMaps.Init("AIzaSyBqqk9aQg8BMyPcApsArXclgqkXNXmHf28");
-            LoadApplication(new App(new iOSInitializer()));
+            LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
-        }
-    }
-
-    public class iOSInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
         }
     }
 }
