@@ -12,6 +12,7 @@ using GpsNote.Services.Settings;
 using GpsNote.Helpers;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using System.ComponentModel;
 
 namespace GpsNote.ViewModels
 {
@@ -23,19 +24,33 @@ namespace GpsNote.ViewModels
         ISettings _settings;
 
         #endregion
+
+       
+
         public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) : base(navigationService)
         {
             _dialogService = dialogService;
             _settings = settings;
 
-            Xamarin.Forms.Element.
+            Map = new Xamarin.Forms.GoogleMaps.Map();
+            //Map.MapClicked += Map_MapClicked;
+            
+
+            var position = new Position(50.79762, -122.40181);
+            Map.MoveToRegion(new MapSpan(position, 0.01, 0.01));
+
+            //Map.MapType = MapType.Satellite;
+
             if (!string.IsNullOrEmpty(_settings.LastPosition))
             {
-                Position position = RecordPosition.ReadPositionFromString(_settings.LastPosition);
+                //Position position = RecordPosition.ReadPositionFromString(_settings.LastPosition);
                 
             }
         }
 
+        
+
+        public Xamarin.Forms.GoogleMaps.Map Map { get; private set; }
         
         #region -- Publics -- 
         MapType mapType;

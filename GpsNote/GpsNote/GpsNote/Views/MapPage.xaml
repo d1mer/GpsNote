@@ -2,9 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
+             xmlns:viewModels="clr-namespace:GpsNote.ViewModels"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:prism="http://prismlibrary.com"
              Title="Map">
+
+    <!--<ContentPage.BindingContext>
+        <viewModels:MapViewModel/>
+    </ContentPage.BindingContext>-->
+    <ContentPage.Content>
+        <ContentView Content="{Binding Map}"/>
+    </ContentPage.Content>
 
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
@@ -14,7 +22,8 @@
                   HasScrollEnabled="True"
                   HasZoomEnabled="True" 
                   MapType="{Binding MapType}"
-                  >
+                  ca
+                  BindingContext="{Binding Map}">
             
             <maps:Map.Behaviors>
                 <prism:EventToCommandBehavior EventName="MapClicked"
