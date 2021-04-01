@@ -3,15 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:prism="http://prismlibrary.com"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              Title="Map">
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
-        <controls:CustomMap x:Name="map"
+        <maps:Map x:Name="map"
                   MyLocationEnabled="True"
                   VerticalOptions="FillAndExpand"
                   IsShowingUser="True"
                   HasScrollEnabled="True"
-                  HasZoomEnabled="True" />
+                  HasZoomEnabled="True"           
+                  MapType="{Binding MapType}">
+            <maps:Map.Behaviors>
+                <prism:EventToCommandBehavior EventName="MapClicked"
+                                              Command="{Binding TapCommand}"/>
+            </maps:Map.Behaviors>
+        </maps:Map>
     </Grid>
 </ContentPage>
