@@ -12,6 +12,8 @@ using GpsNote.Services.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using GpsNote.Themes;
+using Xamarin.Forms.GoogleMaps;
+using GpsNote.Helpers;
 
 namespace GpsNote
 {
