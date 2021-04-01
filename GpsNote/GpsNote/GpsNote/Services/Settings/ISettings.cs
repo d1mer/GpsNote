@@ -9,6 +9,6 @@ namespace GpsNote.Services.Settings
     {
         int LoggedUser { get; set; }
         bool DarkTheme { get; set; }
-        Position LastPosition { get; set; }
+        //Position LastPosition { get; set; }
     }
 }

@@ -19,11 +19,11 @@ namespace GpsNote.Services.Settings
             get => Preferences.Get(nameof(DarkTheme), false);
             set => Preferences.Set(nameof(DarkTheme), value);
         }
-        public Position LastPosition 
-        {
-            get => Preferences.Get(nameof(LastPosition),);
-            set => Preferences.Set(nameof(LastPosition), value);
-        }
+        //public Position LastPosition 
+        //{
+        //    get => Preferences.Get(nameof(LastPosition),);
+        //    set => Preferences.Set(nameof(LastPosition), value);
+        //}
 
         #endregion
     }
