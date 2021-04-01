@@ -14,10 +14,11 @@ namespace GpsNote.ViewModels
         IPageDialogService _dialogService;
         public MapViewModel(INavigationService navigationService, IPageDialogService dialogService) : base(navigationService)
         {
-            MapType = MapType.Satellite;
             _dialogService = dialogService;
         }
 
+
+        #region -- Publics -- 
         MapType mapType;
         public MapType MapType
         {
@@ -25,20 +26,15 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref mapType, value);
         }
 
-        public DelegateCommand TapCommand => new DelegateCommand(EventTap);
+        public DelegateCommand<Position> TapCommand => new DelegateCommand<Position>(EventTap);
+        //public DelegateCommand TapCommand => new DelegateCommand(EventTap);
 
-        private async void EventTap()
+        #endregion
+
+        private async void EventTap(Position position)
         {
-           await _dialogService.DisplayAlertAsync("SUCCESS",
-                                                       "Account created!!!",
-                                                       "Cancel");
+            await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
+            //await _dialogService.DisplayAlertAsync("Position", $"RRRRR", "Cancel");
         }
-
-        //private CustomMap map = new CustomMap();
-        //public Map Map
-        //{
-        //    get => map;
-        //    set => SetProperty(ref map, value);
-        //}
     }
 }
