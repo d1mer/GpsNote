@@ -5,6 +5,8 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.ViewModels
@@ -26,15 +28,14 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref mapType, value);
         }
 
-        public DelegateCommand<Position> TapCommand => new DelegateCommand<Position>(EventTap);
-        //public DelegateCommand TapCommand => new DelegateCommand(EventTap);
+        public ICommand MapTapCommand => new Command(EventTap);
 
         #endregion
 
-        private async void EventTap(Position position)
+        private async void EventTap(Object _position)
         {
+            Position position = (Position)_position;
             await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
-            //await _dialogService.DisplayAlertAsync("Position", $"RRRRR", "Cancel");
         }
     }
 }

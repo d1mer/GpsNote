@@ -4,15 +4,8 @@
              x:Class="GpsNote.Views.MapPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:converters="clr-namespace:GpsNote.Converters"
              Title="Map">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:MapClickedEventArgsConverter x:Key="mapClickedEventArgsConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
         <maps:Map x:Name="map"
@@ -20,12 +13,13 @@
                   VerticalOptions="FillAndExpand"
                   HasScrollEnabled="True"
                   HasZoomEnabled="True" 
-                  MapType="{Binding MapType}">
+                  MapType="{Binding MapType}"
+                  >
             
             <maps:Map.Behaviors>
                 <prism:EventToCommandBehavior EventName="MapClicked"
-                                              Command="{Binding TapCommand}"
-                                              EventArgsConverter="{StaticResource mapClickedEventArgsConverter}" />
+                                              Command="{Binding MapTapCommand}"
+                                              EventArgsParameterPath="Point" />
             </maps:Map.Behaviors>
         </maps:Map>
     </Grid>
