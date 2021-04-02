@@ -7,13 +7,6 @@
              xmlns:prism="http://prismlibrary.com"
              Title="Map">
 
-    <!--<ContentPage.BindingContext>
-        <viewModels:MapViewModel/>
-    </ContentPage.BindingContext>-->
-    <ContentPage.Content>
-        <ContentView Content="{Binding Map}"/>
-    </ContentPage.Content>
-
     <Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
         <maps:Map x:Name="map"
@@ -21,9 +14,7 @@
                   VerticalOptions="FillAndExpand"
                   HasScrollEnabled="True"
                   HasZoomEnabled="True" 
-                  MapType="{Binding MapType}"
-                  ca
-                  BindingContext="{Binding Map}">
+                  MapType="{Binding MapType}">
             
             <maps:Map.Behaviors>
                 <prism:EventToCommandBehavior EventName="MapClicked"

@@ -16,7 +16,7 @@ using System.ComponentModel;
 
 namespace GpsNote.ViewModels
 {
-    public class MapViewModel : ViewModelBase
+    public class MapViewModel
     {
         #region -- Private fields -- 
 
@@ -25,9 +25,12 @@ namespace GpsNote.ViewModels
 
         #endregion
 
-       
+        public MapViewModel()
+        {
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) : base(navigationService)
+        }
+
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) 
         {
             _dialogService = dialogService;
             _settings = settings;
