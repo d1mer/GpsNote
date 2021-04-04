@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
              xmlns:viewModels="clr-namespace:GpsNote.ViewModels"
-             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              Title="Map">
 
-    <Grid HorizontalOptions="FillAndExpand"
+    <!--<Grid HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
         <maps:Map x:Name="map"
                   MyLocationEnabled="True"
@@ -25,5 +26,15 @@
                                               EventArgsParameterPath="Position" />
             </maps:Map.Behaviors>
         </maps:Map>
+    </Grid>-->
+
+    <Grid>
+        <controls:CustomMap MapType="{Binding MapType}"
+                            CurrentPosition="{Binding LastPosition}"
+                            CurrentZoom="{Binding LastZoom}"
+                            IsRequiredCameraChanging="{Binding IsRequiredCameraChanging}">
+            
+        </controls:CustomMap>
     </Grid>
+    
 </ContentPage>

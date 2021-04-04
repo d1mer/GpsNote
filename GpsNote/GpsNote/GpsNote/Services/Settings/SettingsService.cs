@@ -25,6 +25,12 @@ namespace GpsNote.Services.Settings
             set => Preferences.Set(nameof(LastPosition), value);
         }
 
+        public double LastZoom
+        {
+            get => Preferences.Get(nameof(LastZoom), 2.0);
+            set => Preferences.Set(nameof(LastZoom), value);
+        }
+
         #endregion
     }
 }

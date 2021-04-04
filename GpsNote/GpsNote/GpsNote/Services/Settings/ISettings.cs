@@ -10,5 +10,6 @@ namespace GpsNote.Services.Settings
         int LoggedUser { get; set; }
         bool DarkTheme { get; set; }
         string LastPosition { get; set; }
+        double LastZoom { get; set; }
     }
 }

@@ -16,51 +16,64 @@ using System.ComponentModel;
 
 namespace GpsNote.ViewModels
 {
-    public class MapViewModel
+    public class MapViewModel : ViewModelBase
     {
         #region -- Private fields -- 
 
-        IPageDialogService _dialogService;
-        ISettings _settings;
-
+        private IPageDialogService _dialogService;
+        private ISettings _settings;
+        private bool _flag = true;
         #endregion
 
-        public MapViewModel()
-        {
+       
 
-        }
-
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) 
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) : base(navigationService)
         {
             _dialogService = dialogService;
             _settings = settings;
 
-            Map = new Xamarin.Forms.GoogleMaps.Map();
-            //Map.MapClicked += Map_MapClicked;
             
-
-            var position = new Position(50.79762, -122.40181);
-            Map.MoveToRegion(new MapSpan(position, 0.01, 0.01));
-
-            //Map.MapType = MapType.Satellite;
-
             if (!string.IsNullOrEmpty(_settings.LastPosition))
             {
-                //Position position = RecordPosition.ReadPositionFromString(_settings.LastPosition);
-                
+                IsRequiredCameraChanging = true;
+                _flag = false;
+                LastPosition = RecordPosition.ReadPositionFromString(_settings.LastPosition);
+                LastZoom = _settings.LastZoom;
+                _flag = true;
+                //IsRequiredCameraChanging = true;
             }
         }
 
         
-
-        public Xamarin.Forms.GoogleMaps.Map Map { get; private set; }
         
         #region -- Publics -- 
-        MapType mapType;
+
+        private MapType mapType;
         public MapType MapType
         {
             get => mapType;
             set => SetProperty(ref mapType, value);
+        }
+
+        private Position lastPosition;
+        public Position LastPosition
+        {
+            get => lastPosition;
+            set => SetProperty(ref lastPosition, value);
+        }
+
+        private double lastZoom;
+        public double LastZoom
+        {
+            get => lastZoom;
+            set => SetProperty(ref lastZoom, value);
+        }
+
+        private bool isRequiredCameraChanging;
+        public bool IsRequiredCameraChanging
+        {
+            get => isRequiredCameraChanging;
+            set => SetProperty(ref isRequiredCameraChanging, value);
         }
 
         public DelegateCommand<Object> MapTapCommand => new DelegateCommand<Object>(OnClickMap);
@@ -68,10 +81,32 @@ namespace GpsNote.ViewModels
 
         #endregion
 
+
+        #region -- Overrides --
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            if (!_flag)
+            {
+                return;
+            }
+
+            base.OnPropertyChanged(args);
+
+            if(args.PropertyName == nameof(LastPosition) ||
+                args.PropertyName == nameof(LastZoom))
+            {
+                _settings.LastPosition = RecordPosition.WritePositionToString(LastPosition);
+                _settings.LastZoom = LastZoom;
+            }
+        }
+
+        #endregion
+
         private async void OnClickMap(Object _position)
         {
             Position position = (Position)_position;
-            //await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
+            await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
         }
 
         private async void OnCameraLed(Object _cameraPosition)
