@@ -34,7 +34,9 @@
                             CurrentZoom="{Binding LastZoom}"
                             CurrentBearing="{Binding LastBearing}"
                             CurrentTilt="{Binding LastTilt}"
-                            IsRequiredCameraChanging="{Binding IsRequiredCameraChanging}">
+                            IsRequiredCameraChanging="{Binding IsRequiredCameraChanging}"
+                            Pins="{Binding Pins}"
+                            PinAdded="{Binding PinAdded}">
             
         </controls:CustomMap>
     </Grid>

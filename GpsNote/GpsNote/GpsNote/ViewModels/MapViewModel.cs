@@ -13,6 +13,8 @@ using GpsNote.Helpers;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.ComponentModel;
+using GpsNote.Services.Repository;
+using GpsNote.Models;
 
 namespace GpsNote.ViewModels
 {
@@ -22,15 +24,17 @@ namespace GpsNote.ViewModels
 
         private IPageDialogService _dialogService;
         private ISettings _settings;
+        private IRepository _repository;
         private bool _flag = true;
         #endregion
 
        
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings) : base(navigationService)
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings, IRepository repository) : base(navigationService)
         {
             _dialogService = dialogService;
             _settings = settings;
+            _repository = repository;
 
             
             if (!string.IsNullOrEmpty(_settings.LastPosition))
@@ -42,8 +46,9 @@ namespace GpsNote.ViewModels
                 LastBearing = _settings.LastBearing;
                 LastTilt = _settings.LastTilt;
                 _flag = true;
-                //IsRequiredCameraChanging = true;
             }
+
+           Pins = _repository.GetPinsAsync(_settings.LoggedUser).Result;
         }
 
         
@@ -92,10 +97,25 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref isRequiredCameraChanging, value);
         }
 
+        private List<Pin> pins;
+        public List<Pin> Pins
+        {
+            get => pins;
+            set => SetProperty(ref pins, value);
+        }
+
+        private Pin pinAdded;
+        public Pin PinAdded
+        {
+            get => pinAdded;
+            set => SetProperty(ref pinAdded, value);
+        }
+
         public DelegateCommand<Object> MapTapCommand => new DelegateCommand<Object>(OnClickMap);
         public DelegateCommand<Object> CameraIdLedCommand => new DelegateCommand<Object>(OnCameraLed);
 
         #endregion
+
 
 
         #region -- Overrides --
@@ -118,6 +138,15 @@ namespace GpsNote.ViewModels
                 _settings.LastZoom = LastZoom;
                 _settings.LastBearing = LastBearing;
                 _settings.LastTilt = LastTilt;
+            }
+
+            if(args.PropertyName == nameof(PinAdded))
+            {
+                PinModel pinModel = new PinModel
+                {
+                    Pin = PinAdded,
+                    Owner = _settings.LoggedUser
+                };
             }
         }
 

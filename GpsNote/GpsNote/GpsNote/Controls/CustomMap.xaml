@@ -5,6 +5,7 @@
              x:Class="GpsNote.Controls.CustomMap">
     <ContentView.Content>
         <maps:Map x:Name="map"
-                  CameraIdled="Map_CameraIdled" />
+                  CameraIdled="Map_CameraIdled"
+                  MapClicked="Map_MapClicked"/>
     </ContentView.Content>
 </ContentView>

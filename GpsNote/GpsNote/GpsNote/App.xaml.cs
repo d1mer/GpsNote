@@ -33,11 +33,11 @@ namespace GpsNote
 
             _settings = Container.Resolve<SettingsService>();
 
-            await NavigationService.NavigateAsync("NavigationPage/MapPage");
-            //if (_settings.LoggedUser == -1)
-            //   await NavigationService.NavigateAsync("NavigationPage/SignInPage");
-            //else
-            //    await NavigationService.NavigateAsync(nameof(MainTabbedPage));
+            //await NavigationService.NavigateAsync("NavigationPage/MapPage");
+            if (_settings.LoggedUser == -1)
+                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+            else
+                await NavigationService.NavigateAsync(nameof(MainTabbedPage));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -73,7 +73,7 @@ namespace GpsNote
 
         private void ResourceLoader()
         {
-            ICollection<ResourceDictionary> mergedDictionaries =                   Application.Current.Resources.MergedDictionaries;
+            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
 
             switch (_settings.DarkTheme)
             {

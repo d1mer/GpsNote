@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Xamarin.Forms.GoogleMaps;
+using Xamarin.Forms.Xaml;
 
 namespace GpsNote.Controls
 {
@@ -64,7 +61,7 @@ namespace GpsNote.Controls
                                     defaultBindingMode: BindingMode.TwoWay,
                                     propertyChanged: CurrentBearingPropertyChanged);
 
-       
+
 
         public static readonly BindableProperty CurrentTiltProperty =
             BindableProperty.Create(nameof(CurrentTilt),
@@ -73,6 +70,21 @@ namespace GpsNote.Controls
                                     defaultValue: default(double),
                                     defaultBindingMode: BindingMode.TwoWay,
                                     propertyChanged: CurrentTiltPropertyChanged);
+
+
+        public static readonly BindableProperty PinsProperty =
+            BindableProperty.Create(nameof(Pins),
+                                    typeof(List<Pin>),
+                                    typeof(CustomMap),
+                                    propertyChanged: PinsPropertyChanged);
+
+
+        public static readonly BindableProperty PinAddedProperty =
+            BindableProperty.Create(nameof(PinAdded),
+                                    typeof(Pin),
+                                    typeof(CustomMap));
+
+
 
 
         #endregion
@@ -122,6 +134,19 @@ namespace GpsNote.Controls
             set => SetValue(CurrentTiltProperty, value);
         }
 
+        public List<Pin> Pins
+        {
+            get => (List<Pin>)GetValue(PinsProperty);
+            set => SetValue(PinsProperty, value);
+        }
+
+        public Pin PinAdded
+        {
+            get => (Pin)GetValue(PinAddedProperty);
+            set => SetValue(PinAddedProperty, value);
+        }
+
+
         #endregion
 
 
@@ -145,11 +170,10 @@ namespace GpsNote.Controls
 
 
         private static void IsRequiredCameraChangingChanged(BindableObject bindable, object oldValue, object newValue)
-        {    
+        {
             if ((bool)newValue)
             {
                 CustomMap customMap = (CustomMap)bindable;
-                //customMap.map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(_lastPosition, _lastZoom);
                 customMap.map.InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(new CameraPosition(_lastPosition, _lastZoom, _lastBearing, _lastTilt));
             }
         }
@@ -166,6 +190,16 @@ namespace GpsNote.Controls
         }
 
 
+        private static void PinsPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomMap customMap = (CustomMap)bindable;
+
+            if ((List<Pin>)newValue != null)
+                foreach (Pin pin in (List<Pin>)newValue)
+                    customMap.map.Pins.Add(pin);
+        }
+
+
         private void Map_CameraIdled(object sender, CameraIdledEventArgs e)
         {
             CameraPosition cameraPosition = e.Position;
@@ -175,7 +209,24 @@ namespace GpsNote.Controls
             CurrentTilt = cameraPosition.Tilt;
         }
 
+
+        private async void Map_MapClicked(object sender, MapClickedEventArgs e)
+        {
+            Pin pin = new Pin
+            {
+                Position = new Position(e.Point.Latitude, e.Point.Longitude)
+            };
+
+            Geocoder geocoder = new Geocoder();
+            var res = await geocoder.GetAddressesForPositionAsync(pin.Position);
+            pin.Label = res != null ? res.FirstOrDefault() : "No name";
+
+            map.Pins.Add(pin);
+            PinAdded = pin;
+        }
+
         #endregion
+
 
     }
 }
