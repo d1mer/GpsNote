@@ -39,6 +39,8 @@ namespace GpsNote.ViewModels
                 _flag = false;
                 LastPosition = RecordPosition.ReadPositionFromString(_settings.LastPosition);
                 LastZoom = _settings.LastZoom;
+                LastBearing = _settings.LastBearing;
+                LastTilt = _settings.LastTilt;
                 _flag = true;
                 //IsRequiredCameraChanging = true;
             }
@@ -69,6 +71,20 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref lastZoom, value);
         }
 
+        private double lastBearing;
+        public double LastBearing
+        {
+            get => lastBearing;
+            set => SetProperty(ref lastBearing, value);
+        }
+
+        private double lastTilt;
+        public double LastTilt
+        {
+            get => lastTilt;
+            set => SetProperty(ref lastTilt, value);
+        }
+
         private bool isRequiredCameraChanging;
         public bool IsRequiredCameraChanging
         {
@@ -94,10 +110,14 @@ namespace GpsNote.ViewModels
             base.OnPropertyChanged(args);
 
             if(args.PropertyName == nameof(LastPosition) ||
-                args.PropertyName == nameof(LastZoom))
+                args.PropertyName == nameof(LastZoom)    ||
+                args.PropertyName == nameof(LastBearing) ||
+                args.PropertyName == nameof(LastTilt))
             {
                 _settings.LastPosition = RecordPosition.WritePositionToString(LastPosition);
                 _settings.LastZoom = LastZoom;
+                _settings.LastBearing = LastBearing;
+                _settings.LastTilt = LastTilt;
             }
         }
 

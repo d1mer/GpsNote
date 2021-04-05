@@ -32,6 +32,8 @@
         <controls:CustomMap MapType="{Binding MapType}"
                             CurrentPosition="{Binding LastPosition}"
                             CurrentZoom="{Binding LastZoom}"
+                            CurrentBearing="{Binding LastBearing}"
+                            CurrentTilt="{Binding LastTilt}"
                             IsRequiredCameraChanging="{Binding IsRequiredCameraChanging}">
             
         </controls:CustomMap>

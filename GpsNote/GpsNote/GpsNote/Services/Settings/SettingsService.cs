@@ -31,6 +31,19 @@ namespace GpsNote.Services.Settings
             set => Preferences.Set(nameof(LastZoom), value);
         }
 
+        public double LastBearing
+        { 
+            get => Preferences.Get(nameof(LastBearing), 0.0);
+            set => Preferences.Set(nameof(LastBearing), value);
+        }
+        
+        public double LastTilt 
+        {
+            get => Preferences.Get(nameof(LastTilt), 0.0);
+            set => Preferences.Set(nameof(LastTilt), value);
+        }
+        
+
         #endregion
     }
 }

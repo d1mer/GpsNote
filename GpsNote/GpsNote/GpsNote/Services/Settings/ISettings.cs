@@ -11,5 +11,7 @@ namespace GpsNote.Services.Settings
         bool DarkTheme { get; set; }
         string LastPosition { get; set; }
         double LastZoom { get; set; }
+        double LastBearing { get; set; }
+        double LastTilt { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace GpsNote.Controls
 
         private static Position _lastPosition;
         private static double _lastZoom;
+        private static double _lastBearing;
+        private static double _lastTilt;
 
         #endregion
 
@@ -54,6 +56,24 @@ namespace GpsNote.Controls
                                     defaultValue: false,
                                     propertyChanged: IsRequiredCameraChangingChanged);
 
+        public static readonly BindableProperty CurrentBearingProperty =
+            BindableProperty.Create(nameof(CurrentBearing),
+                                    typeof(double),
+                                    typeof(CustomMap),
+                                    defaultValue: default(double),
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: CurrentBearingPropertyChanged);
+
+       
+
+        public static readonly BindableProperty CurrentTiltProperty =
+            BindableProperty.Create(nameof(CurrentTilt),
+                                    typeof(double),
+                                    typeof(CustomMap),
+                                    defaultValue: default(double),
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: CurrentTiltPropertyChanged);
+
 
         #endregion
 
@@ -90,6 +110,18 @@ namespace GpsNote.Controls
             set => SetValue(IsRequiredCameraChangingProperty, value);
         }
 
+        public double CurrentBearing
+        {
+            get => (double)GetValue(CurrentBearingProperty);
+            set => SetValue(CurrentBearingProperty, value);
+        }
+
+        public double CurrentTilt
+        {
+            get => (double)GetValue(CurrentTiltProperty);
+            set => SetValue(CurrentTiltProperty, value);
+        }
+
         #endregion
 
 
@@ -117,8 +149,20 @@ namespace GpsNote.Controls
             if ((bool)newValue)
             {
                 CustomMap customMap = (CustomMap)bindable;
-                customMap.map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(_lastPosition, _lastZoom);
+                //customMap.map.InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(_lastPosition, _lastZoom);
+                customMap.map.InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(new CameraPosition(_lastPosition, _lastZoom, _lastBearing, _lastTilt));
             }
+        }
+
+        private static void CurrentBearingPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            _lastBearing = (double)newValue;
+        }
+
+
+        private static void CurrentTiltPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            _lastTilt = (double)newValue;
         }
 
 
@@ -127,6 +171,8 @@ namespace GpsNote.Controls
             CameraPosition cameraPosition = e.Position;
             CurrentPosition = new Position(cameraPosition.Target.Latitude, cameraPosition.Target.Longitude);
             CurrentZoom = cameraPosition.Zoom;
+            CurrentBearing = cameraPosition.Bearing;
+            CurrentTilt = cameraPosition.Tilt;
         }
 
         #endregion
