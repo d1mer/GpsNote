@@ -23,37 +23,45 @@ namespace GpsNote.ViewModels
         #region -- Private fields -- 
 
         private IPageDialogService _dialogService;
-        private ISettings _settings;
+        private ISettingsService _settings;
         private IRepository _repository;
-        private bool _flag = true;
+
         #endregion
 
-       
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettings settings, IRepository repository) : base(navigationService)
+        #region -- Constructors --
+
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IRepository repository) : base(navigationService)
         {
             _dialogService = dialogService;
             _settings = settings;
             _repository = repository;
 
-            
-            if (!string.IsNullOrEmpty(_settings.LastPosition))
+            Title = "Map";
+          
+            if (_settings.LastZoom != 0.0)
             {
-                IsRequiredCameraChanging = true;
-                _flag = false;
-                LastPosition = RecordPosition.ReadPositionFromString(_settings.LastPosition);
-                LastZoom = _settings.LastZoom;
-                LastBearing = _settings.LastBearing;
-                LastTilt = _settings.LastTilt;
-                _flag = true;
+                Position position = new Position(_settings.LastLatitude, _settings.LastLongitude);
+               
+                InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
+                    new CameraPosition(position, 
+                                       _settings.LastZoom, 
+                                       _settings.LastBearing, 
+                                       _settings.LastTilt));
             }
-
-           Pins = _repository.GetPinsAsync(_settings.LoggedUser).Result;
         }
 
-        
-        
+        #endregion
+
         #region -- Publics -- 
+
+        private CameraUpdate initialCameraUpdate;
+        public CameraUpdate InitialCameraUpdate
+        {
+            get => initialCameraUpdate;
+            set => SetProperty(ref initialCameraUpdate, value);
+        }
+
 
         private MapType mapType;
         public MapType MapType
@@ -62,54 +70,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref mapType, value);
         }
 
-        private Position lastPosition;
-        public Position LastPosition
-        {
-            get => lastPosition;
-            set => SetProperty(ref lastPosition, value);
-        }
-
-        private double lastZoom;
-        public double LastZoom
-        {
-            get => lastZoom;
-            set => SetProperty(ref lastZoom, value);
-        }
-
-        private double lastBearing;
-        public double LastBearing
-        {
-            get => lastBearing;
-            set => SetProperty(ref lastBearing, value);
-        }
-
-        private double lastTilt;
-        public double LastTilt
-        {
-            get => lastTilt;
-            set => SetProperty(ref lastTilt, value);
-        }
-
-        private bool isRequiredCameraChanging;
-        public bool IsRequiredCameraChanging
-        {
-            get => isRequiredCameraChanging;
-            set => SetProperty(ref isRequiredCameraChanging, value);
-        }
-
-        private List<Pin> pins;
-        public List<Pin> Pins
-        {
-            get => pins;
-            set => SetProperty(ref pins, value);
-        }
-
-        private Pin pinAdded;
-        public Pin PinAdded
-        {
-            get => pinAdded;
-            set => SetProperty(ref pinAdded, value);
-        }
 
         public DelegateCommand<Object> MapTapCommand => new DelegateCommand<Object>(OnClickMap);
         public DelegateCommand<Object> CameraIdLedCommand => new DelegateCommand<Object>(OnCameraLed);
@@ -122,32 +82,27 @@ namespace GpsNote.ViewModels
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
-            if (!_flag)
-            {
-                return;
-            }
-
             base.OnPropertyChanged(args);
 
-            if(args.PropertyName == nameof(LastPosition) ||
-                args.PropertyName == nameof(LastZoom)    ||
-                args.PropertyName == nameof(LastBearing) ||
-                args.PropertyName == nameof(LastTilt))
-            {
-                _settings.LastPosition = RecordPosition.WritePositionToString(LastPosition);
-                _settings.LastZoom = LastZoom;
-                _settings.LastBearing = LastBearing;
-                _settings.LastTilt = LastTilt;
-            }
+            //if(args.PropertyName == nameof(LastPosition) ||
+            //    args.PropertyName == nameof(LastZoom)    ||
+            //    args.PropertyName == nameof(LastBearing) ||
+            //    args.PropertyName == nameof(LastTilt))
+            //{
+            //    _settings.LastPosition = RecordPosition.WritePositionToString(LastPosition);
+            //    _settings.LastZoom = LastZoom;
+            //    _settings.LastBearing = LastBearing;
+            //    _settings.LastTilt = LastTilt;
+            //}
 
-            if(args.PropertyName == nameof(PinAdded))
-            {
-                PinModel pinModel = new PinModel
-                {
-                    Pin = PinAdded,
-                    Owner = _settings.LoggedUser
-                };
-            }
+            //if(args.PropertyName == nameof(PinAdded))
+            //{
+            //    PinModel pinModel = new PinModel
+            //    {
+            //        Pin = PinAdded,
+            //        Owner = _settings.IdCurrentUser
+            //    };
+            //}
         }
 
         #endregion
@@ -155,7 +110,7 @@ namespace GpsNote.ViewModels
         private async void OnClickMap(Object _position)
         {
             Position position = (Position)_position;
-            await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
+            //await _dialogService.DisplayAlertAsync("Position", $"Latitude - {position.Latitude}\nLongitude - {position.Longitude}", "Cancel");
         }
 
         private async void OnCameraLed(Object _cameraPosition)
@@ -166,7 +121,11 @@ namespace GpsNote.ViewModels
 
         private void RecPos(CameraPosition cameraPosition)
         {
-            _settings.LastPosition = RecordPosition.WritePositionToString(new Position(cameraPosition.Target.Latitude, cameraPosition.Target.Longitude));
+            _settings.LastLatitude  = cameraPosition.Target.Latitude;
+            _settings.LastLongitude = cameraPosition.Target.Longitude;
+            _settings.LastZoom      = cameraPosition.Zoom;
+            _settings.LastBearing   = cameraPosition.Bearing;
+            _settings.LastTilt      = cameraPosition.Tilt;
         }
     }
 }
