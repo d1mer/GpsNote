@@ -10,7 +10,10 @@ namespace GpsNote.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public Pin Pin { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Label { get; set; }
+        public string Address { get; set; }
         public int Owner { get; set; }
     }
 }

@@ -10,9 +10,13 @@ namespace GpsNote.Services.Repository
     public interface IRepository
     {
         Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new();
+
         Task<T> GetEntityAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new();
+
         Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new();
 
-        Task<List<Pin>> GetPinsAsync(int owner);
+        Task<List<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new();
+
+        Task DeleteAllAsync<T>() where T : IEntityBase, new();
     }
 }

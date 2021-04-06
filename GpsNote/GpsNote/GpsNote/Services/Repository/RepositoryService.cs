@@ -17,6 +17,10 @@ namespace GpsNote.Services.Repository
 
         #endregion
 
+
+
+        #region -- Constructor --
+
         public RepositoryService()
         {
             _database = new Lazy<SQLiteAsyncConnection>(() =>
@@ -31,12 +35,13 @@ namespace GpsNote.Services.Repository
             });
         }
 
+        #endregion
+
 
         #region -- IRepository implementation --
 
         public Task<T> GetEntityAsync<T>(Expression<Func<T, bool>> predicate) 
-            where T : IEntityBase, new() =>
-            _database.Value.FindAsync<T>(predicate);
+            where T : IEntityBase, new() => _database.Value.FindAsync<T>(predicate);
 
         public Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new() =>
             _database.Value.InsertAsync(entity);
@@ -44,14 +49,10 @@ namespace GpsNote.Services.Repository
 
         public Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new() => _database.Value.Table<T>().ToListAsync();
 
+        public Task<List<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new() =>
+            _database.Value.Table<T>().Where(predicate).ToListAsync();
 
-        public async Task<List<Pin>> GetPinsAsync(int owner) 
-        {
-            List<PinModel> res = await _database.Value.Table<PinModel>().Where(p => p.Owner == owner).ToListAsync();
-            List<Pin> list = new List<Pin>();
-            res.ForEach(p => list.Add(p.Pin));
-            return list;
-        }
+        public Task DeleteAllAsync<T>() where T : IEntityBase, new() => _database.Value.DeleteAllAsync<T>();
 
         #endregion
     }
