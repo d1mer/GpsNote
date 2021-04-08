@@ -1,6 +1,6 @@
 ﻿using GpsNote.Helpers;
 using GpsNote.Models;
-using GpsNote.Services.Registration;
+using GpsNote.Services.RegistrationService;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -15,13 +15,13 @@ namespace GpsNote.ViewModels
     {
         #region -- Private fields --
 
-        IRegistration _registration;
+        IRegistrationService _registration;
         IPageDialogService _dialogService;
 
         #endregion
 
 
-        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IRegistration registration) : base(navigationService)
+        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IRegistrationService registration) : base(navigationService)
         {
             _registration = registration;
             _dialogService = dialogService;

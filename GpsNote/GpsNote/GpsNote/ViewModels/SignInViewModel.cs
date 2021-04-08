@@ -10,8 +10,8 @@ using GpsNote.Services.Authorization;
 using GpsNote.Models;
 using GpsNote.Helpers;
 using Xamarin.Forms;
-using GpsNote.Services.Settings;
-using GpsNote.Services.Repository;
+using GpsNote.Services.SettingsService;
+using GpsNote.Services.RepositoryService;
 
 namespace GpsNote.ViewModels
 {
@@ -21,13 +21,13 @@ namespace GpsNote.ViewModels
         #region -- Private fields --
 
         IPageDialogService _dialogService;
-        IAuthorization _authorization;
+        IAuthorizeService _authorization;
         ISettingsService _settings;
-        IRepository _repository;
+        IRepositoryService _repository;
 
         #endregion
 
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorization authorization, IRepository repository, ISettingsService settings) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizeService authorization, IRepositoryService repository, ISettingsService settings) : base(navigationService)
         {
             _dialogService = dialogService;
             _authorization = authorization;

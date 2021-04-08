@@ -1,6 +1,5 @@
-using GpsNote.Services.Registration;
-using GpsNote.Services.Authorization;
-using GpsNote.Services.Repository;
+using GpsNote.Services.RegistrationService;
+using GpsNote.Services.RepositoryService;
 using GpsNote.ViewModels;
 using GpsNote.Views;
 using Prism;
@@ -8,12 +7,11 @@ using Prism.Ioc;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
-using GpsNote.Services.Settings;
-using System.Collections;
+using GpsNote.Services.SettingsService;
 using System.Collections.Generic;
 using GpsNote.Themes;
-using Xamarin.Forms.GoogleMaps;
-using GpsNote.Helpers;
+using GpsNote.Services.AuthorizationService;
+using GpsNote.Services.UserService;
 
 namespace GpsNote
 {
@@ -47,10 +45,11 @@ namespace GpsNote
 
             #region service registry
 
-            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<RepositoryService>());
-            containerRegistry.RegisterInstance<IRegistration>(Container.Resolve<RegistrationService>());
-            containerRegistry.RegisterInstance<IAuthorization>(Container.Resolve<AuthorizationService>());
+            containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
+            containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
+            containerRegistry.RegisterInstance<IAuthorizeService>(Container.Resolve<AuthorizeService>());
             containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
+            containerRegistry.RegisterInstance<IUserService>(Container.Resolve<UserService>());
 
             #endregion
 

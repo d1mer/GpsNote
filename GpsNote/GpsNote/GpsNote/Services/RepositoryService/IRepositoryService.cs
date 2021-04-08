@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using Xamarin.Forms.GoogleMaps;
 
-namespace GpsNote.Services.Repository
+namespace GpsNote.Services.RepositoryService
 {
-    public interface IRepository
+    public interface IRepositoryService
     {
         Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new();
 
