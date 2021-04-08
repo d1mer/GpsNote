@@ -1,11 +1,8 @@
 ﻿using GpsNote.Enums;
 using GpsNote.Helpers;
 using GpsNote.Models;
-using GpsNote.Services.RepositoryService;
 using GpsNote.Services.UserService;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GpsNote.Services.RegistrationService
@@ -63,14 +60,7 @@ namespace GpsNote.Services.RegistrationService
                 Password = password
             };
 
-            try
-            {
-                _userService.SaveNewUser(user);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            _userService.SaveNewUser(user);
 
             return CodeUserAuthresult.Passed;
         }

@@ -1,5 +1,4 @@
 ﻿using GpsNote.Enums;
-using GpsNote.Models;
 using System.Threading.Tasks;
 
 namespace GpsNote.Services.RegistrationService

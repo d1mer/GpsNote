@@ -1,17 +1,10 @@
 ﻿using GpsNote.Views;
 using Prism.Commands;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using Prism.Services;
-using GpsNote.Services.Authorization;
-using GpsNote.Models;
-using GpsNote.Helpers;
-using Xamarin.Forms;
-using GpsNote.Services.SettingsService;
-using GpsNote.Services.RepositoryService;
+using GpsNote.Services.AuthorizationService;
+using GpsNote.Enums;
 
 namespace GpsNote.ViewModels
 {
@@ -21,35 +14,31 @@ namespace GpsNote.ViewModels
         #region -- Private fields --
 
         IPageDialogService _dialogService;
-        IAuthorizeService _authorization;
-        ISettingsService _settings;
-        IRepositoryService _repository;
+        IAuthorizeService _authorizationService;
 
         #endregion
 
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizeService authorization, IRepositoryService repository, ISettingsService settings) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizeService authorization) : base(navigationService)
         {
             _dialogService = dialogService;
-            _authorization = authorization;
-            _repository = repository;
-            _settings = settings;
+            _authorizationService = authorization;
 
-            Title = "SignIn";      
+            Title = "SignIn";
         }
 
 
         #region -- Publics -- 
 
         private string _email = "";
-        public string Email 
+        public string Email
         {
             get => _email;
             set => SetProperty(ref _email, value);
         }
 
         private string _password = "";
-        public string Password 
-        { 
+        public string Password
+        {
             get => _password;
             set => SetProperty(ref _password, value);
         }
@@ -63,7 +52,7 @@ namespace GpsNote.ViewModels
         }
 
         public DelegateCommand OnSignUpTapCommand => new DelegateCommand(NavigationToSignUp);
-        public DelegateCommand OnSignInButtonTapCommand => new DelegateCommand(AuthorizationUser, CanExecute);
+        public DelegateCommand OnSignInButtonTapCommand => new DelegateCommand(AuthorizeUser, CanExecute);
 
         #endregion
 
@@ -111,48 +100,48 @@ namespace GpsNote.ViewModels
         }
 
 
-        private async void AuthorizationUser()
+        private async void AuthorizeUser()
         {
-            if (!Validator.Validate(Email, Validator.patternEmail))
+            CodeUserAuthresult result = await _authorizationService.Authorize(Email, Password);
+
+            switch (result)
             {
-                await _dialogService.DisplayAlertAsync("Error",
+                case CodeUserAuthresult.InvalidEmail:
+                    await _dialogService.DisplayAlertAsync("Error",
                                                        "Invalid email. Try again",
                                                        "Cancel");
-                Email = "";
-                Password = "";
-                return;
-            }
-            if (!Validator.Validate(Password, Validator.patternPassword))
-            {
-                await _dialogService.DisplayAlertAsync("Error",
+                    Email = "";
+                    Password = "";
+                    return;
+                case CodeUserAuthresult.InvalidPassword:
+                    await _dialogService.DisplayAlertAsync("Error",
                                                        "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number",
                                                        "Cancel");
-                Password = "";
-                return;
-            }
-
-            User checkingUser = new User
-            {
-                Email = Email,
-                Password = Password
-            };
-
-            bool result = await _authorization.IsAuthorization(checkingUser);
-
-            if (!result)
-            {
-                await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid login or password",
+                    Password = "";
+                    return;
+                case CodeUserAuthresult.EmailNotFound:
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                       "This email wasn't found",
                                                        "Cancel");
-                Password = "";
-                return;
+                    Password = "";
+                    return;
+                case CodeUserAuthresult.WrongPassword:
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                       "Wrong password",
+                                                       "Cancel");
+                    Password = "";
+                    return;
+                case CodeUserAuthresult.Passed:
+                    await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
+                    break;
+                default:
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                       "Result unknown",
+                                                       "Cancel");
+                    Email = "";
+                    Password = "";
+                    return;
             }
-
-
-            User existUser = await _repository.GetEntityAsync<User>((s) => Email == s.Email);
-            _settings.IdCurrentUser = existUser.Id;
-            //await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
-            await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
         }
 
         #endregion

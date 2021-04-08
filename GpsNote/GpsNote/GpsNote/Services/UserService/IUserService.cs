@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GpsNote.Models;
-using GpsNote.Services.RepositoryService;
+﻿using GpsNote.Models;
 
 namespace GpsNote.Services.UserService
 {
@@ -14,6 +10,6 @@ namespace GpsNote.Services.UserService
 
         User GetUserByEmail(string email);
 
-        void
+        void SaveIdCurrentUser(int id);
     }
 }

@@ -47,6 +47,8 @@ namespace GpsNote.Services.AuthorizationService
                 return CodeUserAuthresult.WrongPassword;
             }
 
+            _userService.SaveIdCurrentUser(user.Id);
+
             return CodeUserAuthresult.Passed;
         }
     }
