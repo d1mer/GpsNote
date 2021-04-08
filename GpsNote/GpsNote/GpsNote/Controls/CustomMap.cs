@@ -13,6 +13,7 @@ namespace GpsNote.Controls
             BindableProperty.Create(nameof(PinsList),
                                     typeof(List<Pin>),
                                     typeof(CustomMap),
+                                    defaultValue: default(List<Pin>),
                                     defaultBindingMode: BindingMode.TwoWay,
                                     propertyChanged: PinsListPropertyPropertyChanged);
 
@@ -20,15 +21,6 @@ namespace GpsNote.Controls
         {
             get => (List<Pin>)GetValue(PinsListProperty);
             set => SetValue(PinsListProperty, value);
-        }
-
-        #endregion
-
-        #region -- Constructors -- 
-
-        public CustomMap()
-        {
-            
         }
 
         #endregion
@@ -43,7 +35,9 @@ namespace GpsNote.Controls
             if ((List<Pin>)newValue != null)
             {
                 foreach (Pin pin in (List<Pin>)newValue)
+                {
                     map.Pins.Add(pin);
+                }
             }
         }
 

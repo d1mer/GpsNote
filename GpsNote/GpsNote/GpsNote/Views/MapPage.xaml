@@ -11,7 +11,7 @@
 
     <Grid>
         <controls:CustomMap x:Name="map"
-                            InitialCameraUpdate="{Binding InitialCameraUpdate, Mode=TwoWay}"
+                            InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}"
                             >
 

@@ -1,14 +1,14 @@
-﻿using Prism.Commands;
+﻿using GpsNote.Models;
+using GpsNote.Services.Repository;
+using GpsNote.Services.Settings;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
-using Xamarin.Forms.GoogleMaps;
-using GpsNote.Services.Settings;
-using System.Threading.Tasks;
-using GpsNote.Services.Repository;
-using GpsNote.Models;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.ViewModels
 {
@@ -32,15 +32,17 @@ namespace GpsNote.ViewModels
             _repository = repository;
 
             Title = "Map";
-          
+
+            InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
+
             if (_settings.LastZoom != 0.0)
             {
                 Position position = new Position(_settings.LastLatitude, _settings.LastLongitude);
-               
+
                 InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
-                    new CameraPosition(position, 
-                                       _settings.LastZoom, 
-                                       _settings.LastBearing, 
+                    new CameraPosition(position,
+                                       _settings.LastZoom,
+                                       _settings.LastBearing,
                                        _settings.LastTilt));
             }
 
@@ -66,7 +68,7 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref mapType, value);
         }
 
-        private List<Pin> pins;
+        private List<Pin> pins = new List<Pin>();
         public List<Pin> Pins
         {
             get => pins;
@@ -93,10 +95,10 @@ namespace GpsNote.ViewModels
             {
                 Position = position,
                 Address = address != null ? address.FirstOrDefault() : string.Empty,
-                Label = address != null ?  
+                Label = address != null ?
                         address.FirstOrDefault().Substring(0, address.FirstOrDefault().IndexOf(",") != -1 ?
-                                                              address.FirstOrDefault().IndexOf(",")       :
-                                                              address.FirstOrDefault().Length - 1)        : 
+                                                              address.FirstOrDefault().IndexOf(",") :
+                                                              address.FirstOrDefault().Length - 1) :
                         "New pin"
             };
             List<Pin> addedPin = new List<Pin>();
@@ -122,7 +124,7 @@ namespace GpsNote.ViewModels
                                                  cancelButton: "Close");
                 return;
             }
-            
+
             Pins = addedPin;
         }
 
@@ -135,11 +137,11 @@ namespace GpsNote.ViewModels
 
         private void RecordCurrentCameraPosition(CameraPosition cameraPosition)
         {
-            _settings.LastLatitude  = cameraPosition.Target.Latitude;
+            _settings.LastLatitude = cameraPosition.Target.Latitude;
             _settings.LastLongitude = cameraPosition.Target.Longitude;
-            _settings.LastZoom      = cameraPosition.Zoom;
-            _settings.LastBearing   = cameraPosition.Bearing;
-            _settings.LastTilt      = cameraPosition.Tilt;
+            _settings.LastZoom = cameraPosition.Zoom;
+            _settings.LastBearing = cameraPosition.Bearing;
+            _settings.LastTilt = cameraPosition.Tilt;
         }
 
 
@@ -151,7 +153,7 @@ namespace GpsNote.ViewModels
             {
                 pinModels = _repository.GetAllAsync<PinModel>(p => p.Owner == _settings.IdCurrentUser).Result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _dialogService.DisplayAlertAsync(title: "Error",
                                                  message: ex.Message,
