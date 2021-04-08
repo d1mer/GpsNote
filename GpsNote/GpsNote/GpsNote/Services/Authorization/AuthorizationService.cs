@@ -11,11 +11,11 @@ namespace GpsNote.Services.Authorization
     {
         #region -- Private fields --
 
-        IRepository _repository;
+        IRepositoryService _repository;
 
         #endregion
 
-        public AuthorizationService(IRepository repository)
+        public AuthorizationService(IRepositoryService repository)
         {
             _repository = repository;
         }

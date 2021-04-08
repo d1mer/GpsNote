@@ -9,7 +9,7 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.Services.Repository
 {
-    public class RepositoryService : IRepository
+    public class RepositoryService : IRepositoryService
     {
         #region -- Private fields --
 

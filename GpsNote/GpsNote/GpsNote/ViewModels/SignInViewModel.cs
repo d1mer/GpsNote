@@ -23,11 +23,11 @@ namespace GpsNote.ViewModels
         IPageDialogService _dialogService;
         IAuthorization _authorization;
         ISettingsService _settings;
-        IRepository _repository;
+        IRepositoryService _repository;
 
         #endregion
 
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorization authorization, IRepository repository, ISettingsService settings) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorization authorization, IRepositoryService repository, ISettingsService settings) : base(navigationService)
         {
             _dialogService = dialogService;
             _authorization = authorization;

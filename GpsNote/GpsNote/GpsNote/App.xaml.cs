@@ -33,11 +33,11 @@ namespace GpsNote
 
             _settings = Container.Resolve<SettingsService>();
 
-            await NavigationService.NavigateAsync("NavigationPage/MapPage");
-            //if (_settings.IdCurrentUser == -1)
-            //    await NavigationService.NavigateAsync("NavigationPage/SignInPage");
-            //else
-            //    await NavigationService.NavigateAsync(nameof(MainTabbedPage));
+            //await NavigationService.NavigateAsync("NavigationPage/MapPage");
+            if (_settings.IdCurrentUser == -1)
+                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+            else
+                await NavigationService.NavigateAsync(nameof(MainTabbedPage));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -47,7 +47,7 @@ namespace GpsNote
 
             #region service registry
 
-            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<RepositoryService>());
+            containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
             containerRegistry.RegisterInstance<IRegistration>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorization>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());

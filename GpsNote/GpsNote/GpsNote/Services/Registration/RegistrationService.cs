@@ -11,11 +11,11 @@ namespace GpsNote.Services.Registration
     {
         #region -- Private fields --
 
-        IRepository _repository;
+        IRepositoryService _repository;
 
         #endregion
 
-        public RegistrationService(IRepository repository)
+        public RegistrationService(IRepositoryService repository)
         {
             _repository = repository;
         }

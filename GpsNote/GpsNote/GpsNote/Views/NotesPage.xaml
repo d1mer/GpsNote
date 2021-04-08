@@ -3,11 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.NotesPage"
              Title="Notes">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Notes Page"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="pinsListView"
+              ItemsSource="{Binding PinsList}"
+                  HasUnevenRows="True"
+              SelectionMode="None"
+              SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Edit"
+                                      Command="{Binding}"
+                                      CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete"
+                                      Command="{Binding}"
+                                      CommandParameter="{Binding .}"/>
+                        </ViewCell.ContextActions>
+
+                        <ViewCell.View>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Label Text="{Binding Label}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"/>
+                                <Label Grid.Row="1"
+                                       Text=""
+                                       FontSize="Medium"/>
+                                <StackLayout Grid.Row="2"
+                                             Orientation="Horizontal">
+                                    <Label Text="Position"/>
+                                    <Label Text="{Binding Latitude}"/>
+                                    <Label Text="{Binding Longitude}"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+        <Button Grid.Row="0" 
+                ImageSource="ic_add.png"
+                BorderColor="Gray"
+                BorderWidth="5"
+                FontAttributes="None"
+                BackgroundColor="Blue"
+                BorderRadius ="70"
+                TextColor="White"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                WidthRequest="80"
+                HeightRequest="80"
+                Margin="0,0,20,40" />
+    </Grid>
 </ContentPage>

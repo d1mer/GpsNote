@@ -18,14 +18,14 @@ namespace GpsNote.ViewModels
 
         private IPageDialogService _dialogService;
         private ISettingsService _settings;
-        private IRepository _repository;
+        private IRepositoryService _repository;
 
         #endregion
 
 
         #region -- Constructors --
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IRepository repository) : base(navigationService)
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IRepositoryService repository) : base(navigationService)
         {
             _dialogService = dialogService;
             _settings = settings;
@@ -34,6 +34,8 @@ namespace GpsNote.ViewModels
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
+
+            //_repository.DeleteAllAsync<PinModel>();
 
             if (_settings.LastZoom != 0.0)
             {
