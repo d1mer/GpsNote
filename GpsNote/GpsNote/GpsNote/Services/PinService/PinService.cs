@@ -55,6 +55,17 @@ namespace GpsNote.Services.PinService
         }
 
 
+        public List<PinModel> GetUserPinModels()
+        {
+            if (_settingsService.IdCurrentUser == -1)
+                return null;
+
+            List<PinModel> pinModels = _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.IdCurrentUser).Result;
+
+            return pinModels;
+        }
+
+
         public async Task<Pin> GetNewPinAsync(Position position)
         {
             Geocoder geocoder = new Geocoder();

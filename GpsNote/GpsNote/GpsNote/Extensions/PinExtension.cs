@@ -12,7 +12,7 @@ namespace GpsNote.Extensions
                 Latitude = pin.Position.Latitude,
                 Longitude = pin.Position.Longitude,
                 Label = pin.Label,
-                Address = pin.Address,
+                Address = pin.Address
             };
 
             return pinModel;

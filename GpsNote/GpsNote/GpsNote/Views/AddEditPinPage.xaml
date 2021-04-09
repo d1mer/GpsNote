@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GpsNote.Views.AddEditPinPage"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
+             xmlns:prism="http://prismlibrary.com"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Primary"
+                     Text="Save"
+                     IconImageSource="ic_save.png"
+                     Command="{Binding SaveTapCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition  Height="0.6*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout Margin="15"
+                     Spacing="10">
+            <Entry Text="{Binding LabelPinText}" 
+                   Placeholder="Label Pin"/>
+            <Label Text="Position"
+                   Margin="15, 15, 15, 0"
+                   FontAttributes="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Entry Text="{Binding LatitudePinText}"
+                       Keyboard="Numeric"
+                       Placeholder="Latitude"/>
+                <Entry Grid.Column="1"
+                       Text="{Binding LongitudePinText}"
+                       Keyboard="Numeric"
+                       Placeholder="Longitude"/>
+            </Grid>
+            <Editor Text="{Binding EditorText}"
+                    Margin="10, 30, 10, 5"
+                    Placeholder="Description"/>
+        </StackLayout>
+
+        <controls:CustomMap Grid.Row="1"
+                            PinsList="{Binding Pins}">
+            <controls:CustomMap.Behaviors>
+                <prism:EventToCommandBehavior EventName="MapClicked"
+                                              Command="{Binding MapTapCommand}"
+                                              EventArgsParameterPath="Point" />
+            </controls:CustomMap.Behaviors>
+        </controls:CustomMap>
+    </Grid>
+</ContentPage>

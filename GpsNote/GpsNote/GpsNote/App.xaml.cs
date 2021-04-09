@@ -65,6 +65,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<MapPage, MapViewModel>();
             containerRegistry.RegisterForNavigation<NotesPage, NotesViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPinPage, AddEditPinViewModel>();
 
             #endregion
         }

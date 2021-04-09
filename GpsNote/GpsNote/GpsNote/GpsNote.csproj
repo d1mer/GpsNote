@@ -24,6 +24,9 @@
     <Compile Update="Themes\LightTheme.xaml.cs">
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddEditPinPage.xaml.cs">
+      <DependentUpon>AddEditPinPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +38,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Themes\LightTheme.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddEditPinPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainTabbedPage.xaml">

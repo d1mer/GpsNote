@@ -34,6 +34,7 @@ namespace GpsNote.Controls
            
             if ((List<Pin>)newValue != null)
             {
+                map.Pins.Clear();
                 foreach (Pin pin in (List<Pin>)newValue)
                 {
                     map.Pins.Add(pin);

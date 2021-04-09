@@ -11,6 +11,8 @@ namespace GpsNote.Services.PinService
     {
         List<Pin> GetUserPins();
 
+        List<PinModel> GetUserPinModels();
+
         Task<Pin> GetNewPinAsync(Position position);
 
         void SavePinModelToDatabase(PinModel pinModel);

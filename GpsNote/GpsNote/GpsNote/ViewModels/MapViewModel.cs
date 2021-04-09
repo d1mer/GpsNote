@@ -66,7 +66,7 @@ namespace GpsNote.ViewModels
             get => initialCameraUpdate;
             set => SetProperty(ref initialCameraUpdate, value);
         }
-
+        
         private MapType mapType;
         public MapType MapType
         {
@@ -82,8 +82,11 @@ namespace GpsNote.ViewModels
         }
 
 
-        public DelegateCommand<Object> MapTapCommand => new DelegateCommand<Object>(OnClickMapAsync);
-        public DelegateCommand<Object> CameraIdLedCommand => new DelegateCommand<Object>(OnCameraLed);
+        private DelegateCommand<Object> mapTapCommand;
+        public DelegateCommand<Object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<Object>(OnClickMapAsync));
+
+        private DelegateCommand<Object> cameraIdLedCommand;
+        public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? (new DelegateCommand<Object>(OnCameraLed));
 
         #endregion
 
@@ -92,27 +95,27 @@ namespace GpsNote.ViewModels
 
         private async void OnClickMapAsync(Object _position)
         {
-            Position position = (Position)_position;
+            //Position position = (Position)_position;
 
-            Pin pin = await _pinService.GetNewPinAsync(position);
-            List<Pin> addedPin = new List<Pin>();
-            addedPin.Add(pin);
+            //Pin pin = await _pinService.GetNewPinAsync(position);
+            //List<Pin> addedPin = new List<Pin>();
+            //addedPin.Add(pin);
 
-            PinModel pinModel = pin.PinToPinModel();
+            //PinModel pinModel = pin.PinToPinModel();
 
-            try
-            {
-                _pinService.SavePinModelToDatabase(pinModel);
-            }
-            catch (Exception ex)
-            {
-                await _dialogService.DisplayAlertAsync(title: "Error",
-                                                 message: ex.Message,
-                                                 cancelButton: "Close");
-                return;
-            }
+            //try
+            //{
+            //    _pinService.SavePinModelToDatabase(pinModel);
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _dialogService.DisplayAlertAsync(title: "Error",
+            //                                     message: ex.Message,
+            //                                     cancelButton: "Close");
+            //    return;
+            //}
 
-            Pins = addedPin;
+            //Pins = addedPin;
         }
 
 
