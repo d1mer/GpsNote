@@ -10,7 +10,7 @@ using Xamarin.Forms;
 using GpsNote.Services.SettingsService;
 using System.Collections.Generic;
 using GpsNote.Themes;
-using GpsNote.Services.AuthorizationService;
+using GpsNote.Services.AuthorizeService;
 using GpsNote.Services.UserService;
 using GpsNote.Services.PinService;
 

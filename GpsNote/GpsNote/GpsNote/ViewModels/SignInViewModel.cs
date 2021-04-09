@@ -3,7 +3,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using System.ComponentModel;
 using Prism.Services;
-using GpsNote.Services.AuthorizationService;
+using GpsNote.Services.AuthorizeService;
 using GpsNote.Enums;
 
 namespace GpsNote.ViewModels

@@ -40,7 +40,7 @@
                        Placeholder="Longitude"/>
             </Grid>
             <Editor Text="{Binding EditorText}"
-                    Margin="10, 30, 10, 5"
+                    Margin="10, 10, 10, 5"
                     Placeholder="Description"/>
         </StackLayout>
 

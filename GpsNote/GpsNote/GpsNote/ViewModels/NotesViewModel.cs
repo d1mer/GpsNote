@@ -26,6 +26,8 @@ namespace GpsNote.ViewModels
         #endregion
 
 
+        #region -- Constructor --
+
         public NotesViewModel(INavigationService navigationService, IPinService pinService, ISettingsService settingsService, IPageDialogService dialogService) : base(navigationService)
         {
             _settingsService = settingsService;
@@ -33,6 +35,7 @@ namespace GpsNote.ViewModels
             _pinService = pinService;
         }
 
+        #endregion
 
 
         #region -- Publics --
@@ -53,12 +56,31 @@ namespace GpsNote.ViewModels
 
 
         #region -- Overrides --
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
+            if(parameters.GetNavigationMode() == NavigationMode.Back)
+            {
+                List<PinModel> pins;
+
+                try
+                {
+                    pins = _pinService.GetUserPinModels();
+                }
+                catch (Exception ex)
+                {
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                     ex.Message,
+                                                     "Cancel");
+                    return;
+                }
+
+                if (pins != null)
+                    PinsList = new ObservableCollection<PinModel>(pins);
+            }
         }
 
         #endregion
+
 
         #region -- Implement IInitializeAsync interface --
 

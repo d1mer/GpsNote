@@ -7,22 +7,37 @@ using GpsNote.Services.RepositoryService;
 using GpsNote.Services.UserService;
 using GpsNote.Enums;
 using GpsNote.Helpers;
+using GpsNote.Services.SettingsService;
 
-namespace GpsNote.Services.AuthorizationService
+namespace GpsNote.Services.AuthorizeService
 {
     public class AuthorizeService : IAuthorizeService
     {
         #region -- Private fields --
 
         private IUserService _userService;
+        private ISettingsService _settingsService;
 
         #endregion
 
-        public AuthorizeService(IUserService userService)
+
+        #region -- Constructor --
+
+        public AuthorizeService(IUserService userService, ISettingsService settingsService)
         {
             _userService = userService;
+            _settingsService = settingsService;
         }
 
+        #endregion
+
+
+        #region -- Inplement IAuthorizeService interface --
+
+        public int IdCurrentUser
+        {
+            get => _settingsService.IdCurrentUser;
+        }
 
         public async Task<CodeUserAuthresult> Authorize(string email, string password)
         {
@@ -51,5 +66,7 @@ namespace GpsNote.Services.AuthorizationService
 
             return CodeUserAuthresult.Passed;
         }
+
+        #endregion
     }
 }

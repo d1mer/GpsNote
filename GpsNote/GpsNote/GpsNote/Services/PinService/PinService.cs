@@ -69,23 +69,32 @@ namespace GpsNote.Services.PinService
         public async Task<Pin> GetNewPinAsync(Position position)
         {
             Geocoder geocoder = new Geocoder();
-            IEnumerable<string> address = await geocoder.GetAddressesForPositionAsync(position);
+            IEnumerable<string> addresses = await geocoder.GetAddressesForPositionAsync(position);
 
-            Pin pin = new Pin
-            {
-                Position = position,
-                Address = address != null ? address.FirstOrDefault() : string.Empty,
-                Label = address != null ?
-                        address.FirstOrDefault().Substring(0, address.FirstOrDefault().IndexOf(",") != -1 ?
-                                                              address.FirstOrDefault().IndexOf(",") :
-                                                              address.FirstOrDefault().Length - 1) :
-                        "New pin"
-            };
-            return pin;
+            return await Task.Run(() => GetPin(position, addresses));
         }
 
 
         public void SavePinModelToDatabase(PinModel pinModel) => _repositoryService.InsertAsync<PinModel>(pinModel);
+
+        #endregion
+
+        #region -- Private helpers --
+
+        private Pin GetPin(Position position, IEnumerable<string> addresses)
+        {
+            Pin pin = new Pin
+            {
+                Position = position,
+                Address = addresses != null ? addresses.FirstOrDefault() : string.Empty,
+                Label = addresses != null ?
+                       addresses.FirstOrDefault().Substring(0, addresses.FirstOrDefault().IndexOf(",") != -1 ?
+                                                             addresses.FirstOrDefault().IndexOf(",") :
+                                                             addresses.FirstOrDefault().Length - 1) :
+                       "New pin"
+            };
+            return pin;
+        }
 
         #endregion
     }
