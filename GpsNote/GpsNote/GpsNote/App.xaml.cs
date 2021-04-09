@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using GpsNote.Themes;
 using GpsNote.Services.AuthorizationService;
 using GpsNote.Services.UserService;
+using GpsNote.Services.PinService;
 
 namespace GpsNote
 {
@@ -31,7 +32,7 @@ namespace GpsNote
 
             _settings = Container.Resolve<SettingsService>();
 
-            //await NavigationService.NavigateAsync("NavigationPage/MapPage");
+            
             if (_settings.IdCurrentUser == -1)
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");
             else
@@ -50,7 +51,8 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IUserService>(Container.Resolve<UserService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizeService>(Container.Resolve<AuthorizeService>());
-                       
+            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+
             #endregion
 
 

@@ -1,4 +1,5 @@
 ﻿using GpsNote.Models;
+using GpsNote.Services.PinService;
 using GpsNote.Services.RepositoryService;
 using GpsNote.Services.SettingsService;
 using Prism.Commands;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Extensions;
 
 namespace GpsNote.ViewModels
 {
@@ -17,19 +19,21 @@ namespace GpsNote.ViewModels
         #region -- Private fields -- 
 
         private IPageDialogService _dialogService;
+        private IPinService        _pinService;
         private ISettingsService _settings;
-        private IRepositoryService _repository;
+        //private IRepositoryService _repository;
 
         #endregion
 
 
         #region -- Constructors --
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IRepositoryService repository) : base(navigationService)
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IRepositoryService repository, IPinService pinService) : base(navigationService)
         {
             _dialogService = dialogService;
+            _pinService = pinService;
             _settings = settings;
-            _repository = repository;
+            //_repository = repository;
 
             Title = "Map";
 
@@ -90,34 +94,15 @@ namespace GpsNote.ViewModels
         {
             Position position = (Position)_position;
 
-            Geocoder geocoder = new Geocoder();
-            IEnumerable<string> address = await geocoder.GetAddressesForPositionAsync(position);
-
-            Pin pin = new Pin
-            {
-                Position = position,
-                Address = address != null ? address.FirstOrDefault() : string.Empty,
-                Label = address != null ?
-                        address.FirstOrDefault().Substring(0, address.FirstOrDefault().IndexOf(",") != -1 ?
-                                                              address.FirstOrDefault().IndexOf(",") :
-                                                              address.FirstOrDefault().Length - 1) :
-                        "New pin"
-            };
+            Pin pin = await _pinService.GetNewPinAsync(position);
             List<Pin> addedPin = new List<Pin>();
             addedPin.Add(pin);
 
-            PinModel pinModel = new PinModel
-            {
-                Latitude = pin.Position.Latitude,
-                Longitude = pin.Position.Longitude,
-                Label = pin.Label,
-                Address = pin.Address,
-                Owner = _settings.IdCurrentUser
-            };
+            PinModel pinModel = pin.PinToPinModel();
 
             try
             {
-                await _repository.InsertAsync<PinModel>(pinModel);
+                _pinService.SavePinModelToDatabase(pinModel);
             }
             catch (Exception ex)
             {
@@ -149,11 +134,9 @@ namespace GpsNote.ViewModels
 
         private void GetPinsFromDatabase()
         {
-            List<PinModel> pinModels;
-
             try
             {
-                pinModels = _repository.GetAllAsync<PinModel>(p => p.Owner == _settings.IdCurrentUser).Result;
+                Pins = _pinService.GetUserPins();
             }
             catch (Exception ex)
             {
@@ -162,22 +145,6 @@ namespace GpsNote.ViewModels
                                                  cancelButton: "Close");
                 return;
             }
-
-            if (pinModels == null || pinModels.Count == 0)
-                return;
-
-            List<Pin> pinsList = new List<Pin>();
-
-            foreach (PinModel pinModel in pinModels)
-            {
-                Pin pin = new Pin();
-                pin.Position = new Position(pinModel.Latitude, pinModel.Longitude);
-                pin.Label = pinModel.Label;
-                pin.Address = pinModel.Address;
-                pinsList.Add(pin);
-            }
-
-            Pins = pinsList;
         }
 
         #endregion
