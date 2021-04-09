@@ -4,7 +4,7 @@ using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
 
-namespace GpsNote.Services.Settings
+namespace GpsNote.Services.SettingsService
 {
     public class SettingsService : ISettingsService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms.GoogleMaps;
 
-namespace GpsNote.Services.Settings
+namespace GpsNote.Services.SettingsService
 {
     public interface ISettingsService
     {

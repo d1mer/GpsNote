@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackLayout Margin="30"
+        <StackLayout Margin="30, 30, 30, 10"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
             <Entry x:Name="name"
@@ -29,7 +29,8 @@
         </StackLayout>
 
         <StackLayout Grid.Row="1"
-                     Margin="30, 10, 30, 30">
+                     Margin="30, 10, 30, 30"
+                     VerticalOptions="EndAndExpand">
             <Button Text="SIGNUP"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignUpButtonEnabled}"

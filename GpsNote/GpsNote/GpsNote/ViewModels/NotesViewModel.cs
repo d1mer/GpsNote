@@ -1,6 +1,7 @@
 ﻿using GpsNote.Models;
-using GpsNote.Services.Repository;
-using GpsNote.Services.Settings;
+using GpsNote.Services.RepositoryService;
+using GpsNote.Services.SettingsService;
+
 using Prism.Navigation;
 using Prism.Services;
 using System;

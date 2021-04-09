@@ -7,7 +7,7 @@ using GpsNote.Models;
 using SQLite;
 using Xamarin.Forms.GoogleMaps;
 
-namespace GpsNote.Services.Repository
+namespace GpsNote.Services.RepositoryService
 {
     public class RepositoryService : IRepositoryService
     {
