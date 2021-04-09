@@ -30,7 +30,7 @@ namespace GpsNote.Services.RepositoryService
                 SQLiteAsyncConnection database = new SQLiteAsyncConnection(path);
 
                 database.CreateTableAsync<User>().Wait();
-                database.CreateTableAsync<PinModel>().Wait();
+                database.CreateTableAsync<PinModelDb>().Wait();
                 return database;
             });
         }

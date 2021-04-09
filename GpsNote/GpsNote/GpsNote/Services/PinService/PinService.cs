@@ -39,10 +39,10 @@ namespace GpsNote.Services.PinService
             if (_settingsService.IdCurrentUser == -1)
                 return null;
 
-            List<PinModel> pinModels = _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.IdCurrentUser).Result;
+            List<PinModelDb> pinModels = _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser).Result;
             List<Pin> pins = new List<Pin>();
 
-            foreach (PinModel pinModel in pinModels)
+            foreach (PinModelDb pinModel in pinModels)
             {
                 Pin pin = new Pin();
                 pin.Position = new Position(pinModel.Latitude, pinModel.Longitude);
@@ -55,12 +55,12 @@ namespace GpsNote.Services.PinService
         }
 
 
-        public List<PinModel> GetUserPinModels()
+        public List<PinModelDb> GetUserPinModels()
         {
             if (_settingsService.IdCurrentUser == -1)
                 return null;
 
-            List<PinModel> pinModels = _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.IdCurrentUser).Result;
+            List<PinModelDb> pinModels = _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser).Result;
 
             return pinModels;
         }
@@ -75,7 +75,7 @@ namespace GpsNote.Services.PinService
         }
 
 
-        public void SavePinModelToDatabase(PinModel pinModel) => _repositoryService.InsertAsync<PinModel>(pinModel);
+        public void SavePinModelToDatabase(PinModelDb pinModel) => _repositoryService.InsertAsync<PinModelDb>(pinModel);
 
         #endregion
 

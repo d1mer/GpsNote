@@ -40,8 +40,8 @@ namespace GpsNote.ViewModels
 
         #region -- Publics --
 
-        private ObservableCollection<PinModel> pinsList;
-        public ObservableCollection<PinModel> PinsList
+        private ObservableCollection<PinModelDb> pinsList;
+        public ObservableCollection<PinModelDb> PinsList
         {
             get => pinsList;
             set => SetProperty(ref pinsList, value);
@@ -60,7 +60,7 @@ namespace GpsNote.ViewModels
         {
             if(parameters.GetNavigationMode() == NavigationMode.Back)
             {
-                List<PinModel> pins;
+                List<PinModelDb> pins;
 
                 try
                 {
@@ -75,7 +75,7 @@ namespace GpsNote.ViewModels
                 }
 
                 if (pins != null)
-                    PinsList = new ObservableCollection<PinModel>(pins);
+                    PinsList = new ObservableCollection<PinModelDb>(pins);
             }
         }
 
@@ -86,7 +86,7 @@ namespace GpsNote.ViewModels
 
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            List<PinModel> pins;
+            List<PinModelDb> pins;
 
             try
             {
@@ -101,7 +101,7 @@ namespace GpsNote.ViewModels
             }
 
             if (pins != null)
-                PinsList = new ObservableCollection<PinModel>(pins);
+                PinsList = new ObservableCollection<PinModelDb>(pins);
         }
 
         #endregion

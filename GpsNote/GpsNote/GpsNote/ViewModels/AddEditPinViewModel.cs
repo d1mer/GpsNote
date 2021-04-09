@@ -135,7 +135,7 @@ namespace GpsNote.ViewModels
             }
 
             pin.Label = LabelPinText;
-            PinModel pinModel = pin.PinToPinModel();
+            PinModelDb pinModel = pin.PinToPinModelDb();
             pinModel.Description = EditorText;
             pinModel.Owner = _authorizeService.IdCurrentUser;
 

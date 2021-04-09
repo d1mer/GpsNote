@@ -11,9 +11,10 @@
 
         <ListView x:Name="pinsListView"
               ItemsSource="{Binding PinsList}"
-                  HasUnevenRows="True"
+              HasUnevenRows="True"
               SelectionMode="None"
-              SeparatorVisibility="None">
+              SeparatorVisibility="None"
+                  Background="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
