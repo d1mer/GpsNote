@@ -50,13 +50,16 @@ namespace GpsNote.ViewModels
 
 
         private DelegateCommand addEditPinTapCommand;
-        public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? (new DelegateCommand(AddEditPin));
+        public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? (new DelegateCommand(AddEditPinAsync));
 
         private DelegateCommand<object> imageTapCommand;
         public DelegateCommand<object> ImageTapCommand => imageTapCommand ?? (new DelegateCommand<Object>(ChangeVisibilityPinAsync));
 
         private DelegateCommand<object> deleteTapCommand;
         public DelegateCommand<object> DeleteTapCommand => deleteTapCommand ?? (new DelegateCommand<object>(DeletePinAsync));
+
+        private DelegateCommand<object> updateTapCommand;
+        public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? (new DelegateCommand<object>(UpdateTapAsync));
 
         #endregion
 
@@ -70,6 +73,20 @@ namespace GpsNote.ViewModels
                 PinViewModel pinViewModel = newPin.PinModelDbToPinViewModel();
                 pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.png" : "not_checked.png";
                 PinsList.Add(pinViewModel);
+            }
+            else if (parameters.TryGetValue<PinModelDb>("EditPin", out PinModelDb editPin))
+            {
+                PinViewModel pinViewModel = PinsList.FirstOrDefault(p => p.Id == editPin.Id);
+                if(pinViewModel != null)
+                {
+                    int index = PinsList.IndexOf(pinViewModel);
+                    PinsList.RemoveAt(index);
+
+                    PinViewModel pinView = editPin.PinModelDbToPinViewModel();
+                    pinView.ImagePath = pinView.IsEnabled ? "checked.jpeg" : "not_checked.png";
+
+                    PinsList.Insert(index, pinView);
+                }
             }
         }
 
@@ -112,7 +129,7 @@ namespace GpsNote.ViewModels
 
         #region -- Private helpers --
 
-        private async void AddEditPin()
+        private async void AddEditPinAsync()
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddEditPinPage));
         }
@@ -174,6 +191,22 @@ namespace GpsNote.ViewModels
                 }
             }
          }
+
+
+        private async void UpdateTapAsync(object obj)
+        {
+            PinViewModel pinViewModel = obj as PinViewModel;
+
+            if(pinViewModel != null)
+            {
+                NavigationParameters parameter = new NavigationParameters
+                {
+                    {"pin", pinViewModel }
+                };
+
+                await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddEditPinPage), parameter);
+            }
+        }
 
         #endregion
     }

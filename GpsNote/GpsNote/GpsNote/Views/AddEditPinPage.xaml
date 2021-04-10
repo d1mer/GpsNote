@@ -33,11 +33,13 @@
                 </Grid.ColumnDefinitions>
                 <Entry Text="{Binding LatitudePinText}"
                        Keyboard="Numeric"
-                       Placeholder="Latitude"/>
+                       Placeholder="Latitude"
+                       IsReadOnly="True"/>
                 <Entry Grid.Column="1"
                        Text="{Binding LongitudePinText}"
                        Keyboard="Numeric"
-                       Placeholder="Longitude"/>
+                       Placeholder="Longitude"
+                       IsReadOnly="True"/>
             </Grid>
             <Editor Text="{Binding EditorText}"
                     Margin="10, 10, 10, 5"
@@ -45,6 +47,7 @@
         </StackLayout>
 
         <controls:CustomMap Grid.Row="1"
+                            InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}">
             <controls:CustomMap.Behaviors>
                 <prism:EventToCommandBehavior EventName="MapClicked"
