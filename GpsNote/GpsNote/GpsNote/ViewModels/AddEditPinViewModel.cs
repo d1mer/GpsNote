@@ -138,10 +138,11 @@ namespace GpsNote.ViewModels
             PinModelDb pinModel = pin.PinToPinModelDb();
             pinModel.Description = EditorText;
             pinModel.Owner = _authorizeService.IdCurrentUser;
+            pinModel.IsEnable = true;
 
             try
             {
-                _pinService.SavePinModelToDatabase(pinModel);
+                await _pinService.SavePinModelDbToDatabaseAsync(pinModel);
             }
             catch(Exception ex)
             {

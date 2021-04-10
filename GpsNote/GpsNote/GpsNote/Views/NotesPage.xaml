@@ -14,39 +14,41 @@
               HasUnevenRows="True"
               SelectionMode="None"
               SeparatorVisibility="None"
-                  Background="Transparent">
+              Background="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="Edit"
-                                      Command="{Binding}"
+                                      Command="{Binding Path=BindingContext.UpdateTapCommand, Source={x:Reference pinsListView}}"
                                       CommandParameter="{Binding .}"/>
                             <MenuItem Text="Delete"
-                                      Command="{Binding}"
+                                      Command="{Binding Path=BindingContext.DeleteTapCommand, Source={x:Reference pinsListView}}"
                                       CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
 
                         <ViewCell.View>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Label Text="{Binding Label}"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium"/>
-                                <Label Grid.Row="1"
-                                       Text=""
-                                       FontSize="Medium"/>
-                                <StackLayout Grid.Row="2"
-                                             Orientation="Horizontal">
-                                    <Label Text="Position"/>
-                                    <Label Text="{Binding Latitude}"/>
-                                    <Label Text="{Binding Longitude}"/>
-                                </StackLayout>
+                            <Grid Background="Transparent">
+                                <Grid ColumnDefinitions="0.2*, *"
+                                      Padding="5, 15, 15, 15">
+                                    <Image Source="{Binding ImagePath}"
+                                           Margin="10, 0, 10, 0"
+                                           HeightRequest="15">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ImageTapCommand, 
+                                                                            Source={x:Reference pinsListView}}"                                                 CommandParameter="{Binding .}"/> 
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <StackLayout Grid.Column="1"
+                                                 Background="Transparent">
+                                        <Label Text="{Binding Label}"
+                                               FontAttributes="Bold"
+                                               FontSize="Medium"/>
+                                        <Label Grid.Row="1"
+                                               Text="{Binding Address}"
+                                               FontSize="Medium"/>
+                                    </StackLayout>
+                                </Grid>
                             </Grid>
                         </ViewCell.View>
                     </ViewCell>
@@ -57,16 +59,16 @@
 
         <Button Grid.Row="0" 
                 ImageSource="ic_add.png"
-                BorderColor="Gray"
+                BorderColor="Black"
                 BorderWidth="5"
                 FontAttributes="None"
-                BackgroundColor="Blue"
+                BackgroundColor="#2296F3"
                 BorderRadius ="70"
                 TextColor="White"
                 HorizontalOptions="End"
                 VerticalOptions="End"
-                WidthRequest="80"
-                HeightRequest="80"
+                WidthRequest="70"
+                HeightRequest="70"
                 Margin="0,0,20,40"
                 Command="{Binding AddEditPinTapCommand}"/>
     </Grid>

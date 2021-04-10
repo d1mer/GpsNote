@@ -8,6 +8,9 @@ using GpsNote.Models;
 using GpsNote.Services.SettingsService;
 using System.Threading.Tasks;
 using System.Linq;
+using GpsNote.Extensions;
+using GpsNote.ViewModels.ExtentedViewModels;
+using System.Linq.Expressions;
 
 namespace GpsNote.Services.PinService
 {
@@ -75,7 +78,21 @@ namespace GpsNote.Services.PinService
         }
 
 
-        public void SavePinModelToDatabase(PinModelDb pinModel) => _repositoryService.InsertAsync<PinModelDb>(pinModel);
+        public async Task<int> SavePinModelDbToDatabaseAsync(PinModelDb pinModel) => 
+            await _repositoryService.InsertAsync<PinModelDb>(pinModel);
+
+        public async Task<int> UpdatePinModelDbAsync(PinModelDb pinModelDb) => 
+            await _repositoryService.UpdateAsync<PinModelDb>(pinModelDb);
+
+        public async Task<int> UpdatePinModelDbAsync(PinViewModel pinViewModel)
+        {
+            PinModelDb pinModelDb = pinViewModel.PinViewModelToPinModelDb();
+            return await UpdatePinModelDbAsync(pinModelDb);
+        }
+
+
+        public async Task<PinModelDb> FindPinModelDbAsync(Expression<Func<PinModelDb, bool>> predicate) =>
+            await _repositoryService.FindEntity<PinModelDb>(predicate); 
 
         #endregion
 
