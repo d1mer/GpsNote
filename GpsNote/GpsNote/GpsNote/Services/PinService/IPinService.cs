@@ -3,7 +3,6 @@ using GpsNote.ViewModels.ExtentedViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
 
@@ -11,11 +10,11 @@ namespace GpsNote.Services.PinService
 {
     public interface IPinService
     {
-        List<Pin> GetUserPins();
+        Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync();
 
-        List<PinModelDb> GetUserPinModels();
+        Task<List<PinModelDb>> GetUserPinModelsFromDatabaseAsync();
 
-        Task<Pin> GetNewPinAsync(Position position);
+        Task<Pin> GetNewPinFromPositionAsync(Position position);
 
         Task<int> SavePinModelDbToDatabaseAsync(PinModelDb pinModel);
 
@@ -24,5 +23,9 @@ namespace GpsNote.Services.PinService
         Task<int> UpdatePinModelDbAsync(PinViewModel pinViewModel);
 
         Task<PinModelDb> FindPinModelDbAsync(Expression<Func<PinModelDb, bool>> predicate);
+
+        Task<int> DeletePinModelDbAsync(PinModelDb pinModelDb);
+
+        Task<int> DeletePinModelDbAsync(PinViewModel pinViewModel);
     }
 }

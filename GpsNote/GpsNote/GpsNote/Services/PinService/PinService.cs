@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Services.RepositoryService;
-using GpsNote.Services.UserService;
 using GpsNote.Models;
 using GpsNote.Services.SettingsService;
 using System.Threading.Tasks;
@@ -37,39 +35,35 @@ namespace GpsNote.Services.PinService
 
         #region -- Implement interface IPinService --
 
-        public List<Pin> GetUserPins()
+        public async Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync()
         {
             if (_settingsService.IdCurrentUser == -1)
                 return null;
 
-            List<PinModelDb> pinModels = _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser).Result;
+            List<PinModelDb> pinModels = await _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser);
             List<Pin> pins = new List<Pin>();
 
-            foreach (PinModelDb pinModel in pinModels)
+            foreach (PinModelDb pinModelDb in pinModels)
             {
-                Pin pin = new Pin();
-                pin.Position = new Position(pinModel.Latitude, pinModel.Longitude);
-                pin.Label = pinModel.Label;
-                pin.Address = pinModel.Address;
-                pins.Add(pin);
+                pins.Add(pinModelDb.PinModelDbToPin());
             }
 
             return pins;
         }
 
 
-        public List<PinModelDb> GetUserPinModels()
+        public async Task<List<PinModelDb>> GetUserPinModelsFromDatabaseAsync()
         {
             if (_settingsService.IdCurrentUser == -1)
                 return null;
 
-            List<PinModelDb> pinModels = _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser).Result;
+            List<PinModelDb> pinModels = await _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser);
 
             return pinModels;
         }
 
 
-        public async Task<Pin> GetNewPinAsync(Position position)
+        public async Task<Pin> GetNewPinFromPositionAsync(Position position)
         {
             Geocoder geocoder = new Geocoder();
             IEnumerable<string> addresses = await geocoder.GetAddressesForPositionAsync(position);
@@ -81,8 +75,10 @@ namespace GpsNote.Services.PinService
         public async Task<int> SavePinModelDbToDatabaseAsync(PinModelDb pinModel) => 
             await _repositoryService.InsertAsync<PinModelDb>(pinModel);
 
+
         public async Task<int> UpdatePinModelDbAsync(PinModelDb pinModelDb) => 
             await _repositoryService.UpdateAsync<PinModelDb>(pinModelDb);
+
 
         public async Task<int> UpdatePinModelDbAsync(PinViewModel pinViewModel)
         {
@@ -92,9 +88,21 @@ namespace GpsNote.Services.PinService
 
 
         public async Task<PinModelDb> FindPinModelDbAsync(Expression<Func<PinModelDb, bool>> predicate) =>
-            await _repositoryService.FindEntity<PinModelDb>(predicate); 
+            await _repositoryService.FindEntity<PinModelDb>(predicate);
+
+
+        public async Task<int> DeletePinModelDbAsync(PinModelDb pinModelDb) => 
+            await _repositoryService.DeleteAsync<PinModelDb>(pinModelDb);
+
+
+        public async Task<int> DeletePinModelDbAsync(PinViewModel pinViewModel)
+        {
+            PinModelDb pinModelDb = pinViewModel.PinViewModelToPinModelDb();
+            return await DeletePinModelDbAsync(pinModelDb);
+        }
 
         #endregion
+
 
         #region -- Private helpers --
 

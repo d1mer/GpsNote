@@ -16,9 +16,6 @@
                             >
 
             <controls:CustomMap.Behaviors>
-                <prism:EventToCommandBehavior EventName="MapClicked"
-                                              Command="{Binding MapTapCommand}"
-                                              EventArgsParameterPath="Point" />
                 <prism:EventToCommandBehavior EventName="CameraIdled"
                                               Command="{Binding CameraIdLedCommand}"
                                               EventArgsParameterPath="Position" />

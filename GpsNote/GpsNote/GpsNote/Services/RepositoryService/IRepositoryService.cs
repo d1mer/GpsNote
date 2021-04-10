@@ -20,6 +20,8 @@ namespace GpsNote.Services.RepositoryService
 
         Task<List<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new();
 
+        Task<int> DeleteAsync<T>(T entity) where T : IEntityBase, new();
+
         Task DeleteAllAsync<T>() where T : IEntityBase, new();
 
         Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new();

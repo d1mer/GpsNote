@@ -4,18 +4,16 @@ using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Extensions;
-using Prism.Services.Dialogs;
 using Prism.Services;
-using System.Threading.Tasks;
 using GpsNote.Services.AuthorizeService;
 
 namespace GpsNote.ViewModels
 {
     public class AddEditPinViewModel : ViewModelBase
     {
+
         #region -- Private fields --
 
         private IPinService _pinService;
@@ -73,7 +71,7 @@ namespace GpsNote.ViewModels
         }
 
 
-        private List<Pin> pins = new List<Pin>();
+        private List<Pin> pins;
         public List<Pin> Pins
         {
             get => pins;
@@ -95,15 +93,16 @@ namespace GpsNote.ViewModels
         private async void OnMapClickAsync(Object _position)
         {
             Position position = (Position)_position;
-            Pin pin = await _pinService.GetNewPinAsync(position);
+            Pin pin = await _pinService.GetNewPinFromPositionAsync(position);
 
             LabelPinText = pin.Label;
             LatitudePinText = pin.Position.Latitude.ToString();
             LongitudePinText = pin.Position.Longitude.ToString();
 
-            List<Pin> addedPin = new List<Pin>();
-            addedPin.Add(pin);
-            Pins = addedPin;
+            Pins = new List<Pin>
+            {
+                pin
+            };
         }
 
 
@@ -123,7 +122,7 @@ namespace GpsNote.ViewModels
 
             try
             {
-                pin = await _pinService.GetNewPinAsync(
+                pin = await _pinService.GetNewPinFromPositionAsync(
                 new Position(Convert.ToDouble(LatitudePinText), Convert.ToDouble(LongitudePinText)));
             }
             catch(Exception ex)
@@ -135,14 +134,14 @@ namespace GpsNote.ViewModels
             }
 
             pin.Label = LabelPinText;
-            PinModelDb pinModel = pin.PinToPinModelDb();
-            pinModel.Description = EditorText;
-            pinModel.Owner = _authorizeService.IdCurrentUser;
-            pinModel.IsEnable = true;
+            PinModelDb pinModelDb = pin.PinToPinModelDb();
+            pinModelDb.Description = EditorText;
+            pinModelDb.Owner = _authorizeService.IdCurrentUser;
+            pinModelDb.IsEnable = true;
 
             try
             {
-                await _pinService.SavePinModelDbToDatabaseAsync(pinModel);
+                await _pinService.SavePinModelDbToDatabaseAsync(pinModelDb);
             }
             catch(Exception ex)
             {
@@ -157,7 +156,9 @@ namespace GpsNote.ViewModels
                 return;
             }
 
-            await NavigationService.GoBackAsync();
+            NavigationParameters parameters = new NavigationParameters();
+            parameters.Add("NewPin", pinModelDb);
+            await NavigationService.GoBackAsync(parameters);
         }
 
         #endregion

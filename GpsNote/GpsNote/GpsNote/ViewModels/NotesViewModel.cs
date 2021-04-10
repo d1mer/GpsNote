@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
+using System.Linq;
 
 namespace GpsNote.ViewModels
 {
@@ -52,42 +52,24 @@ namespace GpsNote.ViewModels
         private DelegateCommand addEditPinTapCommand;
         public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? (new DelegateCommand(AddEditPin));
 
-        private DelegateCommand<Object> imageTapCommand;
-        public DelegateCommand<Object> ImageTapCommand => imageTapCommand ?? (new DelegateCommand<Object>(ChangeVisibilityPinAsync));
+        private DelegateCommand<object> imageTapCommand;
+        public DelegateCommand<object> ImageTapCommand => imageTapCommand ?? (new DelegateCommand<Object>(ChangeVisibilityPinAsync));
+
+        private DelegateCommand<object> deleteTapCommand;
+        public DelegateCommand<object> DeleteTapCommand => deleteTapCommand ?? (new DelegateCommand<object>(DeletePinAsync));
 
         #endregion
 
 
         #region -- Overrides --
-        public async override void OnNavigatedTo(INavigationParameters parameters)
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if(parameters.GetNavigationMode() == NavigationMode.Back)
+            if (parameters.TryGetValue<PinModelDb>("NewPin", out PinModelDb newPin))
             {
-                List<PinModelDb> pinsModelDb;
-
-                try
-                {
-                    pinsModelDb = _pinService.GetUserPinModels();
-                }
-                catch (Exception ex)
-                {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                     ex.Message,
-                                                     "Cancel");
-                    return;
-                }
-
-                if (pinsModelDb != null || pinsModelDb.Count > 0)
-                {
-                    PinsList = new ObservableCollection<PinViewModel>();
-                    foreach(PinModelDb modelDb in pinsModelDb)
-                    {
-                        PinViewModel pinViewModel = modelDb.PinModelDbToPinViewModel();
-                        pinViewModel.ImagePath = modelDb.IsEnable ? "checked.png" : "not_checked.png";
-                        PinsList.Add(pinViewModel);
-                    }
-                    //PinsList = new ObservableCollection<PinViewModel>(pinsModelDb);
-                }
+                PinViewModel pinViewModel = newPin.PinModelDbToPinViewModel();
+                pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.png" : "not_checked.png";
+                PinsList.Add(pinViewModel);
             }
         }
 
@@ -102,7 +84,7 @@ namespace GpsNote.ViewModels
 
             try
             {
-                pinsModelDb = _pinService.GetUserPinModels();
+                pinsModelDb = await _pinService.GetUserPinModelsFromDatabaseAsync();
             }
             catch (Exception ex)
             {
@@ -115,6 +97,7 @@ namespace GpsNote.ViewModels
             if (pinsModelDb.Count != 0)
             {
                 PinsList = new ObservableCollection<PinViewModel>();
+
                 foreach (PinModelDb modelDb in pinsModelDb)
                 {
                     PinViewModel pinViewModel = modelDb.PinModelDbToPinViewModel();
@@ -152,10 +135,7 @@ namespace GpsNote.ViewModels
                         pinModelDb.IsEnable = pinViewModel.IsEnabled;
                         await _pinService.UpdatePinModelDbAsync(pinModelDb);
                     }
-                    //int res = await _pinService.UpdatePinModelDbAsync(pinViewModel);
-                    //await _dialogService.DisplayAlertAsync("Error",
-                    //                                 res.ToString(),
-                    //                                 "Cancel");
+                    //await _pinService.UpdatePinModelDbAsync(pinViewModel);
                 }
                 catch(Exception ex)
                 {
@@ -168,6 +148,32 @@ namespace GpsNote.ViewModels
                 }
             }
         }
+
+
+        private async void DeletePinAsync(object obj)
+        {
+            PinViewModel pinViewModel = obj as PinViewModel;
+
+            if(pinViewModel != null)
+            {
+                string res = await _dialogService.DisplayActionSheetAsync("Delete selected pin?", "OK", "Cancel");
+                if (res != "OK")
+                    return;
+
+                PinsList.Remove(PinsList.First(p => p.Id == pinViewModel.Id));
+
+                try
+                {
+                    await _pinService.DeletePinModelDbAsync(pinViewModel);
+                }
+                catch (Exception ex)
+                {
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                     ex.Message,
+                                                     "Cancel");
+                }
+            }
+         }
 
         #endregion
     }
