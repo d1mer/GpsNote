@@ -1,17 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:CustomTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:GpsNote.Views"
             xmlns:behaviors="clr-namespace:GpsNote.Behaviors"
-             x:Class="GpsNote.Views.MainTabbedPage">
+            xmlns:controls="clr-namespace:GpsNote.Controls.CustomTabbedPage"
+            xmlns:prism="http://prismlibrary.com"
+            prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GpsNote.Views.MainTabbedPage"
+            SelectedTabIndex="{Binding SelectedTab}">
 
-    <TabbedPage.Behaviors>
+    <controls:CustomTabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />
-    </TabbedPage.Behaviors>
+    </controls:CustomTabbedPage.Behaviors>
 
-    <TabbedPage.Children>
+    <controls:CustomTabbedPage.Children>
         <local:MapPage />
         <local:NotesPage/>
         <local:SettingsPage/>
-    </TabbedPage.Children>
-</TabbedPage>
+    </controls:CustomTabbedPage.Children>
+</controls:CustomTabbedPage>

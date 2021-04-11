@@ -13,6 +13,7 @@ using GpsNote.Themes;
 using GpsNote.Services.AuthorizeService;
 using GpsNote.Services.UserService;
 using GpsNote.Services.PinService;
+using Unity;
 
 namespace GpsNote
 {

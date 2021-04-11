@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
 using System.Windows.Input;
+using Unity;
+using GpsNote.Interfaces;
 
 namespace GpsNote.ViewModels
 {
@@ -24,17 +26,19 @@ namespace GpsNote.ViewModels
         private ISettingsService   _settingsService;
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
+        private IUnityContainer _unityContainer;
 
         #endregion
 
 
         #region -- Constructor --
 
-        public NotesViewModel(INavigationService navigationService, IPinService pinService, ISettingsService settingsService, IPageDialogService dialogService) : base(navigationService)
+        public NotesViewModel(INavigationService navigationService, IPinService pinService, ISettingsService settingsService, IPageDialogService dialogService, IUnityContainer unityContainer) : base(navigationService)
         {
             _settingsService = settingsService;
             _dialogService = dialogService;
             _pinService = pinService;
+            _unityContainer = unityContainer;
 
             Title = "Notes";
         }
@@ -225,6 +229,7 @@ namespace GpsNote.ViewModels
         private async void ItemTapAsync(object obj)
         {
             PinViewModel pin = obj as PinViewModel;
+            _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
         }
 
         #endregion
