@@ -14,6 +14,12 @@ namespace GpsNote.Controls
         #endregion
 
 
+        public CustomMap()
+        {
+            UiSettings.CompassEnabled = true;
+            UiSettings.MyLocationButtonEnabled = true;
+        }
+
         #region -- Public statics --
 
         public static readonly BindableProperty PinsListProperty =
