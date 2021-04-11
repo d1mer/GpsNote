@@ -1,4 +1,5 @@
 ﻿using GpsNote.Controls;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace GpsNote.Views
