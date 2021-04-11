@@ -74,6 +74,21 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref pins, value);
         }
 
+
+        private bool isMoveCamera;
+        public bool IsMoveCamera
+        {
+            get => isMoveCamera;
+            set => SetProperty(ref isMoveCamera, value);
+        }
+
+        private Position movingCameraPosition;
+        public Position MovingCameraPosition
+        {
+            get => movingCameraPosition;
+            set => SetProperty(ref movingCameraPosition, value);
+        }
+
         private DelegateCommand<Object> cameraIdLedCommand;
         public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? (new DelegateCommand<Object>(OnCameraLed));
 
@@ -87,6 +102,13 @@ namespace GpsNote.ViewModels
             base.OnNavigatedTo(parameters);
 
             Task.Run(() => GetPinsFromDatabaseAsync());
+
+            if (_pinService.IsDisplayConcretePin)
+            {
+                MovingCameraPosition = parameters.GetValue<Position>("displayPin");
+                IsMoveCamera = true;
+                _pinService.IsDisplayConcretePin = false;
+            }
         }
 
         #endregion

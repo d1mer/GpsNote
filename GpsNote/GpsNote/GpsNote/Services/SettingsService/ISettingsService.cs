@@ -14,5 +14,6 @@ namespace GpsNote.Services.SettingsService
         double      LastZoom { get; set; }
         double   LastBearing { get; set; }
         double      LastTilt { get; set; }
+        bool         ShowPin { get; set; }
     }
 }

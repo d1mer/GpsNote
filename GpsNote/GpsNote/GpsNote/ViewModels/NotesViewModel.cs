@@ -16,6 +16,7 @@ using System.Linq;
 using System.Windows.Input;
 using Unity;
 using GpsNote.Interfaces;
+using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.ViewModels
 {
@@ -27,6 +28,7 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
         private IUnityContainer _unityContainer;
+        private PinViewModel _pinForDisplaying;
 
         #endregion
 
@@ -74,7 +76,7 @@ namespace GpsNote.ViewModels
         public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? (new DelegateCommand<object>(UpdateTapAsync));
 
         private ICommand itemTapCommand;
-        public ICommand ItemTapCommand => itemTapCommand ?? (new Command(ItemTapAsync));
+        public ICommand ItemTapCommand => itemTapCommand ?? (new Command(ItemTap));
 
         #endregion
 
@@ -104,6 +106,19 @@ namespace GpsNote.ViewModels
 
                     PinsList.Insert(index, pinView);
                 }
+            }
+        }
+
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+
+            if(_pinService.IsDisplayConcretePin == true)
+            {
+                Position position = new Position(_pinForDisplaying.Latitude, _pinForDisplaying.Longitude);
+                _pinForDisplaying = null;
+                parameters.Add("displayPin", position);
             }
         }
 
@@ -226,9 +241,14 @@ namespace GpsNote.ViewModels
         }
 
 
-        private async void ItemTapAsync(object obj)
+        private void ItemTap(object obj)
         {
-            PinViewModel pin = obj as PinViewModel;
+            _pinForDisplaying = obj as PinViewModel;
+
+            if (_pinForDisplaying == null)
+                return;
+
+            _pinService.IsDisplayConcretePin = true;
             _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
         }
 

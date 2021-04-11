@@ -10,6 +10,8 @@ namespace GpsNote.Services.PinService
 {
     public interface IPinService
     {
+        bool IsDisplayConcretePin { get; set; }
+
         Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync();
 
         Task<List<PinModelDb>> GetUserPinModelsFromDatabaseAsync();

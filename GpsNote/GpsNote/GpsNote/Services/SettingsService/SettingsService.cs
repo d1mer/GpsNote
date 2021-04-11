@@ -49,6 +49,13 @@ namespace GpsNote.Services.SettingsService
             get => Preferences.Get(nameof(LastTilt), 0.0);
             set => Preferences.Set(nameof(LastTilt), value);
         }
+
+
+        public bool ShowPin
+        {
+            get => Preferences.Get(nameof(ShowPin), false);
+            set => Preferences.Set(nameof(ShowPin), value);
+        }
         
 
         #endregion

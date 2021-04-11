@@ -11,6 +11,9 @@
 
     <Grid>
         <controls:CustomMap x:Name="map"
+                            MyLocationEnabled="True"
+                            IsMoveCamera="{Binding IsMoveCamera}"
+                            CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}"
                             >

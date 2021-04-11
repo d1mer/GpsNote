@@ -35,6 +35,13 @@ namespace GpsNote.Services.PinService
 
         #region -- Implement interface IPinService --
 
+        public bool IsDisplayConcretePin 
+        {
+            get => _settingsService.ShowPin;
+            set => _settingsService.ShowPin = value; 
+        }
+
+
         public async Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync()
         {
             if (_settingsService.IdCurrentUser == -1)
