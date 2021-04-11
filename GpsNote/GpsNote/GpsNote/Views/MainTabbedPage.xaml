@@ -8,7 +8,7 @@
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />
     </TabbedPage.Behaviors>
-    
+
     <TabbedPage.Children>
         <local:MapPage />
         <local:NotesPage/>

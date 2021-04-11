@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using System.Windows.Input;
 
 namespace GpsNote.ViewModels
 {
@@ -34,6 +35,8 @@ namespace GpsNote.ViewModels
             _settingsService = settingsService;
             _dialogService = dialogService;
             _pinService = pinService;
+
+            Title = "Notes";
         }
 
         #endregion
@@ -46,6 +49,11 @@ namespace GpsNote.ViewModels
         {
             get => pinsList;
             set => SetProperty(ref pinsList, value);
+        }
+
+        public Element ParentPage
+        {
+            get;set;
         }
 
 
@@ -61,6 +69,9 @@ namespace GpsNote.ViewModels
         private DelegateCommand<object> updateTapCommand;
         public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? (new DelegateCommand<object>(UpdateTapAsync));
 
+        private ICommand itemTapCommand;
+        public ICommand ItemTapCommand => itemTapCommand ?? (new Command(ItemTapAsync));
+
         #endregion
 
 
@@ -72,6 +83,8 @@ namespace GpsNote.ViewModels
             {
                 PinViewModel pinViewModel = newPin.PinModelDbToPinViewModel();
                 pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.png" : "not_checked.png";
+                if (PinsList == null)
+                    PinsList = new ObservableCollection<PinViewModel>();
                 PinsList.Add(pinViewModel);
             }
             else if (parameters.TryGetValue<PinModelDb>("EditPin", out PinModelDb editPin))
@@ -206,6 +219,12 @@ namespace GpsNote.ViewModels
 
                 await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddEditPinPage), parameter);
             }
+        }
+
+
+        private async void ItemTapAsync(object obj)
+        {
+            PinViewModel pin = obj as PinViewModel;
         }
 
         #endregion
