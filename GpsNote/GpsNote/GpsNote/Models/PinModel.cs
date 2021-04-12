@@ -6,7 +6,7 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.Models
 {
-    public class PinModelDb : IEntityBase
+    public class PinModel : IEntityBase
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

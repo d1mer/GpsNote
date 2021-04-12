@@ -6,9 +6,9 @@ namespace GpsNote.Extensions
 {
     public static class PinExtensions
     {
-        public static PinModelDb PinToPinModelDb(this Pin pin)
+        public static PinModel PinToPinModel(this Pin pin)
         {
-            PinModelDb pinModelDb = new PinModelDb
+            PinModel pinModel = new PinModel
             {
                 Latitude = pin.Position.Latitude,
                 Longitude = pin.Position.Longitude,
@@ -16,7 +16,7 @@ namespace GpsNote.Extensions
                 Address = pin.Address
             };
 
-            return pinModelDb;
+            return pinModel;
         }
 
 
@@ -49,9 +49,9 @@ namespace GpsNote.Extensions
         }
 
 
-        public static PinModelDb PinViewModelToPinModelDb(this PinViewModel pinViewModel)
+        public static PinModel PinViewModelToPinModel(this PinViewModel pinViewModel)
         {
-            PinModelDb pinModelDb = new PinModelDb
+            PinModel pinModel = new PinModel
             {
                 Id = pinViewModel.Id,
                 Label = pinViewModel.Label,
@@ -62,35 +62,35 @@ namespace GpsNote.Extensions
                 IsEnable = pinViewModel.IsEnabled
             };
 
-            return pinModelDb;
+            return pinModel;
         }
 
 
-        public static PinViewModel PinModelDbToPinViewModel(this PinModelDb pinModelDb)
+        public static PinViewModel PinModelToPinViewModel(this PinModel pinModel)
         {
             PinViewModel pinViewModel = new PinViewModel
             {
-                Id = pinModelDb.Id,
-                Latitude = pinModelDb.Latitude,
-                Longitude = pinModelDb.Longitude,
-                Label = pinModelDb.Label,
-                Address = pinModelDb.Address,
-                Description = pinModelDb.Description,
-                IsEnabled = pinModelDb.IsEnable
+                Id = pinModel.Id,
+                Latitude = pinModel.Latitude,
+                Longitude = pinModel.Longitude,
+                Label = pinModel.Label,
+                Address = pinModel.Address,
+                Description = pinModel.Description,
+                IsEnabled = pinModel.IsEnable
             };
 
             return pinViewModel;
         }
 
 
-        public static Pin PinModelDbToPin(this PinModelDb pinModelDb)
+        public static Pin PinModelToPin(this PinModel pinModel)
         {
             Pin pin = new Pin
             {
-                Label = pinModelDb.Label,
-                Position = new Position(pinModelDb.Latitude, pinModelDb.Longitude),
-                Address = pinModelDb.Address,
-                IsVisible = pinModelDb.IsEnable
+                Label = pinModel.Label,
+                Position = new Position(pinModel.Latitude, pinModel.Longitude),
+                Address = pinModel.Address,
+                IsVisible = pinModel.IsEnable
             };
 
             return pin;

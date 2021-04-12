@@ -1,14 +1,17 @@
-﻿using GpsNote.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using Xamarin.Forms.GoogleMaps;
+using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
+using GpsNote.Extensions;
 using GpsNote.Models;
 using GpsNote.Services.AuthorizeService;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
-using Prism.Commands;
-using Prism.Navigation;
-using Prism.Services;
-using System;
-using System.Collections.Generic;
-using Xamarin.Forms.GoogleMaps;
+using GpsNote.Constants;
+
+
 
 namespace GpsNote.ViewModels
 {
@@ -21,7 +24,7 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
         private IAuthorizeService _authorizeService;
         private bool editMode = false;
-        private PinViewModel editPinViewModel;
+        private PinViewModel editPinViewModel = null;
 
         #endregion
 
@@ -94,7 +97,7 @@ namespace GpsNote.ViewModels
         public DelegateCommand<Object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<Object>(OnMapClickAsync));
 
         private DelegateCommand saveTapCommand;
-        public DelegateCommand SaveTapCommand => saveTapCommand ?? (new DelegateCommand(OnSavePin));
+        public DelegateCommand SaveTapCommand => saveTapCommand ?? (new DelegateCommand(OnSavePinAsync));
 
         #endregion
 
@@ -105,27 +108,23 @@ namespace GpsNote.ViewModels
         {
             if (parameters.TryGetValue(nameof(PinViewModel), out PinViewModel pinViewModel))
             {
-                LabelPinText = editPinViewModel.Label;
-                LatitudePinText = editPinViewModel.Latitude.ToString();
-                LongitudePinText = editPinViewModel.Longitude.ToString();
-                EditorText = editPinViewModel.Description;
+                LabelPinText = pinViewModel.Label;
+                LatitudePinText = pinViewModel.Latitude.ToString();
+                LongitudePinText = pinViewModel.Longitude.ToString();
+                EditorText = pinViewModel.Description;
 
-                Pin pin = new Pin
-                {
-                    Position = new Position(editPinViewModel.Latitude, editPinViewModel.Longitude),
-                    Label = editPinViewModel.Label,
-                    Address = editPinViewModel.Address
-                };
+                Pin pin = pinViewModel.PinViewModelToPin();
 
                 Pins = new List<Pin>
                 {
                     pin
                 };
-
+                // TODO: replace zoom value with constant
                 InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
                     new CameraPosition(pin.Position, 12));
 
                 editMode = true;
+                editPinViewModel = pinViewModel;
             }
         }
 
@@ -152,96 +151,93 @@ namespace GpsNote.ViewModels
             };
         }
 
-
-        private async void OnSavePin()
+        private async void OnSavePinAsync()
         {
-            if (string.IsNullOrWhiteSpace(LabelPinText) ||
-                string.IsNullOrWhiteSpace(LatitudePinText) ||
-                string.IsNullOrWhiteSpace(LongitudePinText))
+            if (!string.IsNullOrWhiteSpace(LabelPinText) &&
+                !string.IsNullOrWhiteSpace(LatitudePinText) &&
+                !string.IsNullOrWhiteSpace(LongitudePinText))
+            {
+                PinModel pinModel;
+
+                if (editMode)
+                {
+                    pinModel = await UpdateExistPinAsync(editPinViewModel.Id);
+                }
+                else
+                {
+                    pinModel = await SaveNewPinAsync(Pins[0]);
+                }
+                
+                if(pinModel != null)
+                {
+                    NavigationParameters parameters = new NavigationParameters();
+
+                    if (editMode)
+                    {
+                        parameters.Add(ConstantsValue.EDIT_PIN, pinModel);
+                    }
+                    else
+                    {
+                        parameters.Add(ConstantsValue.NEW_PIN, pinModel);
+                    }
+
+                    await NavigationService.GoBackAsync(parameters);
+                }
+                else
+                {
+                    await _dialogService.DisplayAlertAsync("Error",
+                                                     "Database error.\nPin not saved / updated",
+                                                     "Cancel");
+                }
+            }
+            else
             {
                 await _dialogService.DisplayAlertAsync("Error",
                                                      "Name and coordinates fields must be filled",
                                                      "Cancel");
-                return;
             }
+        }
 
-            Pin pin;
+        private async System.Threading.Tasks.Task<PinModel> UpdateExistPinAsync(int id)
+        {
+            PinModel pinModel = await _pinService.FindPinModelAsync(p => p.Id == editPinViewModel.Id);
 
-            if (editMode)
-                pin = Pins[0];
-            else
+            if (pinModel != null)
             {
-                try
+                pinModel.Label = LabelPinText;
+                pinModel.Description = EditorText;
+                // TODO: to change IdCurrentUser
+                pinModel.Owner = _authorizeService.IdCurrentUser;
+                pinModel.IsEnable = editPinViewModel.IsEnabled;
+                int rows = await _pinService.UpdatePinModelAsync(pinModel);
+
+                if(rows <= 0)
                 {
-                    pin = await _pinService.GetNewPinFromPositionAsync(
-                    new Position(Convert.ToDouble(LatitudePinText), Convert.ToDouble(LongitudePinText)));
-                }
-                catch (Exception ex)
-                {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                         ex.Message,
-                                                         "Cancel");
-                    return;
+                    pinModel = null;
                 }
             }
 
-            PinModelDb pinModelDb;
+            return pinModel;
+        }
 
-            if (editMode)
+        private async System.Threading.Tasks.Task<PinModel> SaveNewPinAsync(Pin pin) 
+        {
+            pin.Label = LabelPinText;
+
+            PinModel pinModel = pin.PinToPinModel();
+            pinModel.Description = EditorText;
+            // TODO: to change IdCurrentUser
+            pinModel.Owner = _authorizeService.IdCurrentUser;
+            pinModel.IsEnable = true;
+
+            int rows = await _pinService.SavePinModelToDatabaseAsync(pinModel);
+
+            if(rows == 0)
             {
-                try
-                {
-                    pinModelDb = await _pinService.FindPinModelDbAsync(p => p.Id == editPinViewModel.Id);
-
-                    if(pinModelDb != null)
-                    {
-                        pinModelDb.Label = LabelPinText;
-                        pinModelDb.Description = EditorText;
-                        pinModelDb.Owner = _authorizeService.IdCurrentUser;
-                        pinModelDb.IsEnable = editPinViewModel.IsEnabled;
-                        await _pinService.UpdatePinModelDbAsync(pinModelDb);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                     ex.Message,
-                                                     "Cancel");
-                    return;
-                }
-            }
-            else
-            {
-                pin.Label = LabelPinText;
-                pinModelDb = pin.PinToPinModelDb();
-                pinModelDb.Description = EditorText;
-                pinModelDb.Owner = _authorizeService.IdCurrentUser;
-                pinModelDb.IsEnable = true;
-
-                try
-                {
-                    await _pinService.SavePinModelDbToDatabaseAsync(pinModelDb);
-                }
-                catch (Exception ex)
-                {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                         ex.Message,
-                                                         "Cancel");
-                    Pins = new List<Pin>();
-                    LabelPinText = string.Empty;
-                    LatitudePinText = string.Empty;
-                    LongitudePinText = string.Empty;
-                    EditorText = string.Empty;
-                    return;
-                }
+                pinModel = null;
             }
 
-            NavigationParameters parameters = new NavigationParameters();
-            if(editMode)
-                parameters.Add("EditPin", pinModelDb);
-            else
-                parameters.Add("NewPin", pinModelDb);
-            await NavigationService.GoBackAsync(parameters);
+            return pinModel;
         }
 
         #endregion

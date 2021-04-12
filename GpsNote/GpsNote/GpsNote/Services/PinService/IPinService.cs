@@ -1,10 +1,9 @@
-﻿using GpsNote.Models;
-using GpsNote.ViewModels.ExtentedViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Models;
 
 namespace GpsNote.Services.PinService
 {
@@ -12,22 +11,16 @@ namespace GpsNote.Services.PinService
     {
         bool IsDisplayConcretePin { get; set; }
 
-        Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync();
-
-        Task<List<PinModelDb>> GetUserPinModelsFromDatabaseAsync();
+        Task<List<PinModel>> GetUsersPinsAsync();
 
         Task<Pin> GetNewPinFromPositionAsync(Position position);
 
-        Task<int> SavePinModelDbToDatabaseAsync(PinModelDb pinModel);
+        Task<int> SavePinModelToDatabaseAsync(PinModel pinModel);
 
-        Task<int> UpdatePinModelDbAsync(PinModelDb pinModelDb);
+        Task<int> UpdatePinModelAsync(PinModel pinModelDb);
 
-        Task<int> UpdatePinModelDbAsync(PinViewModel pinViewModel);
+        Task<PinModel> FindPinModelAsync(Expression<Func<PinModel, bool>> predicate);
 
-        Task<PinModelDb> FindPinModelDbAsync(Expression<Func<PinModelDb, bool>> predicate);
-
-        Task<int> DeletePinModelDbAsync(PinModelDb pinModelDb);
-
-        Task<int> DeletePinModelDbAsync(PinViewModel pinViewModel);
+        Task<int> DeletePinModelAsync(PinModel pinModelDb);
     }
 }

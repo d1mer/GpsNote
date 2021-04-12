@@ -1,16 +1,17 @@
-﻿using GpsNote.Services.MapCameraSettingsService;
-using GpsNote.Services.PinService;
-using GpsNote.Services.SettingsService;
-using GpsNote.ViewModels.ExtentedViewModels;
-using Prism.Commands;
-using Prism.Navigation;
-using Prism.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Services.MapCameraSettingsService;
+using GpsNote.Services.PinService;
+using GpsNote.Models;
+using GpsNote.Extensions;
+using GpsNote.Constants;
 
 namespace GpsNote.ViewModels
 {
@@ -63,7 +64,6 @@ namespace GpsNote.ViewModels
             get => pins;
             set => SetProperty(ref pins, value);
         }
-
 
         private bool isMoveCamera;
         public bool IsMoveCamera
@@ -123,11 +123,11 @@ namespace GpsNote.ViewModels
         public DelegateCommand SearchButtonTapCommand => searchButtonTapCommand ?? (new DelegateCommand(OnSearchButtonTap));
 
         private DelegateCommand<object> searchTextChangedCommand;
-        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? (new DelegateCommand<object>(SearchPin));
+        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? (new DelegateCommand<object>(OnSearchPin));
 
 
         private DelegateCommand<object> unfocusedSearchbarCommand;
-        public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? (new DelegateCommand<object>(UnfocusedSearch));
+        public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? (new DelegateCommand<object>(OnUnfocusedSearch));
 
         private DelegateCommand<object> mapTapCommand;
         public DelegateCommand<object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<object>(OnMapClick));
@@ -147,6 +147,7 @@ namespace GpsNote.ViewModels
             Task.Run(() => GetPinsFromDatabaseAsync());
         }
 
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -155,8 +156,12 @@ namespace GpsNote.ViewModels
 
             if (_pinService.IsDisplayConcretePin)
             {
-                MovingCameraPosition = parameters.GetValue<Position>("displayPin");
-                IsMoveCamera = true;
+                if(parameters.TryGetValue<Position>(ConstantsValue.DISPLAY_PIN, out Position position))
+                {
+                    MovingCameraPosition = position;
+                    IsMoveCamera = true;
+                }
+   
                 _pinService.IsDisplayConcretePin = false;
             }
         }
@@ -175,20 +180,21 @@ namespace GpsNote.ViewModels
 
         private async void GetPinsFromDatabaseAsync()
         {
-            List<Pin> pinList;
-            try
-            {
-                pinList = await _pinService.GetUserPinModelDbToPinsFromDatabaseAsync();
-            }
-            catch (Exception ex)
-            {
-                await _dialogService.DisplayAlertAsync(title: "Error",
-                                                 message: ex.Message,
-                                                 cancelButton: "Close");
-                return;
-            }
+            List<PinModel> userPins = await _pinService.GetUsersPinsAsync();
 
-            Pins = pinList.Where(p => p.IsVisible == true).ToList();
+            if(userPins != null)
+            {
+                List<Pin> pins = new List<Pin>();
+                Pin pin;
+
+                foreach(PinModel pinModel in userPins)
+                {
+                    pin = pinModel.PinModelToPin();
+                    pins.Add(pin);
+                }
+
+                Pins = pins.Where(p => p.IsVisible == true).ToList();
+            }
         }
 
 
@@ -200,23 +206,24 @@ namespace GpsNote.ViewModels
         }
 
 
-        private void SearchPin(object obj)
+        private void OnSearchPin(object obj)
         {
             string newText = obj as string;
 
-            if (string.IsNullOrWhiteSpace(newText))
+            if (!string.IsNullOrWhiteSpace(newText))
+            {
+                var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
+                SearchResultList = new ObservableCollection<Pin>(list);
+                IsSearchListVisible = true;
+            }
+            else
             {
                 IsSearchListVisible = false;
-                return;
             }
-
-            var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
-            SearchResultList = new ObservableCollection<Pin>(list);
-            IsSearchListVisible = true;
         }
 
 
-        private void UnfocusedSearch(object obj)
+        private void OnUnfocusedSearch(object obj)
         {
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;

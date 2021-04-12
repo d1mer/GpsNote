@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+using System.Linq.Expressions;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Services.RepositoryService;
 using GpsNote.Models;
 using GpsNote.Services.SettingsService;
-using System.Threading.Tasks;
-using System.Linq;
-using GpsNote.Extensions;
-using GpsNote.ViewModels.ExtentedViewModels;
-using System.Linq.Expressions;
+
 
 namespace GpsNote.Services.PinService
 {
@@ -41,71 +40,102 @@ namespace GpsNote.Services.PinService
             set => _settingsService.ShowPin = value; 
         }
 
-
-        public async Task<List<Pin>> GetUserPinModelDbToPinsFromDatabaseAsync()
+        public async Task<List<PinModel>> GetUsersPinsAsync()
         {
-            if (_settingsService.IdCurrentUser == -1)
-                return null;
-
-            List<PinModelDb> pinModels = await _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser);
-            List<Pin> pins = new List<Pin>();
-
-            foreach (PinModelDb pinModelDb in pinModels)
+            List<PinModel> userPins = null;
+            // TODO: change user verification from authorize service
+            if (_settingsService.IdCurrentUser != -1)
             {
-                pins.Add(pinModelDb.PinModelDbToPin());
+                try
+                {
+                    userPins = await _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.IdCurrentUser);
+                }
+                catch(Exception ex)
+                {
+                    // handle exception
+                }
             }
 
-            return pins;
+            return userPins;
         }
 
-
-        public async Task<List<PinModelDb>> GetUserPinModelsFromDatabaseAsync()
+        public async Task<int> SavePinModelToDatabaseAsync(PinModel pinModel)
         {
-            if (_settingsService.IdCurrentUser == -1)
-                return null;
+            int rows = 0;
 
-            List<PinModelDb> pinModels = await _repositoryService.GetAllAsync<PinModelDb>(p => p.Owner == _settingsService.IdCurrentUser);
+            try
+            {
+                rows = await _repositoryService.InsertAsync<PinModel>(pinModel);
+            }
+            catch(Exception ex) 
+            {
+                rows = 0;
+            }
 
-            return pinModels;
+            return rows;
         }
 
+        public async Task<int> UpdatePinModelAsync(PinModel pinModel)
+        {
+            int index = 0;
+
+            try
+            {
+                index = await _repositoryService.UpdateAsync<PinModel>(pinModel);
+            }
+            catch(Exception ex)
+            {
+                index = -1;
+            }
+
+            return index;
+        }
+
+        public async Task<PinModel> FindPinModelAsync(Expression<Func<PinModel, bool>> predicate)
+        {
+            PinModel pinModel = null;
+
+            try
+            {
+                pinModel = await _repositoryService.FindEntity<PinModel>(predicate);
+            }
+            catch(Exception ex) { }
+
+            return pinModel;
+        }
+
+        public async Task<int> DeletePinModelAsync(PinModel pinModel)
+        {
+            int rows = 0;
+            try
+            {
+                rows = await _repositoryService.DeleteAsync<PinModel>(pinModel);
+            }
+            catch(Exception ex)
+            {
+                rows = -1;
+            }
+
+            return rows;
+        }
 
         public async Task<Pin> GetNewPinFromPositionAsync(Position position)
         {
             Geocoder geocoder = new Geocoder();
-            IEnumerable<string> addresses = await geocoder.GetAddressesForPositionAsync(position);
+            IEnumerable<string> addresses = null;
+            Pin pin;
 
-            return await Task.Run(() => GetPin(position, addresses));
-        }
+            try
+            {
+                addresses = await geocoder.GetAddressesForPositionAsync(position);
+                pin = await Task.Run(() => GetPin(position, addresses));
+            }
+            catch(Exception ex) 
+            {
+                pin = null;
+            }
 
-
-        public async Task<int> SavePinModelDbToDatabaseAsync(PinModelDb pinModel) => 
-            await _repositoryService.InsertAsync<PinModelDb>(pinModel);
-
-
-        public async Task<int> UpdatePinModelDbAsync(PinModelDb pinModelDb) => 
-            await _repositoryService.UpdateAsync<PinModelDb>(pinModelDb);
-
-
-        public async Task<int> UpdatePinModelDbAsync(PinViewModel pinViewModel)
-        {
-            PinModelDb pinModelDb = pinViewModel.PinViewModelToPinModelDb();
-            return await UpdatePinModelDbAsync(pinModelDb);
-        }
-
-
-        public async Task<PinModelDb> FindPinModelDbAsync(Expression<Func<PinModelDb, bool>> predicate) =>
-            await _repositoryService.FindEntity<PinModelDb>(predicate);
-
-
-        public async Task<int> DeletePinModelDbAsync(PinModelDb pinModelDb) => 
-            await _repositoryService.DeleteAsync<PinModelDb>(pinModelDb);
-
-
-        public async Task<int> DeletePinModelDbAsync(PinViewModel pinViewModel)
-        {
-            PinModelDb pinModelDb = pinViewModel.PinViewModelToPinModelDb();
-            return await DeletePinModelDbAsync(pinModelDb);
+            return pin;
         }
 
         #endregion
