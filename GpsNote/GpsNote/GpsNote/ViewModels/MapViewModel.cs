@@ -36,17 +36,6 @@ namespace GpsNote.ViewModels
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
-
-            if (_settings.LastZoom != 0.0)
-            {
-                Position position = new Position(_settings.LastLatitude, _settings.LastLongitude);
-
-                InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
-                    new CameraPosition(position,
-                                       _settings.LastZoom,
-                                       _settings.LastBearing,
-                                       _settings.LastTilt));
-            }
         }
 
         #endregion
@@ -152,6 +141,8 @@ namespace GpsNote.ViewModels
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
+
+            InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(_cameraSettingsService.GetInitialCameraSettings());
 
             Task.Run(() => GetPinsFromDatabaseAsync());
         }

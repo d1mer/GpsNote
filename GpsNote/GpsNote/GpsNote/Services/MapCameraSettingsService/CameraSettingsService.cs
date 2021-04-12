@@ -11,7 +11,7 @@ namespace GpsNote.Services.MapCameraSettingsService
     {
         #region -- Private --
 
-        ISettingsService _settingsService;
+        private readonly ISettingsService _settingsService;
 
         #endregion
 
@@ -29,6 +29,24 @@ namespace GpsNote.Services.MapCameraSettingsService
         public async void RecordCurrentCameraPositionAsync(CameraPosition cameraPosition)
         {
             await Task.Run(() => SaveCameraPosition(cameraPosition));
+        }
+
+
+        public CameraPosition GetInitialCameraSettings()
+        {
+            CameraPosition cameraPosition = null;
+
+            if (_settingsService.LastZoom != 0.0)
+            {
+                Position position = new Position(_settingsService.LastLatitude, _settingsService.LastLongitude);
+
+                cameraPosition = new CameraPosition(position,
+                                                    _settingsService.LastZoom,
+                                                    _settingsService.LastBearing,
+                                                    _settingsService.LastTilt);
+            }
+
+            return cameraPosition;
         }
 
 
