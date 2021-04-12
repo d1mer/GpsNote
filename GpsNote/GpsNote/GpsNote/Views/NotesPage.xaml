@@ -9,10 +9,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ListView x:Name="pinsListView"
+        <SearchBar Placeholder="Search"
+                   HorizontalOptions="FillAndExpand">
+            <SearchBar.Behaviors>
+                <prism:EventToCommandBehavior EventName="TextChanged"
+                                              Command="{Binding SearchTextChangedCommand}"
+                                              EventArgsParameterPath="NewTextValue"/>
+            </SearchBar.Behaviors>
+        </SearchBar>
+
+            <ListView x:Name="pinsListView"
+                  Grid.Row="1"
               ItemsSource="{Binding PinsList}"
               HasUnevenRows="True"
               SelectionMode="None"
@@ -49,7 +60,8 @@
 
                                         <Image.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Path=BindingContext.ImageTapCommand, 
-                                                                            Source={x:Reference pinsListView}}"                                                 CommandParameter="{Binding .}"/>
+                                                                            Source={x:Reference pinsListView}}"      
+                                                                  CommandParameter="{Binding .}"/>
                                         </Image.GestureRecognizers>
 
                                     </Image>
@@ -59,7 +71,8 @@
                                         <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
                                                FontSize="Medium"
-                                               effect:ShortPressedEffect.Command="{Binding                                                                                       Path=BindingContext.ItemTapCommand,                                                           Source={x:Reference pinsListView}}"
+                                               effect:ShortPressedEffect.Command="{Binding Path=BindingContext.ItemTapCommand,                                                          
+                                                                                           Source={x:Reference pinsListView}}"
                                                effect:ShortPressedEffect.CommandParameter="{Binding .}">
                                             <Label.Effects>
                                                 <effect:ShortPressedEffect/>
@@ -68,7 +81,8 @@
                                         <Label Grid.Row="1"
                                                Text="{Binding Address}"
                                                FontSize="Medium"
-                                               effect:ShortPressedEffect.Command="{Binding                                                                                       Path=BindingContext.ItemTapCommand,                                                           Source={x:Reference pinsListView}}"
+                                               effect:ShortPressedEffect.Command="{Binding Path=BindingContext.ItemTapCommand,                                                           
+                                            Source={x:Reference pinsListView}}"
                                                effect:ShortPressedEffect.CommandParameter="{Binding .}">
                                             <Label.Effects>
                                                 <effect:ShortPressedEffect/>
@@ -84,7 +98,7 @@
         </ListView>
 
 
-        <Button Grid.Row="0" 
+        <Button Grid.Row="1" 
                 ImageSource="ic_add.png"
                 BorderColor="Black"
                 BorderWidth="5"

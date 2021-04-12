@@ -29,6 +29,7 @@ namespace GpsNote.ViewModels
         private IPinService        _pinService;
         private IUnityContainer _unityContainer;
         private PinViewModel _pinForDisplaying;
+        private List<PinViewModel> _oldPinsList = null;
 
         #endregion
 
@@ -74,6 +75,9 @@ namespace GpsNote.ViewModels
 
         private DelegateCommand<object> updateTapCommand;
         public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? (new DelegateCommand<object>(UpdateTapAsync));
+
+        private DelegateCommand<object> searchTextChangedCommand;
+        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? (new DelegateCommand<object>(SearchPin));
 
         private ICommand itemTapCommand;
         public ICommand ItemTapCommand => itemTapCommand ?? (new Command(ItemTap));
@@ -250,6 +254,27 @@ namespace GpsNote.ViewModels
 
             _pinService.IsDisplayConcretePin = true;
             _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
+        }
+
+
+        private void SearchPin(object obj)
+        {
+            string newText = (string)obj;
+
+            if (_oldPinsList == null)
+                _oldPinsList = PinsList.ToList();
+
+            if (string.IsNullOrWhiteSpace(newText))
+            {
+                PinsList = new ObservableCollection<PinViewModel>(_oldPinsList);
+                _oldPinsList = null;
+            }
+
+            var list = PinsList.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
+            PinsList.Clear();
+            foreach (PinViewModel pin in list)
+                PinsList.Add(pin);
+
         }
 
         #endregion
