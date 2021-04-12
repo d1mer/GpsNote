@@ -8,5 +8,7 @@ namespace GpsNote.Services.AuthorizeService
         int IdCurrentUser { get; }
 
         Task<CodeUserAuthresult> Authorize(string email, string password);
+
+        bool IsAuthorize();
     }
 }

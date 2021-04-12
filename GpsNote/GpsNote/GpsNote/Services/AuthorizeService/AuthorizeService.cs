@@ -62,9 +62,14 @@ namespace GpsNote.Services.AuthorizeService
                 return CodeUserAuthresult.WrongPassword;
             }
 
-            _userService.SaveIdCurrentUser(user.Id);
+            _settingsService.IdCurrentUser = user.Id;
 
             return CodeUserAuthresult.Passed;
+        }
+
+        public bool IsAuthorize()
+        {
+            return _settingsService.IdCurrentUser >= 0;
         }
 
         #endregion

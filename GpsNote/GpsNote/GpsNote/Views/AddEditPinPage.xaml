@@ -28,8 +28,8 @@
                    FontAttributes="Bold"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="0.5*" />
                 </Grid.ColumnDefinitions>
                 <Entry Text="{Binding LatitudePinText}"
                        Keyboard="Numeric"

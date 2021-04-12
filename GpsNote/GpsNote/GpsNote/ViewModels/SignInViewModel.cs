@@ -112,25 +112,25 @@ namespace GpsNote.ViewModels
                                                        "Cancel");
                     Email = "";
                     Password = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.InvalidPassword:
                     await _dialogService.DisplayAlertAsync("Error",
                                                        "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number",
                                                        "Cancel");
                     Password = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.EmailNotFound:
                     await _dialogService.DisplayAlertAsync("Error",
                                                        "This email wasn't found",
                                                        "Cancel");
                     Password = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.WrongPassword:
                     await _dialogService.DisplayAlertAsync("Error",
                                                        "Wrong password",
                                                        "Cancel");
                     Password = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.Passed:
                     await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
                     break;
@@ -140,7 +140,7 @@ namespace GpsNote.ViewModels
                                                        "Cancel");
                     Email = "";
                     Password = "";
-                    return;
+                    break;
             }
         }
 

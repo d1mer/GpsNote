@@ -103,9 +103,7 @@ namespace GpsNote.ViewModels
 
         public override void Initialize(INavigationParameters parameters)
         {
-            editPinViewModel = parameters.GetValue<PinViewModel>("pin");
-
-            if (editPinViewModel != null)
+            if (parameters.TryGetValue(nameof(PinViewModel), out PinViewModel pinViewModel))
             {
                 LabelPinText = editPinViewModel.Label;
                 LatitudePinText = editPinViewModel.Latitude.ToString();

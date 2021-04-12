@@ -14,12 +14,15 @@ using GpsNote.Services.AuthorizeService;
 using GpsNote.Services.UserService;
 using GpsNote.Services.PinService;
 using Unity;
+using GpsNote.Services.MapCameraSettingsService;
 
 namespace GpsNote
 {
     public partial class App
     {
-        private ISettingsService _settings;
+        private IAuthorizeService _AuthorizationService;
+        private IAuthorizeService AuthorizationService =>
+            _AuthorizationService ?? (_AuthorizationService = Container.Resolve<IAuthorizeService>());
 
         public App(IPlatformInitializer initializer)
             : base(initializer)
@@ -31,34 +34,28 @@ namespace GpsNote
         {
             InitializeComponent();
 
-            _settings = Container.Resolve<SettingsService>();
-
-            
-            if (_settings.IdCurrentUser == -1)
+            if (AuthorizationService.IsAuthorize())
+            {
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+            }
             else
+            {
                 await NavigationService.NavigateAsync(nameof(MainTabbedPage));
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
-
-            #region service registry
-
+            //Services
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
             containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
             containerRegistry.RegisterInstance<IUserService>(Container.Resolve<UserService>());
             containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
             containerRegistry.RegisterInstance<IAuthorizeService>(Container.Resolve<AuthorizeService>());
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+            containerRegistry.RegisterInstance<ICameraSettingsService>(Container.Resolve<CameraSettingsService>());
 
-            #endregion
-
-
-            #region navigation registry
-
+            //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
@@ -67,8 +64,6 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<NotesPage, NotesViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPinPage, AddEditPinViewModel>();
-
-            #endregion
         }
 
 
@@ -76,17 +71,17 @@ namespace GpsNote
 
         private void ResourceLoader()
         {
-            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            //ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
 
-            switch (_settings.DarkTheme)
-            {
-                case false:
-                    mergedDictionaries.Add(new LightTheme());
-                    break;
-                case true:
-                    mergedDictionaries.Add(new DarkTheme());
-                    break;
-            }
+            //switch (_settings.DarkTheme)
+            //{
+            //    case false:
+            //        mergedDictionaries.Add(new LightTheme());
+            //        break;
+            //    case true:
+            //        mergedDictionaries.Add(new DarkTheme());
+            //        break;
+            //}
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using GpsNote.Services.PinService;
+﻿using GpsNote.Services.MapCameraSettingsService;
+using GpsNote.Services.PinService;
 using GpsNote.Services.SettingsService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using Prism.Commands;
@@ -19,18 +20,18 @@ namespace GpsNote.ViewModels
 
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
-        private ISettingsService _settings;
+        private ICameraSettingsService _cameraSettingsService;
 
         #endregion
 
 
         #region -- Constructors --
 
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, ISettingsService settings, IPinService pinService) : base(navigationService)
+        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, IPinService pinService, ICameraSettingsService cameraSettingsService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
-            _settings = settings;
+            _cameraSettingsService = cameraSettingsService;
 
             Title = "Map";
 
@@ -46,8 +47,6 @@ namespace GpsNote.ViewModels
                                        _settings.LastBearing,
                                        _settings.LastTilt));
             }
-
-            Task.Run(() => GetPinsFromDatabaseAsync());
         }
 
         #endregion
@@ -150,6 +149,13 @@ namespace GpsNote.ViewModels
 
         #region -- Override --
 
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+
+            Task.Run(() => GetPinsFromDatabaseAsync());
+        }
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -169,20 +175,10 @@ namespace GpsNote.ViewModels
 
         #region -- Private helpers -- 
 
-        private async void OnCameraLed(Object _cameraPosition)
+        private void OnCameraLed(Object _cameraPosition)
         {
             CameraPosition cameraPosition = _cameraPosition as CameraPosition;
-            await Task.Run(() => RecordCurrentCameraPosition(cameraPosition));
-        }
-
-
-        private void RecordCurrentCameraPosition(CameraPosition cameraPosition)
-        {
-            _settings.LastLatitude = cameraPosition.Target.Latitude;
-            _settings.LastLongitude = cameraPosition.Target.Longitude;
-            _settings.LastZoom = cameraPosition.Zoom;
-            _settings.LastBearing = cameraPosition.Bearing;
-            _settings.LastTilt = cameraPosition.Tilt;
+            _cameraSettingsService.RecordCurrentCameraPositionAsync(cameraPosition);
         }
 
 
@@ -215,9 +211,7 @@ namespace GpsNote.ViewModels
 
         private void SearchPin(object obj)
         {
-            string newText = (string)obj;
-
-            
+            string newText = obj as string;
 
             if (string.IsNullOrWhiteSpace(newText))
             {
@@ -236,6 +230,7 @@ namespace GpsNote.ViewModels
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
             ButtonsVisibility = true;
+            IsSearchListVisible = false;
         }
 
 

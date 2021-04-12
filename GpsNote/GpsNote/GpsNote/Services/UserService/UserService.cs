@@ -38,8 +38,6 @@ namespace GpsNote.Services.UserService
             _repositoryService.GetEntityAsync<User>((s) => email == s.Email).Result;
 
 
-        public void SaveIdCurrentUser(int id) => _settingsService.IdCurrentUser = id;
-
         #endregion
     }
 }

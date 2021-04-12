@@ -9,7 +9,5 @@ namespace GpsNote.Services.UserService
         int SaveNewUser(User user);
 
         User GetUserByEmail(string email);
-
-        void SaveIdCurrentUser(int id);
     }
 }
