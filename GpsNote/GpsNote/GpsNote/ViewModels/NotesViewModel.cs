@@ -271,9 +271,10 @@ namespace GpsNote.ViewModels
             }
 
             var list = PinsList.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
-            PinsList.Clear();
-            foreach (PinViewModel pin in list)
-                PinsList.Add(pin);
+            PinsList = new ObservableCollection<PinViewModel>(list);
+            //PinsList.Clear();
+            //foreach (PinViewModel pin in list)
+            //    PinsList.Add(pin);
 
         }
 

@@ -20,6 +20,7 @@ namespace GpsNote.Controls
             UiSettings.MyLocationButtonEnabled = true;
         }
 
+
         #region -- Public statics --
 
         public static readonly BindableProperty PinsListProperty =
@@ -67,6 +68,22 @@ namespace GpsNote.Controls
             set => SetValue(CameraMovingPositionProperty, value);
         }
 
+
+        public static readonly BindableProperty ChangeCompassMyLocationButtonsVisibilityProperty =
+            BindableProperty.Create(nameof(ChangeCompassMyLocationButtonsVisibility),
+                                    typeof(bool),
+                                    typeof(CustomMap),
+                                    defaultValue: true,
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: ChangeCompassMyLocationButtonsVisibilityPropertyChanged);
+
+
+        public bool ChangeCompassMyLocationButtonsVisibility
+        {
+            get => (bool)GetValue(ChangeCompassMyLocationButtonsVisibilityProperty);
+            set => SetValue(ChangeCompassMyLocationButtonsVisibilityProperty, value);
+        }
+
         #endregion
 
 
@@ -106,6 +123,18 @@ namespace GpsNote.Controls
             {
                 if (newValue is Position)
                     map._cameraMovingPosition = (Position)newValue;
+            }
+        }
+
+
+        private static void ChangeCompassMyLocationButtonsVisibilityPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomMap map = bindable as CustomMap;
+
+            if(map != null)
+            {
+                map.UiSettings.CompassEnabled = (bool)newValue;
+                map.UiSettings.MyLocationButtonEnabled = (bool)newValue;
             }
         }
 
