@@ -59,5 +59,248 @@ namespace GpsNote.Resource {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Pin.
+        /// </summary>
+        internal static string AddPinTitlePage {
+            get {
+                return ResourceManager.GetString("AddPinTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success!! Account created.
+        /// </summary>
+        internal static string AUTHETICATION_SUCCESS {
+            get {
+                return ResourceManager.GetString("AUTHETICATION_SUCCESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CONFIRM_CANCEL {
+            get {
+                return ResourceManager.GetString("CONFIRM_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string CONFIRM_OK {
+            get {
+                return ResourceManager.GetString("CONFIRM_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        internal static string ConfirmPasswordText {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark Color Theme.
+        /// </summary>
+        internal static string DarkTheme {
+            get {
+                return ResourceManager.GetString("DarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Off.
+        /// </summary>
+        internal static string DarkThemeOff {
+            get {
+                return ResourceManager.GetString("DarkThemeOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to On.
+        /// </summary>
+        internal static string DarkThemeOn {
+            get {
+                return ResourceManager.GetString("DarkThemeOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you really want to delete this pin?.
+        /// </summary>
+        internal static string DELETE_PIN_QUESTION {
+            get {
+                return ResourceManager.GetString("DELETE_PIN_QUESTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteContextAction {
+            get {
+                return ResourceManager.GetString("DeleteContextAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DescriptionText {
+            get {
+                return ResourceManager.GetString("DescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Pin.
+        /// </summary>
+        internal static string EditPinTitlePage {
+            get {
+                return ResourceManager.GetString("EditPinTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email is already taken. Come up with another.
+        /// </summary>
+        internal static string EMAIL_TAKEN {
+            get {
+                return ResourceManager.GetString("EMAIL_TAKEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string EmailText {
+            get {
+                return ResourceManager.GetString("EmailText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid login. Login must be from 4 to 16 characters and must not start with a Invalid login. Login must be from 4 to 16 characters and must not start with a number.
+        /// </summary>
+        internal static string INVALID_LOGIN {
+            get {
+                return ResourceManager.GetString("INVALID_LOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid login or password!.
+        /// </summary>
+        internal static string INVALID_LOGIN_OR_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_LOGIN_OR_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number.
+        /// </summary>
+        internal static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LogOut.
+        /// </summary>
+        internal static string LogOutToolbarItem {
+            get {
+                return ResourceManager.GetString("LogOutToolbarItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string NameText {
+            get {
+                return ResourceManager.GetString("NameText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwords mismatch. Re-enter passwords.
+        /// </summary>
+        internal static string PASSWORD_MISMATCH {
+            get {
+                return ResourceManager.GetString("PASSWORD_MISMATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string PasswordText {
+            get {
+                return ResourceManager.GetString("PasswordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string SaveToolbatItem {
+            get {
+                return ResourceManager.GetString("SaveToolbatItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsTitlePage {
+            get {
+                return ResourceManager.GetString("SettingsTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SIGN IN.
+        /// </summary>
+        internal static string SignInButtonText {
+            get {
+                return ResourceManager.GetString("SignInButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users SignIn.
+        /// </summary>
+        internal static string SignInTitlePage {
+            get {
+                return ResourceManager.GetString("SignInTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SIGN UP.
+        /// </summary>
+        internal static string SignUpButtonText {
+            get {
+                return ResourceManager.GetString("SignUpButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users SignUp.
+        /// </summary>
+        internal static string SignUpTitlePage {
+            get {
+                return ResourceManager.GetString("SignUpTitlePage", resourceCulture);
+            }
+        }
     }
 }
