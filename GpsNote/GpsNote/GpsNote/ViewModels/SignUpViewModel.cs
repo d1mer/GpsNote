@@ -1,9 +1,11 @@
-﻿using GpsNote.Enums;
-using GpsNote.Services.RegistrationService;
+﻿using System.ComponentModel;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
-using System.ComponentModel;
+using GpsNote.Enums;
+using GpsNote.Services.Authentication;
+using GpsNote.Constants;
+
 
 namespace GpsNote.ViewModels
 {
@@ -11,19 +13,23 @@ namespace GpsNote.ViewModels
     {
         #region -- Private fields --
 
-        IRegistrationService _registrationService;
+        IAuthenticationService _authenticationService;
         IPageDialogService _dialogService;
 
         #endregion
 
 
-        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IRegistrationService registration) : base(navigationService)
+        #region -- Constructor --
+
+        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthenticationService registration) : base(navigationService)
         {
-            _registrationService = registration;
+            _authenticationService = registration;
             _dialogService = dialogService;
 
             Title = "SignUp";
         }
+
+        #endregion
 
 
         #region -- Publics --
@@ -65,7 +71,7 @@ namespace GpsNote.ViewModels
         }
 
 
-        public DelegateCommand OnSignUpCommand => new DelegateCommand(RegistrationUser, CanExecute);
+        public DelegateCommand OnSignUpCommand => new DelegateCommand(OnAuthenticationUserAsync, CanExecute);
 
         #endregion
 
@@ -98,78 +104,79 @@ namespace GpsNote.ViewModels
         private bool CanExecute() => IsSignUpButtonEnabled;
 
 
-        private async void RegistrationUser()
+        private async void OnAuthenticationUserAsync()
         {
-            CodeUserAuthresult authUserResult = await _registrationService.IsRegistration(Name,
+            CodeUserAuthresult result = await _authenticationService.SignUpAsync(Name,
                                                                                           Email,
                                                                                           Password,
                                                                                           ConfirmPassword);
 
-            switch (authUserResult)
+            switch (result)
             {
                 case CodeUserAuthresult.InvalidName:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid login. Login must be from 4 to 16 characters and must not start with a number",
-                                                       "Cancel");
+                                                           "Invalid login. Login must be from 4 to 16 characters and must not start with a number",
+                                                           "Cancel");
                     Name = "";
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.InvalidEmail:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid email. Try again",
-                                                       "Cancel");
+                                                           "Invalid email. Try again",
+                                                           "Cancel");
                     Email = "";
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.InvalidPassword:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number",
-                                                       "Cancel");
+                                                           "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number",
+                                                         "Cancel");
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.PasswordMismatch:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "Passwords mismatch. Re-enter passwords",
-                                                       "Cancel");
+                                                           "Passwords mismatch. Re-enter passwords",
+                                                           "Cancel");
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.EmailTaken:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "This email is already taken. Come up with another",
-                                                       "Cancel");
+                                                           "This email is already taken. Come up with another",
+                                                           "Cancel");
                     Name = "";
                     Email = "";
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
                 case CodeUserAuthresult.Passed:
                     await _dialogService.DisplayAlertAsync("SUCCESS",
-                                                       "Account created!!!",
-                                                       "Cancel");
+                                                           "Account created!!!",
+                                                           "Cancel");
                     break;
                 default:
                     await _dialogService.DisplayAlertAsync("Error",
-                                                       "Result unknown",
-                                                       "Cancel");
+                                                           "Result unknown",
+                                                           "Cancel");
                     Name = "";
                     Email = "";
                     Password = "";
                     ConfirmPassword = "";
-                    return;
+                    break;
             }
 
-
-            NavigationParameters parameters = new NavigationParameters
+            if(result == CodeUserAuthresult.Passed)
             {
-                {"newUserEmail", Email }
-            };
+                NavigationParameters parameters = new NavigationParameters
+                {
+                    {ConstantsValue.NEW_USER_EMAIL, Email }
+                };
 
-            await NavigationService.GoBackAsync(parameters);
-
+                await NavigationService.GoBackAsync(parameters);
+            }
         }
 
         #endregion

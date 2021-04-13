@@ -5,9 +5,9 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.Services.SettingsService
 {
-    public interface ISettingsService
+    public interface ISettingsManager
     {
-        int    IdCurrentUser { get; set; }
+        int    AuthorizedUserID { get; set; }
         bool       DarkTheme { get; set; }
         double  LastLatitude { get; set; }
         double LastLongitude { get; set; }

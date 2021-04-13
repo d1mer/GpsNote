@@ -1,17 +1,12 @@
-using GpsNote.Services.RegistrationService;
+using GpsNote.Services.Authentication;
 using GpsNote.Services.RepositoryService;
 using GpsNote.ViewModels;
 using GpsNote.Views;
 using Prism;
 using Prism.Ioc;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using GpsNote.Services.SettingsService;
-using System.Collections.Generic;
-using GpsNote.Themes;
-using GpsNote.Services.AuthorizeService;
-using GpsNote.Services.UserService;
+using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using Unity;
 using GpsNote.Services.MapCameraSettingsService;
@@ -20,9 +15,9 @@ namespace GpsNote
 {
     public partial class App
     {
-        private IAuthorizeService _AuthorizationService;
-        private IAuthorizeService AuthorizationService =>
-            _AuthorizationService ?? (_AuthorizationService = Container.Resolve<IAuthorizeService>());
+        private IAuthorizationService _authorizationService;
+        private IAuthorizationService AuthorizationService =>
+            _authorizationService ?? (_authorizationService = Container.Resolve<IAuthorizationService>());
 
         public App(IPlatformInitializer initializer)
             : base(initializer)
@@ -34,7 +29,7 @@ namespace GpsNote
         {
             InitializeComponent();
 
-            if (AuthorizationService.IsAuthorize())
+            if (!AuthorizationService.IsAuthorized())
             {
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");
             }
@@ -48,10 +43,9 @@ namespace GpsNote
         {
             //Services
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
-            containerRegistry.RegisterInstance<ISettingsService>(Container.Resolve<SettingsService>());
-            containerRegistry.RegisterInstance<IUserService>(Container.Resolve<UserService>());
-            containerRegistry.RegisterInstance<IRegistrationService>(Container.Resolve<RegistrationService>());
-            containerRegistry.RegisterInstance<IAuthorizeService>(Container.Resolve<AuthorizeService>());
+            containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
+            containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
+            containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>()); 
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
             containerRegistry.RegisterInstance<ICameraSettingsService>(Container.Resolve<CameraSettingsService>());
 

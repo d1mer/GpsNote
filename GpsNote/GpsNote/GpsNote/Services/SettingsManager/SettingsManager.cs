@@ -6,14 +6,14 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.Services.SettingsService
 {
-    public class SettingsService : ISettingsService
+    public class SettingsManager : ISettingsManager
     {
         #region -- Implement ISettings --
 
-        public int IdCurrentUser 
+        public int AuthorizedUserID 
         {
-            get => Preferences.Get(nameof(IdCurrentUser), -1);
-            set => Preferences.Set(nameof(IdCurrentUser), value); 
+            get => Preferences.Get(nameof(AuthorizedUserID), -1);
+            set => Preferences.Set(nameof(AuthorizedUserID), value); 
         }
         public bool DarkTheme 
         { 

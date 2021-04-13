@@ -13,5 +13,12 @@ namespace GpsNote.Constants
         public const string DISPLAY_PIN = "DisplayPin";
 
         #endregion
+
+
+        #region -- Authorization --
+
+        public const string NEW_USER_EMAIL = "NewUserEmail";
+
+        #endregion
     }
 }

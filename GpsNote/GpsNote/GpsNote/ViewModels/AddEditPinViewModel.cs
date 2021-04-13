@@ -6,7 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using GpsNote.Extensions;
 using GpsNote.Models;
-using GpsNote.Services.AuthorizeService;
+using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Constants;
@@ -22,7 +22,7 @@ namespace GpsNote.ViewModels
 
         private IPinService _pinService;
         private IPageDialogService _dialogService;
-        private IAuthorizeService _authorizeService;
+        private IAuthorizationService _authorizationService;
         private bool editMode = false;
         private PinViewModel editPinViewModel = null;
 
@@ -34,11 +34,11 @@ namespace GpsNote.ViewModels
         public AddEditPinViewModel(INavigationService navigationService,
                                    IPageDialogService dialogService,
                                    IPinService pinService,
-                                   IAuthorizeService authorizeService) : base(navigationService)
+                                   IAuthorizationService authorizeService) : base(navigationService)
         {
             _pinService = pinService;
             _dialogService = dialogService;
-            _authorizeService = authorizeService;
+            _authorizationService = authorizeService;
 
             Title = "AddEditPin";
         }
@@ -206,8 +206,7 @@ namespace GpsNote.ViewModels
             {
                 pinModel.Label = LabelPinText;
                 pinModel.Description = EditorText;
-                // TODO: to change IdCurrentUser
-                pinModel.Owner = _authorizeService.IdCurrentUser;
+                pinModel.Owner = _authorizationService.GetCurrentUserID();
                 pinModel.IsEnable = editPinViewModel.IsEnabled;
                 int rows = await _pinService.UpdatePinModelAsync(pinModel);
 
@@ -226,8 +225,7 @@ namespace GpsNote.ViewModels
 
             PinModel pinModel = pin.PinToPinModel();
             pinModel.Description = EditorText;
-            // TODO: to change IdCurrentUser
-            pinModel.Owner = _authorizeService.IdCurrentUser;
+            pinModel.Owner = _authorizationService.GetCurrentUserID();
             pinModel.IsEnable = true;
 
             int rows = await _pinService.SavePinModelToDatabaseAsync(pinModel);

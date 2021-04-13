@@ -1,10 +1,12 @@
-﻿using GpsNote.Views;
+﻿using System.ComponentModel;
+using Prism.Services;
 using Prism.Commands;
 using Prism.Navigation;
-using System.ComponentModel;
-using Prism.Services;
-using GpsNote.Services.AuthorizeService;
+using GpsNote.Views;
+using GpsNote.Services.Authorization;
 using GpsNote.Enums;
+using GpsNote.Constants;
+using GpsNote.Services.Authentication;
 
 namespace GpsNote.ViewModels
 {
@@ -14,17 +16,24 @@ namespace GpsNote.ViewModels
         #region -- Private fields --
 
         IPageDialogService _dialogService;
-        IAuthorizeService _authorizeService;
+        IAuthorizationService _authorizationService;
+        IAuthenticationService _authenticationService;
 
         #endregion
 
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizeService authorizationService) : base(navigationService)
+
+        #region -- Constructor --
+
+        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizationService authorizationService, IAuthenticationService authenticationService) : base(navigationService)
         {
             _dialogService = dialogService;
-            _authorizeService = authorizationService;
+            _authorizationService = authorizationService;
+            _authenticationService = authenticationService;
 
             Title = "SignIn";
         }
+
+        #endregion
 
 
         #region -- Publics -- 
@@ -51,11 +60,10 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignInButtonEnabled, value);
         }
 
-        public DelegateCommand OnSignUpTapCommand => new DelegateCommand(NavigationToSignUp);
-        public DelegateCommand OnSignInButtonTapCommand => new DelegateCommand(AuthorizeUser, CanExecute);
+        public DelegateCommand OnSignUpTapCommand => new DelegateCommand(OnNavigationToSignUpAsync);
+        public DelegateCommand OnSignInButtonTapCommand => new DelegateCommand(OnSignInUserAsync, CanExecute);
 
         #endregion
-
 
 
         #region -- Overrides --
@@ -73,36 +81,28 @@ namespace GpsNote.ViewModels
             }
         }
 
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            //base.Initialize(parameters);
-
-            //Email = (string)parameters["newUseremail"];
-        }
-
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Email = (string)parameters["newUserEmail"];
+            if(parameters.TryGetValue<string>(ConstantsValue.NEW_USER_EMAIL, out string email))
+            {
+                Email = email;
+            }
         }
 
         #endregion
-
 
 
         #region Private helpers
 
         private bool CanExecute() => IsSignInButtonEnabled;
 
-        private async void NavigationToSignUp()
-        {
+        private async void OnNavigationToSignUpAsync() => 
             await NavigationService.NavigateAsync(nameof(SignUpPage));
-        }
 
 
-        private async void AuthorizeUser()
+        private async void OnSignInUserAsync()
         {
-            CodeUserAuthresult result = await _authorizeService.Authorize(Email, Password);
+            CodeUserAuthresult result = await _authenticationService.SignInAsync(Email, Password);
 
             switch (result)
             {

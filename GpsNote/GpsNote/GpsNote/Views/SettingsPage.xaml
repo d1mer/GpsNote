@@ -52,6 +52,7 @@
                 HorizontalOptions="Start"
                 VerticalOptions="Center"
                 HeightRequest="65"
-                WidthRequest="100"/>
+                WidthRequest="100"
+                Command="{Binding LogOutCommand}"/>
     </Grid>
 </ContentPage>

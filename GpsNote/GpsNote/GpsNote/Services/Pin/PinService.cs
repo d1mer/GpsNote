@@ -16,14 +16,14 @@ namespace GpsNote.Services.PinService
         #region --Private fields --
 
         IRepositoryService _repositoryService;
-        ISettingsService   _settingsService;
+        ISettingsManager   _settingsService;
 
         #endregion
 
 
         #region -- Constructor --
 
-        public PinService(IRepositoryService repositoryService, ISettingsService settingsService)
+        public PinService(IRepositoryService repositoryService, ISettingsManager settingsService)
         {
             _repositoryService = repositoryService;
             _settingsService   = settingsService;
@@ -44,11 +44,11 @@ namespace GpsNote.Services.PinService
         {
             List<PinModel> userPins = null;
             // TODO: change user verification from authorize service
-            if (_settingsService.IdCurrentUser != -1)
+            if (_settingsService.AuthorizedUserID != -1)
             {
                 try
                 {
-                    userPins = await _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.IdCurrentUser);
+                    userPins = await _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.AuthorizedUserID);
                 }
                 catch(Exception ex)
                 {
@@ -149,10 +149,10 @@ namespace GpsNote.Services.PinService
             {
                 Position = position,
                 Address = addresses != null ? addresses.FirstOrDefault() : string.Empty,
-                Label = addresses != null ?
+                Label = addresses != null && addresses.FirstOrDefault() != null ?
                        addresses.FirstOrDefault().Substring(0, addresses.FirstOrDefault().IndexOf(",") != -1 ?
                                                              addresses.FirstOrDefault().IndexOf(",") :
-                                                             addresses.FirstOrDefault().Length - 1) :
+                                                             addresses.FirstOrDefault().Length) :
                        "New pin"
             };
             return pin;

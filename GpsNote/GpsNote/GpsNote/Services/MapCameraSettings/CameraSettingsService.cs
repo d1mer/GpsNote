@@ -11,14 +11,14 @@ namespace GpsNote.Services.MapCameraSettingsService
     {
         #region -- Private --
 
-        private readonly ISettingsService _settingsService;
+        private readonly ISettingsManager _settingsService;
 
         #endregion
 
 
         #region -- Constructor --
 
-        public CameraSettingsService(ISettingsService settingsService)
+        public CameraSettingsService(ISettingsManager settingsService)
         {
             _settingsService = settingsService;
         }
