@@ -115,6 +115,20 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref searchResultList, value);
         }
 
+        private int listRowHeight = 100;
+        public int ListRowHeight
+        {
+            get => listRowHeight;
+            set => SetProperty(ref listRowHeight, value);
+        }
+
+        private int listHeiqhtRequest;
+        public int ListHeiqhtRequest
+        {
+            get => listHeiqhtRequest;
+            set => SetProperty(ref listHeiqhtRequest, value);
+        }
+
 
         private DelegateCommand<Object> cameraIdLedCommand;
         public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? (new DelegateCommand<Object>(OnCameraLed));
@@ -131,6 +145,9 @@ namespace GpsNote.ViewModels
 
         private DelegateCommand<object> mapTapCommand;
         public DelegateCommand<object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<object>(OnMapClick));
+
+        private DelegateCommand<object> listItemTapCommand;
+        public DelegateCommand<Object> ListItemTapCommand => listItemTapCommand ?? (new DelegateCommand<Object>(OnItemTap));
 
 
         #endregion
@@ -214,11 +231,23 @@ namespace GpsNote.ViewModels
             {
                 var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
                 SearchResultList = new ObservableCollection<Pin>(list);
+                ListHeiqhtRequest = ListRowHeight * list.Count;
                 IsSearchListVisible = true;
             }
             else
             {
                 IsSearchListVisible = false;
+            }
+        }
+
+        private void OnItemTap(object obj)
+        {
+            Pin pin = obj as Pin;
+
+            if(pin != null)
+            {
+                MovingCameraPosition = pin.Position;
+                IsMoveCamera = true;
             }
         }
 

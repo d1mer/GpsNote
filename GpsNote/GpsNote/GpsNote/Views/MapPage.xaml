@@ -57,7 +57,8 @@
         <ListView x:Name="searchResultList"
                   ItemsSource="{Binding SearchResultList}"
                   Grid.Row="0"
-                  HeightRequest="100"
+                  RowHeight="{Binding ListRowHeight}"
+                  HeightRequest="{Binding ListHeiqhtRequest}"
                   IsVisible="{Binding IsSearchListVisible}"
                   HasUnevenRows="True"
                   SelectionMode="None"
@@ -65,6 +66,13 @@
                   Background="Transparent"
                   VerticalOptions="Start"
                   Margin="0, 45, 0, 0">
+
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              Command="{Binding Path=BindingContext.ListItemTapCommand, 
+                                                        Source={x:Reference searchResultList}}"
+                                              EventArgsParameterPath="Item" />
+            </ListView.Behaviors>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
