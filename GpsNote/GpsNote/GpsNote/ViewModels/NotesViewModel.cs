@@ -171,24 +171,20 @@ namespace GpsNote.ViewModels
                 pinViewModel.IsEnabled = !pinViewModel.IsEnabled;
                 pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.jpeg" : "not_checked.png";
 
-                try
+                PinModel pinModel = await _pinService.FindPinModelAsync(p => p.Id == pinViewModel.Id);
+
+                if (pinModel != null)
                 {
-                    PinModel pinModelDb = await _pinService.FindPinModelAsync(p => p.Id == pinViewModel.Id);
-                    if(pinModelDb != null)
-                    {
-                        pinModelDb.IsEnable = pinViewModel.IsEnabled;
-                        await _pinService.UpdatePinModelAsync(pinModelDb);
-                    }
-                    //await _pinService.UpdatePinModelDbAsync(pinViewModel);
+                    pinModel.IsEnable = pinViewModel.IsEnabled;
+                    await _pinService.UpdatePinModelAsync(pinModel);
                 }
-                catch(Exception ex)
+                else
                 {
                     await _dialogService.DisplayAlertAsync("Error",
-                                                     ex.Message,
-                                                     "Cancel");
+                                                           "This pin is not found in db",
+                                                           "Cancel");
                     pinViewModel.IsEnabled = !pinViewModel.IsEnabled;
                     pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.jpeg" : "not_checked.png";
-                    return;
                 }
             }
         }
@@ -201,20 +197,30 @@ namespace GpsNote.ViewModels
             if(pinViewModel != null)
             {
                 string res = await _dialogService.DisplayActionSheetAsync("Delete selected pin?", "OK", "Cancel");
-                if (res != "OK")
-                    return;
-
-                PinsList.Remove(PinsList.First(p => p.Id == pinViewModel.Id));
-
-                try
+                if (res == "OK")
                 {
-                    await _pinService.DeletePinModelDbAsync(pinViewModel);
-                }
-                catch (Exception ex)
-                {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                     ex.Message,
-                                                     "Cancel");
+                    PinModel pinModel = await _pinService.FindPinModelAsync(p => p.Id == pinViewModel.Id);
+                    if(pinModel != null)
+                    {
+                        int rows = await _pinService.DeletePinModelAsync(pinModel);
+
+                        if(rows != 0)
+                        {
+                            PinsList.Remove(PinsList.First(p => p.Id == pinViewModel.Id));
+                        }
+                        else
+                        {
+                            await _dialogService.DisplayAlertAsync("Error",
+                                                                   "Error delete pin from database",
+                                                                   "Cancel");
+                        }
+                    }
+                    else
+                    {
+                        await _dialogService.DisplayAlertAsync("Error",
+                                                               "Pin is not found in db",
+                                                               "Cancel");
+                    }
                 }
             }
          }
@@ -228,7 +234,7 @@ namespace GpsNote.ViewModels
             {
                 NavigationParameters parameter = new NavigationParameters
                 {
-                    {"pin", pinViewModel }
+                    {nameof(PinViewModel), pinViewModel }
                 };
 
                 await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddEditPinPage), parameter);
@@ -240,11 +246,11 @@ namespace GpsNote.ViewModels
         {
             _pinForDisplaying = obj as PinViewModel;
 
-            if (_pinForDisplaying == null)
-                return;
-
-            _pinService.IsDisplayConcretePin = true;
-            _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
+            if (_pinForDisplaying != null)
+            {
+                _pinService.IsDisplayConcretePin = true;
+                _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
+            }            
         }
 
 
@@ -263,10 +269,6 @@ namespace GpsNote.ViewModels
 
             var list = PinsList.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
             PinsList = new ObservableCollection<PinViewModel>(list);
-            //PinsList.Clear();
-            //foreach (PinViewModel pin in list)
-            //    PinsList.Add(pin);
-
         }
 
         #endregion
