@@ -7,7 +7,7 @@ using Xamarin.Forms.GoogleMaps;
 using GpsNote.Services.RepositoryService;
 using GpsNote.Models;
 using GpsNote.Services.SettingsService;
-
+using GpsNote.Services.Authorization;
 
 namespace GpsNote.Services.PinService
 {
@@ -17,16 +17,18 @@ namespace GpsNote.Services.PinService
 
         IRepositoryService _repositoryService;
         ISettingsManager   _settingsService;
+        IAuthorizationService _authorizationService;
 
         #endregion
 
 
         #region -- Constructor --
 
-        public PinService(IRepositoryService repositoryService, ISettingsManager settingsService)
+        public PinService(IRepositoryService repositoryService, ISettingsManager settingsService, IAuthorizationService authorizationService)
         {
             _repositoryService = repositoryService;
             _settingsService   = settingsService;
+            _authorizationService = authorizationService;
         }
 
         #endregion
@@ -43,8 +45,8 @@ namespace GpsNote.Services.PinService
         public async Task<List<PinModel>> GetUsersPinsAsync()
         {
             List<PinModel> userPins = null;
-            // TODO: change user verification from authorize service
-            if (_settingsService.AuthorizedUserID != -1)
+            
+            if (_authorizationService.GetCurrentUserID() != -1)
             {
                 try
                 {

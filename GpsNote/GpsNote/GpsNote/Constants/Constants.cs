@@ -20,5 +20,12 @@ namespace GpsNote.Constants
         public const string NEW_USER_EMAIL = "NewUserEmail";
 
         #endregion
+
+
+        #region -- Camera settings --
+
+        public const int ZOOM = 10;
+
+        #endregion
     }
 }

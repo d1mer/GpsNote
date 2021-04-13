@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using GpsNote.Models;
 using SQLite;
-using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.Services.RepositoryService
 {

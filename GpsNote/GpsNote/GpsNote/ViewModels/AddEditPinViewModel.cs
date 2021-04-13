@@ -121,7 +121,7 @@ namespace GpsNote.ViewModels
                 };
                 // TODO: replace zoom value with constant
                 InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
-                    new CameraPosition(pin.Position, 12));
+                    new CameraPosition(pin.Position, ConstantsValue.ZOOM));
 
                 editMode = true;
                 editPinViewModel = pinViewModel;
