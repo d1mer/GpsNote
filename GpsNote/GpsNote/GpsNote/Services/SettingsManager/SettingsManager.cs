@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Essentials;
-using Xamarin.Forms.GoogleMaps;
+﻿using Xamarin.Essentials;
 
 namespace GpsNote.Services.SettingsService
 {
@@ -34,19 +30,19 @@ namespace GpsNote.Services.SettingsService
 
         public double LastZoom
         {
-            get => Preferences.Get(nameof(LastZoom), 0.0);
+            get => Preferences.Get(nameof(LastZoom), default(double));
             set => Preferences.Set(nameof(LastZoom), value);
         }
 
         public double LastBearing
         { 
-            get => Preferences.Get(nameof(LastBearing), 0.0);
+            get => Preferences.Get(nameof(LastBearing), default(double));
             set => Preferences.Set(nameof(LastBearing), value);
         }
         
         public double LastTilt 
         {
-            get => Preferences.Get(nameof(LastTilt), 0.0);
+            get => Preferences.Get(nameof(LastTilt), default(double));
             set => Preferences.Set(nameof(LastTilt), value);
         }
 
@@ -56,7 +52,17 @@ namespace GpsNote.Services.SettingsService
             get => Preferences.Get(nameof(ShowPin), false);
             set => Preferences.Set(nameof(ShowPin), value);
         }
-        
+
+        public void CleanUpAuthorizedUser()
+        {
+            AuthorizedUserID = -1;
+            DarkTheme = false;
+            LastLatitude = default(double);
+            LastLongitude = default(double);
+            LastZoom = default(double);
+            LastBearing = default(double);
+            LastTilt = default(double);
+        }
 
         #endregion
     }

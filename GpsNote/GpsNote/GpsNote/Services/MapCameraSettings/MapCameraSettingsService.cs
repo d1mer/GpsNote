@@ -4,30 +4,21 @@ using GpsNote.Services.SettingsService;
 
 namespace GpsNote.Services.MapCameraSettingsService
 {
-    public class CameraSettingsService : ICameraSettingsService
+    public class MapCameraSettingsService : IMapCameraSettingsService
     {
-        #region -- Private --
-
         private readonly ISettingsManager _settingsService;
 
-        #endregion
-
-
-        #region -- Constructor --
-
-        public CameraSettingsService(ISettingsManager settingsService)
+        public MapCameraSettingsService(ISettingsManager settingsService)
         {
             _settingsService = settingsService;
         }
 
-        #endregion
+        #region -- IMapCameraSettingsService implementation --
 
-
-        public async void RecordCurrentCameraPositionAsync(CameraPosition cameraPosition)
+        public async void SaveCurrentCameraPositionAsync(CameraPosition cameraPosition)
         {
             await Task.Run(() => SaveCameraPosition(cameraPosition));
         }
-
 
         public CameraPosition GetInitialCameraSettings()
         {
@@ -45,6 +36,8 @@ namespace GpsNote.Services.MapCameraSettingsService
 
             return cameraPosition;
         }
+
+        #endregion
 
 
         #region -- Private helpers --

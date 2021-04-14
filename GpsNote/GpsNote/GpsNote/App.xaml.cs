@@ -53,7 +53,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>()); 
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
-            containerRegistry.RegisterInstance<ICameraSettingsService>(Container.Resolve<CameraSettingsService>());
+            containerRegistry.RegisterInstance<IMapCameraSettingsService>(Container.Resolve<MapCameraSettingsService>());
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
 
             //Navigation

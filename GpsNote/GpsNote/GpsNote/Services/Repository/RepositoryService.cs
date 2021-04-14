@@ -10,15 +10,8 @@ namespace GpsNote.Services.RepositoryService
 {
     public class RepositoryService : IRepositoryService
     {
-        #region -- Private fields --
-
         private Lazy<SQLiteAsyncConnection> _database;
 
-        #endregion
-
-
-
-        #region -- Constructor --
 
         public RepositoryService()
         {
@@ -34,35 +27,49 @@ namespace GpsNote.Services.RepositoryService
             });
         }
 
-        #endregion
-
 
         #region -- IRepository implementation --
 
         public Task<T> GetEntityAsync<T>(Expression<Func<T, bool>> predicate) 
-            where T : IEntityBase, new() => _database.Value.FindAsync<T>(predicate);
+            where T : IEntityBase, new()
+        {
+            return _database.Value.FindAsync<T>(predicate);
+        }
 
-        public Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new() =>
-            _database.Value.InsertAsync(entity);
+        public Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new()
+        {
+            return _database.Value.InsertAsync(entity);
+        }
 
+        public Task<int> UpdateAsync<T>(T entity) where T : IEntityBase, new()
+        {
+            return _database.Value.UpdateAsync(entity);
+        }
 
-        public Task<int> UpdateAsync<T>(T entity) where T : IEntityBase, new() => _database.Value.UpdateAsync(entity);
+        public Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new()
+        {
+            return _database.Value.Table<T>().ToListAsync();
+        }
 
+        public Task<List<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new()
+        {
+            return _database.Value.Table<T>().Where(predicate).ToListAsync();
+        }
 
-        public Task<List<T>> GetAllAsync<T>() where T : IEntityBase, new() => _database.Value.Table<T>().ToListAsync();
+        public Task<int> DeleteAsync<T>(T entity) where T : IEntityBase, new()
+        {
+            return _database.Value.DeleteAsync(entity);
+        }
 
-        public Task<List<T>> GetAllAsync<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new() =>
-            _database.Value.Table<T>().Where(predicate).ToListAsync();
+        public Task DeleteAllAsync<T>() where T : IEntityBase, new()
+        {
+            return _database.Value.DeleteAllAsync<T>();
+        }
 
-
-        public Task<int> DeleteAsync<T>(T entity) where T : IEntityBase, new() => _database.Value.DeleteAsync(entity);
-
-
-        public Task DeleteAllAsync<T>() where T : IEntityBase, new() => _database.Value.DeleteAllAsync<T>();
-
-
-        public async Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new() =>
-            await _database.Value.FindAsync<T>(predicate);
+        public async Task<T> FindEntity<T>(Expression<Func<T, bool>> predicate) where T : IEntityBase, new()
+        {
+            return await _database.Value.FindAsync<T>(predicate);
+        }
 
         #endregion
     }

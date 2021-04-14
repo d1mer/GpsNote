@@ -11,25 +11,19 @@ namespace GpsNote.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        #region -- Private fields --
-
-        IAuthorizationService _authorizationService;
-        IRepositoryService _repositoryService;
-        ISettingsManager _settingsManager;
-
-        #endregion
+        private IAuthorizationService _authorizationService;
+        private IRepositoryService _repositoryService;
+        private ISettingsManager _settingsManager;
 
 
-        #region -- Constructor --
-
-        public AuthenticationService(IAuthorizationService authorizationService, IRepositoryService repositoryService, ISettingsManager settingsManager)
+        public AuthenticationService(IAuthorizationService authorizationService, 
+                                     IRepositoryService repositoryService, 
+                                     ISettingsManager settingsManager)
         {
             _authorizationService = authorizationService;
             _repositoryService = repositoryService;
             _settingsManager = settingsManager;
         }
-
-        #endregion
 
 
 
@@ -37,7 +31,7 @@ namespace GpsNote.Services.Authentication
 
         public async Task<CodeUserAuthresult> SignInAsync(string email, string password)
         {
-            CodeUserAuthresult result = CodeUserAuthresult.Passed;
+            CodeUserAuthresult result = CodeUserAuthresult.Undefined;
 
             if (!Validator.Validate(email, Validator.patternEmail))
             {
@@ -49,7 +43,7 @@ namespace GpsNote.Services.Authentication
                 result = CodeUserAuthresult.InvalidPassword;
             }
 
-            if(result == CodeUserAuthresult.Passed)
+            if(result == CodeUserAuthresult.Undefined)
             {
                 User findUser = null;
 
@@ -60,6 +54,7 @@ namespace GpsNote.Services.Authentication
                 catch (Exception ex)
                 {
                     result = CodeUserAuthresult.UnknownError;
+                    Console.WriteLine(ex.Message);
                 }
 
                 if(findUser != null)
@@ -122,6 +117,7 @@ namespace GpsNote.Services.Authentication
                 catch (Exception ex)
                 {
                     result = CodeUserAuthresult.UnknownError;
+                    Console.WriteLine(ex.Message);
                 }
 
                 if (findUser == null)

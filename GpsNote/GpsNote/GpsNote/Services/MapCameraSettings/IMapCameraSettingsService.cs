@@ -2,9 +2,9 @@
 
 namespace GpsNote.Services.MapCameraSettingsService
 {
-    public interface ICameraSettingsService
+    public interface IMapCameraSettingsService
     {
-        void RecordCurrentCameraPositionAsync(CameraPosition cameraPosition);
+        void SaveCurrentCameraPositionAsync(CameraPosition cameraPosition);
 
         CameraPosition GetInitialCameraSettings();
     }

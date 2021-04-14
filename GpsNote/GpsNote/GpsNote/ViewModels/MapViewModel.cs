@@ -19,13 +19,13 @@ namespace GpsNote.ViewModels
     {
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
-        private ICameraSettingsService _cameraSettingsService;
+        private IMapCameraSettingsService _cameraSettingsService;
 
 
         public MapViewModel(INavigationService navigationService, 
                             IPageDialogService dialogService, 
                             IPinService pinService, 
-                            ICameraSettingsService cameraSettingsService) : base(navigationService)
+                            IMapCameraSettingsService cameraSettingsService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
@@ -178,7 +178,7 @@ namespace GpsNote.ViewModels
         private void OnCameraLed(Object _cameraPosition)
         {
             CameraPosition cameraPosition = _cameraPosition as CameraPosition;
-            _cameraSettingsService.RecordCurrentCameraPositionAsync(cameraPosition);
+            _cameraSettingsService.SaveCurrentCameraPositionAsync(cameraPosition);
         }
 
         private async void GetPinsFromDatabaseAsync()

@@ -11,6 +11,7 @@
         PasswordMismatch,
         WrongPassword,
         Passed,
-        UnknownError
+        UnknownError,
+        Undefined
     }
 }

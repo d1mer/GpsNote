@@ -13,16 +13,10 @@ namespace GpsNote.Services.PinService
 {
     public class PinService : IPinService
     {
-        #region --Private fields --
-
         IRepositoryService _repositoryService;
         ISettingsManager   _settingsService;
         IAuthorizationService _authorizationService;
 
-        #endregion
-
-
-        #region -- Constructor --
 
         public PinService(IRepositoryService repositoryService, ISettingsManager settingsService, IAuthorizationService authorizationService)
         {
@@ -30,8 +24,6 @@ namespace GpsNote.Services.PinService
             _settingsService   = settingsService;
             _authorizationService = authorizationService;
         }
-
-        #endregion
 
 
         #region -- Implement interface IPinService --
@@ -54,7 +46,7 @@ namespace GpsNote.Services.PinService
                 }
                 catch(Exception ex)
                 {
-                    // handle exception
+                    Console.WriteLine(ex.Message);
                 }
             }
 
@@ -72,6 +64,7 @@ namespace GpsNote.Services.PinService
             catch(Exception ex) 
             {
                 rows = 0;
+                Console.WriteLine(ex.Message);
             }
 
             return rows;
@@ -88,6 +81,7 @@ namespace GpsNote.Services.PinService
             catch(Exception ex)
             {
                 index = -1;
+                Console.WriteLine(ex.Message);
             }
 
             return index;
@@ -101,7 +95,10 @@ namespace GpsNote.Services.PinService
             {
                 pinModel = await _repositoryService.FindEntity<PinModel>(predicate);
             }
-            catch(Exception ex) { }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             return pinModel;
         }
@@ -116,6 +113,7 @@ namespace GpsNote.Services.PinService
             catch(Exception ex)
             {
                 rows = -1;
+                Console.WriteLine(ex.Message);
             }
 
             return rows;
@@ -135,6 +133,7 @@ namespace GpsNote.Services.PinService
             catch(Exception ex) 
             {
                 pin = null;
+                Console.WriteLine(ex.Message);
             }
 
             return pin;
