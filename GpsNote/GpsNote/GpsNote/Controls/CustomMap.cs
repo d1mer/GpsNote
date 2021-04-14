@@ -7,12 +7,7 @@ namespace GpsNote.Controls
 {
     public class CustomMap : Map
     {
-        #region -- Private --
-
         Position _cameraMovingPosition;
-
-        #endregion
-
 
         public CustomMap()
         {
@@ -21,7 +16,7 @@ namespace GpsNote.Controls
         }
 
 
-        #region -- Public statics --
+        #region -- Public properties --
 
         public static readonly BindableProperty PinsListProperty =
             BindableProperty.Create(nameof(PinsList),
@@ -29,7 +24,7 @@ namespace GpsNote.Controls
                                     typeof(CustomMap),
                                     defaultValue: default(List<Pin>),
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: PinsListPropertyPropertyChanged);
+                                    propertyChanged: PinsListPropertyChanged);
 
         public List<Pin> PinsList
         {
@@ -89,7 +84,7 @@ namespace GpsNote.Controls
 
         #region -- Private helpers --
 
-        private static void PinsListPropertyPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void PinsListPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = (CustomMap)bindable;
            

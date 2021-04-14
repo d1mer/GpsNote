@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
-using Xamarin.Forms.GoogleMaps;
+﻿using SQLite;
 
 namespace GpsNote.Models
 {
@@ -12,6 +8,7 @@ namespace GpsNote.Models
         public int Id { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        [Unique]
         public string Label { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }

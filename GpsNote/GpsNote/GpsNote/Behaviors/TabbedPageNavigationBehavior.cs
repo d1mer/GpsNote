@@ -10,12 +10,7 @@ namespace GpsNote.Behaviors
 {
     public class TabbedPageNavigationBehavior : BehaviorBase<TabbedPage>
     {
-        #region -- Private fields --
-
         private Page _currentPage;
-
-        #endregion
-
 
         #region -- Override --
 
