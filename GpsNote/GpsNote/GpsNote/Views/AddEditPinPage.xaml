@@ -4,56 +4,72 @@
              x:Class="GpsNote.Views.AddEditPinPage"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              xmlns:prism="http://prismlibrary.com"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
+                                               Dark={StaticResource DarkPageBackgroundColor}}">
 
     <ContentPage.ToolbarItems>
+        
         <ToolbarItem Order="Primary"
                      Text="Save"
                      IconImageSource="ic_save.png"
                      Command="{Binding SaveTapCommand}"/>
+        
     </ContentPage.ToolbarItems>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition  Height="0.6*"/>
-        </Grid.RowDefinitions>
+    <Grid RowDefinitions="0.4*, 0.6*">
 
         <StackLayout Margin="15"
                      Spacing="10">
+
+            <!-- PIN LABEL -->
             <Entry Text="{Binding LabelPinText}" 
                    Placeholder="Label Pin"/>
+
+            <!-- PIN POSITION -->
             <Label Text="Position"
                    Margin="15, 15, 15, 0"
                    FontAttributes="Bold"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*" />
-                    <ColumnDefinition Width="0.5*" />
-                </Grid.ColumnDefinitions>
+
+            <Grid ColumnDefinitions="0.5*, 0.5*">
+
+                <!-- PIN LATITUDE -->
                 <Entry Text="{Binding LatitudePinText}"
                        Keyboard="Numeric"
                        Placeholder="Latitude"
                        IsReadOnly="True"/>
+
+                <!-- PIN LONGTITUDE -->
                 <Entry Grid.Column="1"
                        Text="{Binding LongitudePinText}"
                        Keyboard="Numeric"
                        Placeholder="Longitude"
                        IsReadOnly="True"/>
+                
             </Grid>
+
+            <!-- PIN DESCRIPTION -->
             <Editor Text="{Binding EditorText}"
                     Margin="10, 10, 10, 5"
                     Placeholder="Description"/>
+            
         </StackLayout>
 
+        <!-- MAP -->
         <controls:CustomMap Grid.Row="1"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}">
+            
             <controls:CustomMap.Behaviors>
+                
                 <prism:EventToCommandBehavior EventName="MapClicked"
                                               Command="{Binding MapTapCommand}"
                                               EventArgsParameterPath="Point" />
+                
             </controls:CustomMap.Behaviors>
+            
         </controls:CustomMap>
+        
     </Grid>
+    
 </ContentPage>

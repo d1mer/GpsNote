@@ -2,18 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
-             xmlns:viewModels="clr-namespace:GpsNote.ViewModels"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:controls="clr-namespace:GpsNote.Controls"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
+                                               Dark={StaticResource DarkPageBackgroundColor}}">
 
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
+    <Grid RowDefinitions="*">
+
+        <!-- MAP -->
         <controls:CustomMap x:Name="map"
                             MyLocationEnabled="True"
                             IsMoveCamera="{Binding IsMoveCamera}"
@@ -23,37 +22,42 @@
                             ChangeCompassMyLocationButtonsVisibility="{Binding ButtonsVisibility}">
 
             <controls:CustomMap.Behaviors>
+                
                 <prism:EventToCommandBehavior EventName="CameraIdled"
                                               Command="{Binding CameraIdLedCommand}"
                                               EventArgsParameterPath="Position" />
 
                 <prism:EventToCommandBehavior EventName="MapClicked"
                                               Command="{Binding MapTapCommand}" />
+                
             </controls:CustomMap.Behaviors>
             
         </controls:CustomMap>
 
-
+        
+        <!-- SEARCHBAR -->
         <SearchBar Placeholder="Search"
                    Grid.Row="0"
                    IsVisible="{Binding IsVisibleSearcBar}"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="Start"
                    BackgroundColor="White"
-                   CancelButtonColor="black"
-                   >
+                   CancelButtonColor="black">
 
             <SearchBar.Behaviors>
+                
                 <prism:EventToCommandBehavior EventName="TextChanged"
                                               Command="{Binding SearchTextChangedCommand}"
                                               EventArgsParameterPath="NewTextValue" />
 
                 <prism:EventToCommandBehavior EventName="Unfocused"
                                               Command="{Binding UnfocusedSearchbarCommand}" />
+                
             </SearchBar.Behaviors>
+            
          </SearchBar>
 
-
+        <!-- PIN LIST -->
         <ListView x:Name="searchResultList"
                   ItemsSource="{Binding SearchResultList}"
                   Grid.Row="0"
@@ -68,38 +72,52 @@
                   Margin="0, 45, 0, 0">
 
             <ListView.Behaviors>
+                
                 <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding Path=BindingContext.ListItemTapCommand, 
                                                         Source={x:Reference searchResultList}}"
                                               EventArgsParameterPath="Item" />
+                
             </ListView.Behaviors>
 
             <ListView.ItemTemplate>
+                
                 <DataTemplate>
+                    
                     <ViewCell>
+                        
                         <ViewCell.View>
+                            
                             <Grid Background="Transparent"
                                   Padding="5, 5, 5, 5">
-                                <StackLayout
-                                             Background="Transparent">
+                                
+                                <StackLayout Background="Transparent">
+                                    
+                                    <!-- PIN LABEL -->
                                     <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
-                                               FontSize="Medium">
-                                    </Label>
-                                    <Label
-                                               Text="{Binding Address}"
-                                               FontSize="Medium">
-                                               
-                                    </Label>
+                                               FontSize="Medium" />
+
+                                    <!-- PIN ADDRESS -->
+                                    <Label Text="{Binding Address}"
+                                           FontSize="Medium" />
+
                                 </StackLayout>
+                                
                             </Grid>
+                            
                         </ViewCell.View>
+                        
                     </ViewCell>
+                    
                 </DataTemplate>
+                
             </ListView.ItemTemplate>
+            
         </ListView>
 
-            <Button Grid.Row="0" 
+        <!-- SEARCH BUTTON -->
+        <Button Grid.Row="0" 
                 ImageSource="search.png"
                 BackgroundColor="Transparent"
                 FontAttributes="None"
@@ -112,6 +130,7 @@
                 Margin="0,10,0,0"
                 IsVisible="{Binding IsVisibleSearchButton}"
                 Command="{Binding SearchButtonTapCommand}"/>
+        
     </Grid>
     
 </ContentPage>

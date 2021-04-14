@@ -1,15 +1,15 @@
+using Prism;
+using Prism.Ioc;
+using Xamarin.Forms;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.RepositoryService;
 using GpsNote.ViewModels;
 using GpsNote.Views;
-using Prism;
-using Prism.Ioc;
-using Xamarin.Forms;
 using GpsNote.Services.SettingsService;
 using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
-using Unity;
 using GpsNote.Services.MapCameraSettingsService;
+using GpsNote.Services.Theme;
 
 namespace GpsNote
 {
@@ -18,6 +18,10 @@ namespace GpsNote
         private IAuthorizationService _authorizationService;
         private IAuthorizationService AuthorizationService =>
             _authorizationService ?? (_authorizationService = Container.Resolve<IAuthorizationService>());
+
+        private IThemeService _themeService;
+        public IThemeService ThemeService =>
+            _themeService ?? (_themeService = Container.Resolve<IThemeService>());
 
         public App(IPlatformInitializer initializer)
             : base(initializer)
@@ -48,6 +52,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>()); 
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
             containerRegistry.RegisterInstance<ICameraSettingsService>(Container.Resolve<CameraSettingsService>());
+            containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -59,25 +64,5 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPinPage, AddEditPinViewModel>();
         }
-
-
-        #region -- Private helpers --
-
-        private void ResourceLoader()
-        {
-            //ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-
-            //switch (_settings.DarkTheme)
-            //{
-            //    case false:
-            //        mergedDictionaries.Add(new LightTheme());
-            //        break;
-            //    case true:
-            //        mergedDictionaries.Add(new DarkTheme());
-            //        break;
-            //}
-        }
-
-        #endregion
     }
 }

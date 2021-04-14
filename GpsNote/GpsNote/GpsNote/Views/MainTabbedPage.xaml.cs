@@ -1,10 +1,8 @@
-﻿using GpsNote.Controls.CustomTabbedPage;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace GpsNote.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainTabbedPage : CustomTabbedPage
+    public partial class MainTabbedPage : TabbedPage
     {
         public MainTabbedPage()
         {

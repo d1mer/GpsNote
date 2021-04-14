@@ -15,7 +15,6 @@ using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Extensions;
 using GpsNote.Views;
-using GpsNote.Interfaces;
 using GpsNote.Constants;
 
 
@@ -249,7 +248,7 @@ namespace GpsNote.ViewModels
             if (_pinForDisplaying != null)
             {
                 _pinService.IsDisplayConcretePin = true;
-                _unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
+                //_unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
             }            
         }
 

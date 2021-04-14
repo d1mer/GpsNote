@@ -3,51 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.SignInPage"
              Title ="{Binding Title}"
-             BackgroundColor="{DynamicResource PageBackgroundColor}">
+              BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
+                                                Dark={StaticResource DarkPageBackgroundColor}}">
 
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="2*" />
-        </Grid.RowDefinitions>
+    <Grid RowDefinitions="*, 2*">
 
         <StackLayout Margin="30, 50, 30, 30"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
+
+            <!-- EMAIL ENTRY-->
             <Entry x:Name="email"
                    Text="{Binding Email}"
-                   Placeholder="Enter email" />
+                   Placeholder="Enter email"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+
+            <!-- PASSWORD ENTRY-->
             <Entry x:Name="password"
                    Text="{Binding Password}"
                    Placeholder="Enter password"
-                   IsPassword="True" />
+                   IsPassword="True" 
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+            
         </StackLayout>
 
         <StackLayout Grid.Row="1"
                      Margin="30">
+
+            <!-- SIGNIN BUTTON -->
             <Button Text="SIGNIN"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignInButtonEnabled}"
-                    Command="{Binding OnSignInButtonTapCommand}">
-            </Button>
+                    Command="{Binding OnSignInButtonTapCommand}" />
 
+            <!-- ONSIGNUP LINK LABEL -->
             <Label HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand">
+                
                 <Label.FormattedText>
+                    
                     <FormattedString>
+                        
                         <FormattedString.Spans>
+                            
                             <Span Text="SignUp" 
-                                  TextDecorations="Underline">
+                                  TextDecorations="Underline"
+                                  FontSize="Medium">
+                                
                                 <Span.GestureRecognizers>
+                                    
                                     <TapGestureRecognizer Command="{Binding OnSignUpTapCommand}" />
+                                    
                                 </Span.GestureRecognizers>
+                                
                             </Span>
+                            
                         </FormattedString.Spans>
+                        
                     </FormattedString>
+                    
                 </Label.FormattedText>
+                
             </Label>
+            
         </StackLayout>
+        
     </Grid>
 
 </ContentPage>

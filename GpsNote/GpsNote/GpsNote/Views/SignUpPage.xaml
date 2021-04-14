@@ -2,41 +2,61 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.SignUpPage"
-             Title="{Binding Title}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+             Title="{Binding Title}"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
+                                               Dark={StaticResource DarkPageBackgroundColor}}">
+    <Grid RowDefinitions="*, *">
 
         <StackLayout Margin="30, 30, 30, 10"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
+
+            <!-- NAME ENTRY -->
             <Entry x:Name="name"
                    Text="{Binding Name}"
-                   Placeholder="Enter name" />
+                   Placeholder="Enter name"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+
+            <!-- EMAIL ENTRY -->
             <Entry x:Name="email"
                    Placeholder="Enter email"
-                   Text="{Binding Email}" />
+                   Text="{Binding Email}"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+
+            <!-- PASSWORD ENTRY -->
             <Entry x:Name="password"
                    Text="{Binding Password}"
                    Placeholder="Enter password"
-                   IsPassword="True" />
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+
+            <!-- CONFIRM PASSWORD ENTRY -->
             <Entry x:Name="confirmPassword"
                    Text="{Binding ConfirmPassword}"
                    Placeholder="Confirm password"
-                   IsPassword="True" />
+                   IsPassword="True"
+                   ClearButtonVisibility="WhileEditing"
+                   FontSize="Medium" />
+            
         </StackLayout>
 
         <StackLayout Grid.Row="1"
                      Margin="30, 10, 30, 30"
                      VerticalOptions="EndAndExpand">
+            
+            <!-- SIGNUP BUTTON -->
             <Button Text="SIGNUP"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignUpButtonEnabled}"
                     Command="{Binding OnSignUpCommand}">
 
             </Button>
+            
         </StackLayout>
+        
     </Grid>
+    
 </ContentPage>
