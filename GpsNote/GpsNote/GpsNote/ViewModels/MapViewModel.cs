@@ -17,18 +17,15 @@ namespace GpsNote.ViewModels
 {
     public class MapViewModel : ViewModelBase
     {
-        #region -- Private fields -- 
-
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
         private ICameraSettingsService _cameraSettingsService;
 
-        #endregion
 
-
-        #region -- Constructors --
-
-        public MapViewModel(INavigationService navigationService, IPageDialogService dialogService, IPinService pinService, ICameraSettingsService cameraSettingsService) : base(navigationService)
+        public MapViewModel(INavigationService navigationService, 
+                            IPageDialogService dialogService, 
+                            IPinService pinService, 
+                            ICameraSettingsService cameraSettingsService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
@@ -39,8 +36,6 @@ namespace GpsNote.ViewModels
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
         }
 
-        #endregion
-
 
         #region -- Publics -- 
 
@@ -49,13 +44,6 @@ namespace GpsNote.ViewModels
         {
             get => initialCameraUpdate;
             set => SetProperty(ref initialCameraUpdate, value);
-        }
-        
-        private MapType mapType;
-        public MapType MapType
-        {
-            get => mapType;
-            set => SetProperty(ref mapType, value);
         }
 
         private List<Pin> pins = new List<Pin>();
@@ -131,23 +119,22 @@ namespace GpsNote.ViewModels
 
 
         private DelegateCommand<Object> cameraIdLedCommand;
-        public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? (new DelegateCommand<Object>(OnCameraLed));
+        public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? new DelegateCommand<Object>(OnCameraLed);
 
         private DelegateCommand searchButtonTapCommand;
-        public DelegateCommand SearchButtonTapCommand => searchButtonTapCommand ?? (new DelegateCommand(OnSearchButtonTap));
+        public DelegateCommand SearchButtonTapCommand => searchButtonTapCommand ?? new DelegateCommand(OnSearchButtonTap);
 
         private DelegateCommand<object> searchTextChangedCommand;
-        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? (new DelegateCommand<object>(OnSearchPin));
-
+        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? new DelegateCommand<object>(OnSearchPin);
 
         private DelegateCommand<object> unfocusedSearchbarCommand;
-        public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? (new DelegateCommand<object>(OnUnfocusedSearch));
+        public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? new DelegateCommand<object>(OnUnfocusedSearch);
 
         private DelegateCommand<object> mapTapCommand;
-        public DelegateCommand<object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<object>(OnMapClick));
+        public DelegateCommand<object> MapTapCommand => mapTapCommand ?? new DelegateCommand<object>(OnMapClick);
 
         private DelegateCommand<object> listItemTapCommand;
-        public DelegateCommand<Object> ListItemTapCommand => listItemTapCommand ?? (new DelegateCommand<Object>(OnItemTap));
+        public DelegateCommand<Object> ListItemTapCommand => listItemTapCommand ?? new DelegateCommand<object>(OnItemTap);
 
 
         #endregion
@@ -194,7 +181,6 @@ namespace GpsNote.ViewModels
             _cameraSettingsService.RecordCurrentCameraPositionAsync(cameraPosition);
         }
 
-
         private async void GetPinsFromDatabaseAsync()
         {
             List<PinModel> userPins = await _pinService.GetUsersPinsAsync();
@@ -206,14 +192,13 @@ namespace GpsNote.ViewModels
 
                 foreach(PinModel pinModel in userPins)
                 {
-                    pin = pinModel.PinModelToPin();
+                    pin = pinModel.ToPin();
                     pins.Add(pin);
                 }
 
-                Pins = pins.Where(p => p.IsVisible == true).ToList();
+                Pins = pins;
             }
         }
-
 
         private void OnSearchButtonTap()
         {
@@ -221,7 +206,6 @@ namespace GpsNote.ViewModels
             IsVisibleSearchButton = false;
             ButtonsVisibility = false;
         }
-
 
         private void OnSearchPin(object obj)
         {
@@ -251,7 +235,6 @@ namespace GpsNote.ViewModels
             }
         }
 
-
         private void OnUnfocusedSearch(object obj)
         {
             IsVisibleSearcBar = false;
@@ -259,7 +242,6 @@ namespace GpsNote.ViewModels
             ButtonsVisibility = true;
             IsSearchListVisible = false;
         }
-
 
         private void OnMapClick(object obj)
         {

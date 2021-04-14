@@ -11,25 +11,19 @@ namespace GpsNote.ViewModels
 {
     public class SignUpViewModel : ViewModelBase
     {
-        #region -- Private fields --
-
-        IAuthenticationService _authenticationService;
-        IPageDialogService _dialogService;
-
-        #endregion
+        private IAuthenticationService _authenticationService;
+        private IPageDialogService _dialogService;
 
 
-        #region -- Constructor --
-
-        public SignUpViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthenticationService registration) : base(navigationService)
+        public SignUpViewModel(INavigationService navigationService, 
+                               IPageDialogService dialogService, 
+                               IAuthenticationService registration) : base(navigationService)
         {
             _authenticationService = registration;
             _dialogService = dialogService;
 
             Title = "SignUp";
         }
-
-        #endregion
 
 
         #region -- Publics --
@@ -47,7 +41,6 @@ namespace GpsNote.ViewModels
             get => _email;
             set => SetProperty(ref _email, value);
         }
-
 
         private string _password = "";
         public string Password
@@ -70,11 +63,10 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignUpButtonEnabled, value);
         }
 
-
-        public DelegateCommand OnSignUpCommand => new DelegateCommand(OnAuthenticationUserAsync, CanExecute);
+        private DelegateCommand onSignUpCommand;
+        public DelegateCommand OnSignUpCommand => onSignUpCommand ?? new DelegateCommand(OnAuthenticationUserAsync, CanExecute);
 
         #endregion
-
 
 
         #region -- Overrides --
@@ -88,21 +80,29 @@ namespace GpsNote.ViewModels
                 args.PropertyName == nameof(Password) ||
                 args.PropertyName == nameof(ConfirmPassword))
             {
-                if (!string.IsNullOrWhiteSpace(Name) && !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !string.IsNullOrWhiteSpace(ConfirmPassword))
+                if (!string.IsNullOrWhiteSpace(Name) &&
+                    !string.IsNullOrWhiteSpace(Email) &&
+                    !string.IsNullOrWhiteSpace(Password) &&
+                    !string.IsNullOrWhiteSpace(ConfirmPassword))
+                {
                     IsSignUpButtonEnabled = true;
+                }
                 else
+                {
                     IsSignUpButtonEnabled = false;
+                }
             }
         }
 
         #endregion
 
 
-
         #region -- Private helpers --
 
-        private bool CanExecute() => IsSignUpButtonEnabled;
-
+        private bool CanExecute()
+        {
+            return IsSignUpButtonEnabled;
+        }
 
         private async void OnAuthenticationUserAsync()
         {

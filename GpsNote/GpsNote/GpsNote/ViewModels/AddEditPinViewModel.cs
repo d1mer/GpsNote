@@ -17,19 +17,12 @@ namespace GpsNote.ViewModels
 {
     public class AddEditPinViewModel : ViewModelBase
     {
-
-        #region -- Private fields --
-
         private IPinService _pinService;
         private IPageDialogService _dialogService;
         private IAuthorizationService _authorizationService;
         private bool editMode = false;
         private PinViewModel editPinViewModel = null;
 
-        #endregion
-
-
-        #region -- Constructor --
 
         public AddEditPinViewModel(INavigationService navigationService,
                                    IPageDialogService dialogService,
@@ -42,8 +35,6 @@ namespace GpsNote.ViewModels
 
             Title = "AddEditPin";
         }
-
-        #endregion
 
 
         #region -- Publics --
@@ -76,7 +67,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref editorText, value);
         }
 
-
         private List<Pin> pins;
         public List<Pin> Pins
         {
@@ -92,12 +82,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref initialCameraUpdate, value);
         }
 
-
         private DelegateCommand<Object> mapTapCommand;
-        public DelegateCommand<Object> MapTapCommand => mapTapCommand ?? (new DelegateCommand<Object>(OnMapClickAsync));
+        public DelegateCommand<Object> MapTapCommand => mapTapCommand ?? new DelegateCommand<Object>(OnMapClickAsync);
 
         private DelegateCommand saveTapCommand;
-        public DelegateCommand SaveTapCommand => saveTapCommand ?? (new DelegateCommand(OnSavePinAsync));
+        public DelegateCommand SaveTapCommand => saveTapCommand ?? new DelegateCommand(OnSavePinAsync);
 
         #endregion
 
@@ -113,13 +102,13 @@ namespace GpsNote.ViewModels
                 LongitudePinText = pinViewModel.Longitude.ToString();
                 EditorText = pinViewModel.Description;
 
-                Pin pin = pinViewModel.PinViewModelToPin();
+                Pin pin = pinViewModel.ToPin();
 
                 Pins = new List<Pin>
                 {
                     pin
                 };
-                // TODO: replace zoom value with constant
+                
                 InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
                     new CameraPosition(pin.Position, ConstantsValue.ZOOM));
 
@@ -161,7 +150,7 @@ namespace GpsNote.ViewModels
 
                 if (editMode)
                 {
-                    pinModel = await UpdateExistPinAsync(editPinViewModel.Id);
+                    pinModel = await UpdateExistPinAsync();
                 }
                 else
                 {
@@ -198,7 +187,7 @@ namespace GpsNote.ViewModels
             }
         }
 
-        private async System.Threading.Tasks.Task<PinModel> UpdateExistPinAsync(int id)
+        private async System.Threading.Tasks.Task<PinModel> UpdateExistPinAsync()
         {
             PinModel pinModel = await _pinService.FindPinModelAsync(p => p.Id == editPinViewModel.Id);
 
@@ -223,7 +212,7 @@ namespace GpsNote.ViewModels
         {
             pin.Label = LabelPinText;
 
-            PinModel pinModel = pin.PinToPinModel();
+            PinModel pinModel = pin.ToPinModel();
             pinModel.Description = EditorText;
             pinModel.Owner = _authorizationService.GetCurrentUserID();
             pinModel.IsEnable = true;

@@ -33,6 +33,8 @@ namespace GpsNote
         {
             InitializeComponent();
 
+            Application.Current.UserAppTheme = (OSAppTheme)ThemeService.Theme;
+
             if (!AuthorizationService.IsAuthorized())
             {
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");

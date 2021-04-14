@@ -9,7 +9,7 @@ using Xamarin.Forms.GoogleMaps;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
-using Unity;
+using Prism.Navigation.TabbedPages;
 using GpsNote.Models;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
@@ -17,34 +17,25 @@ using GpsNote.Extensions;
 using GpsNote.Views;
 using GpsNote.Constants;
 
-
 namespace GpsNote.ViewModels
 {
     public class NotesViewModel : ViewModelBase, IInitializeAsync
     {
-        #region -- Private fields --
-
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
-        private IUnityContainer _unityContainer;
         private PinViewModel _pinForDisplaying;
         private List<PinViewModel> _oldPinsList = null;
 
-        #endregion
 
-
-        #region -- Constructor --
-
-        public NotesViewModel(INavigationService navigationService, IPinService pinService, IPageDialogService dialogService, IUnityContainer unityContainer) : base(navigationService)
+        public NotesViewModel(INavigationService navigationService, 
+                              IPinService pinService, 
+                              IPageDialogService dialogService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
-            _unityContainer = unityContainer;
 
             Title = "Notes";
         }
-
-        #endregion
 
 
         #region -- Publics --
@@ -57,26 +48,26 @@ namespace GpsNote.ViewModels
         }
 
         private DelegateCommand addEditPinTapCommand;
-        public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? (new DelegateCommand(OnAddEditPinAsync));
+        public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? new DelegateCommand(OnAddEditPinAsync);
 
         private DelegateCommand<object> imageTapCommand;
         public DelegateCommand<object> ImageTapCommand => imageTapCommand ?? 
-            (new DelegateCommand<Object>(OnChangeVisibilityPinAsync));
+            new DelegateCommand<Object>(OnChangeVisibilityPinAsync);
 
         private DelegateCommand<object> deleteTapCommand;
         public DelegateCommand<object> DeleteTapCommand => deleteTapCommand ?? 
-            (new DelegateCommand<object>(OnDeletePinAsync));
+            new DelegateCommand<object>(OnDeletePinAsync);
 
         private DelegateCommand<object> updateTapCommand;
         public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? 
-            (new DelegateCommand<object>(OnUpdatePinAsync));
+            new DelegateCommand<object>(OnUpdatePinAsync);
 
         private DelegateCommand<object> searchTextChangedCommand;
         public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? 
-            (new DelegateCommand<object>(OnSearchPin));
+            new DelegateCommand<object>(OnSearchPin);
 
         private ICommand itemTapCommand;
-        public ICommand ItemTapCommand => itemTapCommand ?? (new Command(OnItemTap));
+        public ICommand ItemTapCommand => itemTapCommand ?? new Command(OnItemTapAsync);
 
         #endregion
 
@@ -87,7 +78,7 @@ namespace GpsNote.ViewModels
         {
             if (parameters.TryGetValue<PinModel>(ConstantsValue.NEW_PIN, out PinModel newPin))
             {
-                PinViewModel pinViewModel = newPin.PinModelToPinViewModel();
+                PinViewModel pinViewModel = newPin.ToPinViewModel();
                 pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.png" : "not_checked.png";
 
                 if (PinsList == null)
@@ -106,14 +97,13 @@ namespace GpsNote.ViewModels
                     int index = PinsList.IndexOf(pinViewModel);
                     PinsList.RemoveAt(index);
 
-                    PinViewModel pinView = editPin.PinModelToPinViewModel();
+                    PinViewModel pinView = editPin.ToPinViewModel();
                     pinView.ImagePath = pinView.IsEnabled ? "checked.jpeg" : "not_checked.png";
 
                     PinsList.Insert(index, pinView);
                 }
             }
         }
-
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
@@ -143,7 +133,7 @@ namespace GpsNote.ViewModels
 
                 foreach (PinModel pinModel in pinsModel)
                 {
-                    pinViewModel = pinModel.PinModelToPinViewModel();
+                    pinViewModel = pinModel.ToPinViewModel();
                     pinViewModel.ImagePath = pinModel.IsEnable ? "checked.jpeg" : "not_checked.png";
                     PinsList.Add(pinViewModel);
                 }
@@ -159,7 +149,6 @@ namespace GpsNote.ViewModels
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + nameof(AddEditPinPage));
         }
-
 
         private async void OnChangeVisibilityPinAsync(object obj)
         {
@@ -187,7 +176,6 @@ namespace GpsNote.ViewModels
                 }
             }
         }
-
 
         private async void OnDeletePinAsync(object obj)
         {
@@ -224,7 +212,6 @@ namespace GpsNote.ViewModels
             }
          }
 
-
         private async void OnUpdatePinAsync(object obj)
         {
             PinViewModel pinViewModel = obj as PinViewModel;
@@ -240,22 +227,20 @@ namespace GpsNote.ViewModels
             }
         }
 
-
-        private void OnItemTap(object obj)
+        private async void OnItemTapAsync(object obj)
         {
             _pinForDisplaying = obj as PinViewModel;
 
             if (_pinForDisplaying != null)
             {
                 _pinService.IsDisplayConcretePin = true;
-                //_unityContainer.Resolve<ICustomTabbedPageSelectedTab>().SetSelectedTab(0);
+                await NavigationService.SelectTabAsync(nameof(MapPage));
             }            
         }
 
-
         private void OnSearchPin(object obj)
         {
-            string newText = (string)obj;
+            string newText = obj as string;
 
             if (_oldPinsList == null)
                 _oldPinsList = PinsList.ToList();

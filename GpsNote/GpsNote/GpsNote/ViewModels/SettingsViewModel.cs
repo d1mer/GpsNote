@@ -1,32 +1,54 @@
-﻿using System;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
 using Prism.Commands;
 using Prism.Navigation;
 using GpsNote.Services.Authorization;
 using GpsNote.Views;
-
+using GpsNote.Services.Theme;
 
 namespace GpsNote.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        #region -- Private --
-
-        IAuthorizationService _authorizationService;
-
-        #endregion
+        private IAuthorizationService _authorizationService;
+        private IThemeService _themeService;
 
 
-        public SettingsViewModel(INavigationService navigationService, IAuthorizationService authorizationService) : base(navigationService)
+        public SettingsViewModel(INavigationService navigationService, 
+                                 IAuthorizationService authorizationService, 
+                                 IThemeService themeService) : base(navigationService)
         {
             _authorizationService = authorizationService;
+            _themeService = themeService;
         }
 
 
         #region -- Publics --
 
+        private bool isToogled;
+        public bool IsToogled
+        {
+            get => isToogled;
+            set => SetProperty(ref isToogled, value);
+        }
+
         private DelegateCommand logOutCommand;
-        public DelegateCommand LogOutCommand => logOutCommand ?? (new DelegateCommand(OnLogoutAsync));
+        public DelegateCommand LogOutCommand => logOutCommand ?? new DelegateCommand(OnLogoutAsync);
+
+        #endregion
+
+
+        #region -- Overrides --
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(IsToogled))
+            {
+                OnChangeTheme();
+            }
+        }
 
         #endregion
 
@@ -37,6 +59,21 @@ namespace GpsNote.ViewModels
         {
             _authorizationService.LogOut();
             await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{ nameof(SignInPage)} ");
+        }
+
+        private void OnChangeTheme()
+        {
+            switch (IsToogled)
+            {
+                case true:
+                    Application.Current.UserAppTheme = OSAppTheme.Dark;
+                    _themeService.Theme = (int)OSAppTheme.Dark;
+                    break;
+                case false:
+                    Application.Current.UserAppTheme = OSAppTheme.Light;
+                    _themeService.Theme = (int)OSAppTheme.Light;
+                    break;
+            }
         }
 
         #endregion

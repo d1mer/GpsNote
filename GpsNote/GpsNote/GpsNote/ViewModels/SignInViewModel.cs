@@ -12,19 +12,15 @@ namespace GpsNote.ViewModels
 {
     public class SignInViewModel : ViewModelBase
     {
-
-        #region -- Private fields --
-
-        IPageDialogService _dialogService;
-        IAuthorizationService _authorizationService;
-        IAuthenticationService _authenticationService;
-
-        #endregion
+        private IPageDialogService _dialogService;
+        private IAuthorizationService _authorizationService;
+        private IAuthenticationService _authenticationService;
 
 
-        #region -- Constructor --
-
-        public SignInViewModel(INavigationService navigationService, IPageDialogService dialogService, IAuthorizationService authorizationService, IAuthenticationService authenticationService) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, 
+                               IPageDialogService dialogService, 
+                               IAuthorizationService authorizationService, 
+                               IAuthenticationService authenticationService) : base(navigationService)
         {
             _dialogService = dialogService;
             _authorizationService = authorizationService;
@@ -32,8 +28,6 @@ namespace GpsNote.ViewModels
 
             Title = "SignIn";
         }
-
-        #endregion
 
 
         #region -- Publics -- 
@@ -52,7 +46,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-
         private bool _isSignInButtonEnabled;
         public bool IsSignInButtonEnabled
         {
@@ -60,8 +53,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignInButtonEnabled, value);
         }
 
-        public DelegateCommand OnSignUpTapCommand => new DelegateCommand(OnNavigationToSignUpAsync);
-        public DelegateCommand OnSignInButtonTapCommand => new DelegateCommand(OnSignInUserAsync, CanExecute);
+        private DelegateCommand onSignUpTapCommand;
+        public DelegateCommand OnSignUpTapCommand => onSignUpTapCommand ?? new DelegateCommand(OnNavigationToSignUpAsync);
+
+        private DelegateCommand onSignInButtonTapCommand;
+        public DelegateCommand OnSignInButtonTapCommand => onSignInButtonTapCommand ?? new DelegateCommand(OnSignInUserAsync, CanExecute);
 
         #endregion
 
@@ -94,11 +90,15 @@ namespace GpsNote.ViewModels
 
         #region Private helpers
 
-        private bool CanExecute() => IsSignInButtonEnabled;
+        private bool CanExecute()
+        {
+            return IsSignInButtonEnabled;
+        }
 
-        private async void OnNavigationToSignUpAsync() => 
+        private async void OnNavigationToSignUpAsync()
+        {
             await NavigationService.NavigateAsync(nameof(SignUpPage));
-
+        }
 
         private async void OnSignInUserAsync()
         {

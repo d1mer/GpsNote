@@ -6,7 +6,7 @@ namespace GpsNote.Extensions
 {
     public static class PinExtensions
     {
-        public static PinModel PinToPinModel(this Pin pin)
+        public static PinModel ToPinModel(this Pin pin)
         {
             PinModel pinModel = new PinModel
             {
@@ -19,37 +19,7 @@ namespace GpsNote.Extensions
             return pinModel;
         }
 
-
-        public static Pin PinViewModelToPin(this PinViewModel pinViewModel)
-        {
-            Pin pin = new Pin
-            {
-                Label = pinViewModel.Label,
-                Position = new Position(pinViewModel.Latitude, pinViewModel.Longitude),
-                IsVisible = pinViewModel.IsEnabled,
-                Address = pinViewModel.Address
-            };
-
-            return pin;
-        }
-
-
-        public static PinViewModel PinToPinViewModel(this Pin pin)
-        {
-            PinViewModel pinViewModel = new PinViewModel
-            {
-                Label = pin.Label,
-                Latitude = pin.Position.Latitude,
-                Longitude = pin.Position.Longitude,
-                IsEnabled = pin.IsVisible,
-                Address = pin.Address
-            };
-
-            return pinViewModel;
-        }
-
-
-        public static PinModel PinViewModelToPinModel(this PinViewModel pinViewModel)
+        public static PinModel ToPinModel(this PinViewModel pinViewModel)
         {
             PinModel pinModel = new PinModel
             {
@@ -65,8 +35,47 @@ namespace GpsNote.Extensions
             return pinModel;
         }
 
+        public static Pin ToPin(this PinViewModel pinViewModel)
+        {
+            Pin pin = new Pin
+            {
+                Label = pinViewModel.Label,
+                Position = new Position(pinViewModel.Latitude, pinViewModel.Longitude),
+                IsVisible = pinViewModel.IsEnabled,
+                Address = pinViewModel.Address
+            };
 
-        public static PinViewModel PinModelToPinViewModel(this PinModel pinModel)
+            return pin;
+        }
+
+        public static Pin ToPin(this PinModel pinModel)
+        {
+            Pin pin = new Pin
+            {
+                Label = pinModel.Label,
+                Position = new Position(pinModel.Latitude, pinModel.Longitude),
+                Address = pinModel.Address,
+                IsVisible = pinModel.IsEnable
+            };
+
+            return pin;
+        }
+
+        public static PinViewModel ToPinViewModel(this Pin pin)
+        {
+            PinViewModel pinViewModel = new PinViewModel
+            {
+                Label = pin.Label,
+                Latitude = pin.Position.Latitude,
+                Longitude = pin.Position.Longitude,
+                IsEnabled = pin.IsVisible,
+                Address = pin.Address
+            };
+
+            return pinViewModel;
+        }
+
+        public static PinViewModel ToPinViewModel(this PinModel pinModel)
         {
             PinViewModel pinViewModel = new PinViewModel
             {
@@ -80,20 +89,6 @@ namespace GpsNote.Extensions
             };
 
             return pinViewModel;
-        }
-
-
-        public static Pin PinModelToPin(this PinModel pinModel)
-        {
-            Pin pin = new Pin
-            {
-                Label = pinModel.Label,
-                Position = new Position(pinModel.Latitude, pinModel.Longitude),
-                Address = pinModel.Address,
-                IsVisible = pinModel.IsEnable
-            };
-
-            return pin;
-        }
+        }       
     }
 }
