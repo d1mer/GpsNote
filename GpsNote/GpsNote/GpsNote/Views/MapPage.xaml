@@ -18,7 +18,7 @@
                             CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}"
-                            ChangeMyLocationButtonsVisibility="{Binding MyLocationButtonsVisibility}">
+                            ChangeMyLocationButtonVisibility="{Binding MyLocationButtonVisibility}">
 
             <controls:CustomMap.Behaviors>
                 

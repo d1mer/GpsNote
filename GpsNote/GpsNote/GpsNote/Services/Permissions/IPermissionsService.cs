@@ -15,5 +15,6 @@ namespace GpsNote.Services.Permissions
         Task<bool> ShowRequestPermission<T>() where T : BasePermission, new();
 
         bool CheckLocationPermission();
+        void SaveLocationPermission(bool value);
     }
 }

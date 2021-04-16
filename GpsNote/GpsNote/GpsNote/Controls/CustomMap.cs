@@ -12,6 +12,8 @@ namespace GpsNote.Controls
         public CustomMap()
         {
             UiSettings.CompassEnabled = true;
+            MyLocationEnabled = false;
+            UiSettings.MyLocationButtonEnabled = false;
         }
 
 
@@ -63,19 +65,19 @@ namespace GpsNote.Controls
         }
 
 
-        public static readonly BindableProperty ChangeMyLocationButtonsVisibilityProperty =
-            BindableProperty.Create(nameof(ChangeMyLocationButtonsVisibility),
+        public static readonly BindableProperty ChangeMyLocationButtonVisibilityProperty =
+            BindableProperty.Create(nameof(ChangeMyLocationButtonVisibility),
                                     typeof(bool),
                                     typeof(CustomMap),
-                                    defaultValue: true,
+                                    defaultValue: false,
                                     defaultBindingMode: BindingMode.TwoWay,
                                     propertyChanged: ChangeMyLocationButtonsVisibilityPropertyChanged);
 
 
-        public bool ChangeMyLocationButtonsVisibility
+        public bool ChangeMyLocationButtonVisibility
         {
-            get => (bool)GetValue(ChangeMyLocationButtonsVisibilityProperty);
-            set => SetValue(ChangeMyLocationButtonsVisibilityProperty, value);
+            get => (bool)GetValue(ChangeMyLocationButtonVisibilityProperty);
+            set => SetValue(ChangeMyLocationButtonVisibilityProperty, value);
         }
 
         #endregion
@@ -128,6 +130,7 @@ namespace GpsNote.Controls
             if(map != null)
             {
                 map.UiSettings.MyLocationButtonEnabled = (bool)newValue;
+                map.MyLocationEnabled = (bool)newValue;
             }
         }
 

@@ -2,6 +2,7 @@ using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
 using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.RepositoryService;
 using GpsNote.ViewModels;
@@ -43,16 +44,6 @@ namespace GpsNote
 
             Application.Current.UserAppTheme = (OSAppTheme)ThemeService.Theme;
 
-            bool permissionLocation = PermissionsService.CheckLocationPermission();
-
-            if (!permissionLocation)
-            {
-                if(await PermissionsService.ShowRequestPermission<LocationPermission>())
-                {
-                    SettingsManager.LocationPermission = true;
-                }
-            }
-
             if (!AuthorizationService.IsAuthorized())
             {
                 await NavigationService.NavigateAsync("NavigationPage/SignInPage");
@@ -60,6 +51,16 @@ namespace GpsNote
             else
             {
                 await NavigationService.NavigateAsync(nameof(MainTabbedPage));
+            }
+
+            PermissionStatus locationPermission = await PermissionsService.CheckStatusAsync<LocationPermission>();
+
+            if (locationPermission != PermissionStatus.Granted)
+            {
+                if (await PermissionsService.ShowRequestPermission<LocationPermission>())
+                {
+                    SettingsManager.LocationPermission = true;
+                }
             }
         }
 

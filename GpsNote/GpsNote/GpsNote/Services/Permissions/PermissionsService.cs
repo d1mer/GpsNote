@@ -86,6 +86,11 @@ namespace GpsNote.Services.Permissions
             return _settingsManager.LocationPermission;
         }
 
+        public void SaveLocationPermission(bool value)
+        {
+            _settingsManager.LocationPermission = value;
+        }
+
         #endregion
     }
 }

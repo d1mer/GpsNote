@@ -33,46 +33,12 @@ namespace GpsNote.Droid
             LoadApplication(new App(new AndroidInitializer()));
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum]Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
-            //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-            //if (requestCode == RequestLocationId)
-            //{
-            //    if ((grantResults.Length == 1) && (grantResults[0] == (int)Permission.Granted))
-            //    { 
-            //        // Permissions granted - display a message.
-            //    }
-            //    else
-            //    {
-            //        // Permissions denied - display a message.
-            //    }
-
-            //}
-            //else
-            //{
-            //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            //}
         }
-
-        //protected override void OnStart()
-        //{
-        //    base.OnStart();
-
-        //    if ((int)Build.VERSION.SdkInt >= 23)
-        //    {
-        //        if (CheckSelfPermission(Manifest.Permission.AccessFineLocation) != Permission.Granted)
-        //        {
-        //            RequestPermissions(LocationPermissions, RequestLocationId);
-        //        }
-        //        else
-        //        {
-        //            // Permissions already granted - display a message.
-        //        }
-        //    }
-        //}
     }
 
     public class AndroidInitializer : IPlatformInitializer

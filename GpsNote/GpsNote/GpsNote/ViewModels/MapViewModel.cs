@@ -38,15 +38,6 @@ namespace GpsNote.ViewModels
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
-
-            if (!_permissionsService.CheckLocationPermission())
-            {
-                MyLocationButtonsVisibility = false;
-            }
-            else
-            {
-                MyLocationButtonsVisibility = true;
-            }
         }
 
 
@@ -95,7 +86,7 @@ namespace GpsNote.ViewModels
         }
 
         private bool myLocationbuttonsVisibility = true;
-        public bool MyLocationButtonsVisibility
+        public bool MyLocationButtonVisibility
         {
             get => myLocationbuttonsVisibility;
             set => SetProperty(ref myLocationbuttonsVisibility, value);
@@ -162,6 +153,15 @@ namespace GpsNote.ViewModels
             InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(_cameraSettingsService.GetInitialCameraSettings());
 
             Task.Run(() => GetPinsFromDatabaseAsync());
+
+            if (!_permissionsService.CheckLocationPermission())
+            {
+                MyLocationButtonVisibility = false;
+            }
+            else
+            {
+                MyLocationButtonVisibility = true;
+            }
         }
 
 
@@ -217,7 +217,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = true;
             IsVisibleSearchButton = false;
-            MyLocationButtonsVisibility = false;
+            MyLocationButtonVisibility = false;
         }
 
         private void OnSearchPin(object obj)
@@ -252,7 +252,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
-            MyLocationButtonsVisibility = _permissionsService.CheckLocationPermission();
+            MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
             IsSearchListVisible = false;
         }
 
@@ -260,7 +260,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
-            MyLocationButtonsVisibility = _permissionsService.CheckLocationPermission();
+            MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
         }
 
         #endregion
