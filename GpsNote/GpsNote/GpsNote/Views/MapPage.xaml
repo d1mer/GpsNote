@@ -14,12 +14,11 @@
 
         <!-- MAP -->
         <controls:CustomMap x:Name="map"
-                            MyLocationEnabled="True"
                             IsMoveCamera="{Binding IsMoveCamera}"
                             CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}"
-                            ChangeCompassMyLocationButtonsVisibility="{Binding ButtonsVisibility}">
+                            ChangeMyLocationButtonsVisibility="{Binding MyLocationButtonsVisibility}">
 
             <controls:CustomMap.Behaviors>
                 

@@ -25,6 +25,7 @@ namespace GpsNote.Constants
         #region -- Camera settings --
 
         public const int ZOOM = 10;
+        public const int INITIAL_ZOOM = 2;
 
         #endregion
     }

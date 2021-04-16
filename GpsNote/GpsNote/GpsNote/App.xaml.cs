@@ -1,6 +1,7 @@
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
+using Plugin.Permissions;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.RepositoryService;
 using GpsNote.ViewModels;
@@ -10,6 +11,7 @@ using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using GpsNote.Services.MapCameraSettingsService;
 using GpsNote.Services.Theme;
+using GpsNote.Services.Permissions;
 
 namespace GpsNote
 {
@@ -23,6 +25,12 @@ namespace GpsNote
         public IThemeService ThemeService =>
             _themeService ?? (_themeService = Container.Resolve<IThemeService>());
 
+        private IPermissionsService _permissionsService;
+        public IPermissionsService PermissionsService => _permissionsService ?? (_permissionsService = Container.Resolve<IPermissionsService>());
+
+        private ISettingsManager _settingsManager;
+        public ISettingsManager SettingsManager => _settingsManager ?? (_settingsManager = Container.Resolve<ISettingsManager>());
+
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -34,6 +42,16 @@ namespace GpsNote
             InitializeComponent();
 
             Application.Current.UserAppTheme = (OSAppTheme)ThemeService.Theme;
+
+            bool permissionLocation = PermissionsService.CheckLocationPermission();
+
+            if (!permissionLocation)
+            {
+                if(await PermissionsService.ShowRequestPermission<LocationPermission>())
+                {
+                    SettingsManager.LocationPermission = true;
+                }
+            }
 
             if (!AuthorizationService.IsAuthorized())
             {
@@ -55,6 +73,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
             containerRegistry.RegisterInstance<IMapCameraSettingsService>(Container.Resolve<MapCameraSettingsService>());
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
+            containerRegistry.RegisterInstance<IPermissionsService>(Container.Resolve<PermissionsService>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();

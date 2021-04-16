@@ -10,6 +10,7 @@
         double LastBearing { get; set; }
         double LastTilt { get; set; }
         bool ShowPin { get; set; }
+        bool LocationPermission { get; set; }
         void CleanUpAuthorizedUser();
     }
 }

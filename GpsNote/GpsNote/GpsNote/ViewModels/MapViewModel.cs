@@ -12,6 +12,7 @@ using GpsNote.Services.PinService;
 using GpsNote.Models;
 using GpsNote.Extensions;
 using GpsNote.Constants;
+using GpsNote.Services.Permissions;
 
 namespace GpsNote.ViewModels
 {
@@ -20,20 +21,32 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
         private IMapCameraSettingsService _cameraSettingsService;
+        private IPermissionsService _permissionsService;
 
 
         public MapViewModel(INavigationService navigationService, 
                             IPageDialogService dialogService, 
                             IPinService pinService, 
-                            IMapCameraSettingsService cameraSettingsService) : base(navigationService)
+                            IMapCameraSettingsService cameraSettingsService,
+                            IPermissionsService permissionsService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
             _cameraSettingsService = cameraSettingsService;
+            _permissionsService = permissionsService;
 
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
+
+            if (!_permissionsService.CheckLocationPermission())
+            {
+                MyLocationButtonsVisibility = false;
+            }
+            else
+            {
+                MyLocationButtonsVisibility = true;
+            }
         }
 
 
@@ -46,7 +59,7 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref initialCameraUpdate, value);
         }
 
-        private List<Pin> pins = new List<Pin>();
+        private List<Pin> pins;
         public List<Pin> Pins
         {
             get => pins;
@@ -81,11 +94,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref isVisibleSearchButton, value);
         }
 
-        private bool buttonsVisibility = true;
-        public bool ButtonsVisibility
+        private bool myLocationbuttonsVisibility = true;
+        public bool MyLocationButtonsVisibility
         {
-            get => buttonsVisibility;
-            set => SetProperty(ref buttonsVisibility, value);
+            get => myLocationbuttonsVisibility;
+            set => SetProperty(ref myLocationbuttonsVisibility, value);
         }
 
 
@@ -160,12 +173,12 @@ namespace GpsNote.ViewModels
 
             if (_pinService.IsDisplayConcretePin)
             {
-                if(parameters.TryGetValue<Position>(ConstantsValue.DISPLAY_PIN, out Position position))
+                if (parameters.TryGetValue<Position>(ConstantsValue.DISPLAY_PIN, out Position position))
                 {
                     MovingCameraPosition = position;
                     IsMoveCamera = true;
                 }
-   
+
                 _pinService.IsDisplayConcretePin = false;
             }
         }
@@ -185,12 +198,12 @@ namespace GpsNote.ViewModels
         {
             List<PinModel> userPins = await _pinService.GetUsersPinsAsync();
 
-            if(userPins != null)
+            if (userPins != null)
             {
                 List<Pin> pins = new List<Pin>();
                 Pin pin;
 
-                foreach(PinModel pinModel in userPins)
+                foreach (PinModel pinModel in userPins)
                 {
                     pin = pinModel.ToPin();
                     pins.Add(pin);
@@ -204,7 +217,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = true;
             IsVisibleSearchButton = false;
-            ButtonsVisibility = false;
+            MyLocationButtonsVisibility = false;
         }
 
         private void OnSearchPin(object obj)
@@ -228,7 +241,7 @@ namespace GpsNote.ViewModels
         {
             Pin pin = obj as Pin;
 
-            if(pin != null)
+            if (pin != null)
             {
                 MovingCameraPosition = pin.Position;
                 IsMoveCamera = true;
@@ -239,7 +252,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
-            ButtonsVisibility = true;
+            MyLocationButtonsVisibility = _permissionsService.CheckLocationPermission();
             IsSearchListVisible = false;
         }
 
@@ -247,7 +260,7 @@ namespace GpsNote.ViewModels
         {
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
-            ButtonsVisibility = true;
+            MyLocationButtonsVisibility = _permissionsService.CheckLocationPermission();
         }
 
         #endregion

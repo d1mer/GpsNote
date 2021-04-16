@@ -53,6 +53,12 @@ namespace GpsNote.Services.SettingsService
             set => Preferences.Set(nameof(ShowPin), value);
         }
 
+        public bool LocationPermission
+        {
+            get => Preferences.Get(nameof(LocationPermission), false);
+            set => Preferences.Set(nameof(LocationPermission), value);
+        }
+
         public void CleanUpAuthorizedUser()
         {
             AuthorizedUserID = -1;
@@ -62,6 +68,7 @@ namespace GpsNote.Services.SettingsService
             LastZoom = default(double);
             LastBearing = default(double);
             LastTilt = default(double);
+            LocationPermission = false;
         }
 
         #endregion

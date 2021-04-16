@@ -1,18 +1,17 @@
-﻿using GpsNote.Constants;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Constants;
 
 namespace GpsNote.Controls
 {
     public class CustomMap : Map
     {
-        Position _cameraMovingPosition;
+        private Position _cameraMovingPosition;
 
         public CustomMap()
         {
             UiSettings.CompassEnabled = true;
-            UiSettings.MyLocationButtonEnabled = true;
         }
 
 
@@ -64,19 +63,19 @@ namespace GpsNote.Controls
         }
 
 
-        public static readonly BindableProperty ChangeCompassMyLocationButtonsVisibilityProperty =
-            BindableProperty.Create(nameof(ChangeCompassMyLocationButtonsVisibility),
+        public static readonly BindableProperty ChangeMyLocationButtonsVisibilityProperty =
+            BindableProperty.Create(nameof(ChangeMyLocationButtonsVisibility),
                                     typeof(bool),
                                     typeof(CustomMap),
                                     defaultValue: true,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: ChangeCompassMyLocationButtonsVisibilityPropertyChanged);
+                                    propertyChanged: ChangeMyLocationButtonsVisibilityPropertyChanged);
 
 
-        public bool ChangeCompassMyLocationButtonsVisibility
+        public bool ChangeMyLocationButtonsVisibility
         {
-            get => (bool)GetValue(ChangeCompassMyLocationButtonsVisibilityProperty);
-            set => SetValue(ChangeCompassMyLocationButtonsVisibilityProperty, value);
+            get => (bool)GetValue(ChangeMyLocationButtonsVisibilityProperty);
+            set => SetValue(ChangeMyLocationButtonsVisibilityProperty, value);
         }
 
         #endregion
@@ -122,13 +121,12 @@ namespace GpsNote.Controls
         }
 
 
-        private static void ChangeCompassMyLocationButtonsVisibilityPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void ChangeMyLocationButtonsVisibilityPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = bindable as CustomMap;
 
             if(map != null)
             {
-                map.UiSettings.CompassEnabled = (bool)newValue;
                 map.UiSettings.MyLocationButtonEnabled = (bool)newValue;
             }
         }

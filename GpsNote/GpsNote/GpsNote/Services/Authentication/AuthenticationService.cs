@@ -62,6 +62,7 @@ namespace GpsNote.Services.Authentication
                     if(findUser.Password == password)
                     {
                         _settingsManager.AuthorizedUserID = findUser.Id;
+                        result = CodeUserAuthresult.Passed;
                     }
                     else
                     {

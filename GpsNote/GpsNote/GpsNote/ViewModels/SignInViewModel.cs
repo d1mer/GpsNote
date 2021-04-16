@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Prism.Services;
 using Prism.Commands;
 using Prism.Navigation;
+using Plugin.Permissions.Abstractions;
 using GpsNote.Views;
 using GpsNote.Services.Authorization;
 using GpsNote.Enums;
 using GpsNote.Constants;
 using GpsNote.Services.Authentication;
+
 
 namespace GpsNote.ViewModels
 {
