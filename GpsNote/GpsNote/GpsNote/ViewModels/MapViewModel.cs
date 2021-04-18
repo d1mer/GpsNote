@@ -139,6 +139,8 @@ namespace GpsNote.ViewModels
         private DelegateCommand<object> listItemTapCommand;
         public DelegateCommand<Object> ListItemTapCommand => listItemTapCommand ?? new DelegateCommand<object>(OnItemTap);
 
+        private DelegateCommand<object> pinClickedCommand;
+        public DelegateCommand<object> PinClickedCommand => pinClickedCommand ?? new DelegateCommand<object>(OnPinClicked);
 
         #endregion
 
@@ -255,6 +257,16 @@ namespace GpsNote.ViewModels
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
             MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
+        }
+
+        private void OnPinClicked(object obj)
+        {
+            Pin pin = obj as Pin;
+
+            if(pin != null)
+            {
+                _dialogService.DisplayAlertAsync("Pin", $"{pin.Position.Latitude} {pin.Position.Longitude}", "Ok");
+            }
         }
 
         #endregion

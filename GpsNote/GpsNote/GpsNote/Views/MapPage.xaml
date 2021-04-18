@@ -28,7 +28,11 @@
 
                 <prism:EventToCommandBehavior EventName="MapClicked"
                                               Command="{Binding MapTapCommand}" />
-                
+
+                <prism:EventToCommandBehavior EventName="PinClicked"
+                                              Command="{Binding PinClickedCommand}"
+                                              EventArgsParameterPath="Pin" />
+
             </controls:CustomMap.Behaviors>
             
         </controls:CustomMap>

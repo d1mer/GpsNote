@@ -1,9 +1,9 @@
-﻿using Foundation;
-using GpsNote.AuthHelpers;
+﻿using System;
+using UIKit;
+using Foundation;
 using Prism;
 using Prism.Ioc;
-using System;
-using UIKit;
+using GpsNote.Services.GoogleAuthentication.AuthHelpers;
 
 
 namespace GpsNote.iOS
@@ -26,6 +26,9 @@ namespace GpsNote.iOS
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyBqqk9aQg8BMyPcApsArXclgqkXNXmHf28");
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+
+            Rg.Plugins.Popup.Popup.Init();
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

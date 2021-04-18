@@ -31,6 +31,8 @@ namespace GpsNote.Droid
             Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
             global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, savedInstanceState);
 
+            Rg.Plugins.Popup.Popup.Init(this);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 
@@ -39,6 +41,11 @@ namespace GpsNote.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
     }
 
