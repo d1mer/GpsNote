@@ -9,8 +9,6 @@ namespace GpsNote.Services.PinService
 {
     public interface IPinService
     {
-        bool IsDisplayConcretePin { get; set; }
-
         Task<List<PinModel>> GetUsersPinsAsync();
 
         Task<Pin> GetNewPinFromPositionAsync(Position position);

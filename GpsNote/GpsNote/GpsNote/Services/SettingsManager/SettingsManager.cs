@@ -48,13 +48,6 @@ namespace GpsNote.Services.SettingsService
             set => Preferences.Set(nameof(LastTilt), value);
         }
 
-
-        public bool ShowPin
-        {
-            get => Preferences.Get(nameof(ShowPin), false);
-            set => Preferences.Set(nameof(ShowPin), value);
-        }
-
         public bool LocationPermission
         {
             get => Preferences.Get(nameof(LocationPermission), false);

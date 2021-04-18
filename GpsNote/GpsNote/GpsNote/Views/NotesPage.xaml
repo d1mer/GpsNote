@@ -74,17 +74,19 @@
                                     <ImageButton Source="{Binding ImagePath}"
                                                  BackgroundColor="Transparent"
                                                  Margin="10, 0, 10, 0"
-                                                 HeightRequest="15">
+                                                 HeightRequest="15"
+                                                 Command="{Binding Path=BindingContext.ImageTapCommand, 
+                                                                          Source={x:Reference pinsListView}}">
 
-                                        <ImageButton.Behaviors>
+                                        <!--<ImageButton.Behaviors>
                                             
                                             <prism:EventToCommandBehavior EventName="Clicked"
                                                                           Command="{
-                                                                          Binding Path=BindingContext.ItemTapCommand, 
+                                                                          Binding Path=BindingContext.ImageTapCommand, 
                                                                           Source={x:Reference pinsListView}}"
                                                                           EventArgsParameterPath="." />
                                             
-                                        </ImageButton.Behaviors>
+                                        </ImageButton.Behaviors>-->
 
                                     </ImageButton>
                                     

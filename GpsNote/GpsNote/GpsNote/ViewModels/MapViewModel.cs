@@ -170,15 +170,10 @@ namespace GpsNote.ViewModels
 
             Task.Run(() => GetPinsFromDatabaseAsync());
 
-            if (_pinService.IsDisplayConcretePin)
+            if (parameters.TryGetValue<Position>(Constants.DISPLAY_PIN, out Position position))
             {
-                if (parameters.TryGetValue<Position>(Constants.DISPLAY_PIN, out Position position))
-                {
-                    MovingCameraPosition = position;
-                    IsMoveCamera = true;
-                }
-
-                _pinService.IsDisplayConcretePin = false;
+                MovingCameraPosition = position;
+                IsMoveCamera = true;
             }
         }
 

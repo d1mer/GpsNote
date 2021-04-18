@@ -17,7 +17,7 @@ namespace GpsNote
 
 
         // Camera settings
-        public const int ZOOM = 10;
+        public const int ZOOM = 5;
         public const int INITIAL_ZOOM = 2;
 
 

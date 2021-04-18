@@ -18,7 +18,9 @@ namespace GpsNote.Services.PinService
         IAuthorizationService _authorizationService;
 
 
-        public PinService(IRepositoryService repositoryService, ISettingsManager settingsService, IAuthorizationService authorizationService)
+        public PinService(IRepositoryService repositoryService, 
+                          ISettingsManager settingsService, 
+                          IAuthorizationService authorizationService)
         {
             _repositoryService = repositoryService;
             _settingsService   = settingsService;
@@ -27,12 +29,6 @@ namespace GpsNote.Services.PinService
 
 
         #region -- Implement interface IPinService --
-
-        public bool IsDisplayConcretePin 
-        {
-            get => _settingsService.ShowPin;
-            set => _settingsService.ShowPin = value; 
-        }
 
         public async Task<List<PinModel>> GetUsersPinsAsync()
         {

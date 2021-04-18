@@ -9,7 +9,6 @@ using Xamarin.Forms.GoogleMaps;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
-using Prism.Navigation.TabbedPages;
 using GpsNote.Models;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
@@ -22,7 +21,6 @@ namespace GpsNote.ViewModels
     {
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
-        private PinViewModel _pinForDisplaying;
         private List<PinViewModel> _oldPinsList = null;
 
 
@@ -101,18 +99,6 @@ namespace GpsNote.ViewModels
 
                     PinsList.Insert(index, pinView);
                 }
-            }
-        }
-
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
-
-            if(_pinService.IsDisplayConcretePin == true)
-            {
-                Position position = new Position(_pinForDisplaying.Latitude, _pinForDisplaying.Longitude);
-                _pinForDisplaying = null;
-                parameters.Add(Constants.DISPLAY_PIN, position);
             }
         }
 
@@ -228,12 +214,18 @@ namespace GpsNote.ViewModels
 
         private async void OnItemTapAsync(object obj)
         {
-            _pinForDisplaying = obj as PinViewModel;
+            PinViewModel pin = obj as PinViewModel;
 
-            if (_pinForDisplaying != null)
+            if (pin != null)
             {
-                _pinService.IsDisplayConcretePin = true;
-                await NavigationService.SelectTabAsync(nameof(MapPage));
+                Position position = new Position(pin.Latitude, pin.Longitude);
+     
+                NavigationParameters parameters = new NavigationParameters
+                {
+                    { $"{Constants.DISPLAY_PIN}", position}
+                };
+               
+                await NavigationService.SelectTabAsync(nameof(MapPage), parameters);
             }            
         }
 
