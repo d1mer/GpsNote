@@ -9,7 +9,6 @@ using GpsNote.Models;
 using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
-using GpsNote.Constants;
 
 
 
@@ -110,7 +109,7 @@ namespace GpsNote.ViewModels
                 };
                 
                 InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(
-                    new CameraPosition(pin.Position, ConstantsValue.ZOOM));
+                    new CameraPosition(pin.Position, Constants.ZOOM));
 
                 editMode = true;
                 editPinViewModel = pinViewModel;
@@ -163,11 +162,11 @@ namespace GpsNote.ViewModels
 
                     if (editMode)
                     {
-                        parameters.Add(ConstantsValue.EDIT_PIN, pinModel);
+                        parameters.Add(Constants.EDIT_PIN, pinModel);
                     }
                     else
                     {
-                        parameters.Add(ConstantsValue.NEW_PIN, pinModel);
+                        parameters.Add(Constants.NEW_PIN, pinModel);
                     }
 
                     await NavigationService.GoBackAsync(parameters);

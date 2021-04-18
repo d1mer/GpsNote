@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
-using GpsNote.Constants;
+using GpsNote;
 
 namespace GpsNote.Controls
 {
@@ -106,7 +106,7 @@ namespace GpsNote.Controls
 
             if((bool)newValue == true)
             {
-                map.MoveCamera(CameraUpdateFactory.NewPositionZoom(map._cameraMovingPosition, ConstantsValue.ZOOM));
+                map.MoveCamera(CameraUpdateFactory.NewPositionZoom(map._cameraMovingPosition, Constants.ZOOM));
                 map.IsMoveCamera = false;
             }
         }

@@ -15,7 +15,6 @@ using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Extensions;
 using GpsNote.Views;
-using GpsNote.Constants;
 
 namespace GpsNote.ViewModels
 {
@@ -76,7 +75,7 @@ namespace GpsNote.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.TryGetValue<PinModel>(ConstantsValue.NEW_PIN, out PinModel newPin))
+            if (parameters.TryGetValue<PinModel>(Constants.NEW_PIN, out PinModel newPin))
             {
                 PinViewModel pinViewModel = newPin.ToPinViewModel();
                 pinViewModel.ImagePath = pinViewModel.IsEnabled ? "checked.png" : "not_checked.png";
@@ -88,7 +87,7 @@ namespace GpsNote.ViewModels
 
                 PinsList.Add(pinViewModel);
             }
-            else if (parameters.TryGetValue<PinModel>(ConstantsValue.EDIT_PIN, out PinModel editPin))
+            else if (parameters.TryGetValue<PinModel>(Constants.EDIT_PIN, out PinModel editPin))
             {
                 PinViewModel pinViewModel = PinsList.FirstOrDefault(p => p.Id == editPin.Id);
 
@@ -113,7 +112,7 @@ namespace GpsNote.ViewModels
             {
                 Position position = new Position(_pinForDisplaying.Latitude, _pinForDisplaying.Longitude);
                 _pinForDisplaying = null;
-                parameters.Add(ConstantsValue.DISPLAY_PIN, position);
+                parameters.Add(Constants.DISPLAY_PIN, position);
             }
         }
 

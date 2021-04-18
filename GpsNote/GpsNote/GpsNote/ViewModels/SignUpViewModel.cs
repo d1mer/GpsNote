@@ -4,7 +4,6 @@ using Prism.Navigation;
 using Prism.Services;
 using GpsNote.Enums;
 using GpsNote.Services.Authentication;
-using GpsNote.Constants;
 
 
 namespace GpsNote.ViewModels
@@ -172,7 +171,7 @@ namespace GpsNote.ViewModels
             {
                 NavigationParameters parameters = new NavigationParameters
                 {
-                    {ConstantsValue.NEW_USER_EMAIL, Email }
+                    {Constants.NEW_USER_EMAIL, Email }
                 };
 
                 await NavigationService.GoBackAsync(parameters);

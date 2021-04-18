@@ -13,6 +13,7 @@ using GpsNote.Services.PinService;
 using GpsNote.Services.MapCameraSettingsService;
 using GpsNote.Services.Theme;
 using GpsNote.Services.Permissions;
+using GpsNote.Services.GoogleAuthentication;
 
 namespace GpsNote
 {
@@ -75,6 +76,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IMapCameraSettingsService>(Container.Resolve<MapCameraSettingsService>());
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
             containerRegistry.RegisterInstance<IPermissionsService>(Container.Resolve<PermissionsService>());
+            containerRegistry.RegisterInstance<IGoogleAuthenticationService>(Container.Resolve<GoogleAuthenticationService>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();

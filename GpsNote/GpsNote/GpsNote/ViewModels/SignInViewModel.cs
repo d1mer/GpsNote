@@ -1,12 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using Xamarin.Auth;
 using Prism.Services;
 using Prism.Commands;
 using Prism.Navigation;
 using GpsNote.Views;
 using GpsNote.Services.Authorization;
 using GpsNote.Enums;
-using GpsNote.Constants;
 using GpsNote.Services.Authentication;
+using GpsNote.Services.GoogleAuthentication;
 
 namespace GpsNote.ViewModels
 {
@@ -15,16 +17,19 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
         private IAuthorizationService _authorizationService;
         private IAuthenticationService _authenticationService;
+        private IGoogleAuthenticationService _googleAuthenticationService;
 
 
         public SignInViewModel(INavigationService navigationService, 
                                IPageDialogService dialogService, 
                                IAuthorizationService authorizationService, 
-                               IAuthenticationService authenticationService) : base(navigationService)
+                               IAuthenticationService authenticationService,
+                               IGoogleAuthenticationService googleAuthenticationService) : base(navigationService)
         {
             _dialogService = dialogService;
             _authorizationService = authorizationService;
             _authenticationService = authenticationService;
+            _googleAuthenticationService = googleAuthenticationService;
 
             Title = "SignIn";
         }
@@ -59,6 +64,9 @@ namespace GpsNote.ViewModels
         private DelegateCommand onSignInButtonTapCommand;
         public DelegateCommand OnSignInButtonTapCommand => onSignInButtonTapCommand ?? new DelegateCommand(OnSignInUserAsync, CanExecute);
 
+        private DelegateCommand onSignInGoogleButtonTapCommand;
+        public DelegateCommand OnSignInGoogleButtonTapCommand => onSignInGoogleButtonTapCommand ?? new DelegateCommand(OnSignInGoogleUser);
+
         #endregion
 
 
@@ -79,7 +87,7 @@ namespace GpsNote.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if(parameters.TryGetValue<string>(ConstantsValue.NEW_USER_EMAIL, out string email))
+            if(parameters.TryGetValue<string>(Constants.NEW_USER_EMAIL, out string email))
             {
                 Email = email;
             }
@@ -142,6 +150,11 @@ namespace GpsNote.ViewModels
                     Password = "";
                     break;
             }
+        }
+
+        private void OnSignInGoogleUser()
+        {
+            _googleAuthenticationService.SignInWithGoogle();
         }
 
         #endregion

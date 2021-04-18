@@ -6,16 +6,18 @@ namespace GpsNote.Services.SettingsService
     {
         #region -- Implement ISettings --
 
-        public int AuthorizedUserID 
+        public int AuthorizedUserID
         {
             get => Preferences.Get(nameof(AuthorizedUserID), -1);
-            set => Preferences.Set(nameof(AuthorizedUserID), value); 
+            set => Preferences.Set(nameof(AuthorizedUserID), value);
         }
+
         public bool DarkTheme 
         { 
             get => Preferences.Get(nameof(DarkTheme), false);
             set => Preferences.Set(nameof(DarkTheme), value);
         }
+
         public double LastLatitude
         {
             get => Preferences.Get(nameof(LastLatitude), default(double));

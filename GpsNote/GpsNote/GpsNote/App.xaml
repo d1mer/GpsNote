@@ -83,7 +83,7 @@
 
         <Style TargetType="Button">
             <Setter Property="TextColor"
-             Value="{AppThemeBinding Light={StaticResource LightButtonTextColor},
+             Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
                 Dark={StaticResource DarkButtonTextColor}}" />
             <Setter Property="BackgroundColor"
              Value="{AppThemeBinding Light={StaticResource LightButtonAuthBackgroundColor},

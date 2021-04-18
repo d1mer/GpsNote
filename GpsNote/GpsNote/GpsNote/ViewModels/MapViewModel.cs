@@ -11,7 +11,6 @@ using GpsNote.Services.MapCameraSettingsService;
 using GpsNote.Services.PinService;
 using GpsNote.Models;
 using GpsNote.Extensions;
-using GpsNote.Constants;
 using GpsNote.Services.Permissions;
 
 namespace GpsNote.ViewModels
@@ -173,7 +172,7 @@ namespace GpsNote.ViewModels
 
             if (_pinService.IsDisplayConcretePin)
             {
-                if (parameters.TryGetValue<Position>(ConstantsValue.DISPLAY_PIN, out Position position))
+                if (parameters.TryGetValue<Position>(Constants.DISPLAY_PIN, out Position position))
                 {
                     MovingCameraPosition = position;
                     IsMoveCamera = true;

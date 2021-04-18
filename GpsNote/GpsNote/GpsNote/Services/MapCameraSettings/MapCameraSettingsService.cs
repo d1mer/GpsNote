@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Services.SettingsService;
-using GpsNote.Constants;
+using GpsNote;
 
 namespace GpsNote.Services.MapCameraSettingsService
 {
@@ -36,7 +36,7 @@ namespace GpsNote.Services.MapCameraSettingsService
             }
             else
             {
-                cameraPosition = new CameraPosition(new Position(0, 0), ConstantsValue.INITIAL_ZOOM);
+                cameraPosition = new CameraPosition(new Position(0, 0), Constants.INITIAL_ZOOM);
             }
 
             return cameraPosition;

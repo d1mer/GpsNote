@@ -38,6 +38,17 @@
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignInButtonEnabled}"
                     Command="{Binding OnSignInButtonTapCommand}" />
+            
+            <!-- OR LABEL -->
+            <Label Text="or"
+                   Margin="0, 20, 0, 20"
+                   HorizontalOptions="Center"
+                   FontSize="Medium"/>
+            
+            <!-- GOOGLE BUTTON -->
+            <Button Text="Login with GOOGLE"
+                    BorderWidth="1"
+                    Command="{Binding OnSignInGoogleButtonTapCommand}" />
 
             <!-- ONSIGNUP LINK LABEL -->
             <Label HorizontalOptions="CenterAndExpand"
