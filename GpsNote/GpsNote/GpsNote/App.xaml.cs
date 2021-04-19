@@ -1,6 +1,7 @@
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
+using Prism.Plugin.Popups;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using GpsNote.Services.Authentication;
@@ -14,6 +15,7 @@ using GpsNote.Services.MapCameraSettingsService;
 using GpsNote.Services.Theme;
 using GpsNote.Services.Permissions;
 using GpsNote.Services.GoogleAuthentication;
+using GpsNote.Services.TimeZone;
 
 namespace GpsNote
 {
@@ -77,6 +79,8 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IThemeService>(Container.Resolve<ThemeService>());
             containerRegistry.RegisterInstance<IPermissionsService>(Container.Resolve<PermissionsService>());
             containerRegistry.RegisterInstance<IGoogleAuthenticationService>(Container.Resolve<GoogleAuthenticationService>());
+            containerRegistry.RegisterInstance<ITimeZoneService>(Container.Resolve<TimeZoneService>());
+            containerRegistry.RegisterPopupNavigationService();
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();
@@ -87,6 +91,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<NotesPage, NotesViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPinPage, AddEditPinViewModel>();
+            //containerRegistry.RegisterForNavigation<ClockPopupPage, ClockPopupViewModel>();
         }
     }
 }

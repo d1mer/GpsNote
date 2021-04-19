@@ -32,5 +32,9 @@ namespace GpsNote
         public const string IOS_REDIRECT_URL = "com.googleusercontent.apps.347199190339-e1jfkfrgdcqfcu9667aapvlb3kpm2be9:/oauth2redirect";
         public const string ANDROID_REDIRECT_URL = "com.googleusercontent.apps.347199190339-33q364490p2l7cb84l05umegsbbf47di:/oauth2redirect";
         public const string AUTHENTICATION_RESULT_OK = "OK";
+
+        // Google time zone API
+        public const string GPSNOTE_KEY = "AIzaSyBqqk9aQg8BMyPcApsArXclgqkXNXmHf28";
+        public const string BASE_URI_TIMEZONE_API = "https://maps.googleapis.com/maps/api/timezone/json?";
     }
 }

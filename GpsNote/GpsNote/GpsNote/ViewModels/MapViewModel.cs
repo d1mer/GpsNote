@@ -12,6 +12,9 @@ using GpsNote.Services.PinService;
 using GpsNote.Models;
 using GpsNote.Extensions;
 using GpsNote.Services.Permissions;
+using Rg.Plugins.Popup.Services;
+using GpsNote.Views.Clock;
+using GpsNote.Services.TimeZone;
 
 namespace GpsNote.ViewModels
 {
@@ -21,18 +24,21 @@ namespace GpsNote.ViewModels
         private IPinService        _pinService;
         private IMapCameraSettingsService _cameraSettingsService;
         private IPermissionsService _permissionsService;
+        private ITimeZoneService _timeZoneService;
 
 
         public MapViewModel(INavigationService navigationService, 
                             IPageDialogService dialogService, 
                             IPinService pinService, 
                             IMapCameraSettingsService cameraSettingsService,
-                            IPermissionsService permissionsService) : base(navigationService)
+                            IPermissionsService permissionsService,
+                            ITimeZoneService timeZoneService) : base(navigationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;
             _cameraSettingsService = cameraSettingsService;
             _permissionsService = permissionsService;
+            _timeZoneService = timeZoneService;
 
             Title = "Map";
 
@@ -140,7 +146,7 @@ namespace GpsNote.ViewModels
         public DelegateCommand<Object> ListItemTapCommand => listItemTapCommand ?? new DelegateCommand<object>(OnItemTap);
 
         private DelegateCommand<object> pinClickedCommand;
-        public DelegateCommand<object> PinClickedCommand => pinClickedCommand ?? new DelegateCommand<object>(OnPinClicked);
+        public DelegateCommand<object> PinClickedCommand => pinClickedCommand ?? new DelegateCommand<object>(OnPinClickedAsync);
 
         #endregion
 
@@ -259,13 +265,22 @@ namespace GpsNote.ViewModels
             MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
         }
 
-        private void OnPinClicked(object obj)
+        private async void OnPinClickedAsync(object obj)
         {
             Pin pin = obj as Pin;
 
             if(pin != null)
             {
-                _dialogService.DisplayAlertAsync("Pin", $"{pin.Position.Latitude} {pin.Position.Longitude}", "Ok");
+                TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
+                
+                if(timeZoneResponse.Status == "OK")
+                {
+                    await PopupNavigation.Instance.PushAsync(new ClockPopupPage());
+                }
+                else
+                {
+                    await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
+                }
             }
         }
 
