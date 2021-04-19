@@ -1,9 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+<rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:popup="http://rotorgames.com"
-             x:Class="GpsNote.Views.Clock.ClockPopupPage"
-             CloseWhenBackgroundIsClicked="False">
+             xmlns:rg="http://rotorgames.com"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             CloseWhenBackgroundIsClicked="True"
+             AndroidTalkbackAccessibilityWorkaround="True"
+             x:Class="GpsNote.Views.Clock.ClockPopupPage">
 
-                
-</popup:PopupPage>
+    <skia:SKCanvasView x:Name="canvasView"
+                       PaintSurface="CanvasView_PaintSurface" />
+
+</rg:PopupPage>

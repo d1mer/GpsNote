@@ -4,7 +4,6 @@ using Android.OS;
 using Plugin.Permissions;
 using Prism;
 using Prism.Ioc;
-using Prism.Plugin.Popups;
 
 namespace GpsNote.Droid
 {
@@ -34,6 +33,11 @@ namespace GpsNote.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
     }
 
