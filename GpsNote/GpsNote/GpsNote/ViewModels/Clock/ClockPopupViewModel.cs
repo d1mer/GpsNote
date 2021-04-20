@@ -84,8 +84,8 @@ namespace GpsNote.ViewModels.Clock
             DateTimeOffset offset = new DateTimeOffset(DateTime.Now);
             long timeStamp = offset.ToUnixTimeSeconds();
             timeStamp = timeStamp + (long)timeZoneResponse.DstOffset + (long)timeZoneResponse.RawOffset;
-
-            return UnixTimeStampToDateTime(timeStamp);
+            DateTime dt = UnixTimeStampToDateTime(timeStamp);
+            return dt;
             //TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneResponse.TimeZoneID);
             
             //DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);

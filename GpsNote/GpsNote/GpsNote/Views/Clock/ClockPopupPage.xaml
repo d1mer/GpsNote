@@ -2,14 +2,14 @@
 <rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:rg="http://rotorgames.com"
-             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             xmlns:controls="clr-namespace:GpsNote.Controls"
+              xmlns:controls="clr-namespace:GpsNote.Controls"
              CloseWhenBackgroundIsClicked="True"
              AndroidTalkbackAccessibilityWorkaround="True"
-             x:Class="GpsNote.Views.Clock.ClockPopupPage">
+             x:Class="GpsNote.Views.Clock.ClockPopupPage"
+             BackgroundColor="Transparent"
+             Padding="20, 50">
 
-    <Grid RowDefinitions="0.15*, 0.15*, 0.7*"
-          Margin="20, 110"
+    <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="White">
 
         <Grid ColumnDefinitions="0.9*, 0.1*">
@@ -18,23 +18,23 @@
             <Label Text="{Binding LabelPin}"
                    FontSize="Medium"
                    HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center"
+                   Margin="20, 0, 0, 0"/>
             
             <!-- IMAGE CLOSE POPUP -->
             <Image Source="ic_clear.png"
                    Grid.Column="1" 
-                   Margin="0, 0, 10, 0"/>
+                   Margin="0, 0, 5, 0"/>
             
         </Grid>
 
-        <Grid ColumnDefinitions="*, *"
+        <Grid ColumnDefinitions="0.4*, 0.6*"
               Grid.Row="1">
 
-            <StackLayout HorizontalOptions="Center"
+            <StackLayout HorizontalOptions="EndAndExpand"
                          Orientation="Horizontal"
-                         Spacing="2"
-                         VerticalOptions="Center"
-                         Padding="0, 0, 0, 20">
+                         Spacing="2"  
+                         Padding="0, 0, 10, 20">
                 
                 <!-- HOURS LABEl -->
                 <Label Text="{Binding Hours}"
@@ -50,20 +50,21 @@
                 <Label Text="{Binding Minutes}"
                        FontSize="Large"
                        FontAttributes="Bold"
-                       Margin="0, 0, 2, 0"/>
+                       Margin="0, 0, 5, 0"/>
 
             </StackLayout>
-
+            
+            <!-- TIMEZONEID LABEL-->
             <Label Text="{Binding TimeZoneID}" 
                    Grid.Column="1"
                    FontSize="Large"
                    FontAttributes="Bold"
-                   Margin="2, 0, 0, 0"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Start"/>
 
         </Grid>
 
-        <controls:CustomCanvas Grid.Row="2" />
+        <controls:CustomCanvas Grid.Row="2"
+                               Margin="0, 0, 0, 15"/>
 
     </Grid>
 

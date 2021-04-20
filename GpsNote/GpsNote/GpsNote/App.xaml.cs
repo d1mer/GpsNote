@@ -17,6 +17,7 @@ using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.TimeZone;
 using GpsNote.Views.Clock;
 using GpsNote.ViewModels.Clock;
+using Prism.Plugin.Popups;
 
 namespace GpsNote
 {
@@ -71,6 +72,7 @@ namespace GpsNote
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //Services
+            containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterInstance<IRepositoryService>(Container.Resolve<RepositoryService>());
             containerRegistry.RegisterInstance<ISettingsManager>(Container.Resolve<SettingsManager>());
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());

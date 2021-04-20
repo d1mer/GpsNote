@@ -8,79 +8,80 @@ namespace GpsNote.Views.Clock
 {
     public partial class ClockPopupPage : Rg.Plugins.Popup.Pages.PopupPage
     {
-        SKPaint blackFillPaint = new SKPaint
-        {
-            Style = SKPaintStyle.Fill,
-            Color = SKColors.Black
-        };
+        //SKPaint blackFillPaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Fill,
+        //    Color = SKColors.Black
+        //};
 
-        SKPaint whiteStrokePaint = new SKPaint
-        {
-            Style = SKPaintStyle.Stroke,
-            Color = SKColors.White,
-            StrokeWidth = 2,
-            StrokeCap = SKStrokeCap.Round,
-            IsAntialias = true
-        };
+        //SKPaint whiteStrokePaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Stroke,
+        //    Color = SKColors.White,
+        //    StrokeWidth = 2,
+        //    StrokeCap = SKStrokeCap.Round,
+        //    IsAntialias = true
+        //};
 
-        SKPaint whiteFillPaint = new SKPaint
-        {
-            Style = SKPaintStyle.Fill,
-            Color = SKColors.White
-        };
+        //SKPaint whiteFillPaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Fill,
+        //    Color = SKColors.White
+        //};
 
-        SKPaint greenFillPaint = new SKPaint
-        {
-            Style = SKPaintStyle.Fill,
-            Color = SKColors.PaleGreen
-        };
+        //SKPaint greenFillPaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Fill,
+        //    Color = SKColors.PaleGreen
+        //};
 
-        SKPaint blackStrokepaint = new SKPaint
-        {
-            Style = SKPaintStyle.Stroke,
-            Color = SKColors.Black,
-            StrokeWidth = 20,
-            StrokeCap = SKStrokeCap.Round
-        };
+        //SKPaint blackStrokepaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Stroke,
+        //    Color = SKColors.Black,
+        //    StrokeWidth = 20,
+        //    StrokeCap = SKStrokeCap.Round
+        //};
 
-        SKPaint grayFillPaint = new SKPaint
-        {
-            Style = SKPaintStyle.Fill,
-            Color = SKColors.Gray
-        };
+        //SKPaint grayFillPaint = new SKPaint
+        //{
+        //    Style = SKPaintStyle.Fill,
+        //    Color = SKColors.Gray
+        //};
 
 
-        SKPath catEarPath = new SKPath();
-        SKPath catEyePath = new SKPath();
-        SKPath catPupilPath = new SKPath();
-        SKPath catTailPath = new SKPath();
+        //SKPath catEarPath = new SKPath();
+        //SKPath catEyePath = new SKPath();
+        //SKPath catPupilPath = new SKPath();
+        //SKPath catTailPath = new SKPath();
 
 
         public ClockPopupPage()
         {
             InitializeComponent();
+            //BindingContext = new ClockPopupViewModel();
 
-            // make cat ear path
-            catEarPath.MoveTo(0, 0);
-            catEarPath.LineTo(0, 75);
-            catEarPath.LineTo(100, 75);
-            catEarPath.Close();
+            //// make cat ear path
+            //catEarPath.MoveTo(0, 0);
+            //catEarPath.LineTo(0, 75);
+            //catEarPath.LineTo(100, 75);
+            //catEarPath.Close();
 
-            // make cat eye path
-            catEyePath.MoveTo(0, 0);
-            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 50, 0);
-            catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 0, 0);
-            catEyePath.Close();
+            //// make cat eye path
+            //catEyePath.MoveTo(0, 0);
+            //catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 50, 0);
+            //catEyePath.ArcTo(50, 50, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 0, 0);
+            //catEyePath.Close();
 
-            // make eye pupil path
-            catPupilPath.MoveTo(25, -5);
-            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, 5);
-            catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, -5);
-            catPupilPath.Close();
+            //// make eye pupil path
+            //catPupilPath.MoveTo(25, -5);
+            //catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, 5);
+            //catPupilPath.ArcTo(6, 6, 0, SKPathArcSize.Small, SKPathDirection.Clockwise, 25, -5);
+            //catPupilPath.Close();
 
-            // make cat tail path
-            catTailPath.MoveTo(0, 100);
-            catTailPath.CubicTo(50, 200, 0, 250, -50, 200);
+            //// make cat tail path
+            //catTailPath.MoveTo(0, 100);
+            //catTailPath.CubicTo(50, 200, 0, 250, -50, 200);
 
             //Device.StartTimer(TimeSpan.FromSeconds(1f / 600), () =>
             //{
@@ -88,7 +89,7 @@ namespace GpsNote.Views.Clock
             //    return true;
             //});
         }
-
+        /*
         private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             SKSurface surface = e.Surface;
@@ -173,6 +174,6 @@ namespace GpsNote.Views.Clock
             whiteStrokePaint.StrokeWidth = 2;
             canvas.DrawLine(0, 10, 0, -80, whiteStrokePaint);
             canvas.Restore();
-        }
+        }*/
     }
 }

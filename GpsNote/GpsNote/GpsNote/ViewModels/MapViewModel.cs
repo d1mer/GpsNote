@@ -282,10 +282,7 @@ namespace GpsNote.ViewModels
                         {Constants.TUPLE, tup }
                     };
 
-                    await NavigationService.NavigateAsync(nameof(ClockPopupPage),
-                        parameter,
-                        useModalNavigation: true,
-                        animated: true);
+                    await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
                 }
                 else
                 {
