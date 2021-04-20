@@ -36,5 +36,8 @@ namespace GpsNote
         // Google time zone API
         public const string GPSNOTE_KEY = "AIzaSyBqqk9aQg8BMyPcApsArXclgqkXNXmHf28";
         public const string BASE_URI_TIMEZONE_API = "https://maps.googleapis.com/maps/api/timezone/json?";
+
+        // Popups
+        public const string TUPLE = "tuple";
     }
 }

@@ -55,16 +55,10 @@ namespace GpsNote.Views.Clock
         SKPath catPupilPath = new SKPath();
         SKPath catTailPath = new SKPath();
 
-        SKPath hourHandPath = SKPath.ParseSvgPathData(
-            "M 0 -60 C 0 -30 20 -30 5 -20 L 5 0 C 5 7.5 -5 7.5 -5 0 L -5 -20 C -20 -30 0 -30 0 -60");
-
-        SKPath minuteHandPath = SKPath.ParseSvgPathData(
-            "M 0 -80 C 0 -75 0 -70 2.5 60 L 2.5 0 C 2.5 5 -2.5 5 -2.5 0 L -2.5 -60 C 0 -70 0 -75 0 -80");
 
         public ClockPopupPage()
         {
             InitializeComponent();
-            BindingContext = new ClockPopupViewModel();
 
             // make cat ear path
             catEarPath.MoveTo(0, 0);
@@ -88,11 +82,11 @@ namespace GpsNote.Views.Clock
             catTailPath.MoveTo(0, 100);
             catTailPath.CubicTo(50, 200, 0, 250, -50, 200);
 
-            Device.StartTimer(TimeSpan.FromSeconds(1f / 600), () =>
-            {
-                canvasView.InvalidateSurface();
-                return true;
-            });
+            //Device.StartTimer(TimeSpan.FromSeconds(1f / 600), () =>
+            //{
+            //    canvasView.InvalidateSurface();
+            //    return true;
+            //});
         }
 
         private void CanvasView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)

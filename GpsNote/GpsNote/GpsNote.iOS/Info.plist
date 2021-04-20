@@ -37,6 +37,11 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>CFBundleDocumentTypes</key>
+
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs access to location.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location.</string>
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>

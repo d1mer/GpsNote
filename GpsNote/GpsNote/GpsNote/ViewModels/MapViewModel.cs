@@ -268,20 +268,30 @@ namespace GpsNote.ViewModels
         private async void OnPinClickedAsync(object obj)
         {
             Pin pin = obj as Pin;
-            await PopupNavigation.Instance.PushAsync(new ClockPopupPage());
-            //if (pin != null)
-            //{
-            //    TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
-                
-            //    if(timeZoneResponse.Status == "OK")
-            //    {
-            //        await PopupNavigation.Instance.PushAsync(new ClockPopupPage());
-            //    }
-            //    else
-            //    {
-            //        await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
-            //    }
-            //}
+            
+            if (pin != null)
+            {
+                TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
+
+                if (timeZoneResponse.Status == "OK")
+                {
+                    (Pin, TimeZoneResponse) tup = (pin, timeZoneResponse);
+
+                    NavigationParameters parameter = new NavigationParameters
+                    {
+                        {Constants.TUPLE, tup }
+                    };
+
+                    await NavigationService.NavigateAsync(nameof(ClockPopupPage),
+                        parameter,
+                        useModalNavigation: true,
+                        animated: true);
+                }
+                else
+                {
+                    await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
+                }
+            }
         }
 
         #endregion
