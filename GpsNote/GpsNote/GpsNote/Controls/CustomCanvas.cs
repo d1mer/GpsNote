@@ -5,35 +5,35 @@ using System.Text;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+using Prism.Ioc;
 using GpsNote.Services.Color;
+using Prism;
 
 namespace GpsNote.Controls
 {
     public class CustomCanvas : SKCanvasView
     {
         private IColorService _colorService;
-        private SKColor _colorLight;
-        private SKColor _colorDark;
 
-        private SKPaint grayFillPaint = new SKPaint
+        private readonly SKPaint grayFillPaint = new SKPaint
         {
             Style = SKPaintStyle.Fill,
             Color = Xamarin.Forms.Color.FromHex(Constants.GRAY_FILL_CLOCK_COLOR).ToSKColor()
         };
 
-        private SKPaint lightStrokePaint = new SKPaint
+        private readonly SKPaint lightStrokePaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
             StrokeWidth = 2
         };
 
-        private SKPaint darkStrokePaint = new SKPaint
+        private readonly SKPaint darkStrokePaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
             StrokeWidth = 2
         };
 
-        private SKPaint digitsFillPaint = new SKPaint
+        private readonly SKPaint digitsFillPaint = new SKPaint
         {
             Style = SKPaintStyle.Fill,
             Color = SKColors.Black
@@ -43,12 +43,12 @@ namespace GpsNote.Controls
         private static bool _timerAlive = false;
 
 
-        public CustomCanvas(IColorService colorService)
+        public CustomCanvas()
         {
-            _colorService = colorService;
+            SetColorService();
             lightStrokePaint.Color = _colorService.GetCurrentLightColor();
             darkStrokePaint.Color = _colorService.GetCurrentDarkColor();
-
+            
             _timerAlive = true;
             this.PaintSurface += CustomCanvas_PaintSurface;
 
@@ -61,7 +61,7 @@ namespace GpsNote.Controls
         }
 
 
-        #region -- Publics properties --
+        #region -- Public properties --
 
         public static readonly BindableProperty TimeZoneLocalTimeProperty =
             BindableProperty.Create(nameof(TimeZoneLocalTime),
@@ -109,40 +109,42 @@ namespace GpsNote.Controls
             int width = e.Info.Width;
             int height = e.Info.Height;
 
+            float radius = (width / 10f) < (height / 10f) ? width / 10f : height / 10f;
+
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(width / 200f);
 
 
-            canvas.DrawCircle(0, 0, width / 10f, grayFillPaint);
-            canvas.DrawCircle(0, 0, width / 10f + 1, lightStrokePaint);
+            canvas.DrawCircle(0, 0, radius, grayFillPaint);
+            canvas.DrawCircle(0, 0, radius + 1, lightStrokePaint);
             canvas.DrawCircle(0, 0, 2, darkStrokePaint);
 
             lightStrokePaint.StrokeWidth = 2;
 
             for (int angle = 0; angle < 360; angle += 90)
             {
-                canvas.DrawLine(2, width / 10f, 2, width / 10f - 7, lightStrokePaint);
+                canvas.DrawLine(2, radius, 2, radius - 7, lightStrokePaint);
                 canvas.RotateDegrees(90);
             }
 
 
-            canvas.DrawText("12", -8, -width / 10f + 20, digitsFillPaint);
-            canvas.DrawText("6", -2, width / 10f - 12, digitsFillPaint);
-            canvas.DrawText("9", -width / 10f + 10, 5, digitsFillPaint);
-            canvas.DrawText("3", width / 10f - 15, 3, digitsFillPaint);
+            canvas.DrawText("12", -8, -radius + 20, digitsFillPaint);
+            canvas.DrawText("6", -2, radius - 12, digitsFillPaint);
+            canvas.DrawText("9", -radius + 10, 5, digitsFillPaint);
+            canvas.DrawText("3", radius - 15, 3, digitsFillPaint);
 
             // hour hand
             canvas.Save();
             canvas.RotateDegrees(30 * _dateTime.Hour + _dateTime.Minute / 2f);
             darkStrokePaint.StrokeWidth = 3;
-            canvas.DrawLine(0, -2, 0, -40, darkStrokePaint);
+            canvas.DrawLine(0, -2, 0, -radius / 2, darkStrokePaint);
             canvas.Restore();
 
             // minute hand
             canvas.Save();
             canvas.RotateDegrees(6 * _dateTime.Minute + _dateTime.Second / 10f);
             darkStrokePaint.StrokeWidth = 2;
-            canvas.DrawLine(0, -2, 0, -50, darkStrokePaint);
+            canvas.DrawLine(0, -2, 0, -radius * 0.75f, darkStrokePaint);
             canvas.Restore();
 
             // second hand
@@ -150,7 +152,7 @@ namespace GpsNote.Controls
             float seconds = _dateTime.Second + _dateTime.Millisecond / 1000f;
             canvas.RotateDegrees(6 * seconds);
             lightStrokePaint.StrokeWidth = 1;
-            canvas.DrawLine(0, -3, 0, -65, lightStrokePaint);
+            canvas.DrawLine(0, -3, 0, -radius * 0.9f, lightStrokePaint);
             canvas.Restore();
         }
 
@@ -173,6 +175,16 @@ namespace GpsNote.Controls
             if(canvas != null)
             {
                 _timerAlive = (bool)newValue;
+            }
+        }
+
+
+        private void SetColorService()
+        {
+            if(_colorService == null)
+            {
+                App app = (App)Application.Current;
+                _colorService = app.Container.Resolve<IColorService>();
             }
         }
 

@@ -1,5 +1,6 @@
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 using Xamarin.Forms;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -17,7 +18,6 @@ using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.TimeZone;
 using GpsNote.Views.Clock;
 using GpsNote.ViewModels.Clock;
-using Prism.Plugin.Popups;
 using GpsNote.Services.Color;
 
 namespace GpsNote
