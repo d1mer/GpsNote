@@ -8,14 +8,13 @@ using SkiaSharp.Views.Forms;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Models;
 using Prism.Navigation;
+using Prism.Commands;
+using Rg.Plugins.Popup.Services;
 
 namespace GpsNote.ViewModels.Clock
 {
     public class ClockPopupViewModel : ViewModelBase
     {
-        private Pin _pin;
-        private TimeZoneResponse _timeZoneResponse;
-
         public ClockPopupViewModel(INavigationService navigationService) : base(navigationService)
         {
 
@@ -28,20 +27,6 @@ namespace GpsNote.ViewModels.Clock
         {
             get => labelPin;
             set => SetProperty(ref labelPin, value);
-        }
-
-        private string hours;
-        public string Hours 
-        {
-            get => hours;
-            set => SetProperty(ref hours, value); 
-        }
-
-        private string minutes;
-        public string Minutes
-        {
-            get => minutes;
-            set => SetProperty(ref minutes, value);
         }
 
         private DateTime timeZoneDateTime;
@@ -58,6 +43,24 @@ namespace GpsNote.ViewModels.Clock
             set => SetProperty(ref timeZoneID, value);
         }
 
+        private string timeString;
+        public string TimeString
+        {
+            get => timeString;
+            set => SetProperty(ref timeString, value);
+        }
+
+
+        private bool isTimerAlive;
+        public bool IsTimerAlive
+        {
+            get => isTimerAlive;
+            set => SetProperty(ref isTimerAlive, value);
+        }
+
+        private DelegateCommand closePopupCommand;
+        public DelegateCommand ClosePopupCommand => closePopupCommand ?? new DelegateCommand(OnClosePopupAsync);
+
         #endregion
 
         #region -- Overrides --
@@ -68,10 +71,17 @@ namespace GpsNote.ViewModels.Clock
             {
                 LabelPin = tup.Item1.Label;
                 TimeZoneDateTime = GetDateTime(tup.Item2);
-
-                Hours = TimeZoneDateTime.Hour.ToString();
-                Minutes = TimeZoneDateTime.Minute.ToString();
+                TimeString = TimeZoneDateTime.ToString("hh:mm");
                 TimeZoneID = tup.Item2.TimeZoneID;
+
+                DateTime dt = TimeZoneDateTime;
+                IsTimerAlive = true;
+                Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+                {
+                    dt = dt.AddSeconds(1);
+                    TimeString = dt.ToString("hh:mm");
+                    return IsTimerAlive;
+                });
             }
         }
 
@@ -86,21 +96,22 @@ namespace GpsNote.ViewModels.Clock
             timeStamp = timeStamp + (long)timeZoneResponse.DstOffset + (long)timeZoneResponse.RawOffset;
             DateTime dt = UnixTimeStampToDateTime(timeStamp);
             return dt;
-            //TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneResponse.TimeZoneID);
-            
-            //DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            //dtDateTime = dtDateTime.AddSeconds(timeStamp).ToLocalTime();
-
-            //DateTime dt = TimeZoneInfo.ConvertTimeFromUtc(dtDateTime, zone);
-            //return dt;
         }
 
         private DateTime UnixTimeStampToDateTime(long unixTimeStamp)
         {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);          
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);          
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             
             return dtDateTime;
+        }
+
+        private async void OnClosePopupAsync()
+        {
+            IsTimerAlive = false;
+            TimeString = null;
+            TimeZoneDateTime = default(DateTime);
+            await NavigationService.GoBackAsync();
         }
 
         #endregion

@@ -5,36 +5,32 @@ using System.Text;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+using GpsNote.Services.Color;
 
 namespace GpsNote.Controls
 {
     public class CustomCanvas : SKCanvasView
     {
+        private IColorService _colorService;
+        private SKColor _colorLight;
+        private SKColor _colorDark;
+
         private SKPaint grayFillPaint = new SKPaint
         {
             Style = SKPaintStyle.Fill,
-            Color = Xamarin.Forms.Color.FromHex("#F1F3FD").ToSKColor()
+            Color = Xamarin.Forms.Color.FromHex(Constants.GRAY_FILL_CLOCK_COLOR).ToSKColor()
         };
 
-        private SKPaint lightBlueStrokePaint = new SKPaint
+        private SKPaint lightStrokePaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
-            Color = Xamarin.Forms.Color.FromHex("#C7CDF5").ToSKColor(),
             StrokeWidth = 2
         };
 
-        private SKPaint darkBlueStrokePaint = new SKPaint
+        private SKPaint darkStrokePaint = new SKPaint
         {
             Style = SKPaintStyle.Stroke,
-            Color = Xamarin.Forms.Color.FromHex("#596EFB").ToSKColor(),
             StrokeWidth = 2
-        };
-
-        private SKPaint hourStrokePaint = new SKPaint
-        {
-            Style = SKPaintStyle.Stroke,
-            Color = Xamarin.Forms.Color.FromHex("#596EFB").ToSKColor(),
-            StrokeWidth = 3
         };
 
         private SKPaint digitsFillPaint = new SKPaint
@@ -43,17 +39,66 @@ namespace GpsNote.Controls
             Color = SKColors.Black
         };
 
-        public CustomCanvas()
+        private static DateTime _dateTime = default(DateTime);
+        private static bool _timerAlive = false;
+
+
+        public CustomCanvas(IColorService colorService)
         {
+            _colorService = colorService;
+            lightStrokePaint.Color = _colorService.GetCurrentLightColor();
+            darkStrokePaint.Color = _colorService.GetCurrentDarkColor();
+
+            _timerAlive = true;
             this.PaintSurface += CustomCanvas_PaintSurface;
 
-            Device.StartTimer(TimeSpan.FromSeconds(1f / 600), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1f / 60), () =>
             {
                 this.InvalidateSurface();
-                return true;
+                return _timerAlive;
             });
+
         }
 
+
+        #region -- Publics properties --
+
+        public static readonly BindableProperty TimeZoneLocalTimeProperty =
+            BindableProperty.Create(nameof(TimeZoneLocalTime),
+                                    typeof(DateTime),
+                                    typeof(CustomCanvas),
+                                    defaultValue: default(DateTime),
+                                    propertyChanged: TimeZoneLocalTimePropertyChanged);
+
+
+        public DateTime TimeZoneLocalTime
+        {
+            get => (DateTime)GetValue(TimeZoneLocalTimeProperty);
+            set => SetValue(TimeZoneLocalTimeProperty, value);
+        }
+
+
+        public static readonly BindableProperty TimerAliveProperty =
+            BindableProperty.Create(nameof(TimerAlive),
+                                    typeof(bool),
+                                    typeof(CustomCanvas),
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    defaultValue: false,
+                                    propertyChanged: TimerAlivePropertyChanged);
+
+
+        public bool TimerAlive
+        {
+            get => (bool)GetValue(TimerAliveProperty);
+            set => SetValue(TimerAliveProperty, value);
+        }
+
+        #endregion
+
+        
+
+
+        #region -- Private helpers --
         private void CustomCanvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
             SKSurface surface = e.Surface;
@@ -67,64 +112,70 @@ namespace GpsNote.Controls
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(width / 200f);
 
-            DateTime dateTime = DateTime.Now;
 
-            canvas.DrawCircle(0, 0, height / 10f, grayFillPaint);
-            canvas.DrawCircle(0, 0, height / 10f + 1, lightBlueStrokePaint);
-            canvas.DrawCircle(0, 0, 2, darkBlueStrokePaint);
+            canvas.DrawCircle(0, 0, width / 10f, grayFillPaint);
+            canvas.DrawCircle(0, 0, width / 10f + 1, lightStrokePaint);
+            canvas.DrawCircle(0, 0, 2, darkStrokePaint);
 
-            lightBlueStrokePaint.StrokeWidth = 2;
-            int time = 6;
+            lightStrokePaint.StrokeWidth = 2;
 
             for (int angle = 0; angle < 360; angle += 90)
             {
-                canvas.DrawLine(2, height / 10f, 2, height / 10f - 7, lightBlueStrokePaint);
-
-                if(time == 12)
-                {
-                    canvas.Save();
-                    canvas.RotateDegrees(-180);
-                    canvas.DrawText(time.ToString(), -4, height / 10f - 10, digitsFillPaint);
-                    canvas.Restore();
-                }
-                else
-                {
-                    canvas.DrawText(time.ToString(), -1, height / 10f - 10, digitsFillPaint);
-                }
-
-                if(time == 12)
-                {
-                    time = 3;
-                }
-                else
-                {
-                    time += 3;
-                }
-
+                canvas.DrawLine(2, width / 10f, 2, width / 10f - 7, lightStrokePaint);
                 canvas.RotateDegrees(90);
             }
 
+
+            canvas.DrawText("12", -8, -width / 10f + 20, digitsFillPaint);
+            canvas.DrawText("6", -2, width / 10f - 12, digitsFillPaint);
+            canvas.DrawText("9", -width / 10f + 10, 5, digitsFillPaint);
+            canvas.DrawText("3", width / 10f - 15, 3, digitsFillPaint);
+
             // hour hand
             canvas.Save();
-            canvas.RotateDegrees(30 * dateTime.Hour + dateTime.Minute / 2f);
-            darkBlueStrokePaint.StrokeWidth = 3;
-            canvas.DrawLine(0, -2, 0, -40, darkBlueStrokePaint);
+            canvas.RotateDegrees(30 * _dateTime.Hour + _dateTime.Minute / 2f);
+            darkStrokePaint.StrokeWidth = 3;
+            canvas.DrawLine(0, -2, 0, -40, darkStrokePaint);
             canvas.Restore();
 
             // minute hand
             canvas.Save();
-            canvas.RotateDegrees(6 * dateTime.Minute + dateTime.Second / 10f);
-            darkBlueStrokePaint.StrokeWidth = 2;
-            canvas.DrawLine(0, -2, 0, -50, darkBlueStrokePaint);
+            canvas.RotateDegrees(6 * _dateTime.Minute + _dateTime.Second / 10f);
+            darkStrokePaint.StrokeWidth = 2;
+            canvas.DrawLine(0, -2, 0, -50, darkStrokePaint);
             canvas.Restore();
 
             // second hand
             canvas.Save();
-            float seconds = dateTime.Second + dateTime.Millisecond / 1000f;
+            float seconds = _dateTime.Second + _dateTime.Millisecond / 1000f;
             canvas.RotateDegrees(6 * seconds);
-            lightBlueStrokePaint.StrokeWidth = 1;
-            canvas.DrawLine(0, -3, 0, -65, lightBlueStrokePaint);
+            lightStrokePaint.StrokeWidth = 1;
+            canvas.DrawLine(0, -3, 0, -65, lightStrokePaint);
             canvas.Restore();
         }
+
+
+        private static void TimeZoneLocalTimePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            _dateTime = (DateTime)newValue;
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                _dateTime = _dateTime.AddSeconds(1);
+                return _timerAlive;
+            });
+        }
+
+        private static void TimerAlivePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomCanvas canvas = bindable as CustomCanvas;
+
+            if(canvas != null)
+            {
+                _timerAlive = (bool)newValue;
+            }
+        }
+
+        #endregion
     }
 }

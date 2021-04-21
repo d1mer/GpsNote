@@ -7,7 +7,7 @@
              AndroidTalkbackAccessibilityWorkaround="True"
              x:Class="GpsNote.Views.Clock.ClockPopupPage"
              BackgroundColor="Transparent"
-             Padding="20, 50">
+             Padding="20, 65">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="White">
@@ -24,36 +24,25 @@
             <!-- IMAGE CLOSE POPUP -->
             <Image Source="ic_clear.png"
                    Grid.Column="1" 
-                   Margin="0, 0, 5, 0"/>
+                   Margin="0, 0, 5, 0">
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
             
         </Grid>
 
-        <Grid ColumnDefinitions="0.4*, 0.6*"
+        <Grid ColumnDefinitions="0.3*, 0.7*"
               Grid.Row="1">
 
-            <StackLayout HorizontalOptions="EndAndExpand"
-                         Orientation="Horizontal"
-                         Spacing="2"  
-                         Padding="0, 0, 10, 20">
-                
-                <!-- HOURS LABEl -->
-                <Label Text="{Binding Hours}"
-                        FontSize="Large"
-                        FontAttributes="Bold"
-                       VerticalOptions="Start"/>
+            <!-- TIME LABEL -->
+            <Label Text="{Binding TimeString}"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   VerticalOptions="Start"
+                   HorizontalOptions="End"/>
 
-                <Label Text=":"
-                       FontAttributes="Bold"
-                       VerticalOptions="Center"/>
-                
-                <!-- MINUTES LABEL -->
-                <Label Text="{Binding Minutes}"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       Margin="0, 0, 5, 0"/>
-
-            </StackLayout>
-            
             <!-- TIMEZONEID LABEL-->
             <Label Text="{Binding TimeZoneID}" 
                    Grid.Column="1"
@@ -64,7 +53,9 @@
         </Grid>
 
         <controls:CustomCanvas Grid.Row="2"
-                               Margin="0, 0, 0, 15"/>
+                               Margin="0, 0, 0, 15"
+                               TimeZoneLocalTime="{Binding TimeZoneDateTime}"
+                               TimerAlive="{Binding IsTimerAlive}" />
 
     </Grid>
 

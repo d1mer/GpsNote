@@ -18,6 +18,7 @@ using GpsNote.Services.TimeZone;
 using GpsNote.Views.Clock;
 using GpsNote.ViewModels.Clock;
 using Prism.Plugin.Popups;
+using GpsNote.Services.Color;
 
 namespace GpsNote
 {
@@ -83,6 +84,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IPermissionsService>(Container.Resolve<PermissionsService>());
             containerRegistry.RegisterInstance<IGoogleAuthenticationService>(Container.Resolve<GoogleAuthenticationService>());
             containerRegistry.RegisterInstance<ITimeZoneService>(Container.Resolve<TimeZoneService>());
+            containerRegistry.RegisterInstance<IColorService>(Container.Resolve<ColorService>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();

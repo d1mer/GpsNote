@@ -37,6 +37,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>CFBundleDocumentTypes</key>
+	<string>Some text</string>
 
 	<key>NSLocationUsageDescription</key>
 	<string>This app needs access to location.</string>
