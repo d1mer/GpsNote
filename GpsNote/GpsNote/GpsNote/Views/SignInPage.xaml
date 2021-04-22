@@ -1,61 +1,81 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              x:Class="GpsNote.Views.SignInPage"
              NavigationPage.HasBackButton="False">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <Image Source="ic_left_blue.png" />
-            <Label Text="{Binding Title}" />
-        </StackLayout>
+        <Grid ColumnDefinitions="0.4*, 0.6*">
+
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start">
+                
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+                    
+                </Image.GestureRecognizers>
+                
+            </Image>
+
+            <Label x:Name="title"
+                   Grid.Column="1"
+                   Text="{Binding Title}" 
+                   Style="{StaticResource navBarTitle}"/>
+
+        </Grid>
     </NavigationPage.TitleView>
 
 
-    <Grid RowDefinitions="*, 2*">
+    <Grid RowDefinitions="*, *, *, *">
 
         <StackLayout Margin="30, 50, 30, 30"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
+
+            <Label Text="Email"/>
 
             <!-- EMAIL ENTRY-->
             <Entry x:Name="email"
                    Text="{Binding Email}"
                    Placeholder="Enter email"
                    ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
+                   FontSize="Medium" >
+            </Entry>
 
-            <!-- PASSWORD ENTRY-->
+            <!-- PASSWORD ENTRY--><!--
             <Entry x:Name="password"
                    Text="{Binding Password}"
                    Placeholder="Enter password"
                    IsPassword="True" 
                    ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
+                   FontSize="Medium" />-->
             
         </StackLayout>
 
-        <StackLayout Grid.Row="1"
+        <!--<StackLayout Grid.Row="1"
                      Margin="30">
 
-            <!-- SIGNIN BUTTON -->
+            --><!-- SIGNIN BUTTON --><!--
             <Button Text="SIGNIN"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignInButtonEnabled}"
                     Command="{Binding OnSignInButtonTapCommand}" />
             
-            <!-- OR LABEL -->
+            --><!-- OR LABEL --><!--
             <Label Text="or"
                    Margin="0, 20, 0, 20"
                    HorizontalOptions="Center"
                    FontSize="Medium"/>
             
-            <!-- GOOGLE BUTTON -->
+            --><!-- GOOGLE BUTTON --><!--
             <Button Text="Login with GOOGLE"
                     BorderWidth="1"
                     Command="{Binding OnSignInGoogleButtonTapCommand}" />
 
-            <!-- ONSIGNUP LINK LABEL -->
+            --><!-- ONSIGNUP LINK LABEL --><!--
             <Label HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand">
                 
@@ -85,7 +105,7 @@
                 
             </Label>
             
-        </StackLayout>
+        </StackLayout>-->
         
     </Grid>
 

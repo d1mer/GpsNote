@@ -31,11 +31,11 @@ namespace GpsNote.ViewModels
             _authenticationService = authenticationService;
             _googleAuthenticationService = googleAuthenticationService;
 
-            Title = "SignIn";
+            Title = "Log in";
         }
 
 
-        #region -- Publics -- 
+        #region -- Public properties -- 
 
         private string _email = "";
         public string Email
@@ -66,6 +66,10 @@ namespace GpsNote.ViewModels
 
         private DelegateCommand onSignInGoogleButtonTapCommand;
         public DelegateCommand OnSignInGoogleButtonTapCommand => onSignInGoogleButtonTapCommand ?? new DelegateCommand(OnSignInGoogleUser);
+
+        private DelegateCommand backPressedCommand;
+        public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
+
 
         #endregion
 
@@ -155,6 +159,11 @@ namespace GpsNote.ViewModels
         private void OnSignInGoogleUser()
         {
             _googleAuthenticationService.SignInWithGoogle();
+        }
+
+        private void OnBackPressed()
+        {
+            NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 
         #endregion

@@ -73,5 +73,17 @@
                     Value="1" />
         </Style>
 
+        <Style x:Key="navBarTitle" TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black}, 
+                                            Dark={StaticResource Black}}"/>
+            <Setter Property="FontSize"
+                    Value="Large"/>
+            <Setter Property="FontAttributes"
+                    Value="Bold"/>
+            <Setter Property="HorizontalOptions"
+                    Value="Start" />
+        </Style>
+
     </Application.Resources>
 </prism:PrismApplication>
