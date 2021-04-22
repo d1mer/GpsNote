@@ -7,96 +7,70 @@
 
         <!-- Light colors -->
 
-        <Color x:Key="LightPageBackgroundColor">White</Color>
-        <Color x:Key="LightNavigationBarColor">#2296F3</Color>
-        <Color x:Key="LightSecondaryColor">Black</Color>
-        <Color x:Key="LightPrimaryTextColor">Black</Color>
-        <Color x:Key="LightSecondaryTextColor">WhiteSmoke</Color>
-        <Color x:Key="LightButtonTextColor">Black</Color>
-        <Color x:Key="LightFloatButtonColor">DodgerBlue</Color>
-        <Color x:Key="LightOutlineFloatButtonColor">Black</Color>
-        <Color x:Key="LightButtonAuthBackgroundColor">DarkSeaGreen</Color>
-        <Color x:Key="LightLinkTextColor">Blue</Color>
-        <Color x:Key="LightEditorBackgroundColor">#D3D3D3</Color>
-        <Color x:Key="LightPlaceholderTextColor">#B1B1B1</Color>
-        <Color x:Key="LightSearchBarTextColor">#B1B1B1</Color>
+        <Color x:Key="LightBlue">#596EFB</Color>
+        <Color x:Key="LightBlue2">#273BC6</Color>
+        <Color x:Key="LightBlue3">#192680</Color>
+        <Color x:Key="LightGrayBackground">#C7CDF5</Color>
+        <Color x:Key="LightWhiteGray">#F1F3FD</Color>
 
 
         <!-- Dark colors -->
 
-        <Color x:Key="DarkPageBackgroundColor">Black</Color>
-        <Color x:Key="DarkNavigationBarColor">#252526</Color>
-        <Color x:Key="DarkSecondaryColor">#2296F3</Color>
-        <Color x:Key="DarkPrimaryTextColor">#F0F0F0</Color>
-        <Color x:Key="DarkSecondaryTextColor">WhiteSmoke</Color>
-        <Color x:Key="DarkButtonTextColor">Black</Color>
-        <Color x:Key="DarkFloatButtonColor">#252526</Color>
-        <Color x:Key="DarkOutlineFloatButtonColor">#565656</Color>
-        <Color x:Key="DarkButtonAuthBackgroundColor">DarkSeaGreen</Color>
-        <Color x:Key="DarkLinkTextColor">#0098FF</Color>
-        <Color x:Key="DarkEditorBackgroundColor">#232323</Color>
-        <Color x:Key="DarkPlaceholderTextColor">WhiteSmoke</Color>
-        <Color x:Key="DarkSearchBarTextColor">#B1B1B1</Color>
+        <Color x:Key="DarkBlue">#7485FB</Color>
+        <Color x:Key="DarkBlue2">#5F73FA</Color>
+        <Color x:Key="DarkBlue3">#3953FE</Color>
+        <Color x:Key="DarkGrayBackground">#3D4475</Color>
+        <Color x:Key="DarkGray2">#33374E</Color>
+      
+      
+      <!-- Text and Backgrounds -->
+
+        <Color x:Key="White">#FEFEFD</Color>
+        <Color x:Key="LightGray">#D7DDE8</Color>
+        <Color x:Key="Gray">#858E9E</Color>
+        <Color x:Key="DarkGray">#3D4E61</Color>
+        <Color x:Key="Black">#1E242B</Color>
 
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor"
-                    Value="{AppThemeBinding Light={StaticResource LightNavigationBarColor}, 
-                Dark={StaticResource DarkNavigationBarColor}}"/>
-            <Setter Property="BarTextColor"
-                    Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor},
-                Dark={StaticResource DarkSecondaryTextColor}}" />
+                    Value="Transparent" />
         </Style>
 
+        
         <Style TargetType="Page">
             <Setter Property="BackgroundColor"
-                    Value="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                Dark={StaticResource DarkPageBackgroundColor}}"/>
-        </Style>
-
-        <Style TargetType="Label">
-            <Setter Property="TextColor"
-                    Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor}, 
-                Dark={StaticResource DarkPrimaryTextColor}}"/>
-        </Style>
-
-        <Style TargetType="Entry">
-            <Setter Property="PlaceholderColor"
-             Value="{AppThemeBinding Light={StaticResource LightPlaceholderTextColor},
-                Dark={StaticResource DarkPlaceholderTextColor}}" />
-            <Setter Property="TextColor"
-             Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
-                Dark={StaticResource DarkPrimaryTextColor}}" />
-        </Style>
-
-        <Style TargetType="SearchBar">
-            <Setter Property="PlaceholderColor"
-             Value="{AppThemeBinding Light={StaticResource LightPlaceholderTextColor},
-                Dark={StaticResource DarkPlaceholderTextColor}}" />
-            <Setter Property="TextColor"
-             Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
-                Dark={StaticResource DarkPrimaryTextColor}}" />
-            <Setter Property="BackgroundColor"
-                    Value="{AppThemeBinding Light={StaticResource LightSecondaryTextColor},
-                Dark={StaticResource DarkOutlineFloatButtonColor}}" />
-
+                    Value="{AppThemeBinding Light={StaticResource White}, 
+                                            Dark={StaticResource Black}}" />
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="TextColor"
-             Value="{AppThemeBinding Light={StaticResource LightPrimaryTextColor},
-                Dark={StaticResource DarkButtonTextColor}}" />
-            <Setter Property="BackgroundColor"
-             Value="{AppThemeBinding Light={StaticResource LightButtonAuthBackgroundColor},
-                Dark={StaticResource DarkButtonAuthBackgroundColor}}" />
-            <Setter Property="BorderColor"
-             Value="{AppThemeBinding Light={StaticResource LightOutlineFloatButtonColor},
-                Dark={StaticResource DarkOutlineFloatButtonColor}}" />
+            <Setter Property="TextTransform"
+                    Value="None"/>
+            <Setter Property="FontSize"
+                    Value="Medium" />
         </Style>
 
-        <Style TargetType="Span">
+        <Style x:Key="mainButton1" TargetType="Button">
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue}, 
+                                            Dark={StaticResource LightBlue}}"/>
             <Setter Property="TextColor"
-             Value="{AppThemeBinding Light={StaticResource LightLinkTextColor},
-                Dark={StaticResource DarkLinkTextColor}}" />
+                    Value="{AppThemeBinding Light={StaticResource White},
+                                            Dark={StaticResource White}}" />
+        </Style>
+
+        <Style x:Key="mainButton2" TargetType="Button">
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource White}, 
+                                            Dark={StaticResource White}}"/>
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue},
+                                            Dark={StaticResource LightBlue}}" />
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue},
+                                            Dark={StaticResource LightBlue}}" />
+            <Setter Property="BorderWidth"
+                    Value="1" />
         </Style>
 
     </Application.Resources>

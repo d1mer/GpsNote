@@ -4,9 +4,11 @@
              x:Class="GpsNote.Views.SettingsPage"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="Settings"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                                               Dark={StaticResource DarkPageBackgroundColor}}">
+             Title="Settings">
+
+    <!--BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
+                                               Dark={StaticResource DarkPageBackgroundColor}}"-->
+    
 
     <Grid RowDefinitions="*, *, 4*"
           Margin="20, 30, 0, 0">

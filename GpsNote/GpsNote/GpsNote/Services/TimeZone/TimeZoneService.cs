@@ -1,9 +1,7 @@
 ﻿using GpsNote.Models;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms.GoogleMaps;
@@ -35,7 +33,8 @@ namespace GpsNote.Services.TimeZone
                     HttpContent content = response.Content;
                     var json = await content.ReadAsStringAsync();
 
-                    timeZoneResponse = JsonSerializer.Deserialize<TimeZoneResponse>(json);
+                    timeZoneResponse = System.Text.Json.JsonSerializer.Deserialize<TimeZoneResponse>(json);
+                    //timeZoneResponse = JsonConvert.DeserializeObject<TimeZoneResponse>(json);
                 }
             }
 

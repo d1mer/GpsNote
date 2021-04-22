@@ -4,10 +4,10 @@
             xmlns:local="clr-namespace:GpsNote.Views"
             xmlns:behaviors="clr-namespace:GpsNote.Behaviors"
             xmlns:prism="http://prismlibrary.com"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
             prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="GpsNote.Views.MainTabbedPage"
-            BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                                              Dark={StaticResource DarkPageBackgroundColor}}">
+            x:Class="GpsNote.Views.MainTabbedPage">
 
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />

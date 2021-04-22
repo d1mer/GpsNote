@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.SignInPage"
-             Title ="{Binding Title}"
-              BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                                                Dark={StaticResource DarkPageBackgroundColor}}">
+             NavigationPage.HasBackButton="False">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <Image Source="ic_left_blue.png" />
+            <Label Text="{Binding Title}" />
+        </StackLayout>
+    </NavigationPage.TitleView>
 
 
     <Grid RowDefinitions="*, 2*">

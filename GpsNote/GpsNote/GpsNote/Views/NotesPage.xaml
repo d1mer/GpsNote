@@ -4,9 +4,8 @@
              x:Class="GpsNote.Views.NotesPage"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Title}"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                                               Dark={StaticResource DarkPageBackgroundColor}}">
+             Title="{Binding Title}">
+
 
     <Grid RowDefinitions="0.1*, *">
 

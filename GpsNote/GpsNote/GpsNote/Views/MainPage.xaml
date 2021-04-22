@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GpsNote.Views.MainPage">
+
+    <Grid RowDefinitions="7*, 3*">
+
+        <Grid RowDefinitions="0.7*, 0.3*">
+            
+            <Image Source="pic_enter_page2x.png"
+                   VerticalOptions="EndAndExpand"/>
+        
+            <Label Grid.Row="1"
+               Text="MapNotepad"
+               FontSize="30"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               FontAttributes="Bold"
+               TextColor="{StaticResource LightBlue}"/>
+        </Grid>
+
+        <StackLayout Grid.Row="1"
+                     VerticalOptions="End"
+                     Padding="20"
+                     Spacing="20">
+
+            <Button Text="Log in"
+                    Style="{StaticResource mainButton1}"
+                    Command="{Binding SignInTapCommand}"/>
+
+            <Button Text="Create account"
+                    Style="{StaticResource mainButton2}"
+                    Command="{Binding SignUpTapCommand}"/>
+
+        </StackLayout>
+    </Grid>
+    
+</ContentPage>
+   

@@ -5,9 +5,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:controls="clr-namespace:GpsNote.Controls"
-             Title="{Binding Title}"
-             BackgroundColor="{AppThemeBinding Light={StaticResource LightPageBackgroundColor}, 
-                                               Dark={StaticResource DarkPageBackgroundColor}}">
+             Title="{Binding Title}">
 
 
     <Grid RowDefinitions="*">

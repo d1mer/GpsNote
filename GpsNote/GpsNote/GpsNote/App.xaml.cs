@@ -52,7 +52,7 @@ namespace GpsNote
 
             if (!AuthorizationService.IsAuthorized())
             {
-                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+                await NavigationService.NavigateAsync(nameof(MainPage));
             }
             else
             {
@@ -96,6 +96,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPinPage, AddEditPinViewModel>();
             containerRegistry.RegisterForNavigation<ClockPopupPage, ClockPopupViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
     }
 }
