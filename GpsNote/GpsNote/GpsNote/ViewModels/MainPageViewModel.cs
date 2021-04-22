@@ -1,4 +1,5 @@
-﻿using GpsNote.Views;
+﻿using GpsNote.Services.Localization;
+using GpsNote.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
@@ -10,7 +11,7 @@ namespace GpsNote.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService, ILocalizationService localizationService) : base(navigationService, localizationService)
         {
 
         }

@@ -14,6 +14,7 @@ using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Extensions;
 using GpsNote.Views;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -24,9 +25,10 @@ namespace GpsNote.ViewModels
         private List<PinViewModel> _oldPinsList = null;
 
 
-        public NotesViewModel(INavigationService navigationService, 
+        public NotesViewModel(INavigationService navigationService,
+                              ILocalizationService localizationService,
                               IPinService pinService, 
-                              IPageDialogService dialogService) : base(navigationService)
+                              IPageDialogService dialogService) : base(navigationService, localizationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;

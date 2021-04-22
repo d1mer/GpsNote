@@ -60,6 +60,12 @@ namespace GpsNote.Services.SettingsService
             set => Preferences.Set(nameof(CurrentClockColor), value);
         }
 
+        public string Lang 
+        {
+            get => Preferences.Get(nameof(Lang), string.Empty);
+            set => Preferences.Set(nameof(Lang), value);
+        }
+
         public void CleanUpAuthorizedUser()
         {
             AuthorizedUserID = -1;

@@ -10,12 +10,13 @@ using GpsNote.Models;
 using Prism.Navigation;
 using Prism.Commands;
 using Rg.Plugins.Popup.Services;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels.Clock
 {
     public class ClockPopupViewModel : ViewModelBase
     {
-        public ClockPopupViewModel(INavigationService navigationService) : base(navigationService)
+        public ClockPopupViewModel(INavigationService navigationService, ILocalizationService localizationService) : base(navigationService, localizationService)
         {
 
         }

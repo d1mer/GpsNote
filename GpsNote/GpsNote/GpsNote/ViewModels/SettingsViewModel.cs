@@ -5,6 +5,7 @@ using Prism.Navigation;
 using GpsNote.Services.Authorization;
 using GpsNote.Views;
 using GpsNote.Services.Theme;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -14,9 +15,10 @@ namespace GpsNote.ViewModels
         private IThemeService _themeService;
 
 
-        public SettingsViewModel(INavigationService navigationService, 
+        public SettingsViewModel(INavigationService navigationService,
+                                 ILocalizationService localizationService,
                                  IAuthorizationService authorizationService, 
-                                 IThemeService themeService) : base(navigationService)
+                                 IThemeService themeService) : base(navigationService, localizationService)
         {
             _authorizationService = authorizationService;
             _themeService = themeService;
@@ -58,7 +60,7 @@ namespace GpsNote.ViewModels
         private async void OnLogoutAsync()
         {
             _authorizationService.LogOut();
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{ nameof(SignInPage)} ");
+            await NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 
         private void OnChangeTheme()

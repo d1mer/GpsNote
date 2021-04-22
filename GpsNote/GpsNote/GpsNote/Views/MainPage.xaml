@@ -24,11 +24,11 @@
                      Padding="20"
                      Spacing="20">
 
-            <Button Text="Log in"
+            <Button Text="{Binding Resource[LoginText]}"
                     Style="{StaticResource mainButton1}"
                     Command="{Binding SignInTapCommand}"/>
 
-            <Button Text="Create account"
+            <Button Text="{Binding Resource[CreateAccountText]}"
                     Style="{StaticResource mainButton2}"
                     Command="{Binding SignUpTapCommand}"/>
 

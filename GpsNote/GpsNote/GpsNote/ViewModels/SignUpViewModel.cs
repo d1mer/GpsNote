@@ -4,7 +4,7 @@ using Prism.Navigation;
 using Prism.Services;
 using GpsNote.Enums;
 using GpsNote.Services.Authentication;
-
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -14,9 +14,10 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
 
 
-        public SignUpViewModel(INavigationService navigationService, 
+        public SignUpViewModel(INavigationService navigationService,
+                               ILocalizationService localizationService,
                                IPageDialogService dialogService, 
-                               IAuthenticationService registration) : base(navigationService)
+                               IAuthenticationService registration) : base(navigationService, localizationService)
         {
             _authenticationService = registration;
             _dialogService = dialogService;

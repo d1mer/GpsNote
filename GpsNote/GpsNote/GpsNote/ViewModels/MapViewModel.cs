@@ -12,9 +12,9 @@ using GpsNote.Services.PinService;
 using GpsNote.Models;
 using GpsNote.Extensions;
 using GpsNote.Services.Permissions;
-using Rg.Plugins.Popup.Services;
 using GpsNote.Views.Clock;
 using GpsNote.Services.TimeZone;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -27,12 +27,13 @@ namespace GpsNote.ViewModels
         private ITimeZoneService _timeZoneService;
 
 
-        public MapViewModel(INavigationService navigationService, 
+        public MapViewModel(INavigationService navigationService,
+                            ILocalizationService localizationService,
                             IPageDialogService dialogService, 
                             IPinService pinService, 
                             IMapCameraSettingsService cameraSettingsService,
                             IPermissionsService permissionsService,
-                            ITimeZoneService timeZoneService) : base(navigationService)
+                            ITimeZoneService timeZoneService) : base(navigationService, localizationService)
         {
             _dialogService = dialogService;
             _pinService = pinService;

@@ -22,14 +22,14 @@ namespace GpsNote.Resource {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
+    internal class LangResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal LangResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace GpsNote.Resource {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GpsNote.Resource.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GpsNote.Resource.LangResource", typeof(LangResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -106,6 +106,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create account.
+        /// </summary>
+        internal static string CreateAccountText {
+            get {
+                return ResourceManager.GetString("CreateAccountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dark Color Theme.
         /// </summary>
         internal static string DarkTheme {
@@ -144,9 +153,9 @@ namespace GpsNote.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
-        internal static string DeleteContextAction {
+        internal static string DeleteText {
             get {
-                return ResourceManager.GetString("DeleteContextAction", resourceCulture);
+                return ResourceManager.GetString("DeleteText", resourceCulture);
             }
         }
         
@@ -165,6 +174,15 @@ namespace GpsNote.Resource {
         internal static string EditPinTitlePage {
             get {
                 return ResourceManager.GetString("EditPinTitlePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string EditText {
+            get {
+                return ResourceManager.GetString("EditText", resourceCulture);
             }
         }
         
@@ -210,6 +228,15 @@ namespace GpsNote.Resource {
         internal static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        internal static string LoginText {
+            get {
+                return ResourceManager.GetString("LoginText", resourceCulture);
             }
         }
         

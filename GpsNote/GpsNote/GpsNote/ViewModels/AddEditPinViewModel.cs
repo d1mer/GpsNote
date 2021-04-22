@@ -9,8 +9,7 @@ using GpsNote.Models;
 using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
-
-
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -24,9 +23,10 @@ namespace GpsNote.ViewModels
 
 
         public AddEditPinViewModel(INavigationService navigationService,
+                                   ILocalizationService localizationService,
                                    IPageDialogService dialogService,
                                    IPinService pinService,
-                                   IAuthorizationService authorizeService) : base(navigationService)
+                                   IAuthorizationService authorizeService) : base(navigationService,        localizationService)
         {
             _pinService = pinService;
             _dialogService = dialogService;

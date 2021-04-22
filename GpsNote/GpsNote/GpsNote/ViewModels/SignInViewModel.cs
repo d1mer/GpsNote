@@ -9,6 +9,7 @@ using GpsNote.Services.Authorization;
 using GpsNote.Enums;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.GoogleAuthentication;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
@@ -20,11 +21,12 @@ namespace GpsNote.ViewModels
         private IGoogleAuthenticationService _googleAuthenticationService;
 
 
-        public SignInViewModel(INavigationService navigationService, 
+        public SignInViewModel(INavigationService navigationService,
+                               ILocalizationService localizationService,
                                IPageDialogService dialogService, 
                                IAuthorizationService authorizationService, 
                                IAuthenticationService authenticationService,
-                               IGoogleAuthenticationService googleAuthenticationService) : base(navigationService)
+                               IGoogleAuthenticationService googleAuthenticationService) : base(navigationService, localizationService)
         {
             _dialogService = dialogService;
             _authorizationService = authorizationService;

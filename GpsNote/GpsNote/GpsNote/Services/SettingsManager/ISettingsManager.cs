@@ -10,6 +10,7 @@
         double LastBearing { get; set; }
         double LastTilt { get; set; }
         bool LocationPermission { get; set; }
+        string Lang { get; set; }
 
         int CurrentClockColor { get; set; }
         void CleanUpAuthorizedUser();

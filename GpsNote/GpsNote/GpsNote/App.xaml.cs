@@ -19,6 +19,7 @@ using GpsNote.Services.TimeZone;
 using GpsNote.Views.Clock;
 using GpsNote.ViewModels.Clock;
 using GpsNote.Services.Color;
+using GpsNote.Services.Localization;
 
 namespace GpsNote
 {
@@ -85,6 +86,7 @@ namespace GpsNote
             containerRegistry.RegisterInstance<IGoogleAuthenticationService>(Container.Resolve<GoogleAuthenticationService>());
             containerRegistry.RegisterInstance<ITimeZoneService>(Container.Resolve<TimeZoneService>());
             containerRegistry.RegisterInstance<IColorService>(Container.Resolve<ColorService>());
+            containerRegistry.RegisterInstance<ILocalizationService>(Container.Resolve<LocalizationService>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();
