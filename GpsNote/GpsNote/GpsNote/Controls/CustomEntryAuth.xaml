@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GpsNote.Controls.CustomEntryAuth">
+
+    <StackLayout>
+
+        <Frame x:Name="frame">
+
+            <Grid ColumnDefinitions="0.9*, 0.1*">
+
+                <Entry x:Name="entry"
+                       VerticalOptions="End"/>
+
+                <Image Grid.Column="1"
+                       Source="ic_clear.png"
+                       HorizontalOptions="Center"
+                       Margin="0, 0, 10, 0"/>
+
+            </Grid>
+
+        </Frame>
+
+        <Label Text="Test"
+               Margin="15, 0"
+               FontSize="Small"/>
+
+    </StackLayout>
+    
+</ContentView>

@@ -160,7 +160,7 @@
     <value>Редактировать</value>
   </data>
   <data name="EmailText" xml:space="preserve">
-    <value>Email</value>
+    <value>Почта</value>
   </data>
   <data name="EMAIL_TAKEN" xml:space="preserve">
     <value>This email is already taken. Come up with another</value>

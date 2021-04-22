@@ -31,25 +31,59 @@
         <Color x:Key="DarkGray">#3D4E61</Color>
         <Color x:Key="Black">#1E242B</Color>
 
+      
+        <!-- NAVIGATION PAGE STYLE -->
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor"
                     Value="Transparent" />
         </Style>
 
-        
+        <!-- Page -->
         <Style TargetType="Page">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource White}, 
                                             Dark={StaticResource Black}}" />
         </Style>
 
+        <!-- BUTTON -->
         <Style TargetType="Button">
             <Setter Property="TextTransform"
                     Value="None"/>
             <Setter Property="FontSize"
                     Value="Medium" />
         </Style>
+      
+        <!-- LABEL -->
+        <Style TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black},
+                                            Dark={StaticResource Black}}" />
+            <Setter Property="FontSize"
+                    Value="Medium"/>
+        </Style>
+      
+        <!-- FRAME -->
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius"
+                    Value="4"/>
+            <Setter Property="BorderColor"
+                    Value="{StaticResource LightGray}" />
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            <Setter Property="Padding"
+                    Value="0" />
+        </Style>
+      
+        <!-- ENTRY -->
+        <Style TargetType="Entry">
+            <Setter Property="Margin"
+                    Value="10, 0, 0, 0" />
+            <Setter Property="FontSize"
+                    Value="Medium" />
+        </Style>
 
+
+        <!-- NAMED STYLES -->
         <Style x:Key="mainButton1" TargetType="Button">
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource LightBlue}, 

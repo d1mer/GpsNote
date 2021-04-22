@@ -33,7 +33,7 @@ namespace GpsNote.ViewModels
             _authenticationService = authenticationService;
             _googleAuthenticationService = googleAuthenticationService;
 
-            Title = "Log in";
+            Title = Resource["LoginText"];
         }
 
 

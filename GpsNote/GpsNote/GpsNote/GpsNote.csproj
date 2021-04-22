@@ -36,6 +36,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Controls\CustomEntryAuth.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resource\LangResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LangResource.Designer.cs</LastGenOutput>

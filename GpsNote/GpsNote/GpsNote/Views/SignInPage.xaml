@@ -4,7 +4,8 @@
              xmlns:controls="clr-namespace:GpsNote.Controls"
              x:Class="GpsNote.Views.SignInPage"
              NavigationPage.HasBackButton="False">
-
+    
+    <!-- NAVIGATION BAR -->
     <NavigationPage.TitleView>
         <Grid ColumnDefinitions="0.4*, 0.6*">
 
@@ -19,7 +20,8 @@
                 </Image.GestureRecognizers>
                 
             </Image>
-
+            
+            <!-- TITLE LABEL -->
             <Label x:Name="title"
                    Grid.Column="1"
                    Text="{Binding Title}" 
@@ -29,21 +31,28 @@
     </NavigationPage.TitleView>
 
 
-    <Grid RowDefinitions="*, *, *, *">
+    <Grid RowDefinitions="*, *, *, *"
+          Margin="20, 5, 20, 0">
 
-        <StackLayout Margin="30, 50, 30, 30"
-                     Spacing="20"
-                     VerticalOptions="CenterAndExpand">
+        <StackLayout>
+            
+            <!-- EMAIL LABEL -->
+            <Label Text="{Binding Resource[EmailText]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
 
-            <Label Text="Email"/>
-
-            <!-- EMAIL ENTRY-->
-            <Entry x:Name="email"
+            
+            <!--<Entry x:Name="email"
                    Text="{Binding Email}"
                    Placeholder="Enter email"
                    ClearButtonVisibility="WhileEditing"
                    FontSize="Medium" >
-            </Entry>
+            </Entry>-->
+
+            <!-- EMAIL ENTRY-->
+            <controls:CustomEntryAuth/>
+            
+            
 
             <!-- PASSWORD ENTRY--><!--
             <Entry x:Name="password"
@@ -54,11 +63,18 @@
                    FontSize="Medium" />-->
             
         </StackLayout>
+        
 
-        <!--<StackLayout Grid.Row="1"
-                     Margin="30">
+        <StackLayout Grid.Row="1">
 
-            --><!-- SIGNIN BUTTON --><!--
+            <Label Text="{Binding Resource[EmailText]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+            <!-- PASSWORD ENTRY-->
+            <controls:CustomEntryAuth/>
+
+            <!-- SIGNIN BUTTON --><!--
             <Button Text="SIGNIN"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignInButtonEnabled}"
@@ -103,9 +119,9 @@
                     
                 </Label.FormattedText>
                 
-            </Label>
+            </Label>-->
             
-        </StackLayout>-->
+        </StackLayout>
         
     </Grid>
 

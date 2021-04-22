@@ -106,6 +106,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomEntryRenderer.cs" />
     <Compile Include="CustomUrlSchemeInterceptorActivity.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
