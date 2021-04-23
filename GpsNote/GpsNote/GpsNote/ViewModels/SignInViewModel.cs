@@ -60,6 +60,21 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignInButtonEnabled, value);
         }
 
+
+        private string errorTextEmail;
+        public string ErrorTextEmail 
+        {
+            get => errorTextEmail;
+            set => SetProperty(ref errorTextEmail, value);
+        }
+
+        private string errorTextPassword;
+        public string ErrorTextPassword 
+        {
+            get => errorTextPassword;
+            set => SetProperty(ref errorTextPassword, value);
+        }
+
         private DelegateCommand onSignUpTapCommand;
         public DelegateCommand OnSignUpTapCommand => onSignUpTapCommand ?? new DelegateCommand(OnNavigationToSignUpAsync);
 
@@ -121,39 +136,25 @@ namespace GpsNote.ViewModels
             switch (result)
             {
                 case CodeUserAuthresult.InvalidEmail:
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid email. Try again",
-                                                       "Cancel");
-                    Email = "";
-                    Password = "";
+                    ErrorTextEmail = "Invalid email.Try again";
                     break;
                 case CodeUserAuthresult.InvalidPassword:
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                       "Invalid password. Invalid password. Password must be from 8 to 16 characters, must contain at least one uppercase letter, one lowercase and one number",
-                                                       "Cancel");
-                    Password = "";
+                    ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
                     break;
                 case CodeUserAuthresult.EmailNotFound:
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                       "This email wasn't found",
-                                                       "Cancel");
-                    Password = "";
+                    ErrorTextEmail = "This email wasn't found";
                     break;
                 case CodeUserAuthresult.WrongPassword:
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                       "Wrong password",
-                                                       "Cancel");
-                    Password = "";
+                    ErrorTextPassword = "Wrong password";
                     break;
                 case CodeUserAuthresult.Passed:
                     await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
+                    ErrorTextEmail = string.Empty;
+                    ErrorTextPassword = string.Empty;
                     break;
                 default:
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                       "Result unknown",
-                                                       "Cancel");
-                    Email = "";
-                    Password = "";
+                    ErrorTextEmail = "Error";
+                    ErrorTextPassword = "Error";
                     break;
             }
         }

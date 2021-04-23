@@ -10,8 +10,8 @@ namespace GpsNote.iOS
         {
             base.OnElementPropertyChanged(sender, e);
 
-            Control.Layer.BorderWidth = 0;
-            Control.BorderStyle = UITextBorderStyle.None;
+            //Control.Layer.BorderWidth = 0;
+            //Control.BorderStyle = UITextBorderStyle.None;
         }
     }
 }

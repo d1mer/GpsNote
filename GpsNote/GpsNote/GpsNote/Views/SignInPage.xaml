@@ -31,48 +31,47 @@
     </NavigationPage.TitleView>
 
 
-    <Grid RowDefinitions="*, *, *, *"
+    <Grid
           Margin="20, 5, 20, 0">
 
-        <StackLayout>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackLayout Margin="0, 0, 0, 10">
             
             <!-- EMAIL LABEL -->
             <Label Text="{Binding Resource[EmailText]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
-            
-            <!--<Entry x:Name="email"
-                   Text="{Binding Email}"
-                   Placeholder="Enter email"
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" >
-            </Entry>-->
 
             <!-- EMAIL ENTRY-->
-            <controls:CustomEntryAuth/>
-            
-            
+            <controls:CustomEntryAuth ImageSource="ic_clear.png"
+                                      TextEntry="{Binding Email}"
+                                      ErrorText="{Binding ErrorTextEmail}"
+                                      PlaceholderText="Enter email"/>
 
-            <!-- PASSWORD ENTRY--><!--
-            <Entry x:Name="password"
-                   Text="{Binding Password}"
-                   Placeholder="Enter password"
-                   IsPassword="True" 
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />-->
             
         </StackLayout>
         
 
-        <StackLayout Grid.Row="1">
+        <StackLayout Grid.Row="1"
+                     Margin="0, 0, 0, 15">
 
-            <Label Text="{Binding Resource[EmailText]}"
+            <Label Text="{Binding Resource[PasswordText]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
             <!-- PASSWORD ENTRY-->
-            <controls:CustomEntryAuth/>
+            <controls:CustomEntryAuth
+                      ImageSource="ic_eye.png"
+                      TextEntry="{Binding Password}"
+                      ErrorText="{Binding ErrorTextPassword}"
+                      PlaceholderText="Enter password"/>
 
             <!-- SIGNIN BUTTON --><!--
             <Button Text="SIGNIN"
@@ -123,6 +122,58 @@
             
         </StackLayout>
         
+        <!-- LOGIN BUTTON -->
+        <Button Grid.Row="2"
+                Text="{Binding Resource[LoginText]}"
+                Style="{StaticResource mainButton1}"
+                IsEnabled="{Binding IsSignInButtonEnabled}"
+                Command="{Binding OnSignInButtonTapCommand}"
+                VerticalOptions="Center"
+                Margin="0, 0, 0, 15"/>
+
+        <StackLayout Grid.Row="3"
+                     VerticalOptions="Start"
+                     Spacing="20">
+            
+            <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
+                  Margin="0, 0, 0, 15">
+
+                <BoxView HeightRequest="1"
+                         Style="{StaticResource separator}"/>
+                
+                <!-- OR LABEL -->
+                <Label Grid.Column="1"
+                   Text="or"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+
+                <BoxView Grid.Column="2"
+                         Style="{StaticResource separator}"/>
+
+            </Grid>
+
+            <Grid Grid.Row="4"
+              ColumnDefinitions="*, *, *"
+              Margin="0, 0, 0, 50"
+              VerticalOptions="Start" >
+
+                <Button Grid.Column="0"
+                    Style="{StaticResource alternativeLoginButton}"
+                    ImageSource="ic_google.png"
+                    />
+
+                <Button Grid.Column="1"
+                    Style="{StaticResource alternativeLoginButton}"
+                    ImageSource="ic_facebook.png"/>
+
+                <Button Grid.Column="2"
+                    Style="{StaticResource alternativeLoginButton}"
+                    ImageSource="ic_apple.png" />
+
+            </Grid>
+            
+        </StackLayout>
+
     </Grid>
 
 </ContentPage>

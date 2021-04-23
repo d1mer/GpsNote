@@ -111,6 +111,8 @@ namespace GpsNote.ViewModels
 
         public async Task InitializeAsync(INavigationParameters parameters)
         {
+            try
+            {
             List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
 
             if (pinsModel.Count != 0)
@@ -124,6 +126,13 @@ namespace GpsNote.ViewModels
                     pinViewModel.ImagePath = pinModel.IsEnable ? "checked.jpeg" : "not_checked.png";
                     PinsList.Add(pinViewModel);
                 }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 

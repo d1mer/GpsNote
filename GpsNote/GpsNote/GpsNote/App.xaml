@@ -12,6 +12,7 @@
         <Color x:Key="LightBlue3">#192680</Color>
         <Color x:Key="LightGrayBackground">#C7CDF5</Color>
         <Color x:Key="LightWhiteGray">#F1F3FD</Color>
+        <Color x:Key="LightRed">#F24545</Color>
 
 
         <!-- Dark colors -->
@@ -21,6 +22,7 @@
         <Color x:Key="DarkBlue3">#3953FE</Color>
         <Color x:Key="DarkGrayBackground">#3D4475</Color>
         <Color x:Key="DarkGray2">#33374E</Color>
+        <Color x:Key="DarkRed">#FFA545F</Color>
       
       
       <!-- Text and Backgrounds -->
@@ -61,18 +63,7 @@
             <Setter Property="FontSize"
                     Value="Medium"/>
         </Style>
-      
-        <!-- FRAME -->
-        <Style TargetType="Frame">
-            <Setter Property="CornerRadius"
-                    Value="4"/>
-            <Setter Property="BorderColor"
-                    Value="{StaticResource LightGray}" />
-            <Setter Property="BackgroundColor"
-                    Value="Transparent"/>
-            <Setter Property="Padding"
-                    Value="0" />
-        </Style>
+     
       
         <!-- ENTRY -->
         <Style TargetType="Entry">
@@ -107,7 +98,25 @@
                     Value="1" />
         </Style>
 
+        <Style x:Key="alternativeLoginButton" TargetType="Button">
+            
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource Gray},
+                                            Dark={StaticResource White}}" />
+            
+            <Setter Property="BorderWidth"
+                    Value="1" />
+
+            <Setter Property="Margin"
+                    Value="3, 0" />
+            
+        </Style>
+
         <Style x:Key="navBarTitle" TargetType="Label">
+            
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource Black}, 
                                             Dark={StaticResource Black}}"/>
@@ -118,6 +127,84 @@
             <Setter Property="HorizontalOptions"
                     Value="Start" />
         </Style>
+
+        <Style x:Key="separator" TargetType="BoxView">
+            
+            <Setter Property="Color"
+                    Value="{AppThemeBinding Light={StaticResource LightGray},
+                                            Dark={StaticResource Gray}}" />
+
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+
+            <Setter Property="HeightRequest"
+                    Value="1"/>
+            
+        </Style>
+
+        <Style x:Key="errorLabel" TargetType="Label">
+            
+            <Setter Property="FontSize"
+                    Value="Small" />
+
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightRed},
+                                            Dark={StaticResource DarkRed}}" />
+
+            <Setter Property="Margin"
+                    Value="15, 0"/>
+
+            <Setter Property="IsVisible"
+                    Value="False" />
+        </Style>
+
+
+        <!-- FRAME -->
+        <Style x:Key="frameStyle" TargetType="Frame">
+            <Setter Property="CornerRadius"
+                    Value="4"/>
+            <Setter Property="BorderColor"
+                    Value="{StaticResource LightGray}" />
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            <Setter Property="Padding"
+                    Value="0" />
+        </Style>
+
+
+        <Style x:Key="frameErrorAlert" TargetType="Frame">
+            
+            <Setter Property="CornerRadius"
+                    Value="4"/>
+            
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource LightRed},
+                                            Dark={StaticResource DarkRed}}" />
+            
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            
+            <Setter Property="Padding"
+                    Value="0" />
+            
+        </Style>
+
+
+        <Style x:Key="customEntryImage" TargetType="Image">
+            
+            <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+
+            <Setter Property="Margin"
+                    Value="0, 0, 10, 0"/>
+
+            <Setter Property="IsVisible"
+                    Value="false"/>
+        </Style>
+
+
+        <!-- PLACEHOLDER -->
+        <!--<Style x:Key="placeholderText" TargetType="Label"-->
 
     </Application.Resources>
 </prism:PrismApplication>

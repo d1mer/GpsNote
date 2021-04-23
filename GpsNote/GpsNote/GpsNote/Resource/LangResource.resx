@@ -183,6 +183,9 @@
   <data name="NameText" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="OrText" xml:space="preserve">
+    <value>or</value>
+  </data>
   <data name="PasswordText" xml:space="preserve">
     <value>Password</value>
   </data>

@@ -259,6 +259,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        internal static string OrText {
+            get {
+                return ResourceManager.GetString("OrText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords mismatch. Re-enter passwords.
         /// </summary>
         internal static string PASSWORD_MISMATCH {

@@ -6,7 +6,16 @@ namespace GpsNote.Views
     {
         public MainTabbedPage()
         {
-            InitializeComponent();
+            try
+            {
+
+                InitializeComponent();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

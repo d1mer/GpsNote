@@ -60,15 +60,19 @@ namespace GpsNote
                 await NavigationService.NavigateAsync(nameof(MainTabbedPage));
             }
 
-            PermissionStatus locationPermission = await PermissionsService.CheckStatusAsync<LocationPermission>();
+            MainPage = new ContentPage();
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
 
-            if (locationPermission != PermissionStatus.Granted)
-            {
-                if (await PermissionsService.ShowRequestPermission<LocationPermission>())
-                {
-                    SettingsManager.LocationPermission = true;
-                }
-            }
+            // TODO in map page
+            //PermissionStatus locationPermission = await PermissionsService.CheckStatusAsync<LocationPermission>();
+
+            //if (locationPermission != PermissionStatus.Granted)
+            //{
+            //    if (await PermissionsService.ShowRequestPermission<LocationPermission>())
+            //    {
+            //        SettingsManager.LocationPermission = true;
+            //    }
+            //}
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
