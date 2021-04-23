@@ -15,16 +15,18 @@ using GpsNote.Services.Permissions;
 using GpsNote.Views.Clock;
 using GpsNote.Services.TimeZone;
 using GpsNote.Services.Localization;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace GpsNote.ViewModels
 {
     public class MapViewModel : ViewModelBase
     {
-        private IPageDialogService _dialogService;
-        private IPinService        _pinService;
-        private IMapCameraSettingsService _cameraSettingsService;
-        private IPermissionsService _permissionsService;
-        private ITimeZoneService _timeZoneService;
+        private readonly IPageDialogService _dialogService;
+        private readonly IPinService _pinService;
+        private readonly IMapCameraSettingsService _cameraSettingsService;
+        private readonly IPermissionsService _permissionsService;
+        private readonly ITimeZoneService _timeZoneService;
 
 
         public MapViewModel(INavigationService navigationService,
@@ -44,6 +46,8 @@ namespace GpsNote.ViewModels
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
+
+            Task.Run(() => RequestLocationPermission());
         }
 
 
@@ -288,6 +292,19 @@ namespace GpsNote.ViewModels
                 else
                 {
                     await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
+                }
+            }
+        }
+
+        private async void RequestLocationPermission()
+        {
+            PermissionStatus locationpermission = await _permissionsService.CheckStatusAsync<LocationPermission>();
+
+            if (locationpermission != PermissionStatus.Granted)
+            {
+                if (await _permissionsService.ShowRequestPermission<LocationPermission>())
+                {
+                    _permissionsService.SaveLocationPermission(true);
                 }
             }
         }
