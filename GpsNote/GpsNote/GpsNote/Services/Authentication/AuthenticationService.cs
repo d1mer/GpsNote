@@ -37,12 +37,12 @@ namespace GpsNote.Services.Authentication
             email = email.Trim();
             password = password.Trim();
 
-            if (!Validator.Validate(email, Validator.patternEmail))
+            if (!Validator.Validate(email, VerifyEntity.Email))
             {
                 resultEmail = CodeUserAuthresult.InvalidEmail;
             }
 
-            if (!Validator.Validate(password, Validator.patternPassword))
+            if (!Validator.Validate(password, VerifyEntity.Password))
             {
                 resultPassword = CodeUserAuthresult.InvalidPassword;
             }
@@ -96,17 +96,17 @@ namespace GpsNote.Services.Authentication
             password = password.Trim();
             confirmPassword = confirmPassword.Trim();
 
-            if (!Validator.Validate(name, Validator.patternName))
+            if (!Validator.Validate(name, VerifyEntity.Name))
             {
                 result = CodeUserAuthresult.InvalidName;
             }
 
-            if (!Validator.Validate(email, Validator.patternEmail))
+            if (!Validator.Validate(email, VerifyEntity.Email))
             {
                 result = CodeUserAuthresult.InvalidEmail;
             }
 
-            if (!Validator.Validate(password, Validator.patternPassword))
+            if (!Validator.Validate(password, VerifyEntity.Password))
             {
                 result = CodeUserAuthresult.InvalidPassword;
             }
