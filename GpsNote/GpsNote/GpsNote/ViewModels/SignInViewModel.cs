@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using Xamarin.Auth;
+﻿using System.ComponentModel;
 using Prism.Services;
 using Prism.Commands;
 using Prism.Navigation;
@@ -34,6 +32,9 @@ namespace GpsNote.ViewModels
             _googleAuthenticationService = googleAuthenticationService;
 
             Title = Resource["LoginText"];
+
+            ImageSource = "ic_eye_off.png";
+            ShowPassword = false;
         }
 
 
@@ -75,8 +76,34 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref errorTextPassword, value);
         }
 
-        private DelegateCommand onSignUpTapCommand;
-        public DelegateCommand OnSignUpTapCommand => onSignUpTapCommand ?? new DelegateCommand(OnNavigationToSignUpAsync);
+        private bool showPassword;
+        public bool ShowPassword
+        {
+            get => showPassword;
+            set => SetProperty(ref showPassword, value);
+        }
+
+        private string imageSource;
+        public string ImageSource
+        {
+            get => imageSource;
+            set => SetProperty(ref imageSource, value);
+        }
+
+        private bool tapPasswordImage;
+        public bool TapPasswordImage
+        {
+            get => tapPasswordImage;
+            set => SetProperty(ref tapPasswordImage, value);
+        }
+
+        private bool tapEmailImage;
+        public bool TapEmailImage
+        {
+            get => tapEmailImage;
+            set => SetProperty(ref tapEmailImage, value);
+        }
+
 
         private DelegateCommand onSignInButtonTapCommand;
         public DelegateCommand OnSignInButtonTapCommand => onSignInButtonTapCommand ?? new DelegateCommand(OnSignInUserAsync, CanExecute);
@@ -86,7 +113,6 @@ namespace GpsNote.ViewModels
 
         private DelegateCommand backPressedCommand;
         public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
-
 
         #endregion
 
@@ -101,8 +127,19 @@ namespace GpsNote.ViewModels
             {
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
                     IsSignInButtonEnabled = true;
-                else
+                else if(string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+                {
                     IsSignInButtonEnabled = false;
+                }            
+            }
+            else if(args.PropertyName == nameof(TapPasswordImage))
+            {
+                ImageSource = TapPasswordImage ? "ic_eye.png" : "ic_eye_off.png";
+                ShowPassword = TapPasswordImage;
+            }
+            else if(args.PropertyName == nameof(TapEmailImage))
+            {
+                Email = string.Empty;
             }
         }
 
@@ -124,38 +161,46 @@ namespace GpsNote.ViewModels
             return IsSignInButtonEnabled;
         }
 
-        private async void OnNavigationToSignUpAsync()
-        {
-            await NavigationService.NavigateAsync(nameof(SignUpPage));
-        }
-
         private async void OnSignInUserAsync()
         {
-            CodeUserAuthresult result = await _authenticationService.SignInAsync(Email, Password);
+            var (resultEmail, resultPassword) = 
+                await _authenticationService.SignInAsync(Email, Password);
 
-            switch (result)
+            switch (resultEmail)
             {
                 case CodeUserAuthresult.InvalidEmail:
                     ErrorTextEmail = "Invalid email.Try again";
                     break;
-                case CodeUserAuthresult.InvalidPassword:
-                    ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
-                    break;
                 case CodeUserAuthresult.EmailNotFound:
                     ErrorTextEmail = "This email wasn't found";
+                    break;
+                case CodeUserAuthresult.Passed:
+                    break;
+                default:
+                    ErrorTextEmail = "Error";
+                    break;
+            }
+
+            switch (resultPassword)
+            {
+                case CodeUserAuthresult.InvalidPassword:
+                    ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
                     break;
                 case CodeUserAuthresult.WrongPassword:
                     ErrorTextPassword = "Wrong password";
                     break;
                 case CodeUserAuthresult.Passed:
-                    await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
-                    ErrorTextEmail = string.Empty;
-                    ErrorTextPassword = string.Empty;
                     break;
                 default:
-                    ErrorTextEmail = "Error";
                     ErrorTextPassword = "Error";
                     break;
+            }
+
+            if(resultEmail == CodeUserAuthresult.Passed && resultPassword == CodeUserAuthresult.Passed)
+            {
+                await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
+                ErrorTextEmail = string.Empty;
+                ErrorTextPassword = string.Empty;
             }
         }
 

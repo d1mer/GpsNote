@@ -7,6 +7,7 @@
     
     <!-- NAVIGATION BAR -->
     <NavigationPage.TitleView>
+        
         <Grid ColumnDefinitions="0.4*, 0.6*">
 
             <!-- BACK ARROW IMAGE -->
@@ -28,17 +29,19 @@
                    Style="{StaticResource navBarTitle}"/>
 
         </Grid>
+        
     </NavigationPage.TitleView>
 
 
-    <Grid
-          Margin="20, 5, 20, 0">
+    <Grid Margin="20, 5, 20, 0">
 
         <Grid.RowDefinitions>
+            
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            
         </Grid.RowDefinitions>
 
         <StackLayout Margin="0, 0, 0, 10">
@@ -53,7 +56,8 @@
             <controls:CustomEntryAuth ImageSource="ic_clear.png"
                                       TextEntry="{Binding Email}"
                                       ErrorText="{Binding ErrorTextEmail}"
-                                      PlaceholderText="Enter email"/>
+                                      PlaceholderText="{Binding Resource[PlaceholderEnterEmail]}"
+                                      TapImage="{Binding TapEmailImage}"/>
 
             
         </StackLayout>
@@ -62,64 +66,20 @@
         <StackLayout Grid.Row="1"
                      Margin="0, 0, 0, 15">
 
+            <!-- PASSWORD LABEL -->
             <Label Text="{Binding Resource[PasswordText]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
             <!-- PASSWORD ENTRY-->
             <controls:CustomEntryAuth
-                      ImageSource="ic_eye.png"
+                      ImageSource="{Binding ImageSource}"
                       TextEntry="{Binding Password}"
                       ErrorText="{Binding ErrorTextPassword}"
-                      PlaceholderText="Enter password"/>
+                      ShowPassword="{Binding ShowPassword}"
+                      TapImage="{Binding TapPasswordImage}"
+                      PlaceholderText="{Binding Resource[PlaceholderEnterPassword]}"/>
 
-            <!-- SIGNIN BUTTON --><!--
-            <Button Text="SIGNIN"
-                    BorderWidth="1"
-                    IsEnabled="{Binding IsSignInButtonEnabled}"
-                    Command="{Binding OnSignInButtonTapCommand}" />
-            
-            --><!-- OR LABEL --><!--
-            <Label Text="or"
-                   Margin="0, 20, 0, 20"
-                   HorizontalOptions="Center"
-                   FontSize="Medium"/>
-            
-            --><!-- GOOGLE BUTTON --><!--
-            <Button Text="Login with GOOGLE"
-                    BorderWidth="1"
-                    Command="{Binding OnSignInGoogleButtonTapCommand}" />
-
-            --><!-- ONSIGNUP LINK LABEL --><!--
-            <Label HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand">
-                
-                <Label.FormattedText>
-                    
-                    <FormattedString>
-                        
-                        <FormattedString.Spans>
-                            
-                            <Span Text="SignUp" 
-                                  TextDecorations="Underline"
-                                  FontSize="Medium">
-                                
-                                <Span.GestureRecognizers>
-                                    
-                                    <TapGestureRecognizer Command="{Binding OnSignUpTapCommand}" />
-                                    
-                                </Span.GestureRecognizers>
-                                
-                            </Span>
-                            
-                        </FormattedString.Spans>
-                        
-                    </FormattedString>
-                    
-                </Label.FormattedText>
-                
-            </Label>-->
-            
         </StackLayout>
         
         <!-- LOGIN BUTTON -->
@@ -143,9 +103,9 @@
                 
                 <!-- OR LABEL -->
                 <Label Grid.Column="1"
-                   Text="or"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"/>
+                       Text="or"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
 
                 <BoxView Grid.Column="2"
                          Style="{StaticResource separator}"/>
@@ -153,22 +113,26 @@
             </Grid>
 
             <Grid Grid.Row="4"
-              ColumnDefinitions="*, *, *"
-              Margin="0, 0, 0, 50"
-              VerticalOptions="Start" >
-
+                  ColumnDefinitions="*, *, *"
+                  Margin="0, 0, 0, 50"
+                  VerticalOptions="Start" >
+                
+                <!-- GOOGLE AUTH BUTTON -->
                 <Button Grid.Column="0"
-                    Style="{StaticResource alternativeLoginButton}"
-                    ImageSource="ic_google.png"
-                    />
+                        Style="{StaticResource alternativeLoginButton}"
+                        ImageSource="ic_google.png"
+                        Command="{Binding OnSignInGoogleButtonTapCommand}" />
 
+                <!-- FACEBOOK AUTH BUTTON -->
                 <Button Grid.Column="1"
-                    Style="{StaticResource alternativeLoginButton}"
-                    ImageSource="ic_facebook.png"/>
+                        Style="{StaticResource alternativeLoginButton}"
+                        ImageSource="ic_facebook.png"/>
 
+                <!-- APPLE AUTH BUTTON -->
                 <Button Grid.Column="2"
-                    Style="{StaticResource alternativeLoginButton}"
-                    ImageSource="ic_apple.png" />
+                        ImageSource="{AppThemeBinding Light=ic_apple.png,
+                                                      Dark=ic_apple_dark.png}"
+                        Style="{StaticResource alternativeLoginButton}" />
 
             </Grid>
             

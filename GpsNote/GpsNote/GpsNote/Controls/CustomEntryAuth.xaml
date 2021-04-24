@@ -12,11 +12,20 @@
 
                 <Entry x:Name="entry"
                        VerticalOptions="End"
-                       TextChanged="Entry_TextChanged"/>
+                       TextChanged="Entry_TextChanged"
+                       Text="{Binding TextEntry}"/>
 
                 <Image x:Name="image"
                        Grid.Column="1"
-                       Style="{StaticResource customEntryImage}"/>
+                       Style="{StaticResource customEntryImage}">
+
+                    <Image.GestureRecognizers>
+
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+
+                    </Image.GestureRecognizers>
+                    
+                </Image>
                        
             </Grid>    
                        

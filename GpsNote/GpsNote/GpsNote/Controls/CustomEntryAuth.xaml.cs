@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace GpsNote.Controls
                                     typeof(CustomEntryAuth),
                                     defaultValue: string.Empty,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: OnEntryTextPropertyChanged);
+                                    propertyChanged: TextEntryPropertyChanged);
 
 
         public string TextEntry
@@ -41,7 +42,7 @@ namespace GpsNote.Controls
                                     typeof(CustomEntryAuth),
                                     defaultValue: string.Empty,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: OnErrorTextPropertyChanged);
+                                    propertyChanged: ErrorTextPropertyChanged);
 
 
         public string ErrorText
@@ -55,7 +56,7 @@ namespace GpsNote.Controls
                                     typeof(string),
                                     typeof(CustomEntryAuth),
                                     defaultValue: string.Empty,
-                                    propertyChanged: OnImageSourcePropertyChanged);
+                                    propertyChanged: ImageSourcePropertyChanged);
 
         public string ImageSource
         {
@@ -69,7 +70,7 @@ namespace GpsNote.Controls
                                     typeof(string),
                                     typeof(CustomEntryAuth),
                                     defaultValue: string.Empty,
-                                    propertyChanged: OnPlaceholderTextPropertyChanged);
+                                    propertyChanged: PlaceholderTextPropertyChanged);
 
 
         public string PlaceholderText
@@ -79,12 +80,43 @@ namespace GpsNote.Controls
         }
 
 
+        public static readonly BindableProperty ShowPasswordProperty =
+            BindableProperty.Create(nameof(ShowPassword),
+                                    typeof(bool),
+                                    typeof(CustomEntryAuth),
+                                    defaultValue: true,
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: ShowPasswordPropertyChanged);
+
+
+        public bool ShowPassword
+        {
+            get => (bool)GetValue(ShowPasswordProperty);
+            set => SetValue(ShowPasswordProperty, value);
+        }
+
+
+        public static readonly BindableProperty TapImageProperty =
+            BindableProperty.Create(nameof(TapImage),
+                                    typeof(bool),
+                                    typeof(CustomEntryAuth),
+                                    defaultValue: false,
+                                    defaultBindingMode: BindingMode.TwoWay);
+
+
+        public bool TapImage
+        {
+            get => (bool)GetValue(TapImageProperty);
+            set => SetValue(TapImageProperty, value);
+        }
+
+
         #endregion
 
 
         #region -- Private helpers --
 
-        private static void OnErrorTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void ErrorTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomEntryAuth customEntry = bindable as CustomEntryAuth;
 
@@ -96,18 +128,19 @@ namespace GpsNote.Controls
                     customEntry.errorLabel.Text = (string)newValue;
                     customEntry.frame.Style = (Xamarin.Forms.Style)App.Current.Resources["frameErrorAlert"];
                 }
-                //else
-                //{
-                //    customEntry.errorLabel.IsVisible =false;
-                //    customEntry.errorLabel.Text = string.Empty;
-                //    customEntry.frame.Style = (Xamarin.Forms.Style)App.Current.Resources["frameStyle"];
-                //}
-                
+                else
+                {
+                    customEntry.errorLabel.IsVisible = false;
+                    customEntry.errorLabel.Text = string.Empty;
+                    customEntry.frame.Style = (Xamarin.Forms.Style)App.Current.Resources["frameStyle"];
+                    customEntry.TextEntry = string.Empty;
+                }
+
             }
         }
 
 
-        private static void OnEntryTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void TextEntryPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomEntryAuth customEntry = bindable as CustomEntryAuth;
 
@@ -115,7 +148,7 @@ namespace GpsNote.Controls
         }
 
 
-        private static void OnImageSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void ImageSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomEntryAuth customEntry = bindable as CustomEntryAuth;
 
@@ -129,7 +162,7 @@ namespace GpsNote.Controls
         }
 
 
-        private static void OnPlaceholderTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void PlaceholderTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomEntryAuth customEntry = bindable as CustomEntryAuth;
 
@@ -144,7 +177,6 @@ namespace GpsNote.Controls
             if (!string.IsNullOrEmpty(e.NewTextValue))
             {
                 image.IsVisible = true;
-                TextEntry = e.NewTextValue;
             }
             else
             {
@@ -153,9 +185,25 @@ namespace GpsNote.Controls
                 errorLabel.Text = string.Empty;
                 frame.Style = (Xamarin.Forms.Style)App.Current.Resources["frameStyle"];
             }
+
+            TextEntry = e.NewTextValue;
+        }
+
+        private static void ShowPasswordPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomEntryAuth customEntry = bindable as CustomEntryAuth;
+
+            if(customEntry != null)
+            {
+                customEntry.entry.IsPassword = !(bool)newValue;
+            }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            TapImage = !TapImage;
         }
 
         #endregion
-
     }
 }

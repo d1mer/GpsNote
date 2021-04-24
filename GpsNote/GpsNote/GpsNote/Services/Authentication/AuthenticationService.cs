@@ -29,21 +29,25 @@ namespace GpsNote.Services.Authentication
 
         #region -- IAuthenticationService implementation --
 
-        public async Task<CodeUserAuthresult> SignInAsync(string email, string password)
+        public async Task<(CodeUserAuthresult, CodeUserAuthresult)> SignInAsync(string email, string password)
         {
-            CodeUserAuthresult result = CodeUserAuthresult.Undefined;
+            CodeUserAuthresult resultEmail = CodeUserAuthresult.Undefined;
+            CodeUserAuthresult resultPassword = CodeUserAuthresult.Undefined;
+
+            email = email.Trim();
+            password = password.Trim();
 
             if (!Validator.Validate(email, Validator.patternEmail))
             {
-                result = CodeUserAuthresult.InvalidEmail;
+                resultEmail = CodeUserAuthresult.InvalidEmail;
             }
 
             if (!Validator.Validate(password, Validator.patternPassword))
             {
-                result = CodeUserAuthresult.InvalidPassword;
+                resultPassword = CodeUserAuthresult.InvalidPassword;
             }
 
-            if(result == CodeUserAuthresult.Undefined)
+            if(resultEmail == CodeUserAuthresult.Undefined && resultPassword == CodeUserAuthresult.Undefined)
             {
                 User findUser = null;
 
@@ -53,29 +57,34 @@ namespace GpsNote.Services.Authentication
                 }
                 catch (Exception ex)
                 {
-                    result = CodeUserAuthresult.UnknownError;
+                    resultEmail = CodeUserAuthresult.UnknownError;
+                    resultPassword = CodeUserAuthresult.UnknownError;
                     Console.WriteLine(ex.Message);
                 }
 
                 if(findUser != null)
                 {
+                    resultEmail = CodeUserAuthresult.Passed;
+
                     if(findUser.Password == password)
                     {
                         _settingsManager.AuthorizedUserID = findUser.Id;
-                        result = CodeUserAuthresult.Passed;
+                        resultEmail = CodeUserAuthresult.Passed;
+                        resultPassword = CodeUserAuthresult.Passed;
+                        _settingsManager.AuthorizedUserID = findUser.Id;
                     }
                     else
                     {
-                        result = CodeUserAuthresult.WrongPassword;
+                        resultPassword = CodeUserAuthresult.WrongPassword;
                     }
                 }
                 else
                 {
-                    result = CodeUserAuthresult.EmailNotFound;
+                    resultEmail = CodeUserAuthresult.EmailNotFound;
                 }
             }
 
-            return result;
+            return (resultEmail, resultPassword);
         }
 
         public async Task<CodeUserAuthresult> SignUpAsync(string name, string email, string password, string confirmPassword)

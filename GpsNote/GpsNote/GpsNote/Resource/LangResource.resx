@@ -192,6 +192,12 @@
   <data name="PASSWORD_MISMATCH" xml:space="preserve">
     <value>Passwords mismatch. Re-enter passwords</value>
   </data>
+  <data name="PlaceholderEnterEmail" xml:space="preserve">
+    <value>Enter email</value>
+  </data>
+  <data name="PlaceholderEnterPassword" xml:space="preserve">
+    <value>Enter password</value>
+  </data>
   <data name="SaveToolbatItem" xml:space="preserve">
     <value>Save</value>
   </data>

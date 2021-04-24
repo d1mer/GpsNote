@@ -7,6 +7,6 @@ namespace GpsNote.Services.Authentication
     {
         Task<CodeUserAuthresult> SignUpAsync(string name, string email, string password, string confirmPassword);
 
-        Task<CodeUserAuthresult> SignInAsync(string email, string password);
+        Task<(CodeUserAuthresult, CodeUserAuthresult)> SignInAsync(string email, string password);
     }
 }

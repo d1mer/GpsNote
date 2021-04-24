@@ -286,6 +286,24 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter email.
+        /// </summary>
+        internal static string PlaceholderEnterEmail {
+            get {
+                return ResourceManager.GetString("PlaceholderEnterEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter password.
+        /// </summary>
+        internal static string PlaceholderEnterPassword {
+            get {
+                return ResourceManager.GetString("PlaceholderEnterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string SaveToolbatItem {

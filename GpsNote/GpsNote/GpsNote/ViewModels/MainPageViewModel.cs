@@ -27,6 +27,7 @@ namespace GpsNote.ViewModels
 
         #endregion
 
+
         #region -- Private helpers --
 
         private async void OnLoginTapAsync()
@@ -36,7 +37,7 @@ namespace GpsNote.ViewModels
 
         private async void OnRegistrationTapAsync()
         {
-            await NavigationService.NavigateAsync(nameof(SignUpPage));
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}/{nameof(SignUpPage)}");
         }
 
         #endregion
