@@ -5,8 +5,10 @@ namespace GpsNote.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<CodeUserAuthresult> SignUpAsync(string name, string email, string password, string confirmPassword);
+        Task<bool> OnSignUpAsync(string name, string email, string password);
 
-        Task<(CodeUserAuthresult, CodeUserAuthresult)> SignInAsync(string email, string password);
+        Task<(CodeUserAuthresult, CodeUserAuthresult)> OnSignInAsync(string email, string password);
+
+        Task<bool> OnEmailTakenAsync(string email);
     }
 }

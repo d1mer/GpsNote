@@ -108,6 +108,15 @@ namespace GpsNote.Resource {
         /// <summary>
         ///   Looks up a localized string similar to Create account.
         /// </summary>
+        internal static string CreateAccountButtonText {
+            get {
+                return ResourceManager.GetString("CreateAccountButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an account.
+        /// </summary>
         internal static string CreateAccountText {
             get {
                 return ResourceManager.GetString("CreateAccountText", resourceCulture);
@@ -259,6 +268,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string NextText {
+            get {
+                return ResourceManager.GetString("NextText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to or.
         /// </summary>
         internal static string OrText {
@@ -286,11 +304,38 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repeat password.
+        /// </summary>
+        internal static string PlaceholderConfirmPassword {
+            get {
+                return ResourceManager.GetString("PlaceholderConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create password.
+        /// </summary>
+        internal static string PlaceholderCreatePassword {
+            get {
+                return ResourceManager.GetString("PlaceholderCreatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter email.
         /// </summary>
         internal static string PlaceholderEnterEmail {
             get {
                 return ResourceManager.GetString("PlaceholderEnterEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your name.
+        /// </summary>
+        internal static string PlaceholderEnterName {
+            get {
+                return ResourceManager.GetString("PlaceholderEnterName", resourceCulture);
             }
         }
         

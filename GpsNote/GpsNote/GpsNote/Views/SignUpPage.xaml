@@ -1,30 +1,165 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              x:Class="GpsNote.Views.SignUpPage"
-             Title="{Binding Title}">
+             NavigationPage.HasBackButton="False">
+
+    <!-- NAVIGATION BAR -->
+    <NavigationPage.TitleView>
+
+        <Grid ColumnDefinitions="0.2*, 0.8*">
+
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <!-- TITLE LABEL -->
+            <Label Grid.Column="1"
+                   Text="{Binding Title}" 
+                   Style="{StaticResource navBarTitle}"
+                   HorizontalTextAlignment="Center" />
+
+        </Grid>
+
+    </NavigationPage.TitleView>
+
+
+    <Grid Margin="20, 5, 20, 0">
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+
+        </Grid.RowDefinitions>
+
+        <StackLayout Margin="0, 0, 0, 10">
+
+            <!-- NAME LABEL -->
+            <Label Text="{Binding Resource[NameText]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+
+            <!-- NAME ENTRY-->
+            <controls:CustomEntryAuth ImageSource="ic_clear.png"
+                                      TextEntry="{Binding Name}"
+                                      ErrorText="{Binding ErrorTextName}"
+                                      PlaceholderText="{Binding Resource[PlaceholderEnterName]}"
+                                      TapImage="{Binding TapNameImage}"/>
+            
+        </StackLayout>
+
+        <StackLayout Grid.Row="1"
+                     Margin="0, 0, 0, 15">
+
+            <!-- EMAIL LABEL -->
+            <Label Text="{Binding Resource[EmailText]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+            <!-- EMAIL ENTRY-->
+            <controls:CustomEntryAuth
+                      ImageSource="ic_clear.png"
+                      TextEntry="{Binding Email}"
+                      ErrorText="{Binding ErrorTextEmail}"
+                      TapImage="{Binding TapEmailImage}"
+                      PlaceholderText="{Binding Resource[PlaceholderEnterEmail]}"/>
+
+        </StackLayout>
+
+        <!-- NEXT BUTTON -->
+        <Button Grid.Row="2"
+                Text="{Binding Resource[NextText]}"
+                Style="{StaticResource mainButton1}"
+                IsEnabled="{Binding IsNextButtonEnabled}"
+                Command="{Binding NextButtonTapCommand}"
+                VerticalOptions="Center"
+                Margin="0, 0, 0, 15"/>
+
+        
+        <StackLayout Grid.Row="3"
+                     VerticalOptions="Start"
+                     Spacing="20">
+
+            <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
+                  Margin="0, 0, 0, 15">
+
+                <BoxView HeightRequest="1"
+                         Style="{StaticResource separator}"/>
+
+                <!-- OR LABEL -->
+                <Label Grid.Column="1"
+                       Text="or"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                <BoxView Grid.Column="2"
+                         Style="{StaticResource separator}"/>
+
+            </Grid>
+
+            <Grid Grid.Row="4"
+                  ColumnDefinitions="*, *, *"
+                  Margin="0, 0, 0, 50"
+                  VerticalOptions="Start" >
+
+                <!-- GOOGLE AUTH BUTTON -->
+                <Button Grid.Column="0"
+                        Style="{StaticResource alternativeLoginButton}"
+                        ImageSource="ic_google.png"
+                        Command="{Binding OnSignInGoogleButtonTapCommand}" />
+
+                <!-- FACEBOOK AUTH BUTTON -->
+                <Button Grid.Column="1"
+                        Style="{StaticResource alternativeLoginButton}"
+                        ImageSource="ic_facebook.png"/>
+
+                <!-- APPLE AUTH BUTTON -->
+                <Button Grid.Column="2"
+                        ImageSource="{AppThemeBinding Light=ic_apple.png,
+                                                      Dark=ic_apple_dark.png}"
+                        Style="{StaticResource alternativeLoginButton}" />
+
+            </Grid>
+
+        </StackLayout>
+
+    </Grid>
+
     
-    <Grid RowDefinitions="*, *">
+    <!--<Grid RowDefinitions="*, *">
 
         <StackLayout Margin="30, 30, 30, 10"
                      Spacing="20"
                      VerticalOptions="CenterAndExpand">
 
-            <!-- NAME ENTRY -->
+            --><!-- NAME ENTRY --><!--
             <Entry x:Name="name"
                    Text="{Binding Name}"
                    Placeholder="Enter name"
                    ClearButtonVisibility="WhileEditing"
                    FontSize="Medium" />
 
-            <!-- EMAIL ENTRY -->
+            --><!-- EMAIL ENTRY --><!--
             <Entry x:Name="email"
                    Placeholder="Enter email"
                    Text="{Binding Email}"
                    ClearButtonVisibility="WhileEditing"
                    FontSize="Medium" />
 
-            <!-- PASSWORD ENTRY -->
+            --><!-- PASSWORD ENTRY --><!--
             <Entry x:Name="password"
                    Text="{Binding Password}"
                    Placeholder="Enter password"
@@ -32,7 +167,7 @@
                    ClearButtonVisibility="WhileEditing"
                    FontSize="Medium" />
 
-            <!-- CONFIRM PASSWORD ENTRY -->
+            --><!-- CONFIRM PASSWORD ENTRY --><!--
             <Entry x:Name="confirmPassword"
                    Text="{Binding ConfirmPassword}"
                    Placeholder="Confirm password"
@@ -46,7 +181,7 @@
                      Margin="30, 10, 30, 30"
                      VerticalOptions="EndAndExpand">
             
-            <!-- SIGNUP BUTTON -->
+            --><!-- SIGNUP BUTTON --><!--
             <Button Text="SIGNUP"
                     BorderWidth="1"
                     IsEnabled="{Binding IsSignUpButtonEnabled}"
@@ -56,6 +191,6 @@
             
         </StackLayout>
         
-    </Grid>
+    </Grid>-->
     
 </ContentPage>

@@ -124,7 +124,7 @@
     <value>Success!! Account created</value>
   </data>
   <data name="ConfirmPasswordText" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Подтвердить пароль</value>
   </data>
   <data name="CONFIRM_CANCEL" xml:space="preserve">
     <value>Cancel</value>
@@ -132,8 +132,11 @@
   <data name="CONFIRM_OK" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="CreateAccountText" xml:space="preserve">
+  <data name="CreateAccountButtonText" xml:space="preserve">
     <value>Создать аккаунт</value>
+  </data>
+  <data name="CreateAccountText" xml:space="preserve">
+    <value>Создание аккаунта</value>
   </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>Dark Color Theme</value>
@@ -181,7 +184,10 @@
     <value>LogOut</value>
   </data>
   <data name="NameText" xml:space="preserve">
-    <value>Name</value>
+    <value>Имя</value>
+  </data>
+  <data name="NextText" xml:space="preserve">
+    <value>Далее</value>
   </data>
   <data name="OrText" xml:space="preserve">
     <value>или</value>
@@ -192,8 +198,17 @@
   <data name="PASSWORD_MISMATCH" xml:space="preserve">
     <value>Passwords mismatch. Re-enter passwords</value>
   </data>
+  <data name="PlaceholderConfirmPassword" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="PlaceholderCreatePassword" xml:space="preserve">
+    <value>Придумайте пароль</value>
+  </data>
   <data name="PlaceholderEnterEmail" xml:space="preserve">
     <value>Укажите электронную почту</value>
+  </data>
+  <data name="PlaceholderEnterName" xml:space="preserve">
+    <value>Укажите ваше имя</value>
   </data>
   <data name="PlaceholderEnterPassword" xml:space="preserve">
     <value>Введите пароль</value>

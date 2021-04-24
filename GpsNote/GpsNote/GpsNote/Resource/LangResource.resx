@@ -132,8 +132,11 @@
   <data name="CONFIRM_OK" xml:space="preserve">
     <value>Delete</value>
   </data>
-  <data name="CreateAccountText" xml:space="preserve">
+  <data name="CreateAccountButtonText" xml:space="preserve">
     <value>Create account</value>
+  </data>
+  <data name="CreateAccountText" xml:space="preserve">
+    <value>Create an account</value>
   </data>
   <data name="DarkTheme" xml:space="preserve">
     <value>Dark Color Theme</value>
@@ -183,6 +186,9 @@
   <data name="NameText" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="NextText" xml:space="preserve">
+    <value>Next</value>
+  </data>
   <data name="OrText" xml:space="preserve">
     <value>or</value>
   </data>
@@ -192,8 +198,17 @@
   <data name="PASSWORD_MISMATCH" xml:space="preserve">
     <value>Passwords mismatch. Re-enter passwords</value>
   </data>
+  <data name="PlaceholderConfirmPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="PlaceholderCreatePassword" xml:space="preserve">
+    <value>Create password</value>
+  </data>
   <data name="PlaceholderEnterEmail" xml:space="preserve">
     <value>Enter email</value>
+  </data>
+  <data name="PlaceholderEnterName" xml:space="preserve">
+    <value>Enter your name</value>
   </data>
   <data name="PlaceholderEnterPassword" xml:space="preserve">
     <value>Enter password</value>

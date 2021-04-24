@@ -8,15 +8,16 @@ using GpsNote.Enums;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.Localization;
+using GpsNote.Helpers;
 
 namespace GpsNote.ViewModels
 {
     public class SignInViewModel : ViewModelBase
     {
-        private IPageDialogService _dialogService;
-        private IAuthorizationService _authorizationService;
-        private IAuthenticationService _authenticationService;
-        private IGoogleAuthenticationService _googleAuthenticationService;
+        private readonly IPageDialogService _dialogService;
+        private readonly IAuthorizationService _authorizationService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly IGoogleAuthenticationService _googleAuthenticationService;
 
 
         public SignInViewModel(INavigationService navigationService,
@@ -35,19 +36,21 @@ namespace GpsNote.ViewModels
 
             ImageSource = "ic_eye_off.png";
             ShowPassword = false;
+            Password = string.Empty;
+            Email = string.Empty;
         }
 
 
         #region -- Public properties -- 
 
-        private string _email = "";
+        private string _email;
         public string Email
         {
             get => _email;
             set => SetProperty(ref _email, value);
         }
 
-        private string _password = "";
+        private string _password;
         public string Password
         {
             get => _password;
@@ -126,8 +129,10 @@ namespace GpsNote.ViewModels
             if (args.PropertyName == nameof(Password) || args.PropertyName == nameof(Email))
             {
                 if (!string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password))
+                {
                     IsSignInButtonEnabled = true;
-                else if(string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+                }
+                else if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
                 {
                     IsSignInButtonEnabled = false;
                 }            
@@ -163,44 +168,64 @@ namespace GpsNote.ViewModels
 
         private async void OnSignInUserAsync()
         {
-            var (resultEmail, resultPassword) = 
-                await _authenticationService.SignInAsync(Email, Password);
+            Email = Email.Trim();
+            Password = Password.Trim();
 
-            switch (resultEmail)
+            bool verifyEmail = Validator.Validate(Email, VerifyEntity.Email);
+            bool verifyPassword = Validator.Validate(Password, VerifyEntity.Password);
+
+            if(verifyEmail && verifyPassword)
             {
-                case CodeUserAuthresult.InvalidEmail:
-                    ErrorTextEmail = "Invalid email.Try again";
-                    break;
-                case CodeUserAuthresult.EmailNotFound:
-                    ErrorTextEmail = "This email wasn't found";
-                    break;
-                case CodeUserAuthresult.Passed:
-                    break;
-                default:
-                    ErrorTextEmail = "Error";
-                    break;
+                var (resultEmail, resultPassword) =
+                    await _authenticationService.OnSignInAsync(Email, Password);
+
+                switch (resultEmail)
+                {
+                    case CodeUserAuthresult.InvalidEmail:
+                        ErrorTextEmail = "Invalid email.Try again";
+                        break;
+                    case CodeUserAuthresult.EmailNotFound:
+                        ErrorTextEmail = "This email wasn't found";
+                        break;
+                    case CodeUserAuthresult.Passed:
+                        break;
+                    default:
+                        ErrorTextEmail = "Error";
+                        break;
+                }
+
+                switch (resultPassword)
+                {
+                    case CodeUserAuthresult.InvalidPassword:
+                        ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
+                        break;
+                    case CodeUserAuthresult.WrongPassword:
+                        ErrorTextPassword = "Wrong password";
+                        break;
+                    case CodeUserAuthresult.Passed:
+                        break;
+                    default:
+                        ErrorTextPassword = "Error";
+                        break;
+                }
+
+                if (resultEmail == CodeUserAuthresult.Passed && resultPassword == CodeUserAuthresult.Passed)
+                {
+                    await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
+                    ErrorTextEmail = string.Empty;
+                    ErrorTextPassword = string.Empty;
+                }
             }
-
-            switch (resultPassword)
+            else
             {
-                case CodeUserAuthresult.InvalidPassword:
-                    ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
-                    break;
-                case CodeUserAuthresult.WrongPassword:
-                    ErrorTextPassword = "Wrong password";
-                    break;
-                case CodeUserAuthresult.Passed:
-                    break;
-                default:
-                    ErrorTextPassword = "Error";
-                    break;
-            }
+                ErrorTextEmail = verifyEmail ? 
+                                 string.Empty :
+                                 "Invalid email.Try again";
 
-            if(resultEmail == CodeUserAuthresult.Passed && resultPassword == CodeUserAuthresult.Passed)
-            {
-                await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
-                ErrorTextEmail = string.Empty;
-                ErrorTextPassword = string.Empty;
+                ErrorTextPassword = verifyPassword ? 
+                                    string.Empty : 
+                                    "Invalid password. Password must be from 8 to 16 characters";
+                return;
             }
         }
 

@@ -14,6 +14,7 @@ namespace GpsNote
 
         // Authorization
         public const string NEW_USER_EMAIL = "NewUserEmail";
+        public const string DATA_USER = "DataUser";
 
 
         // Camera settings
