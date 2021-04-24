@@ -25,7 +25,7 @@ namespace GpsNote.Controls
                                     typeof(CustomMap),
                                     defaultValue: default(List<Pin>),
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: PinsListPropertyChanged);
+                                    propertyChanged: OnPinsListPropertyChanged);
 
         public List<Pin> PinsList
         {
@@ -40,7 +40,7 @@ namespace GpsNote.Controls
                                     typeof(CustomMap),
                                     defaultValue: false,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: IsMoveCameraPropertyChanged);
+                                    propertyChanged: OnIsMoveCameraPropertyChanged);
 
 
         public bool IsMoveCamera
@@ -56,7 +56,7 @@ namespace GpsNote.Controls
                                     typeof(CustomMap),
                                     defaultValue: default,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: CameraMovingPositionPropertyChanged);
+                                    propertyChanged: OnCameraMovingPositionPropertyChanged);
 
         public Position CameraMovingPosition
         {
@@ -65,19 +65,19 @@ namespace GpsNote.Controls
         }
 
 
-        public static readonly BindableProperty ChangeMyLocationButtonVisibilityProperty =
-            BindableProperty.Create(nameof(ChangeMyLocationButtonVisibility),
+        public static readonly BindableProperty IsMyLocationButtonVisibleProperty =
+            BindableProperty.Create(nameof(IsMyLocationButtonVisible),
                                     typeof(bool),
                                     typeof(CustomMap),
                                     defaultValue: false,
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: ChangeMyLocationButtonsVisibilityPropertyChanged);
+                                    propertyChanged: OnIsMyLocationButtonVisiblePropertyChanged);
 
 
-        public bool ChangeMyLocationButtonVisibility
+        public bool IsMyLocationButtonVisible
         {
-            get => (bool)GetValue(ChangeMyLocationButtonVisibilityProperty);
-            set => SetValue(ChangeMyLocationButtonVisibilityProperty, value);
+            get => (bool)GetValue(IsMyLocationButtonVisibleProperty);
+            set => SetValue(IsMyLocationButtonVisibleProperty, value);
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace GpsNote.Controls
 
         #region -- Private helpers --
 
-        private static void PinsListPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnPinsListPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = (CustomMap)bindable;
            
@@ -100,7 +100,7 @@ namespace GpsNote.Controls
         }
 
 
-        private static void IsMoveCameraPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnIsMoveCameraPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = (CustomMap)bindable;
 
@@ -112,25 +112,28 @@ namespace GpsNote.Controls
         }
 
 
-        private static void CameraMovingPositionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnCameraMovingPositionPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = (CustomMap)bindable;
             if (map != null)
             {
                 if (newValue is Position)
+                {
                     map._cameraMovingPosition = (Position)newValue;
+                }
             }
         }
 
 
-        private static void ChangeMyLocationButtonsVisibilityPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnIsMyLocationButtonVisiblePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomMap map = bindable as CustomMap;
+            bool value = (bool)newValue;
 
             if(map != null)
             {
-                map.UiSettings.MyLocationButtonEnabled = (bool)newValue;
-                map.MyLocationEnabled = (bool)newValue;
+                map.UiSettings.MyLocationButtonEnabled = value;
+                map.MyLocationEnabled = value;
             }
         }
 
