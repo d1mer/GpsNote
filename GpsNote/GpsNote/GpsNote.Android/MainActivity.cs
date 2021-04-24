@@ -39,6 +39,8 @@ namespace GpsNote.Droid
         public override void OnBackPressed()
         {
             Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
+
+            // not find
             //PopupPlugin.OnBackPressed();
         }
     }

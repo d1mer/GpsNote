@@ -19,17 +19,16 @@ namespace GpsNote.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            global::Android.Net.Uri uri_android = Intent.Data;
+            global::Android.Net.Uri uri = Intent.Data;
 
-            Uri uri_netfx = new Uri(uri_android.ToString());
+            Uri uriPage = new Uri(uri.ToString());
 
-            AuthenticationState.Authenticator.OnPageLoading(uri_netfx);
+            AuthenticationState.Authenticator.OnPageLoading(uriPage);
 
             Intent intent = new Intent(this, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.ClearTop | ActivityFlags.SingleTop);
             StartActivity(intent);
             Finish();
-            return;
         }
     }
 }

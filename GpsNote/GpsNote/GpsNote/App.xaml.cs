@@ -59,9 +59,6 @@ namespace GpsNote
             {
                 await NavigationService.NavigateAsync(nameof(MainTabbedPage));
             }
-
-            //MainPage = new ContentPage();
-            //await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
