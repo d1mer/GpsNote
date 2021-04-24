@@ -39,14 +39,5 @@ namespace GpsNote
 
         // Popups
         public const string TUPLE = "tuple";
-
-        // Clock
-        public const string GRAY_FILL_CLOCK_COLOR = "#F1F3FD";
-        public const string LIGHT_BLUE_COLOR = "#C7CDF5";
-        public const string DARK_BLUE_COLOR = "#596EFB";
-        public const string LIGHT_RED_COLOR = "#F5C7C7";
-        public const string DARK_RED_COLOR = "#DD4949";
-        public const string LIGHT_GREEN_COLOR = "#00FFB1";
-        public const string DARK_GREEN_COLOR = "#32D27F";
     }
 }

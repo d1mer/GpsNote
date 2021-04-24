@@ -4,6 +4,15 @@
              xmlns:prism="http://prismlibrary.com"
              x:Class="GpsNote.App">
     <Application.Resources>
+        
+        <!-- SKIASHARP COLORS -->
+        <x:String x:Key="grayFillClock">#F1F3FD</x:String>
+        <x:String x:Key="lightBlueClock">#C7CDF5</x:String>
+        <x:String x:Key="darkBlueClock">#596EFB</x:String>
+        <x:String x:Key="lightRedClock">#F5C7C7</x:String>
+        <x:String x:Key="darkRedClock">#DD4949</x:String>
+        <x:String x:Key="lightGreenClock">#00FFB1</x:String>
+        <x:String x:Key="darkGreenClock">#32D27F</x:String>
 
         <!-- Colors -->
         <Color x:Key="LightBlue">#596EFB</Color>

@@ -25,13 +25,13 @@ namespace GpsNote.Services.Color
             switch (color)
             {
                 case Colors.Red:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.DARK_RED_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["darkRedClock"] as string).ToSKColor();
                     break;
                 case Colors.Green:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.DARK_GREEN_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["darkGreenClock"] as string).ToSKColor();
                     break;
                 case Colors.Blue:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.DARK_BLUE_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["darkBlueClock"] as string).ToSKColor();
                     break;
             }
 
@@ -47,13 +47,13 @@ namespace GpsNote.Services.Color
             switch (color)
             {
                 case Colors.Red:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.LIGHT_RED_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["lightRedClock"] as string).ToSKColor();
                     break;
                 case Colors.Green:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.LIGHT_GREEN_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["lightGreenClock"] as string).ToSKColor();
                     break;
                 case Colors.Blue:
-                    skColor = Xamarin.Forms.Color.FromHex(Constants.LIGHT_BLUE_COLOR).ToSKColor();
+                    skColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["lightBlueClock"] as string).ToSKColor();
                     break;
             }
 
