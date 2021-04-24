@@ -38,16 +38,8 @@ namespace GpsNote.Droid
 
         public override void OnBackPressed()
         {
-            //Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
             //PopupPlugin.OnBackPressed();
-        }
-    }
-
-    public class AndroidInitializer : IPlatformInitializer
-    {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any platform specific implementations
         }
     }
 }
