@@ -14,8 +14,7 @@
                                   SearchResultList="{Binding SearchResultList}"/>
 
         <!-- MAP -->
-        <controls:CustomMap Grid.Row="1"
-                            x:Name="map"
+        <controls:CustomMap x:Name="map"
                             IsMoveCamera="{Binding IsMoveCamera}"
                             CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"

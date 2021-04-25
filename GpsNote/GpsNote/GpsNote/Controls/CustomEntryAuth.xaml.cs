@@ -133,7 +133,6 @@ namespace GpsNote.Controls
                     customEntry.errorLabel.IsVisible = false;
                     customEntry.errorLabel.Text = string.Empty;
                     customEntry.frame.Style = (Xamarin.Forms.Style)App.Current.Resources["frameStyle"];
-                    customEntry.TextEntry = string.Empty;
                 }
 
             }

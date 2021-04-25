@@ -120,6 +120,9 @@
   <data name="AccountCreatedText" xml:space="preserve">
     <value>Account created!!!</value>
   </data>
+  <data name="AddPinTitle" xml:space="preserve">
+    <value>Add pin</value>
+  </data>
   <data name="Button10" xml:space="preserve">
     <value>1</value>
   </data>
@@ -180,11 +183,23 @@
   <data name="ConfirmPasswordPlaceholder" xml:space="preserve">
     <value>repeat password</value>
   </data>
+  <data name="CoordinatesLabel" xml:space="preserve">
+    <value>Coordinates</value>
+  </data>
   <data name="CreateAccountButton" xml:space="preserve">
     <value>Create account</value>
   </data>
   <data name="CreateAccountTitle" xml:space="preserve">
     <value>Create an account</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Write a description</value>
+  </data>
+  <data name="EditPinTitle" xml:space="preserve">
+    <value>Edit pin</value>
   </data>
   <data name="EmailError" xml:space="preserve">
     <value>invalid email. try again</value>
@@ -195,20 +210,14 @@
   <data name="EnterEmailPlaceholder" xml:space="preserve">
     <value>Enter email</value>
   </data>
+  <data name="EnterLabelPinPlaceholder" xml:space="preserve">
+    <value>Enter the label</value>
+  </data>
   <data name="EnterNamePlaceholder" xml:space="preserve">
     <value>Enter your name</value>
   </data>
   <data name="EnterPasswordPlaceholder" xml:space="preserve">
     <value>Enter password</value>
-  </data>
-  <data name="Error10" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error11" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error12" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Error13" xml:space="preserve">
     <value>1</value>
@@ -258,15 +267,6 @@
   <data name="InvalidPasswordError" xml:space="preserve">
     <value>invalid password. password must be from 8 to 16 characters</value>
   </data>
-  <data name="Label1" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label10" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label11" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Label12" xml:space="preserve">
     <value>1</value>
   </data>
@@ -303,11 +303,29 @@
   <data name="Label4" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="LabelAddPinLabel" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="LabelPinError" xml:space="preserve">
+    <value>Label should not be empty</value>
+  </data>
+  <data name="LatitudeError" xml:space="preserve">
+    <value>Latitude should not be empty</value>
+  </data>
+  <data name="LatitudePlaceholder" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
   <data name="LoginButton" xml:space="preserve">
     <value>Log in</value>
   </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>Log in</value>
+  </data>
+  <data name="LongtitudeError" xml:space="preserve">
+    <value>Longtitude should not be empty</value>
+  </data>
+  <data name="LongtitudePlaceholder" xml:space="preserve">
+    <value>Longtitude</value>
   </data>
   <data name="NameLabel" xml:space="preserve">
     <value>Name</value>
@@ -326,18 +344,6 @@
   </data>
   <data name="PasswordMismatchError" xml:space="preserve">
     <value>passwords mismatch</value>
-  </data>
-  <data name="Placeholder10" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder11" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder12" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder13" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Placeholder14" xml:space="preserve">
     <value>1</value>
@@ -379,12 +385,6 @@
     <value>1</value>
   </data>
   <data name="Text9" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title10" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title2" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="Title3" xml:space="preserve">

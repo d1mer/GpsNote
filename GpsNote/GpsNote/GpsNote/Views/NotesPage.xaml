@@ -2,29 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.NotesPage"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
 
 
     <Grid RowDefinitions="0.1*, *">
 
-        <!-- SEARCBAR -->
-        <SearchBar Placeholder="Search"
-                   HorizontalOptions="FillAndExpand">
-            
-            <SearchBar.Behaviors>
-                
-                <prism:EventToCommandBehavior EventName="TextChanged"
-                                              Command="{Binding SearchTextChangedCommand}"
-                                              EventArgsParameterPath="NewTextValue"/>
-                
-            </SearchBar.Behaviors>
-            
-        </SearchBar>
+        <!-- NAVBAR -->
+        <controls:CustomMapNavBar SearchText="{Binding SearchText}"
+                                  SearchResultList="{Binding SearchResultList}"/>
 
         <!-- PINS LIST -->
-        <ListView x:Name="pinsListView"
+        <!--<ListView x:Name="pinsListView"
                   Grid.Row="1"
                   ItemsSource="{Binding PinsList}"
                   HasUnevenRows="True"
@@ -85,12 +76,12 @@
                                     <StackLayout Grid.Column="1"
                                                  Background="Transparent">
                                         
-                                        <!-- PIN LABEL -->
+                                        --><!-- PIN LABEL --><!--
                                         <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
                                                FontSize="Medium" />
                                         
-                                        <!-- PIN ADDRESS -->
+                                        --><!-- PIN ADDRESS --><!--
                                         <Label Grid.Row="1"
                                                Text="{Binding Address}"
                                                FontSize="Medium" />
@@ -109,22 +100,20 @@
                 
             </ListView.ItemTemplate>
             
-        </ListView>
+        </ListView>-->
 
         <!-- ADDEDIT PIN BUTTON -->
         <Button Grid.Row="1" 
-                ImageSource="ic_add.png"
-                BorderColor="Black"
-                BorderWidth="5"
+                ImageSource="ic_plus2x.png"
                 FontAttributes="None"
-                BackgroundColor="#2296F3"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightBlue},
+                                                  Dark={StaticResource DarkBlue}}"
                 BorderRadius ="70"
-                TextColor="White"
                 HorizontalOptions="End"
                 VerticalOptions="End"
                 WidthRequest="70"
                 HeightRequest="70"
-                Margin="0,0,20,40"
+                Margin="0,0,20,20"
                 Command="{Binding AddEditPinTapCommand}"/>
         
     </Grid>

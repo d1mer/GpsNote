@@ -10,6 +10,7 @@ using GpsNote.Services.Authorization;
 using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Services.Localization;
+using GpsNote.Helpers;
 
 namespace GpsNote.ViewModels
 {
@@ -32,7 +33,7 @@ namespace GpsNote.ViewModels
             _dialogService = dialogService;
             _authorizationService = authorizeService;
 
-            Title = "AddEditPin";
+            Title = Resource["AddPinTitle"];
         }
 
 
@@ -59,11 +60,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref longitudePinText, value);
         }
 
-        private string editorText;
-        public string EditorText
+        private string descriptionText;
+        public string DescriptionText
         {
-            get => editorText;
-            set => SetProperty(ref editorText, value);
+            get => descriptionText;
+            set => SetProperty(ref descriptionText, value);
         }
 
         private List<Pin> pins;
@@ -71,6 +72,27 @@ namespace GpsNote.ViewModels
         {
             get => pins;
             set => SetProperty(ref pins, value);
+        }
+
+        private string labelPinError;
+        public string LabelPinError
+        {
+            get => labelPinError;
+            set => SetProperty(ref labelPinError, value);
+        }
+
+        private string longtitudePinError;
+        public string LongtitudePinError
+        {
+            get => longtitudePinError;
+            set => SetProperty(ref longtitudePinError, value);
+        }
+
+        private string latitudePinError;
+        public string LatitudePinError
+        {
+            get => latitudePinError;
+            set => SetProperty(ref latitudePinError, value);
         }
 
 
@@ -87,6 +109,9 @@ namespace GpsNote.ViewModels
         private DelegateCommand saveTapCommand;
         public DelegateCommand SaveTapCommand => saveTapCommand ?? new DelegateCommand(OnSavePinAsync);
 
+        private DelegateCommand backPressedCommand;
+        public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
+
         #endregion
 
 
@@ -99,7 +124,7 @@ namespace GpsNote.ViewModels
                 LabelPinText = pinViewModel.Label;
                 LatitudePinText = pinViewModel.Latitude.ToString();
                 LongitudePinText = pinViewModel.Longitude.ToString();
-                EditorText = pinViewModel.Description;
+                DescriptionText = pinViewModel.Description;
 
                 Pin pin = pinViewModel.ToPin();
 
@@ -113,6 +138,7 @@ namespace GpsNote.ViewModels
 
                 editMode = true;
                 editPinViewModel = pinViewModel;
+                Title = Resource["EditPinTitle"];
             }
         }
 
@@ -126,9 +152,12 @@ namespace GpsNote.ViewModels
             Position position = (Position)_position;
             Pin pin = await _pinService.GetNewPinFromPositionAsync(position);
 
+            string latitude = DoubleOutFormat.Format(pin.Position.Latitude); 
+            string longtitude = DoubleOutFormat.Format(pin.Position.Longitude);
+
             LabelPinText = pin.Label;
-            LatitudePinText = pin.Position.Latitude.ToString();
-            LongitudePinText = pin.Position.Longitude.ToString();
+            LatitudePinText = latitude;
+            LongitudePinText = longtitude;
 
             if (editMode)
                 pin.IsVisible = Pins[0].IsVisible;
@@ -137,6 +166,10 @@ namespace GpsNote.ViewModels
             {
                 pin
             };
+
+            LabelPinError = string.Empty;
+            LongtitudePinError = string.Empty;
+            LatitudePinError = string.Empty;
         }
 
         private async void OnSavePinAsync()
@@ -180,9 +213,18 @@ namespace GpsNote.ViewModels
             }
             else
             {
-                await _dialogService.DisplayAlertAsync("Error",
-                                                     "Name and coordinates fields must be filled",
-                                                     "Cancel");
+                if (string.IsNullOrWhiteSpace(LabelPinText))
+                {
+                    LabelPinError = Resource["LabelPinError"];
+                }
+                if (string.IsNullOrWhiteSpace(LatitudePinText))
+                {
+                    LatitudePinError = Resource["LatitudeError"];
+                }
+                if (string.IsNullOrWhiteSpace(LongitudePinText))
+                {
+                    LongtitudePinError = Resource["LongtitudeError"];
+                }
             }
         }
 
@@ -193,9 +235,11 @@ namespace GpsNote.ViewModels
             if (pinModel != null)
             {
                 pinModel.Label = LabelPinText;
-                pinModel.Description = EditorText;
+                pinModel.Description = DescriptionText;
                 pinModel.Owner = _authorizationService.GetCurrentUserID();
                 pinModel.IsEnable = editPinViewModel.IsEnabled;
+                pinModel.Latitude = Pins[0].Position.Latitude;
+                pinModel.Longitude = Pins[0].Position.Longitude;
                 int rows = await _pinService.UpdatePinModelAsync(pinModel);
 
                 if(rows <= 0)
@@ -212,7 +256,7 @@ namespace GpsNote.ViewModels
             pin.Label = LabelPinText;
 
             PinModel pinModel = pin.ToPinModel();
-            pinModel.Description = EditorText;
+            pinModel.Description = DescriptionText;
             pinModel.Owner = _authorizationService.GetCurrentUserID();
             pinModel.IsEnable = true;
 
@@ -224,6 +268,11 @@ namespace GpsNote.ViewModels
             }
 
             return pinModel;
+        }
+
+        private void OnBackPressed()
+        {
+            NavigationService.GoBackAsync();
         }
 
         #endregion
