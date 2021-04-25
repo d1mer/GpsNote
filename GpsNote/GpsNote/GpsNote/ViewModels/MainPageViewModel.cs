@@ -13,14 +13,14 @@ namespace GpsNote.ViewModels
     {
         public MainPageViewModel(INavigationService navigationService, ILocalizationService localizationService) : base(navigationService, localizationService)
         {
-
+            
         }
 
 
         #region -- Public properties --
 
         private DelegateCommand signInTapCommand;
-        public DelegateCommand SignInTapCommand => signInTapCommand ?? new DelegateCommand(OnLoginTapAsync);
+        public DelegateCommand SignInTapCommand => signInTapCommand ??= new DelegateCommand(OnLoginTapAsync);
 
         private DelegateCommand signUpTapCommand;
         public DelegateCommand SignUpTapCommand => signUpTapCommand ?? new DelegateCommand(OnRegistrationTapAsync);

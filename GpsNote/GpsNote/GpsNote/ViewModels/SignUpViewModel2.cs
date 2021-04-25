@@ -30,7 +30,7 @@ namespace GpsNote.ViewModels
             _googleAuthenticationService = googleAuthenticationService;
             _dialogService = pageDialogService;
 
-            Title = Resource["CreateAccountText"];
+            Title = Resource["CreateAccountTitle"];
 
             ImageSourcePassword = "ic_eye_off.png";
             ImageSourceConfirmPassword = "ic_eye_off.png";
@@ -139,6 +139,7 @@ namespace GpsNote.ViewModels
 
         #endregion
 
+
         #region -- Overrides --
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
@@ -183,6 +184,7 @@ namespace GpsNote.ViewModels
 
         #endregion
 
+
         #region -- Private helpers --
 
         private bool CanExecute()
@@ -218,26 +220,27 @@ namespace GpsNote.ViewModels
 
                     if (result)
                     {
-                        await _dialogService.DisplayAlertAsync("SUCCESS",
-                                                               "Account created!!!",
-                                                               "Cancel");
+                        await _dialogService.DisplayAlertAsync(Resource["SuccessText"],
+                                                               Resource["AccountCreatedText"],
+                                                               Resource["CancelText"]);
+
                         NavigationParameters parameter = new NavigationParameters();
                         parameter.Add(Constants.NEW_USER_EMAIL, Email);
                         await NavigationService.NavigateAsync(nameof(SignInPage), parameter);
                     }
                     else
                     {
-                        await _dialogService.DisplayAlertAsync("Error", "Error save to database", "Cancel");
+                        await _dialogService.DisplayAlertAsync(Resource["ErrorText"], Resource["ErrorSaveDbText"], Resource["CancelText"]);
                     }
                 }
                 else
                 {
-                    ErrorTextPassword = "Wrong password";
+                    ErrorTextPassword = Resource["WrongPasswordError"];
                 }
             }
             else
             {
-                ErrorTextConfirmPassword = "Password mismatch";
+                ErrorTextConfirmPassword = Resource["PasswordMismatchError"];
             }
         }
 

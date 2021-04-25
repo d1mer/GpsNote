@@ -7,15 +7,16 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
             prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="GpsNote.Views.MainTabbedPage">
+            x:Class="GpsNote.Views.MainTabbedPage"
+            BarBackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                 Dark={StaticResource Black}}">
 
     <TabbedPage.Behaviors>
         <behaviors:TabbedPageNavigationBehavior />
     </TabbedPage.Behaviors>
 
     <TabbedPage.Children>
-        <local:MapPage />
-        <local:NotesPage/>
-        <local:SettingsPage/>
+        <local:MapPage IconImageSource="ic_map.png"/>
+        <local:NotesPage IconImageSource="ic_pin.png"/>
     </TabbedPage.Children>
 </TabbedPage>

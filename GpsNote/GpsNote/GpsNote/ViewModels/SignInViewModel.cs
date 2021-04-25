@@ -9,6 +9,7 @@ using GpsNote.Services.Authentication;
 using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.Localization;
 using GpsNote.Helpers;
+using Xamarin.Forms;
 
 namespace GpsNote.ViewModels
 {
@@ -32,7 +33,7 @@ namespace GpsNote.ViewModels
             _authenticationService = authenticationService;
             _googleAuthenticationService = googleAuthenticationService;
 
-            Title = Resource["LoginText"];
+            Title = Resource["LoginTitle"];
 
             ImageSource = "ic_eye_off.png";
             ShowPassword = false;
@@ -182,36 +183,36 @@ namespace GpsNote.ViewModels
                 switch (resultEmail)
                 {
                     case CodeUserAuthresult.InvalidEmail:
-                        ErrorTextEmail = "Invalid email.Try again";
+                        ErrorTextEmail = Resource["EmailError"];
                         break;
                     case CodeUserAuthresult.EmailNotFound:
-                        ErrorTextEmail = "This email wasn't found";
+                        ErrorTextEmail = Resource["NotFoundEmailError"];
                         break;
                     case CodeUserAuthresult.Passed:
                         break;
                     default:
-                        ErrorTextEmail = "Error";
+                        ErrorTextEmail = Resource["UnknownError"];
                         break;
                 }
 
                 switch (resultPassword)
                 {
                     case CodeUserAuthresult.InvalidPassword:
-                        ErrorTextPassword = "Invalid password. Password must be from 8 to 16 characters";
+                        ErrorTextPassword = Resource["InvalidPasswordError"];
                         break;
                     case CodeUserAuthresult.WrongPassword:
-                        ErrorTextPassword = "Wrong password";
+                        ErrorTextPassword = Resource["WrongPasswordError"];
                         break;
                     case CodeUserAuthresult.Passed:
                         break;
                     default:
-                        ErrorTextPassword = "Error";
+                        ErrorTextPassword = Resource["UnknownError"];
                         break;
                 }
 
                 if (resultEmail == CodeUserAuthresult.Passed && resultPassword == CodeUserAuthresult.Passed)
                 {
-                    await NavigationService.NavigateAsync($"/{nameof(MainTabbedPage)}");
+                    await NavigationService.NavigateAsync(nameof(MainTabbedPage));
                     ErrorTextEmail = string.Empty;
                     ErrorTextPassword = string.Empty;
                 }
@@ -220,11 +221,11 @@ namespace GpsNote.ViewModels
             {
                 ErrorTextEmail = verifyEmail ? 
                                  string.Empty :
-                                 "Invalid email.Try again";
+                                 Resource["EmailError"];
 
                 ErrorTextPassword = verifyPassword ? 
-                                    string.Empty : 
-                                    "Invalid password. Password must be from 8 to 16 characters";
+                                    string.Empty :
+                                    Resource["InvalidPasswordError"];
                 return;
             }
         }

@@ -2,16 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GpsNote.Views.MapPage"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:controls="clr-namespace:GpsNote.Controls"
              Title="{Binding Title}">
 
-
-    <Grid RowDefinitions="*">
+    <StackLayout>
+        
+        <!-- NAVBAR -->
+        <controls:CustomMapNavBar/>
 
         <!-- MAP -->
-        <controls:CustomMap x:Name="map"
+        <controls:CustomMap Grid.Row="1"
+                            x:Name="map"
                             IsMoveCamera="{Binding IsMoveCamera}"
                             CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
@@ -19,7 +22,7 @@
                             IsMyLocationButtonVisible="{Binding MyLocationButtonVisibility}">
 
             <controls:CustomMap.Behaviors>
-                
+
                 <prism:EventToCommandBehavior EventName="CameraIdled"
                                               Command="{Binding CameraIdLedCommand}"
                                               EventArgsParameterPath="Position" />
@@ -32,12 +35,12 @@
                                               EventArgsParameterPath="Pin" />
 
             </controls:CustomMap.Behaviors>
-            
+
         </controls:CustomMap>
 
-        
+
         <!-- SEARCHBAR -->
-        <SearchBar Placeholder="Search"
+        <!--<SearchBar Placeholder="Search"
                    Grid.Row="0"
                    IsVisible="{Binding IsVisibleSearcBar}"
                    HorizontalOptions="FillAndExpand"
@@ -56,10 +59,10 @@
                 
             </SearchBar.Behaviors>
             
-         </SearchBar>
+         </SearchBar>-->
 
         <!-- PIN LIST -->
-        <ListView x:Name="searchResultList"
+        <!--<ListView x:Name="searchResultList"
                   ItemsSource="{Binding SearchResultList}"
                   Grid.Row="0"
                   RowHeight="{Binding ListRowHeight}"
@@ -73,52 +76,52 @@
                   Margin="0, 45, 0, 0">
 
             <ListView.Behaviors>
-                
+
                 <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding Path=BindingContext.ListItemTapCommand, 
                                                         Source={x:Reference searchResultList}}"
                                               EventArgsParameterPath="Item" />
-                
+
             </ListView.Behaviors>
 
             <ListView.ItemTemplate>
-                
+
                 <DataTemplate>
-                    
+
                     <ViewCell>
-                        
+
                         <ViewCell.View>
-                            
+
                             <Grid Background="Transparent"
                                   Padding="5, 5, 5, 5">
-                                
+
                                 <StackLayout Background="Transparent">
-                                    
-                                    <!-- PIN LABEL -->
+
+                                    --><!-- PIN LABEL --><!--
                                     <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
                                                FontSize="Medium" />
 
-                                    <!-- PIN ADDRESS -->
+                                    --><!-- PIN ADDRESS --><!--
                                     <Label Text="{Binding Address}"
                                            FontSize="Medium" />
 
                                 </StackLayout>
-                                
+
                             </Grid>
-                            
+
                         </ViewCell.View>
-                        
+
                     </ViewCell>
-                    
+
                 </DataTemplate>
-                
+
             </ListView.ItemTemplate>
-            
-        </ListView>
+
+        </ListView>-->
 
         <!-- SEARCH BUTTON -->
-        <Button Grid.Row="0" 
+        <!--<Button Grid.Row="0" 
                 ImageSource="search.png"
                 BackgroundColor="Transparent"
                 FontAttributes="None"
@@ -130,8 +133,9 @@
                 HeightRequest="40"
                 Margin="0,10,0,0"
                 IsVisible="{Binding IsVisibleSearchButton}"
-                Command="{Binding SearchButtonTapCommand}"/>
-        
-    </Grid>
-    
+                Command="{Binding SearchButtonTapCommand}"/>-->
+
+        <!--</Grid>-->
+    </StackLayout>
+
 </ContentPage>

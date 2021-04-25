@@ -46,7 +46,7 @@
         <StackLayout Margin="0, 0, 0, 10">
 
             <!-- PASSWORD LABEL -->
-            <Label Text="{Binding Resource[PasswordText]}"
+            <Label Text="{Binding Resource[PasswordLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -57,7 +57,7 @@
                       ErrorText="{Binding ErrorTextPassword}"
                       ShowPassword="{Binding ShowPassword}"
                       TapImage="{Binding TapPasswordImage}"
-                      PlaceholderText="{Binding Resource[PlaceholderCreatePassword]}"/>
+                      PlaceholderText="{Binding Resource[EnterPasswordPlaceholder]}"/>
 
         </StackLayout>
 
@@ -65,7 +65,7 @@
                      Margin="0, 0, 0, 15">
 
             <!-- CONFIRM PASSWORD LABEL -->
-            <Label Text="{Binding Resource[ConfirmPasswordText]}"
+            <Label Text="{Binding Resource[ConfirmPasswordLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -76,13 +76,13 @@
                       ErrorText="{Binding ErrorTextConfirmPassword}"
                       ShowPassword="{Binding ShowConfirmPassword}"
                       TapImage="{Binding TapConfirmPasswordImage}"
-                      PlaceholderText="{Binding Resource[PlaceholderConfirmPassword]}"/>
+                      PlaceholderText="{Binding Resource[ConfirmPasswordPlaceholder]}"/>
 
         </StackLayout>
 
         <!-- CREATE ACCOUNT BUTTON -->
         <Button Grid.Row="2"
-                Text="{Binding Resource[CreateAccountButtonText]}"
+                Text="{Binding Resource[CreateAccountButton]}"
                 Style="{StaticResource mainButton1}"
                 IsEnabled="{Binding IsSignUpButtonEnabled}"
                 Command="{Binding SignUpButtonTapCommand}"
@@ -101,7 +101,7 @@
 
                 <!-- OR LABEL -->
                 <Label Grid.Column="1"
-                       Text="or"
+                       Text="{Binding Resource[OrLabel]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 

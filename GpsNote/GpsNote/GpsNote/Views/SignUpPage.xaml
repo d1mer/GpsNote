@@ -47,7 +47,7 @@
         <StackLayout Margin="0, 0, 0, 10">
 
             <!-- NAME LABEL -->
-            <Label Text="{Binding Resource[NameText]}"
+            <Label Text="{Binding Resource[NameLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -56,7 +56,7 @@
             <controls:CustomEntryAuth ImageSource="ic_clear.png"
                                       TextEntry="{Binding Name}"
                                       ErrorText="{Binding ErrorTextName}"
-                                      PlaceholderText="{Binding Resource[PlaceholderEnterName]}"
+                                      PlaceholderText="{Binding Resource[EnterNamePlaceholder]}"
                                       TapImage="{Binding TapNameImage}"/>
             
         </StackLayout>
@@ -65,7 +65,7 @@
                      Margin="0, 0, 0, 15">
 
             <!-- EMAIL LABEL -->
-            <Label Text="{Binding Resource[EmailText]}"
+            <Label Text="{Binding Resource[EmailLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -75,13 +75,13 @@
                       TextEntry="{Binding Email}"
                       ErrorText="{Binding ErrorTextEmail}"
                       TapImage="{Binding TapEmailImage}"
-                      PlaceholderText="{Binding Resource[PlaceholderEnterEmail]}"/>
+                      PlaceholderText="{Binding Resource[EnterEmailPlaceholder]}"/>
 
         </StackLayout>
 
         <!-- NEXT BUTTON -->
         <Button Grid.Row="2"
-                Text="{Binding Resource[NextText]}"
+                Text="{Binding Resource[NextButton]}"
                 Style="{StaticResource mainButton1}"
                 IsEnabled="{Binding IsNextButtonEnabled}"
                 Command="{Binding NextButtonTapCommand}"
@@ -101,7 +101,7 @@
 
                 <!-- OR LABEL -->
                 <Label Grid.Column="1"
-                       Text="or"
+                       Text="{Binding Resource[OrLabel]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 

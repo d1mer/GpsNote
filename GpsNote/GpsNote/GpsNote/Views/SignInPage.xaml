@@ -46,7 +46,7 @@
         <StackLayout Margin="0, 0, 0, 10">
             
             <!-- EMAIL LABEL -->
-            <Label Text="{Binding Resource[EmailText]}"
+            <Label Text="{Binding Resource[EmailLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -55,7 +55,7 @@
             <controls:CustomEntryAuth ImageSource="ic_clear.png"
                                       TextEntry="{Binding Email}"
                                       ErrorText="{Binding ErrorTextEmail}"
-                                      PlaceholderText="{Binding Resource[PlaceholderEnterEmail]}"
+                                      PlaceholderText="{Binding Resource[EnterEmailPlaceholder]}"
                                       TapImage="{Binding TapEmailImage}"/>
 
             
@@ -66,7 +66,7 @@
                      Margin="0, 0, 0, 15">
 
             <!-- PASSWORD LABEL -->
-            <Label Text="{Binding Resource[PasswordText]}"
+            <Label Text="{Binding Resource[PasswordLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
@@ -77,13 +77,13 @@
                       ErrorText="{Binding ErrorTextPassword}"
                       ShowPassword="{Binding ShowPassword}"
                       TapImage="{Binding TapPasswordImage}"
-                      PlaceholderText="{Binding Resource[PlaceholderEnterPassword]}"/>
+                      PlaceholderText="{Binding Resource[EnterPasswordPlaceholder]}"/>
 
         </StackLayout>
         
         <!-- LOGIN BUTTON -->
         <Button Grid.Row="2"
-                Text="{Binding Resource[LoginText]}"
+                Text="{Binding Resource[LoginButton]}"
                 Style="{StaticResource mainButton1}"
                 IsEnabled="{Binding IsSignInButtonEnabled}"
                 Command="{Binding OnSignInButtonTapCommand}"
@@ -102,7 +102,7 @@
                 
                 <!-- OR LABEL -->
                 <Label Grid.Column="1"
-                       Text="or"
+                       Text="{Binding Resource[OrLabel]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 

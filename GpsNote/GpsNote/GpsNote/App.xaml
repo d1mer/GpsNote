@@ -36,19 +36,22 @@
       
         <!-- NAVIGATION PAGE STYLE -->
         <Style TargetType="NavigationPage">
-            
+
             <Setter Property="BarBackgroundColor"
                     Value="Transparent" />
-            
+
         </Style>
 
         <!-- Page -->
         <Style TargetType="Page">
-            
+
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Light={StaticResource SystemWhite}, 
                                             Dark={StaticResource Black}}" />
-            
+
+            <Setter Property="NavigationPage.HasBackButton"
+                    Value="False" />
+
         </Style>
 
         <!-- BUTTON -->

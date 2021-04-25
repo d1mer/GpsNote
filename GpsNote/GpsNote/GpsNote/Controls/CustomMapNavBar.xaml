@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GpsNote.Controls.CustomMapNavBar">
+
+
+    <StackLayout Orientation="Horizontal">
+        
+        <!-- SETTINGS IMAGE BUTTON -->
+        <ImageButton x:Name="settingsButton"
+                     Source="ic_settings.png"
+                     BackgroundColor="Transparent"
+                     VerticalOptions="CenterAndExpand"
+                     Margin="15, 10, 15, 5"
+                     Clicked="SettingsButton_Clicked" />
+
+        <!-- LOGOUT IMAGE BUTTON -->
+        <ImageButton x:Name="logOutButton"
+                     Source="ic_exid.png"
+                     BackgroundColor="Transparent"
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="EndAndExpand"
+                     Margin="15, 10, 15, 5"
+                     Clicked="LogOutButton_Clicked" />
+
+    </StackLayout>
+
+</ContentView>

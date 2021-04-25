@@ -20,7 +20,7 @@ namespace GpsNote.Services.Localization
         {
             _settingsManager = settingsManager;
             _currentCultureInfo = new CultureInfo(_settingsManager.Lang);
-            _resourceManager = new ResourceManager(typeof(LangResource));
+            _resourceManager = new ResourceManager(typeof(ResourcesLang));
 
             MessagingCenter.Subscribe<object, CultureInfo>(this, string.Empty, OnCultureChanged);
         }
