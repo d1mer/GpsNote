@@ -11,6 +11,7 @@ using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Services.Localization;
 using GpsNote.Helpers;
+using System.ComponentModel;
 
 namespace GpsNote.ViewModels
 {
@@ -95,6 +96,34 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref latitudePinError, value);
         }
 
+        private bool tapLabelImage;
+        public bool TapLabelImage
+        {
+            get => tapLabelImage;
+            set => SetProperty(ref tapLabelImage, value);
+        }
+
+        private bool tapDescriptionImage;
+        public bool TapDescriptionImage
+        {
+            get => tapDescriptionImage;
+            set => SetProperty(ref tapDescriptionImage, value);
+        }
+
+        private bool tapLongtitudeImage;
+        public bool TapLongtitudeImage
+        {
+            get => tapLongtitudeImage;
+            set => SetProperty(ref tapLongtitudeImage, value);
+        }
+
+        private bool tapLatitudeImage;
+        public bool TapLatitudeImage
+        {
+            get => tapLatitudeImage; 
+            set => SetProperty(ref tapLatitudeImage, value);
+        }
+
 
         private CameraUpdate initialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
         public CameraUpdate InitialCameraUpdate
@@ -123,7 +152,7 @@ namespace GpsNote.ViewModels
             {
                 LabelPinText = pinViewModel.Label;
                 LatitudePinText = pinViewModel.Latitude.ToString();
-                LongitudePinText = pinViewModel.Longitude.ToString();
+                LongitudePinText = pinViewModel.Longtitude.ToString();
                 DescriptionText = pinViewModel.Description;
 
                 Pin pin = pinViewModel.ToPin();
@@ -139,6 +168,28 @@ namespace GpsNote.ViewModels
                 editMode = true;
                 editPinViewModel = pinViewModel;
                 Title = Resource["EditPinTitle"];
+            }
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if(args.PropertyName == nameof(TapLabelImage))
+            {
+                LabelPinText = string.Empty;
+            }
+            else if(args.PropertyName == nameof(TapDescriptionImage))
+            {
+                DescriptionText = string.Empty;
+            }
+            else if(args.PropertyName == nameof(TapLongtitudeImage))
+            {
+                LongitudePinText = string.Empty;
+            }
+            else if(args.PropertyName == nameof(TapLatitudeImage))
+            {
+                LatitudePinText = string.Empty;
             }
         }
 

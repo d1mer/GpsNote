@@ -142,8 +142,13 @@ namespace GpsNote.Controls
         private static void TextEntryPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             CustomEntryAuth customEntry = bindable as CustomEntryAuth;
+            string value = (string)newValue;
 
-            customEntry.entry.Text = (string)newValue;
+            if (customEntry != null)
+            {
+                customEntry.entry.Text = value;
+                customEntry.errorLabel.Text = string.Empty;
+            }    
         }
 
 

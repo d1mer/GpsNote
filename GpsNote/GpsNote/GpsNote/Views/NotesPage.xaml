@@ -14,95 +14,111 @@
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
                                   SearchResultList="{Binding SearchResultList}"/>
 
-        <!-- PINS LIST -->
-        <!--<ListView x:Name="pinsListView"
-                  Grid.Row="1"
+        <ListView Grid.Row="1"
+                  x:Name="pinsListView"
                   ItemsSource="{Binding PinsList}"
                   HasUnevenRows="True"
                   SelectionMode="None"
                   SeparatorVisibility="None"
                   Background="Transparent">
 
-            
-
-            <ListView.Behaviors>
-                
-                <prism:EventToCommandBehavior EventName="ItemTapped"
-                                              Command="{Binding Path=BindingContext.ItemTapCommand, 
-                                                        Source={x:Reference pinsListView}}"
-                                              EventArgsParameterPath="Item" />
-                
-            </ListView.Behaviors>
-
             <ListView.ItemTemplate>
-                
+
                 <DataTemplate>
-                    
+
                     <ViewCell>
-                        
+
                         <ViewCell.ContextActions>
-                            
-                            <MenuItem Text="{Binding Path=BindingContext.Resource[EditText],
+
+                            <MenuItem IconImageSource="ic_edit.png" 
+                                      Text="{Binding Path=BindingContext.Resource[EditText],
                                                      Source={x:Reference pinsListView}}"
                                       Command="{Binding Path=BindingContext.UpdateTapCommand, 
-                                                Source={x:Reference pinsListView}}"
+                                                Source={x:Reference pinsListView}}"  
                                       CommandParameter="{Binding .}"/>
 
-                            <MenuItem Text="{Binding Path=BindingContext.Resource[DeleteText],
+                            <MenuItem IconImageSource="ic_delete.png" 
+                                      Text="{Binding Path=BindingContext.Resource[DeleteText],
                                                      Source={x:Reference pinsListView}}"
                                       Command="{Binding Path=BindingContext.DeleteTapCommand, 
                                                 Source={x:Reference pinsListView}}"
                                       CommandParameter="{Binding .}"/>
-                            
-                        </ViewCell.ContextActions>
-                        
-                        <ViewCell.View>
-                            
-                            <Grid Background="Transparent">
-                                
-                                <Grid ColumnDefinitions="0.2*, *"
-                                      Padding="5, 15, 15, 15">
 
+                        </ViewCell.ContextActions>
+
+                        <ViewCell.View>
+
+                            <StackLayout Background="Transparent">
+
+                               <!-- SEPARATOR -->
+                                <BoxView Style="{StaticResource separator}" />
+
+                                <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*"
+                                      Padding="0, 0, 0, 10">
+
+                                    <!-- IMAGE HEART -->
                                     <ImageButton Source="{Binding ImagePath}"
                                                  BackgroundColor="Transparent"
-                                                 Margin="10, 0, 10, 0"
-                                                 HeightRequest="15"
-                                                 Command="{Binding Path=BindingContext.ImageTapCommand, 
-                                                                          Source={x:Reference pinsListView}}"
+                                                 Margin="15, 5"
+                                                 Command="{Binding Path=BindingContext.HeartImageTapCommand, 
+                                                                   Source={x:Reference pinsListView}}"
                                                  CommandParameter="{Binding .}">
 
                                     </ImageButton>
-                                    
+
                                     <StackLayout Grid.Column="1"
                                                  Background="Transparent">
-                                        
-                                        --><!-- PIN LABEL --><!--
+
+                                        <!-- PIN LABEL -->
                                         <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
-                                               FontSize="Medium" />
-                                        
-                                        --><!-- PIN ADDRESS --><!--
-                                        <Label Grid.Row="1"
-                                               Text="{Binding Address}"
-                                               FontSize="Medium" />
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
+
+                                        <Grid ColumnDefinitions="*, *"
+                                              
+                                              Background="Transparent">
+
+                                            <!-- LONGTITUDE LABEL -->
+                                            <Label Text="{Binding Longtitude}"
+                                                   FontSize="Small"/>
+
+                                            <!-- LATITUDE LABEL -->
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Latitude}"
+                                                   FontSize="Small" />
+
+                                        </Grid>
 
                                     </StackLayout>
-                                    
-                                </Grid>
-                                
-                            </Grid>
-                            
-                        </ViewCell.View>
-                        
-                    </ViewCell>
-                    
-                </DataTemplate>
-                
-            </ListView.ItemTemplate>
-            
-        </ListView>-->
 
-        <!-- ADDEDIT PIN BUTTON -->
+                                    <!-- IMAGE ARROW -->
+                                    <ImageButton Grid.Column="2"
+                                                 Source="ic_left_gray.png"
+                                                 BackgroundColor="Transparent"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Center"
+                                                 Command="{Binding Path=BindingContext.ArrowImageTapCommand, 
+                                                                   Source={x:Reference pinsListView}}"
+                                                 CommandParameter="{Binding .}">
+
+                                    </ImageButton>
+
+                                </Grid>
+
+                            </StackLayout>
+
+                        </ViewCell.View>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <!-- ADD BUTTON -->
         <Button Grid.Row="1" 
                 ImageSource="ic_plus2x.png"
                 FontAttributes="None"
@@ -115,7 +131,7 @@
                 HeightRequest="70"
                 Margin="0,0,20,20"
                 Command="{Binding AddEditPinTapCommand}"/>
-        
+
     </Grid>
-    
+
 </ContentPage>

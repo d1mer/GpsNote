@@ -1,6 +1,8 @@
 ﻿using GpsNote.Models;
 using GpsNote.ViewModels.ExtentedViewModels;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Helpers;
+using System;
 
 namespace GpsNote.Extensions
 {
@@ -26,7 +28,7 @@ namespace GpsNote.Extensions
                 Id = pinViewModel.Id,
                 Label = pinViewModel.Label,
                 Latitude = pinViewModel.Latitude,
-                Longitude = pinViewModel.Longitude,
+                Longitude = pinViewModel.Longtitude,
                 Address = pinViewModel.Address,
                 Description = pinViewModel.Description,
                 IsEnable = pinViewModel.IsEnabled
@@ -40,7 +42,7 @@ namespace GpsNote.Extensions
             Pin pin = new Pin
             {
                 Label = pinViewModel.Label,
-                Position = new Position(pinViewModel.Latitude, pinViewModel.Longitude),
+                Position = new Position(pinViewModel.Latitude, pinViewModel.Longtitude),
                 IsVisible = pinViewModel.IsEnabled,
                 Address = pinViewModel.Address
             };
@@ -63,11 +65,14 @@ namespace GpsNote.Extensions
 
         public static PinViewModel ToPinViewModel(this Pin pin)
         {
+            double latitude = GetDoubleTruncated(pin.Position.Latitude);
+            double longtitude = GetDoubleTruncated(pin.Position.Longitude);
+
             PinViewModel pinViewModel = new PinViewModel
             {
                 Label = pin.Label,
-                Latitude = pin.Position.Latitude,
-                Longitude = pin.Position.Longitude,
+                Latitude = latitude,
+                Longtitude = longtitude,
                 IsEnabled = pin.IsVisible,
                 Address = pin.Address
             };
@@ -77,11 +82,14 @@ namespace GpsNote.Extensions
 
         public static PinViewModel ToPinViewModel(this PinModel pinModel)
         {
+            double latitude = GetDoubleTruncated(pinModel.Latitude);
+            double longtitude = GetDoubleTruncated(pinModel.Longitude);
+
             PinViewModel pinViewModel = new PinViewModel
             {
                 Id = pinModel.Id,
-                Latitude = pinModel.Latitude,
-                Longitude = pinModel.Longitude,
+                Latitude = latitude,
+                Longtitude = longtitude,
                 Label = pinModel.Label,
                 Address = pinModel.Address,
                 Description = pinModel.Description,
@@ -90,5 +98,11 @@ namespace GpsNote.Extensions
 
             return pinViewModel;
         }       
+
+        private static double GetDoubleTruncated(double digit)
+        {
+            string str = DoubleOutFormat.Format(digit);
+            return Convert.ToDouble(str);
+        }
     }
 }

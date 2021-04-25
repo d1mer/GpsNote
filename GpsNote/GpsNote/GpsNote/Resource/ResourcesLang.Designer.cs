@@ -286,6 +286,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteText {
+            get {
+                return ResourceManager.GetString("DeleteText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         internal static string DescriptionLabel {
@@ -309,6 +318,15 @@ namespace GpsNote.Resource {
         internal static string EditPinTitle {
             get {
                 return ResourceManager.GetString("EditPinTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string EditText {
+            get {
+                return ResourceManager.GetString("EditText", resourceCulture);
             }
         }
         
@@ -745,6 +763,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pins.
+        /// </summary>
+        internal static string PinsTitle {
+            get {
+                return ResourceManager.GetString("PinsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
         internal static string Placeholder14 {
@@ -828,24 +855,6 @@ namespace GpsNote.Resource {
         /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
-        internal static string Text10 {
-            get {
-                return ResourceManager.GetString("Text10", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Text6 {
-            get {
-                return ResourceManager.GetString("Text6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
         internal static string Text7 {
             get {
                 return ResourceManager.GetString("Text7", resourceCulture);
@@ -867,15 +876,6 @@ namespace GpsNote.Resource {
         internal static string Text9 {
             get {
                 return ResourceManager.GetString("Text9", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Title3 {
-            get {
-                return ResourceManager.GetString("Title3", resourceCulture);
             }
         }
         

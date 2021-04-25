@@ -65,7 +65,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref _isSignInButtonEnabled, value);
         }
 
-
         private string errorTextEmail;
         public string ErrorTextEmail 
         {

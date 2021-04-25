@@ -100,29 +100,35 @@
 
                         <ViewCell.View>
 
-                            <StackLayout>
-
+                            <StackLayout Background="Transparent">
+                                
+                                <!-- SEPARATOR -->
                                 <BoxView Style="{StaticResource separator}"/>
 
                                 <Grid ColumnDefinitions="0.2*, 0.8*"
                                       Background="Transparent"
-                                      Padding="5, 5, 5, 5">
-
+                                      Padding="0, 0, 0, 10">
+                                    
+                                    <!-- IMAGE PIN -->
                                     <Image Source="ic_pin_gray.png"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="Center" />
+                                           HorizontalOptions="Center"
+                                           Margin="15, 5"/>
 
                                     <StackLayout Grid.Column="1"
-                                                 Background="Transparent">
+                                                 Background="Transparent"
+                                                 Spacing="10">
 
                                         <!-- PIN LABEL -->
                                         <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
-                                               FontSize="Medium" />
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
 
                                         <!-- PIN ADDRESS -->
                                         <Label Text="{Binding Address}"
-                                           FontSize="Medium" />
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
 
                                     </StackLayout>
 

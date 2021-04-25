@@ -21,7 +21,7 @@ namespace GpsNote.ViewModels.ExtentedViewModels
         }
 
         private double longitude;
-        public double Longitude
+        public double Longtitude
         {
             get => longitude;
             set => SetProperty(ref longitude, value);
