@@ -17,6 +17,7 @@ using GpsNote.Services.TimeZone;
 using GpsNote.Services.Localization;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using System.ComponentModel;
 
 namespace GpsNote.ViewModels
 {
@@ -131,15 +132,19 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref listHeiqhtRequest, value);
         }
 
+        private string searchText;
+        public string SearchText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value);
+        }
+
 
         private DelegateCommand<Object> cameraIdLedCommand;
         public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? new DelegateCommand<Object>(OnCameraLed);
 
         private DelegateCommand searchButtonTapCommand;
         public DelegateCommand SearchButtonTapCommand => searchButtonTapCommand ?? new DelegateCommand(OnSearchButtonTap);
-
-        private DelegateCommand<object> searchTextChangedCommand;
-        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? new DelegateCommand<object>(OnSearchPin);
 
         private DelegateCommand<object> unfocusedSearchbarCommand;
         public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? new DelegateCommand<object>(OnUnfocusedSearch);
@@ -190,6 +195,16 @@ namespace GpsNote.ViewModels
             }
         }
 
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if(args.PropertyName == nameof(SearchText))
+            {
+                OnSearchPin(SearchText);
+            }
+        }
+
         #endregion
 
 
@@ -227,20 +242,12 @@ namespace GpsNote.ViewModels
             MyLocationButtonVisibility = false;
         }
 
-        private void OnSearchPin(object obj)
+        private void OnSearchPin(string newText)
         {
-            string newText = obj as string;
-
             if (!string.IsNullOrWhiteSpace(newText))
             {
                 var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
                 SearchResultList = new ObservableCollection<Pin>(list);
-                ListHeiqhtRequest = ListRowHeight * list.Count;
-                IsSearchListVisible = true;
-            }
-            else
-            {
-                IsSearchListVisible = false;
             }
         }
 

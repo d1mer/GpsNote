@@ -327,9 +327,6 @@
   <data name="PasswordMismatchError" xml:space="preserve">
     <value>passwords mismatch</value>
   </data>
-  <data name="Placeholder1" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Placeholder10" xml:space="preserve">
     <value>1</value>
   </data>
@@ -359,6 +356,9 @@
   </data>
   <data name="Placeholder5" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="SuccessText" xml:space="preserve">
     <value>SUCCESS</value>

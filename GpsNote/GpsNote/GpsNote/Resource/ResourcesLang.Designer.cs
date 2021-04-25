@@ -693,15 +693,6 @@ namespace GpsNote.Resource {
         /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
-        internal static string Placeholder1 {
-            get {
-                return ResourceManager.GetString("Placeholder1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
         internal static string Placeholder10 {
             get {
                 return ResourceManager.GetString("Placeholder10", resourceCulture);
@@ -786,6 +777,15 @@ namespace GpsNote.Resource {
         internal static string Placeholder5 {
             get {
                 return ResourceManager.GetString("Placeholder5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
             }
         }
         
