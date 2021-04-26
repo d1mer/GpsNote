@@ -6,7 +6,8 @@
     <StackLayout>
 
         <Frame x:Name="frame"
-               Style="{StaticResource frameStyle}">
+               Style="{StaticResource frameStyle}"
+               HasShadow="False">
 
             <Grid ColumnDefinitions="0.9*, 0.1*">
 

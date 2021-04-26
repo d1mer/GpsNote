@@ -4,6 +4,8 @@
              x:Class="GpsNote.Views.SettingsPage"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
              Title="Settings">
 
     <!-- NAVIGATION BAR -->

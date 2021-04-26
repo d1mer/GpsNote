@@ -124,7 +124,7 @@
                 FontAttributes="None"
                 BackgroundColor="{AppThemeBinding Light={StaticResource LightBlue},
                                                   Dark={StaticResource DarkBlue}}"
-                BorderRadius ="60"
+                BorderRadius ="28"
                 HorizontalOptions="End"
                 VerticalOptions="End"
                 WidthRequest="56"

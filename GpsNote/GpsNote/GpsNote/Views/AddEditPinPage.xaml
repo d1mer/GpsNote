@@ -4,6 +4,8 @@
              x:Class="GpsNote.Views.AddEditPinPage"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              xmlns:prism="http://prismlibrary.com"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False"
              Title="{Binding Title}">
 
     <!-- NAVIGATION BAR -->

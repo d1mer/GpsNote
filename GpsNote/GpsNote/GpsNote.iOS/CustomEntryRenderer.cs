@@ -1,7 +1,10 @@
-﻿using System.ComponentModel;
+﻿using GpsNote.iOS;
+using System.ComponentModel;
 using UIKit;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
+[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
 namespace GpsNote.iOS
 {
     public class CustomEntryRenderer : EntryRenderer
@@ -10,8 +13,23 @@ namespace GpsNote.iOS
         {
             base.OnElementPropertyChanged(sender, e);
 
-            //Control.Layer.BorderWidth = 0;
-            //Control.BorderStyle = UITextBorderStyle.None;
+            if(Control != null)
+            {
+                Control.Layer.BorderWidth = 0;
+                Control.BorderStyle = UITextBorderStyle.None;
+                Control.Background = null;
+            }
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        {
+            base.OnElementChanged(e);
+
+            //if(Control != null)
+            //{
+            //    Control.Layer.BorderWidth = 0;
+            //    Control.BorderStyle = UITextBorderStyle.None;
+            //}
         }
     }
 }
