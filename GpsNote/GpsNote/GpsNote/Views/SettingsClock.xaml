@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:GpsNote.Resource"
+             x:Class="GpsNote.Views.SettingsClock"
+             NavigationPage.HasBackButton="False">
+    
+        <!-- NAVIGATION BAR -->
+        <NavigationPage.TitleView>
+
+            <Grid ColumnDefinitions="0.1*, 0.9*">
+
+                <!-- BACK ARROW IMAGE -->
+                <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start">
+
+                    <Image.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+
+                    </Image.GestureRecognizers>
+
+                </Image>
+
+                <!-- TITLE LABEL -->
+                <Label Grid.Column="1"
+                       Text="{Binding Title}" 
+                       Style="{StaticResource navBarTitle}"
+                       HorizontalOptions="StartAndExpand"
+                       Margin="40, 0"/>
+
+            </Grid>
+
+        </NavigationPage.TitleView>
+
+    <StackLayout Background="Transparent"
+                 RadioButtonGroup.GroupName="{Binding ClockColor}"
+                 RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
+
+        <BoxView Style="{StaticResource separator}"/>
+
+        <RadioButton Content="{x:Static resources:ResourcesLang.BlueText}"
+                     FontSize="Medium"
+                     Margin="15"
+                     IsChecked="True"/>
+
+        <BoxView Style="{StaticResource separator}"/>
+
+        <RadioButton Content="{x:Static resources:ResourcesLang.RedText}"
+                     FontSize="Medium"
+                     Margin="15"/>
+
+        <BoxView Style="{StaticResource separator}"/>
+
+        <RadioButton Content="{x:Static resources:ResourcesLang.GreenText}"
+                     FontSize="Medium"
+                     Margin="15"/>
+
+        <BoxView Style="{StaticResource separator}"/>
+
+
+    </StackLayout>
+        
+</ContentPage>

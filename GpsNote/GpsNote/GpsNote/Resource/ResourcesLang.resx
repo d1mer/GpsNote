@@ -123,6 +123,9 @@
   <data name="AddPinTitle" xml:space="preserve">
     <value>Add pin</value>
   </data>
+  <data name="BlueText" xml:space="preserve">
+    <value>Blue</value>
+  </data>
   <data name="Button10" xml:space="preserve">
     <value>1</value>
   </data>
@@ -177,6 +180,9 @@
   <data name="CancelText" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="ColorClockLabel" xml:space="preserve">
+    <value>Color of the clock</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Confirm password</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="CreateAccountTitle" xml:space="preserve">
     <value>Create an account</value>
+  </data>
+  <data name="DarkThemeLabel" xml:space="preserve">
+    <value>Dark theme</value>
   </data>
   <data name="DeleteText" xml:space="preserve">
     <value>Delete</value>
@@ -270,17 +279,11 @@
   <data name="ErrorText" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="GreenText" xml:space="preserve">
+    <value>Green</value>
+  </data>
   <data name="InvalidPasswordError" xml:space="preserve">
     <value>invalid password. password must be from 8 to 16 characters</value>
-  </data>
-  <data name="Label12" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label13" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label14" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Label15" xml:space="preserve">
     <value>1</value>
@@ -314,6 +317,9 @@
   </data>
   <data name="LabelPinError" xml:space="preserve">
     <value>Label should not be empty</value>
+  </data>
+  <data name="LanguageLabel" xml:space="preserve">
+    <value>Language</value>
   </data>
   <data name="LatitudeError" xml:space="preserve">
     <value>Latitude should not be empty</value>
@@ -372,29 +378,23 @@
   <data name="Placeholder5" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="RedText" xml:space="preserve">
+    <value>Red</value>
+  </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SettingsClockTitle" xml:space="preserve">
+    <value>Color of the clock</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="SuccessText" xml:space="preserve">
     <value>SUCCESS</value>
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>email taken</value>
-  </data>
-  <data name="Text7" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Text8" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Text9" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title4" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title5" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Title6" xml:space="preserve">
     <value>1</value>

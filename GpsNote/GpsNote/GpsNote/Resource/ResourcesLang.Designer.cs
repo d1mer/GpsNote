@@ -79,6 +79,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blue.
+        /// </summary>
+        internal static string BlueText {
+            get {
+                return ResourceManager.GetString("BlueText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
         internal static string Button10 {
@@ -241,6 +250,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color of the clock.
+        /// </summary>
+        internal static string ColorClockLabel {
+            get {
+                return ResourceManager.GetString("ColorClockLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         internal static string ConfirmPasswordLabel {
@@ -282,6 +300,15 @@ namespace GpsNote.Resource {
         internal static string CreateAccountTitle {
             get {
                 return ResourceManager.GetString("CreateAccountTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark theme.
+        /// </summary>
+        internal static string DarkThemeLabel {
+            get {
+                return ResourceManager.GetString("DarkThemeLabel", resourceCulture);
             }
         }
         
@@ -520,38 +547,20 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Green.
+        /// </summary>
+        internal static string GreenText {
+            get {
+                return ResourceManager.GetString("GreenText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to invalid password. password must be from 8 to 16 characters.
         /// </summary>
         internal static string InvalidPasswordError {
             get {
                 return ResourceManager.GetString("InvalidPasswordError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Label12 {
-            get {
-                return ResourceManager.GetString("Label12", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Label13 {
-            get {
-                return ResourceManager.GetString("Label13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Label14 {
-            get {
-                return ResourceManager.GetString("Label14", resourceCulture);
             }
         }
         
@@ -651,6 +660,15 @@ namespace GpsNote.Resource {
         internal static string LabelPinError {
             get {
                 return ResourceManager.GetString("LabelPinError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
             }
         }
         
@@ -826,11 +844,38 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Red.
+        /// </summary>
+        internal static string RedText {
+            get {
+                return ResourceManager.GetString("RedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string SearchPlaceholder {
             get {
                 return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color of the clock.
+        /// </summary>
+        internal static string SettingsClockTitle {
+            get {
+                return ResourceManager.GetString("SettingsClockTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         
@@ -849,51 +894,6 @@ namespace GpsNote.Resource {
         internal static string TakenEmailError {
             get {
                 return ResourceManager.GetString("TakenEmailError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Text7 {
-            get {
-                return ResourceManager.GetString("Text7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Text8 {
-            get {
-                return ResourceManager.GetString("Text8", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Text9 {
-            get {
-                return ResourceManager.GetString("Text9", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Title4 {
-            get {
-                return ResourceManager.GetString("Title4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Title5 {
-            get {
-                return ResourceManager.GetString("Title5", resourceCulture);
             }
         }
         

@@ -137,6 +137,9 @@ namespace GpsNote.ViewModels
         private DelegateCommand signInGoogleButtonTapCommand;
         public DelegateCommand SignInGoogleButtonTapCommand => signInGoogleButtonTapCommand ?? new DelegateCommand(OnSignInGoogleAsync);
 
+        private DelegateCommand backPressedCommand;
+        public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
+
         #endregion
 
 

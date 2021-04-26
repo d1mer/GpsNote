@@ -123,6 +123,9 @@
   <data name="AddPinTitle" xml:space="preserve">
     <value>Добавление метки</value>
   </data>
+  <data name="BlueText" xml:space="preserve">
+    <value>Синий</value>
+  </data>
   <data name="Button10" xml:space="preserve">
     <value>1</value>
   </data>
@@ -177,6 +180,9 @@
   <data name="CancelText" xml:space="preserve">
     <value>Закрыть</value>
   </data>
+  <data name="ColorClockLabel" xml:space="preserve">
+    <value>Цвет часов</value>
+  </data>
   <data name="ConfirmPasswordLabel" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="CreateAccountTitle" xml:space="preserve">
     <value>Создание аккаунта</value>
+  </data>
+  <data name="DarkThemeLabel" xml:space="preserve">
+    <value>Темная тема</value>
   </data>
   <data name="DeleteText" xml:space="preserve">
     <value>Удалить</value>
@@ -270,17 +279,11 @@
   <data name="ErrorText" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="GreenText" xml:space="preserve">
+    <value>Зеленый</value>
+  </data>
   <data name="InvalidPasswordError" xml:space="preserve">
     <value>неверный пароль. пароль должен быть от 8 до 16 символов</value>
-  </data>
-  <data name="Label12" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label13" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label14" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Label15" xml:space="preserve">
     <value>1</value>
@@ -314,6 +317,9 @@
   </data>
   <data name="LabelPinError" xml:space="preserve">
     <value>Название не должно быть пустым</value>
+  </data>
+  <data name="LanguageLabel" xml:space="preserve">
+    <value>Язык</value>
   </data>
   <data name="LatitudeError" xml:space="preserve">
     <value>поле широты не должно быть пустым</value>
@@ -372,29 +378,23 @@
   <data name="Placeholder5" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="RedText" xml:space="preserve">
+    <value>Красный</value>
+  </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Поиск</value>
+  </data>
+  <data name="SettingsClockTitle" xml:space="preserve">
+    <value>Цвет часов</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Настройки</value>
   </data>
   <data name="SuccessText" xml:space="preserve">
     <value>Успех</value>
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>такой адрес уже занят</value>
-  </data>
-  <data name="Text7" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Text8" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Text9" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title4" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Title5" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Title6" xml:space="preserve">
     <value>1</value>

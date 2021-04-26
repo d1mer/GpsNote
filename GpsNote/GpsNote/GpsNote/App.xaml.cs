@@ -90,6 +90,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<ClockPopupPage, ClockPopupViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage2, SignUpViewModel2>();
+            containerRegistry.RegisterForNavigation<SettingsClock, SettingsClockViewModel>();
         }
     }
 }

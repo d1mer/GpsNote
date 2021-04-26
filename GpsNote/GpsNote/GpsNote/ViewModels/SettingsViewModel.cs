@@ -6,6 +6,7 @@ using GpsNote.Services.Authorization;
 using GpsNote.Views;
 using GpsNote.Services.Theme;
 using GpsNote.Services.Localization;
+using System;
 
 namespace GpsNote.ViewModels
 {
@@ -22,10 +23,12 @@ namespace GpsNote.ViewModels
         {
             _authorizationService = authorizationService;
             _themeService = themeService;
+
+            Title = Resource["SettingsTitle"];
         }
 
 
-        #region -- Publics --
+        #region -- Public properties --
 
         private bool isToogled;
         public bool IsToogled
@@ -34,8 +37,11 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref isToogled, value);
         }
 
-        private DelegateCommand logOutCommand;
-        public DelegateCommand LogOutCommand => logOutCommand ?? new DelegateCommand(OnLogoutAsync);
+        private DelegateCommand backPressedCommand;
+        public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
+
+        private DelegateCommand clockColorArrowTap;
+        public DelegateCommand ClockColorArrowTap => clockColorArrowTap ?? new DelegateCommand(OnClockSettingsTapAsync);
 
         #endregion
 
@@ -63,6 +69,11 @@ namespace GpsNote.ViewModels
             await NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 
+        private void OnBackPressed()
+        {
+            NavigationService.GoBackAsync();
+        }
+
         private void OnChangeTheme()
         {
             switch (IsToogled)
@@ -76,6 +87,11 @@ namespace GpsNote.ViewModels
                     _themeService.Theme = (int)OSAppTheme.Light;
                     break;
             }
+        }
+
+        private async void OnClockSettingsTapAsync()
+        {
+            await NavigationService.NavigateAsync(nameof(SettingsClock));
         }
 
         #endregion
