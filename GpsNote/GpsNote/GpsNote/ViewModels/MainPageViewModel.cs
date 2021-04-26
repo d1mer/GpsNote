@@ -32,12 +32,12 @@ namespace GpsNote.ViewModels
 
         private async void OnLoginTapAsync()
         {
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}/{nameof(SignInPage)}");
+            await NavigationService.NavigateAsync($"/{nameof(MainPage)}/{nameof(SignInPage)}");
         }
 
         private async void OnRegistrationTapAsync()
         {
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainPage)}/{nameof(SignUpPage)}");
+            await NavigationService.NavigateAsync($"/{nameof(MainPage)}/{nameof(SignUpPage)}");
         }
 
         #endregion

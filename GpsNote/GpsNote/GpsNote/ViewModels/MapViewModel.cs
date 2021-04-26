@@ -284,10 +284,6 @@ namespace GpsNote.ViewModels
             
             if (pin != null)
             {
-                
-
-                
-
                 NavigationParameters parameter = new NavigationParameters
                 {
                     {Constants.DISPLAY_PIN, pin }

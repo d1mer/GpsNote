@@ -87,7 +87,7 @@ namespace GpsNote.ViewModels.PinPopup
         {
             base.Initialize(parameters);
 
-            if(parameters.TryGetValue<Pin>(Constants.DISPLAY_PIN, out Pin pin))
+            if(parameters.TryGetValue<Pin>(Constants.DISPLAY_PIN, out pin))
             {
                 if(pin != null)
                 {
@@ -120,23 +120,26 @@ namespace GpsNote.ViewModels.PinPopup
 
         private async void OnShowClockAsync()
         {
-            TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
-
-            if (timeZoneResponse.Status == "OK")
+            if(pin != null)
             {
-                (Pin, TimeZoneResponse) tup = (pin, timeZoneResponse);
+                TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
 
-                NavigationParameters parameter = new NavigationParameters
+                if (timeZoneResponse.Status == "OK")
+                {
+                    (Pin, TimeZoneResponse) tup = (pin, timeZoneResponse);
+
+                    NavigationParameters parameter = new NavigationParameters
                 {
                    {Constants.TUPLE, tup }
                 };
 
-                await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
-            }
-            else
-            {
-                await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
-            }
+                    await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
+                }
+                else
+                {
+                    await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
+                }
+            }          
         }
         #endregion
     }

@@ -3,75 +3,78 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              x:Class="GpsNote.Views.SignInPage"
-             NavigationPage.HasBackButton="False">
-    
-    <!-- NAVIGATION BAR -->
-    <NavigationPage.TitleView>
-        
+             NavigationPage.HasNavigationBar="False">
+
+
+    <Grid RowDefinitions="0.1*, *"
+          Background="Transparent">
+
+        <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="0.4*, 0.6*">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
-                   HorizontalOptions="Start">
-                
+                   HorizontalOptions="Start"
+                   Margin="10, 0, 0, 0">
+
                 <Image.GestureRecognizers>
 
                     <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
-                    
+
                 </Image.GestureRecognizers>
-                
+
             </Image>
-            
+
             <!-- TITLE LABEL -->
             <Label Grid.Column="1"
                    Text="{Binding Title}" 
-                   Style="{StaticResource navBarTitle}"/>
+                   Style="{StaticResource navBarTitle}"
+                   VerticalOptions="Center"/>
 
         </Grid>
-        
-    </NavigationPage.TitleView>
 
+        <!-- CONTENT -->
+        <Grid Grid.Row="1"
+              Margin="20, 5, 20, 0">
 
-    <Grid Margin="20, 5, 20, 0">
+            <Grid.RowDefinitions>
 
-        <Grid.RowDefinitions>
-            
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            
-        </Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
-        <StackLayout Margin="0, 0, 0, 10">
-            
-            <!-- EMAIL LABEL -->
-            <Label Text="{Binding Resource[EmailLabel]}"
+            </Grid.RowDefinitions>
+
+            <StackLayout Margin="0, 0, 0, 10">
+
+                <!-- EMAIL LABEL -->
+                <Label Text="{Binding Resource[EmailLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
 
-            <!-- EMAIL ENTRY-->
-            <controls:CustomEntryAuth ImageSource="ic_clear.png"
+                <!-- EMAIL ENTRY-->
+                <controls:CustomEntryAuth ImageSource="ic_clear.png"
                                       TextEntry="{Binding Email}"
                                       ErrorText="{Binding ErrorTextEmail}"
                                       PlaceholderText="{Binding Resource[EnterEmailPlaceholder]}"
                                       TapImage="{Binding TapEmailImage}"/>
 
-            
-        </StackLayout>
-        
 
-        <StackLayout Grid.Row="1"
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="1"
                      Margin="0, 0, 0, 15">
 
-            <!-- PASSWORD LABEL -->
-            <Label Text="{Binding Resource[PasswordLabel]}"
+                <!-- PASSWORD LABEL -->
+                <Label Text="{Binding Resource[PasswordLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
-            <!-- PASSWORD ENTRY-->
-            <controls:CustomEntryAuth
+                <!-- PASSWORD ENTRY-->
+                <controls:CustomEntryAuth
                       ImageSource="{Binding ImageSource}"
                       TextEntry="{Binding Password}"
                       ErrorText="{Binding ErrorTextPassword}"
@@ -79,10 +82,10 @@
                       TapImage="{Binding TapPasswordImage}"
                       PlaceholderText="{Binding Resource[EnterPasswordPlaceholder]}"/>
 
-        </StackLayout>
-        
-        <!-- LOGIN BUTTON -->
-        <Button Grid.Row="2"
+            </StackLayout>
+
+            <!-- LOGIN BUTTON -->
+            <Button Grid.Row="2"
                 Text="{Binding Resource[LoginButton]}"
                 Style="{StaticResource mainButton1}"
                 IsEnabled="{Binding IsSignInButtonEnabled}"
@@ -90,53 +93,54 @@
                 VerticalOptions="Center"
                 Margin="0, 0, 0, 15"/>
 
-        <StackLayout Grid.Row="3"
+            <StackLayout Grid.Row="3"
                      VerticalOptions="Start"
                      Spacing="20">
-            
-            <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
+
+                <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
                   Margin="0, 0, 0, 15">
 
-                <BoxView HeightRequest="1"
+                    <BoxView HeightRequest="1"
                          Style="{StaticResource separator}"/>
-                
-                <!-- OR LABEL -->
-                <Label Grid.Column="1"
+
+                    <!-- OR LABEL -->
+                    <Label Grid.Column="1"
                        Text="{Binding Resource[OrLabel]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 
-                <BoxView Grid.Column="2"
+                    <BoxView Grid.Column="2"
                          Style="{StaticResource separator}"/>
 
-            </Grid>
+                </Grid>
 
-            <Grid Grid.Row="4"
+                <Grid Grid.Row="4"
                   ColumnDefinitions="*, *, *"
                   Margin="0, 0, 0, 50"
                   VerticalOptions="Start" >
-                
-                <!-- GOOGLE AUTH BUTTON -->
-                <Button Grid.Column="0"
+
+                    <!-- GOOGLE AUTH BUTTON -->
+                    <Button Grid.Column="0"
                         Style="{StaticResource alternativeLoginButton}"
                         ImageSource="ic_google.png"
                         Command="{Binding OnSignInGoogleButtonTapCommand}" />
 
-                <!-- FACEBOOK AUTH BUTTON -->
-                <Button Grid.Column="1"
+                    <!-- FACEBOOK AUTH BUTTON -->
+                    <Button Grid.Column="1"
                         Style="{StaticResource alternativeLoginButton}"
                         ImageSource="ic_facebook.png"/>
 
-                <!-- APPLE AUTH BUTTON -->
-                <Button Grid.Column="2"
+                    <!-- APPLE AUTH BUTTON -->
+                    <Button Grid.Column="2"
                         ImageSource="{AppThemeBinding Light=ic_apple.png,
                                                       Dark=ic_apple_dark.png}"
                         Style="{StaticResource alternativeLoginButton}" />
 
-            </Grid>
-            
-        </StackLayout>
+                </Grid>
 
+            </StackLayout>
+
+        </Grid>
     </Grid>
 
 </ContentPage>

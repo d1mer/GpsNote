@@ -149,7 +149,7 @@ namespace GpsNote.ViewModels
 
         private async void OnAddEditPinAsync()
         {
-            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(AddEditPinPage)}");
+            await NavigationService.NavigateAsync(nameof(AddEditPinPage));
         }
 
         private async void OnChangeVisibilityPinAsync(object obj)

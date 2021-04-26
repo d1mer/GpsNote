@@ -3,16 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              x:Class="GpsNote.Views.SignUpPage"
-             NavigationPage.HasBackButton="False">
+             NavigationPage.HasNavigationBar="False">
 
-    <!-- NAVIGATION BAR -->
-    <NavigationPage.TitleView>
 
+    <Grid RowDefinitions="0.1*, *"
+          Background="Transparent">
+
+        <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="0.2*, 0.8*">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
-                   HorizontalOptions="Start">
+                   HorizontalOptions="Start"
+                   Margin="10, 0, 0, 0">
 
                 <Image.GestureRecognizers>
 
@@ -26,61 +29,61 @@
             <Label Grid.Column="1"
                    Text="{Binding Title}" 
                    Style="{StaticResource navBarTitle}"
-                   HorizontalTextAlignment="Center" />
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"/>
 
         </Grid>
 
-    </NavigationPage.TitleView>
+        <!-- CONTENT -->
+        <Grid  Grid.Row="1"
+           Margin="20, 5, 20, 0">
 
+            <Grid.RowDefinitions>
 
-    <Grid Margin="20, 5, 20, 0">
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
 
-        <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <StackLayout Margin="0, 0, 0, 10">
 
-        </Grid.RowDefinitions>
-
-        <StackLayout Margin="0, 0, 0, 10">
-
-            <!-- NAME LABEL -->
-            <Label Text="{Binding Resource[NameLabel]}"
+                <!-- NAME LABEL -->
+                <Label Text="{Binding Resource[NameLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
 
-            <!-- NAME ENTRY-->
-            <controls:CustomEntryAuth ImageSource="ic_clear.png"
+                <!-- NAME ENTRY-->
+                <controls:CustomEntryAuth ImageSource="ic_clear.png"
                                       TextEntry="{Binding Name}"
                                       ErrorText="{Binding ErrorTextName}"
                                       PlaceholderText="{Binding Resource[EnterNamePlaceholder]}"
                                       TapImage="{Binding TapNameImage}"/>
-            
-        </StackLayout>
 
-        <StackLayout Grid.Row="1"
+            </StackLayout>
+
+            <StackLayout Grid.Row="1"
                      Margin="0, 0, 0, 15">
 
-            <!-- EMAIL LABEL -->
-            <Label Text="{Binding Resource[EmailLabel]}"
+                <!-- EMAIL LABEL -->
+                <Label Text="{Binding Resource[EmailLabel]}"
                    FontSize="Medium"
                    Margin="15, 0"/>
 
-            <!-- EMAIL ENTRY-->
-            <controls:CustomEntryAuth
+                <!-- EMAIL ENTRY-->
+                <controls:CustomEntryAuth
                       ImageSource="ic_clear.png"
                       TextEntry="{Binding Email}"
                       ErrorText="{Binding ErrorTextEmail}"
                       TapImage="{Binding TapEmailImage}"
                       PlaceholderText="{Binding Resource[EnterEmailPlaceholder]}"/>
 
-        </StackLayout>
+            </StackLayout>
 
-        <!-- NEXT BUTTON -->
-        <Button Grid.Row="2"
+            <!-- NEXT BUTTON -->
+            <Button Grid.Row="2"
                 Text="{Binding Resource[NextButton]}"
                 Style="{StaticResource mainButton1}"
                 IsEnabled="{Binding IsNextButtonEnabled}"
@@ -88,109 +91,56 @@
                 VerticalOptions="Center"
                 Margin="0, 0, 0, 15"/>
 
-        
-        <StackLayout Grid.Row="3"
+
+            <StackLayout Grid.Row="3"
                      VerticalOptions="Start"
                      Spacing="20">
 
-            <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
+                <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
                   Margin="0, 0, 0, 15">
 
-                <BoxView HeightRequest="1"
+                    <BoxView HeightRequest="1"
                          Style="{StaticResource separator}"/>
 
-                <!-- OR LABEL -->
-                <Label Grid.Column="1"
+                    <!-- OR LABEL -->
+                    <Label Grid.Column="1"
                        Text="{Binding Resource[OrLabel]}"
                        VerticalOptions="Center"
                        HorizontalOptions="Center"/>
 
-                <BoxView Grid.Column="2"
+                    <BoxView Grid.Column="2"
                          Style="{StaticResource separator}"/>
 
-            </Grid>
+                </Grid>
 
-            <Grid Grid.Row="4"
+                <Grid Grid.Row="4"
                   ColumnDefinitions="*, *, *"
                   Margin="0, 0, 0, 50"
                   VerticalOptions="Start" >
 
-                <!-- GOOGLE AUTH BUTTON -->
-                <Button Grid.Column="0"
+                    <!-- GOOGLE AUTH BUTTON -->
+                    <Button Grid.Column="0"
                         Style="{StaticResource alternativeLoginButton}"
                         ImageSource="ic_google.png"
                         Command="{Binding OnSignInGoogleButtonTapCommand}" />
 
-                <!-- FACEBOOK AUTH BUTTON -->
-                <Button Grid.Column="1"
+                    <!-- FACEBOOK AUTH BUTTON -->
+                    <Button Grid.Column="1"
                         Style="{StaticResource alternativeLoginButton}"
                         ImageSource="ic_facebook.png"/>
 
-                <!-- APPLE AUTH BUTTON -->
-                <Button Grid.Column="2"
+                    <!-- APPLE AUTH BUTTON -->
+                    <Button Grid.Column="2"
                         ImageSource="{AppThemeBinding Light=ic_apple.png,
                                                       Dark=ic_apple_dark.png}"
                         Style="{StaticResource alternativeLoginButton}" />
 
-            </Grid>
+                </Grid>
 
-        </StackLayout>
+            </StackLayout>
+
+        </Grid>
 
     </Grid>
 
-    
-    <!--<Grid RowDefinitions="*, *">
-
-        <StackLayout Margin="30, 30, 30, 10"
-                     Spacing="20"
-                     VerticalOptions="CenterAndExpand">
-
-            --><!-- NAME ENTRY --><!--
-            <Entry x:Name="name"
-                   Text="{Binding Name}"
-                   Placeholder="Enter name"
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
-
-            --><!-- EMAIL ENTRY --><!--
-            <Entry x:Name="email"
-                   Placeholder="Enter email"
-                   Text="{Binding Email}"
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
-
-            --><!-- PASSWORD ENTRY --><!--
-            <Entry x:Name="password"
-                   Text="{Binding Password}"
-                   Placeholder="Enter password"
-                   IsPassword="True"
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
-
-            --><!-- CONFIRM PASSWORD ENTRY --><!--
-            <Entry x:Name="confirmPassword"
-                   Text="{Binding ConfirmPassword}"
-                   Placeholder="Confirm password"
-                   IsPassword="True"
-                   ClearButtonVisibility="WhileEditing"
-                   FontSize="Medium" />
-            
-        </StackLayout>
-
-        <StackLayout Grid.Row="1"
-                     Margin="30, 10, 30, 30"
-                     VerticalOptions="EndAndExpand">
-            
-            --><!-- SIGNUP BUTTON --><!--
-            <Button Text="SIGNUP"
-                    BorderWidth="1"
-                    IsEnabled="{Binding IsSignUpButtonEnabled}"
-                    Command="{Binding OnSignUpCommand}">
-
-            </Button>
-            
-        </StackLayout>
-        
-    </Grid>-->
-    
 </ContentPage>

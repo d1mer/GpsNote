@@ -5,9 +5,17 @@
              xmlns:controls="clr-namespace:GpsNote.Controls"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             NavigationPage.HasNavigationBar="False">
 
-    <StackLayout>
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
         
         <!-- NAVBAR -->
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
@@ -15,6 +23,7 @@
 
         <!-- MAP -->
         <controls:CustomMap x:Name="map"
+                            Grid.Row="1"
                             IsMoveCamera="{Binding IsMoveCamera}"
                             CameraMovingPosition="{Binding MovingCameraPosition}"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
@@ -38,6 +47,6 @@
 
         </controls:CustomMap>
 
-    </StackLayout>
+    </Grid>
 
 </ContentPage>

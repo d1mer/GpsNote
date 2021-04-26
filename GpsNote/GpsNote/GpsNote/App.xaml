@@ -52,6 +52,9 @@
             <Setter Property="NavigationPage.HasBackButton"
                     Value="False" />
 
+            <Setter Property="NavigationPage.HasNavigationBar"
+                    Value="False"/>
+
         </Style>
 
         <!-- BUTTON -->

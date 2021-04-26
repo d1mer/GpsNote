@@ -226,55 +226,55 @@
     <BundleResource Include="Resources\pic_enter_page.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\pic_enter_page2x.png" />
+    <BundleResource Include="Resources\pic_enter_page%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\pic_enter_page3x.png" />
+    <BundleResource Include="Resources\pic_enter_page%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_left_blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_left_blue2x.png" />
+    <BundleResource Include="Resources\ic_left_blue%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_left_blue3x.png" />
+    <BundleResource Include="Resources\ic_left_blue%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_clear.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_clear2x.png" />
+    <BundleResource Include="Resources\ic_clear%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_clear3x.png" />
+    <BundleResource Include="Resources\ic_clear%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_eye.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_eye2x.png" />
+    <BundleResource Include="Resources\ic_eye%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_eye3x.png" />
+    <BundleResource Include="Resources\ic_eye%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_google.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_google2x.png" />
+    <BundleResource Include="Resources\ic_google%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_google3x.png" />
+    <BundleResource Include="Resources\ic_google%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_facebook.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_facebook2x.png" />
+    <BundleResource Include="Resources\ic_facebook%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_facebook3x.png" />
+    <BundleResource Include="Resources\ic_facebook%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_apple.png" />
@@ -283,142 +283,142 @@
     <BundleResource Include="Resources\ic_apple_dark.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_apple_dark2x.png" />
+    <BundleResource Include="Resources\ic_apple_dark%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_apple_dark3x.png" />
+    <BundleResource Include="Resources\ic_apple_dark%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_apple2x.png" />
+    <BundleResource Include="Resources\ic_apple%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_apple3x.png" />
+    <BundleResource Include="Resources\ic_apple%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_eye_off.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_eye_off2x.png" />
+    <BundleResource Include="Resources\ic_eye_off%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_eye_off3x.png" />
+    <BundleResource Include="Resources\ic_eye_off%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_map.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_map2x.png" />
+    <BundleResource Include="Resources\ic_map%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_map3x.png" />
+    <BundleResource Include="Resources\ic_map%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_pin.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_pin2x.png" />
+    <BundleResource Include="Resources\ic_pin%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_pin3x.png" />
+    <BundleResource Include="Resources\ic_pin%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_settings2x.png" />
+    <BundleResource Include="Resources\ic_settings%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_settings3x.png" />
+    <BundleResource Include="Resources\ic_settings%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_exid.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_exid2x.png" />
+    <BundleResource Include="Resources\ic_exid%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_exid3x.png" />
+    <BundleResource Include="Resources\ic_exid%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_pin_gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_pin_gray2x.png" />
+    <BundleResource Include="Resources\ic_pin_gray%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_pin_gray3x.png" />
+    <BundleResource Include="Resources\ic_pin_gray%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_plus.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_plus2x.png" />
+    <BundleResource Include="Resources\ic_plus%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_plus3x.png" />
+    <BundleResource Include="Resources\ic_plus%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_save.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_save2x.png" />
+    <BundleResource Include="Resources\ic_save%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_save3x.png" />
+    <BundleResource Include="Resources\ic_save%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_like_blue.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_like_blue2x.png" />
+    <BundleResource Include="Resources\ic_like_blue%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_like_blue3x.png" />
+    <BundleResource Include="Resources\ic_like_blue%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_like_gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_like_gray2x.png" />
+    <BundleResource Include="Resources\ic_like_gray%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_like_gray3x.png" />
+    <BundleResource Include="Resources\ic_like_gray%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_left_gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_left_gray2x.png" />
+    <BundleResource Include="Resources\ic_left_gray%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_left_gray3x.png" />
+    <BundleResource Include="Resources\ic_left_gray%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_delete2x.png" />
+    <BundleResource Include="Resources\ic_delete%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_delete3x.png" />
+    <BundleResource Include="Resources\ic_delete%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_edit.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_edit2x.png" />
+    <BundleResource Include="Resources\ic_edit%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_edit3x.png" />
+    <BundleResource Include="Resources\ic_edit%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_clock.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_clock2x.png" />
+    <BundleResource Include="Resources\ic_clock%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_clock3x.png" />
+    <BundleResource Include="Resources\ic_clock%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -3,65 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:GpsNote.Resource"
              x:Class="GpsNote.Views.SettingsClock"
-             NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
-    
+
+
+    <Grid RowDefinitions="0.1*, *"
+          BackgroundColor="Transparent">
+
         <!-- NAVIGATION BAR -->
-        <NavigationPage.TitleView>
+        <Grid ColumnDefinitions="0.1*, 0.9*">
 
-            <Grid ColumnDefinitions="0.1*, 0.9*">
-
-                <!-- BACK ARROW IMAGE -->
-                <Image Source="ic_left_blue.png"
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
                    HorizontalOptions="Start">
 
-                    <Image.GestureRecognizers>
+                <Image.GestureRecognizers>
 
-                        <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
 
-                    </Image.GestureRecognizers>
+                </Image.GestureRecognizers>
 
-                </Image>
+            </Image>
 
-                <!-- TITLE LABEL -->
-                <Label Grid.Column="1"
+            <!-- TITLE LABEL -->
+            <Label Grid.Column="1"
                        Text="{Binding Title}" 
                        Style="{StaticResource navBarTitle}"
                        HorizontalOptions="StartAndExpand"
                        Margin="40, 0"/>
 
-            </Grid>
+        </Grid>
+        
+        <!-- CONTENT -->
+        <StackLayout Grid.Row="1"
+                     Background="Transparent"
+                     RadioButtonGroup.GroupName="ClockColor"
+                     RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
 
-        </NavigationPage.TitleView>
+            <BoxView Style="{StaticResource separator}"/>
 
-    <StackLayout Background="Transparent"
-                 RadioButtonGroup.GroupName="ClockColor"
-                 RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
-
-        <BoxView Style="{StaticResource separator}"/>
-
-        <RadioButton Content="{x:Static resources:ResourcesLang.BlueText}"
+            <RadioButton Content="{x:Static resources:ResourcesLang.BlueText}"
                      Value="Blue"
                      FontSize="Medium"
                      Margin="15"/>
 
-        <BoxView Style="{StaticResource separator}"/>
+            <BoxView Style="{StaticResource separator}"/>
 
-        <RadioButton Content="{x:Static resources:ResourcesLang.RedText}"
+            <RadioButton Content="{x:Static resources:ResourcesLang.RedText}"
                       Value="Red"
                      FontSize="Medium"
                      Margin="15"/>
 
-        <BoxView Style="{StaticResource separator}"/>
+            <BoxView Style="{StaticResource separator}"/>
 
-        <RadioButton Content="{x:Static resources:ResourcesLang.GreenText}"
+            <RadioButton Content="{x:Static resources:ResourcesLang.GreenText}"
                       Value="Green"
                      FontSize="Medium"
                      Margin="15"/>
 
-        <BoxView Style="{StaticResource separator}"/>
+            <BoxView Style="{StaticResource separator}"/>
 
 
-    </StackLayout>
-        
+        </StackLayout>
+
+    </Grid>
+
 </ContentPage>

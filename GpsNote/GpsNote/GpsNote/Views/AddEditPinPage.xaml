@@ -4,18 +4,26 @@
              x:Class="GpsNote.Views.AddEditPinPage"
              xmlns:controls="clr-namespace:GpsNote.Controls"
              xmlns:prism="http://prismlibrary.com"
-             NavigationPage.HasBackButton="False"
-             NavigationPage.HasNavigationBar="False"
-             Title="{Binding Title}">
+             NavigationPage.HasNavigationBar="False">
 
-    <!-- NAVIGATION BAR -->
-    <NavigationPage.TitleView>
+    <Grid>
 
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            
+        </Grid.RowDefinitions>
+
+        <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
-                   HorizontalOptions="Start">
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Margin="10, 0, 0, 0">
 
                 <Image.GestureRecognizers>
 
@@ -30,13 +38,14 @@
                    Text="{Binding Title}" 
                    Style="{StaticResource navBarTitle}"
                    HorizontalOptions="CenterAndExpand"
-                   Margin="0, 0, 30, 0"/>
+                   VerticalOptions="Center"/>
 
             <!-- SAVE IMAGE -->
             <Image Grid.Column="2"
                    Source="ic_save.png"
                    HorizontalOptions="End"
-                   Margin="0, 0, 15, 0">
+                   Margin="0, 0, 15, 0"
+                   VerticalOptions="Center">
 
                 <Image.GestureRecognizers>
 
@@ -48,19 +57,9 @@
 
         </Grid>
 
-    </NavigationPage.TitleView>
-
-
-    <Grid>
-
-        <Grid.RowDefinitions>
-
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            
-        </Grid.RowDefinitions>
-
-        <Grid Margin="20, 5, 20, 0">
+        <!-- CONTENT -->
+        <Grid Grid.Row="1"
+              Margin="20, 5, 20, 0">
 
             <Grid.RowDefinitions>
 
@@ -87,9 +86,10 @@
 
 
             </StackLayout>
+            
 
             <StackLayout Grid.Row="1"
-                     Margin="0, 0, 0, 15">
+                         Margin="0, 0, 0, 15">
 
                 <!-- DESCRIPTION LABEL -->
                 <Label Text="{Binding Resource[DescriptionLabel]}"
@@ -107,7 +107,7 @@
 
 
             <StackLayout Grid.Row="2"
-                     Margin="0, 0, 0, 15">
+                         Margin="0, 0, 0, 15">
 
                 <!-- COORDINATES LABEL -->
                 <Label Text="{Binding Resource[CoordinatesLabel]}"
@@ -140,7 +140,7 @@
         </Grid>
 
         <!-- MAP -->
-        <controls:CustomMap Grid.Row="1"
+        <controls:CustomMap Grid.Row="2"
                             VerticalOptions="FillAndExpand"
                             InitialCameraUpdate="{Binding InitialCameraUpdate}"
                             PinsList="{Binding Pins}">

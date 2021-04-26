@@ -5,7 +5,8 @@
              xmlns:prism="http://prismlibrary.com" 
              xmlns:controls="clr-namespace:GpsNote.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             NavigationPage.HasNavigationBar="False">
 
 
     <Grid RowDefinitions="0.1*, *">
