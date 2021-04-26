@@ -20,6 +20,8 @@ using GpsNote.Views.Clock;
 using GpsNote.ViewModels.Clock;
 using GpsNote.Services.Color;
 using GpsNote.Services.Localization;
+using GpsNote.Views.PinInfo;
+using GpsNote.ViewModels.PinPopup;
 
 namespace GpsNote
 {
@@ -91,6 +93,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage2, SignUpViewModel2>();
             containerRegistry.RegisterForNavigation<SettingsClock, SettingsClockViewModel>();
+            containerRegistry.RegisterForNavigation<PinInfoPage, PinInfoViewModel>();
         }
     }
 }

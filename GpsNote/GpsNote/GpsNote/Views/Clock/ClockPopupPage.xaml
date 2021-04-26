@@ -2,7 +2,7 @@
 <rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:rg="http://rotorgames.com"
-              xmlns:controls="clr-namespace:GpsNote.Controls"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
              CloseWhenBackgroundIsClicked="True"
              AndroidTalkbackAccessibilityWorkaround="True"
              x:Class="GpsNote.Views.Clock.ClockPopupPage"

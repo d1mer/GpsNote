@@ -18,6 +18,7 @@ using GpsNote.Services.Localization;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System.ComponentModel;
+using GpsNote.Views.PinInfo;
 
 namespace GpsNote.ViewModels
 {
@@ -283,23 +284,17 @@ namespace GpsNote.ViewModels
             
             if (pin != null)
             {
-                TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
+                
 
-                if (timeZoneResponse.Status == "OK")
+                
+
+                NavigationParameters parameter = new NavigationParameters
                 {
-                    (Pin, TimeZoneResponse) tup = (pin, timeZoneResponse);
+                    {Constants.DISPLAY_PIN, pin }
+                };
 
-                    NavigationParameters parameter = new NavigationParameters
-                    {
-                        {Constants.TUPLE, tup }
-                    };
-
-                    await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
-                }
-                else
-                {
-                    await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
-                }
+                await NavigationService.NavigateAsync(nameof(PinInfoPage), parameter);
+                
             }
         }
 

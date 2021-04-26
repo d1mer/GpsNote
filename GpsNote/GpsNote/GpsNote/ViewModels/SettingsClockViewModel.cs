@@ -32,13 +32,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref colorSelection, value);
         }
 
-        private string clockColor;
-        public string ClockColor
-        {
-            get => clockColor;
-            set => SetProperty(ref clockColor, value);
-        }
-
         private DelegateCommand backPressedCommand;
         public DelegateCommand BackPressedCommand => backPressedCommand ?? new DelegateCommand(OnBackPressed);
 
@@ -47,14 +40,33 @@ namespace GpsNote.ViewModels
 
         #region -- Overrides --
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        public override void Initialize(INavigationParameters parameters)
         {
-            base.OnPropertyChanged(args);
+            base.Initialize(parameters);
 
-            if(args.PropertyName == nameof(ColorSelection))
+            int color = _colorService.GetCurrentColor();
+
+            switch (color)
             {
-
+                case 0:
+                    ColorSelection = "Blue";
+                    break;
+                case 1:
+                    ColorSelection = "Red";
+                    break;
+                case 2:
+                    ColorSelection = "Green";
+                    break;
             }
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+
+            string color = ColorSelection.ToString();
+            int value = color == "Blue" ? 0 : color == "Red" ? 1 : 2;
+            _colorService.SaveCurrentColor((Enums.Colors)value);
         }
 
         #endregion

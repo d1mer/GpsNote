@@ -66,6 +66,11 @@ namespace GpsNote.Services.Color
             _settingsManager.CurrentClockColor = (int)color;
         }
 
+        public int GetCurrentColor()
+        {
+            return _settingsManager.CurrentClockColor;
+        }
+
         #endregion
     }
 }

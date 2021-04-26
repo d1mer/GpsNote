@@ -120,15 +120,15 @@
 
         <!-- ADD BUTTON -->
         <Button Grid.Row="1" 
-                ImageSource="ic_plus2x.png"
+                ImageSource="ic_plus.png"
                 FontAttributes="None"
                 BackgroundColor="{AppThemeBinding Light={StaticResource LightBlue},
                                                   Dark={StaticResource DarkBlue}}"
-                BorderRadius ="70"
+                BorderRadius ="60"
                 HorizontalOptions="End"
                 VerticalOptions="End"
-                WidthRequest="70"
-                HeightRequest="70"
+                WidthRequest="56"
+                HeightRequest="56"
                 Margin="0,0,20,20"
                 Command="{Binding AddEditPinTapCommand}"/>
 

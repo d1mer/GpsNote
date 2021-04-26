@@ -34,25 +34,27 @@
         </NavigationPage.TitleView>
 
     <StackLayout Background="Transparent"
-                 RadioButtonGroup.GroupName="{Binding ClockColor}"
+                 RadioButtonGroup.GroupName="ClockColor"
                  RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
 
         <BoxView Style="{StaticResource separator}"/>
 
         <RadioButton Content="{x:Static resources:ResourcesLang.BlueText}"
+                     Value="Blue"
                      FontSize="Medium"
-                     Margin="15"
-                     IsChecked="True"/>
+                     Margin="15"/>
 
         <BoxView Style="{StaticResource separator}"/>
 
         <RadioButton Content="{x:Static resources:ResourcesLang.RedText}"
+                      Value="Red"
                      FontSize="Medium"
                      Margin="15"/>
 
         <BoxView Style="{StaticResource separator}"/>
 
         <RadioButton Content="{x:Static resources:ResourcesLang.GreenText}"
+                      Value="Green"
                      FontSize="Medium"
                      Margin="15"/>
 

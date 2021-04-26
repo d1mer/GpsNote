@@ -6,15 +6,7 @@ namespace GpsNote.Views
     {
         public NotesPage()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (System.Exception)
-            {
-
-                throw;
-            }
+            InitializeComponent();
         }
     }
 }

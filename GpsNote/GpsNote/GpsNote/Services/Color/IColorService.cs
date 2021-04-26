@@ -13,5 +13,7 @@ namespace GpsNote.Services.Color
         SKColor GetCurrentDarkColor();
 
         void SaveCurrentColor(Colors color);
+
+        int GetCurrentColor();
     }
 }
