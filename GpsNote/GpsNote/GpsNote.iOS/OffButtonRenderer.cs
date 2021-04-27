@@ -9,10 +9,10 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Button), typeof(MyButtonRenderer))]
+[assembly: ExportRenderer(typeof(Button), typeof(OffButtonRenderer))]
 namespace GpsNote.iOS
 {
-    public class MyButtonRenderer : ButtonRenderer
+    public class OffButtonRenderer : ButtonRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Button> e)
         {

@@ -45,7 +45,8 @@
 
             <Button Text="{Binding Resource[CreateAccountButton]}"
                     Style="{StaticResource mainButton2}"
-                    Command="{Binding SignUpTapCommand}"/>
+                    Command="{Binding SignUpTapCommand}"
+                    />
 
         </StackLayout>
     </Grid>

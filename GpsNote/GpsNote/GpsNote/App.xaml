@@ -111,8 +111,8 @@
             <Setter Property="FontFamily"
                     Value="Montserrat-Medium" />
 
-            <Setter  Property="FontSize"
-                     Value="14px"/>
+            <Setter Property="FontSize"
+                    Value="18"/>
 
         </Style>
 
@@ -130,7 +130,13 @@
             <Setter Property="BorderColor"
                     Value="{AppThemeBinding Light={StaticResource LightBlue},
                                             Dark={StaticResource LightBlue}}" />
-            
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter Property="FontSize"
+                    Value="18"/>
+
             <Setter Property="BorderWidth"
                     Value="1" />
 
