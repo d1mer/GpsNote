@@ -108,6 +108,12 @@
             <Setter Property="CornerRadius"
                     Value="1"/>
 
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter  Property="FontSize"
+                     Value="14px"/>
+
         </Style>
 
         <!-- mainButton2 -->

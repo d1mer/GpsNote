@@ -12,19 +12,20 @@
 
 
 
-        <Grid RowDefinitions="0.7*, 0.3*">
+        <Grid RowDefinitions="0.8*, 0.2*">
 
             <Image Source="pic_enter_page.png"
-                   VerticalOptions="EndAndExpand"
-                   Scale="1.5"/>
-        
+                   VerticalOptions="End"
+                   Scale="1.5"
+                   Margin="0, 30"/>
             <Label Grid.Row="1"
-               Text="MapNotepad"
-               FontSize="30"
-               HorizontalOptions="Center"
-               VerticalOptions="Start"
-               FontAttributes="Bold"
-               TextColor="{StaticResource LightBlue}"/>
+                   Text="MapNotepad"
+                   FontFamily="Montserrat-Bold"
+                   FontSize="26"
+                   CharacterSpacing="0.04"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"
+                   TextColor="{StaticResource LightBlue}"/>
         </Grid>
 
         <StackLayout Grid.Row="1"

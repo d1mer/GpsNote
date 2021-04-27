@@ -124,13 +124,15 @@
                       ColumnDefinitions="*, *, *"
                       Margin="0, 0, 0, 50"
                       VerticalOptions="Start" 
-                      ColumnSpacing="10">
+                      ColumnSpacing="10"
+                      HeightRequest="55">
 
                     <!-- GOOGLE AUTH BUTTON -->
                     <Button Grid.Column="0"
                             Style="{StaticResource alternativeLoginButton}"
                             ImageSource="ic_google.png"
-                            Command="{Binding OnSignInGoogleButtonTapCommand}" />
+                            Command="{Binding OnSignInGoogleButtonTapCommand}"/>
+
 
                     <!-- FACEBOOK AUTH BUTTON -->
                     <Button Grid.Column="1"
