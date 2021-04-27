@@ -2,7 +2,7 @@
 
 namespace GpsNote.Views
 {
-    public partial class SignUpPage : ContentPage
+    public partial class SignUpPage : BaseContentPage
     {
         public SignUpPage()
         {

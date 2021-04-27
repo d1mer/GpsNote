@@ -9,8 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace GpsNote.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : ContentPage
+    public partial class MainPage : BaseContentPage
     {
         public MainPage()
         {

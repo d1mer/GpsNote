@@ -3,9 +3,9 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace GpsNote.Views
 {
-    public partial class MainTabbedPage : Xamarin.Forms.TabbedPage
+    public class BaseContentPage : ContentPage
     {
-        public MainTabbedPage()
+        public BaseContentPage()
         {
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }

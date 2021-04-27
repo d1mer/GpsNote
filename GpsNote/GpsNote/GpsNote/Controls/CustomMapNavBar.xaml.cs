@@ -72,7 +72,7 @@ namespace GpsNote.Controls
             }
             else
             {
-                await _navigationService.NavigateAsync($"/{nameof(SettingsPage)}");
+                await _navigationService.NavigateAsync(nameof(SettingsPage));
             }
         }
 

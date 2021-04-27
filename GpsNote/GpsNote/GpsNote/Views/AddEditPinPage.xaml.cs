@@ -2,7 +2,7 @@
 
 namespace GpsNote.Views
 {
-    public partial class AddEditPinPage : ContentPage
+    public partial class AddEditPinPage : BaseContentPage
     {
         public AddEditPinPage()
         {

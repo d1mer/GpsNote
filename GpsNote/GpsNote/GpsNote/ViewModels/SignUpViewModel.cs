@@ -132,7 +132,7 @@ namespace GpsNote.ViewModels
 
         private void OnBackPressed()
         {
-            NavigationService.NavigateAsync($"/{nameof(MainPage)}");
+            NavigationService.GoBackAsync();
         }
 
         private void OnSignInGoogleUser()

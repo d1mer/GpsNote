@@ -17,7 +17,6 @@ namespace GpsNote.iOS
             {
                 Control.Layer.BorderWidth = 0;
                 Control.BorderStyle = UITextBorderStyle.None;
-                Control.Background = null;
             }
         }
 

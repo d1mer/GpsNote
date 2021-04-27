@@ -9,8 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace GpsNote.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SettingsClock : ContentPage
+    public partial class SettingsClock : BaseContentPage
     {
         public SettingsClock()
         {

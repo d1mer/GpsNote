@@ -12,6 +12,7 @@ using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Services.Localization;
 using GpsNote.Helpers;
 using System.ComponentModel;
+using GpsNote.Views;
 
 namespace GpsNote.ViewModels
 {

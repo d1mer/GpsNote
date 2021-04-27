@@ -197,7 +197,7 @@ namespace GpsNote.ViewModels
 
         private void OnBackPressed()
         {
-            NavigationService.NavigateAsync(nameof(SignUpPage));
+            NavigationService.GoBackAsync();
         }
 
         private void OnSignInGoogleAsync()
@@ -229,7 +229,7 @@ namespace GpsNote.ViewModels
 
                         NavigationParameters parameter = new NavigationParameters();
                         parameter.Add(Constants.NEW_USER_EMAIL, Email);
-                        await NavigationService.NavigateAsync(nameof(SignInPage), parameter);
+                        await NavigationService.NavigateAsync($"{nameof(MainPage)}/{nameof(SignInPage)}", parameter);
                     }
                     else
                     {

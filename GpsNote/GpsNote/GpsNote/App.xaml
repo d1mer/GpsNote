@@ -104,7 +104,10 @@
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource SystemWhite},
                                             Dark={StaticResource SystemWhite}}" />
-            
+
+            <Setter Property="CornerRadius"
+                    Value="1"/>
+
         </Style>
 
         <!-- mainButton2 -->
@@ -124,7 +127,10 @@
             
             <Setter Property="BorderWidth"
                     Value="1" />
-            
+
+            <Setter Property="CornerRadius"
+                    Value="1"/>
+
         </Style>
 
         <!-- alternativeLoginButton -->
@@ -142,6 +148,9 @@
 
             <Setter Property="Margin"
                     Value="3, 0" />
+
+            <Setter Property="CornerRadius"
+                    Value="2"/>
 
         </Style>
 

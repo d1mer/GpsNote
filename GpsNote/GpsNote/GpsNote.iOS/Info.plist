@@ -10,8 +10,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -38,46 +36,15 @@
 	<string>1</string>
 	<key>CFBundleDocumentTypes</key>
 	<string>Some text</string>
-
 	<key>NSLocationUsageDescription</key>
 	<string>This app needs access to location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app needs access to location.</string>
+	<key>CFBundleTypeName</key>
+	<string>MKDirectionsRequest</string>
+	<key>LSItemContentTypes</key>
 	<array>
-		<dict>
-			<key>CFBundleTypeName</key>
-			<string>MKDirectionsRequest</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>com.apple.maps.directionsrequest</string>
-			</array>
-		</dict>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
-	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>Xamarin.Auth Google PAuth</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.347199190339-e1jfkfrgdcqfcu9667aapvlb3kpm2be9</string>
-			</array>
-			<key>CFBundleTypeRole</key>
-			<string>None</string>
-		</dict>
-
-		<ItemGroup>
-			<PackageReference Include="System.Memory" Version="4.5.4">
-				<IncludeAssets>none</IncludeAssets>
-			</PackageReference>
-			<PackageReference Include="System.Buffers" Version="4.5.1">
-				<IncludeAssets>none</IncludeAssets>
-			</PackageReference>
-		</ItemGroup>
+		<string>com.apple.maps.directionsrequest</string>
 	</array>
 </dict>
 </plist>
