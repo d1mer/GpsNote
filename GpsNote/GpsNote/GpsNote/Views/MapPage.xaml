@@ -16,7 +16,8 @@
 
          <!-- NAVBAR --> 
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
-                                  SearchResultList="{Binding SearchResultList}"/>
+                                  GoToTapCommand="{Binding SettingsTapCommand}"
+                                 />
 
         <!-- MAP -->
         <controls:CustomMap x:Name="map"
@@ -43,6 +44,80 @@
             </controls:CustomMap.Behaviors>
 
         </controls:CustomMap>
+
+        <!-- SEARCH LISTVIEW -->
+        <ListView Grid.Row="1"
+                  x:Name="searchResultList"
+                  ItemsSource="{Binding SearchResultList}"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  SeparatorVisibility="None"
+                  VerticalOptions="Start"
+                  Background="Transparent"
+                  IsVisible="{Binding IsSearchListVisible}">
+
+            <ListView.Behaviors>
+
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              Command="{Binding Path=BindingContext.ListItemTapCommand, 
+                                                        Source={x:Reference searchResultList}}"
+                                                        EventArgsParameterPath="Item" />
+
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ViewCell>
+
+                        <ViewCell.View>
+
+                            <StackLayout Background="Transparent">
+
+                                <!-- SEPARATOR -->
+                                <BoxView Style="{StaticResource separator}"/>
+
+                                <Grid ColumnDefinitions="0.2*, 0.8*"
+                                      Background="Transparent"
+                                      Padding="0, 0, 0, 10">
+
+                                    <!-- IMAGE PIN -->
+                                    <Image Source="ic_pin_gray.png"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Margin="15, 5"/>
+
+                                    <StackLayout Grid.Column="1"
+                                                 Background="Transparent"
+                                                 Spacing="10">
+
+                                        <!-- PIN LABEL -->
+                                        <Label Text="{Binding Label}"
+                                               FontAttributes="Bold"
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
+
+                                        <!-- PIN ADDRESS -->
+                                        <Label Text="{Binding Address}"
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
+
+                                    </StackLayout>
+
+                                </Grid>
+
+                            </StackLayout>
+
+                        </ViewCell.View>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
 
     </Grid>
 

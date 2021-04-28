@@ -19,6 +19,9 @@ using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System.ComponentModel;
 using GpsNote.Views.PinInfo;
+using System.Windows.Input;
+using Xamarin.Forms;
+using GpsNote.Views;
 
 namespace GpsNote.ViewModels
 {
@@ -48,8 +51,10 @@ namespace GpsNote.ViewModels
             Title = "Map";
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
+            Task.Run(() => RequestLocationPermission());
 
-            //Task.Run(() => RequestLocationPermission());
+            IsSearchListVisible = false;
+            SearchText = string.Empty;
         }
 
 
@@ -159,6 +164,10 @@ namespace GpsNote.ViewModels
         private DelegateCommand<object> pinClickedCommand;
         public DelegateCommand<object> PinClickedCommand => pinClickedCommand ?? new DelegateCommand<object>(OnPinClickedAsync);
 
+        private ICommand settingsTapCommand;
+        public ICommand SettingsTapCommand => settingsTapCommand ?? new DelegateCommand(OnGoToSettings);
+
+
         #endregion
 
 
@@ -167,8 +176,6 @@ namespace GpsNote.ViewModels
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-
-            Task.Run(() => RequestLocationPermission());
 
             InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(_cameraSettingsService.GetInitialCameraSettings());
 
@@ -307,6 +314,11 @@ namespace GpsNote.ViewModels
                     _permissionsService.SaveLocationPermission(true);
                 }
             }
+        }
+
+        private async void OnGoToSettings()
+        {
+            await NavigationService.NavigateAsync(nameof(MainPage)); 
         }
 
         #endregion

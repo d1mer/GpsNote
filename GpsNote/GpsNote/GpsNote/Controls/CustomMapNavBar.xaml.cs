@@ -6,6 +6,7 @@ using Prism.Ioc;
 using Prism.Navigation;
 using GpsNote.Views;
 using GpsNote.Services.Authorization;
+using System.Windows.Input;
 
 namespace GpsNote.Controls
 {
@@ -28,9 +29,7 @@ namespace GpsNote.Controls
             BindableProperty.Create(nameof(SearchText),
                                     typeof(string),
                                     typeof(CustomMapNavBar),
-                                    defaultValue: string.Empty,
-                                    defaultBindingMode: BindingMode.TwoWay/*,
-                                    propertyChanged: SearchTextPropertyChanged*/);
+                                    defaultValue: string.Empty);
 
         public string SearchText
         {
@@ -39,21 +38,32 @@ namespace GpsNote.Controls
         }
 
 
-        public static readonly BindableProperty SearchResultListProperty =
-            BindableProperty.Create(nameof(SearchResultList),
-                                    typeof(ObservableCollection<Pin>),
+        public static readonly BindableProperty GoToTapCommandProperty =
+            BindableProperty.Create(nameof(GoToTapCommand),
+                                    typeof(ICommand),
                                     typeof(CustomMapNavBar),
-                                    defaultValue: default(ObservableCollection<Pin>),
+                                    defaultValue: default(ICommand),
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: SearchResultListPropertyChanged);
+                                    propertyChanged: GoToTapCommandPropertyChanged);
 
-        public ObservableCollection<Pin> SearchResultList
+        private static void GoToTapCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            get => (ObservableCollection<Pin>)GetValue(SearchResultListProperty);
-            set => SetValue(SearchResultListProperty, value);
+            CustomMapNavBar navBar = bindable as CustomMapNavBar;
+
+            if(navBar != null)
+            {
+                navBar.GoToTapCommand = (ICommand)newValue;
+            }
+        }
+
+        public ICommand GoToTapCommand
+        {
+            get => (ICommand)GetValue(GoToTapCommandProperty);
+            set => SetValue(GoToTapCommandProperty, value);
         }
 
         #endregion
+
 
         #region -- Private helpers --
 
@@ -97,35 +107,10 @@ namespace GpsNote.Controls
             searchEntry.Text = string.Empty;
         }
 
-        //private static void SearchTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        //{
-        //    CustomMapNavBar navbar = bindable as CustomMapNavBar;
-
-        //    if(navbar != null)
-        //    {
-        //        navbar.searchEntry.Text = navbar.SearchText;
-        //    }
-        //}
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            {
-                searchResultList.IsVisible = false;
-            }
-
             SearchText = e.NewTextValue;
-        }
-
-        private static void SearchResultListPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            CustomMapNavBar navbar = bindable as CustomMapNavBar;
-
-            if(navbar != null)
-            {
-                navbar.searchResultList.IsVisible = true;
-                navbar.searchResultList.HeightRequest = navbar.searchResultList.RowHeight * navbar.SearchResultList.Count;
-            }
         }
 
         private void SetServices()

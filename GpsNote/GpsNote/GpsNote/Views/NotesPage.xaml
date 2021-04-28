@@ -7,6 +7,8 @@
                         xmlns:controls="clr-namespace:GpsNote.Controls"
                         prism:ViewModelLocator.AutowireViewModel="True"
                         Title="{Binding Title}"
+                        NavigationPage.HasBackButton="False"
+                        NavigationPage.HasNavigationBar="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
 
@@ -14,8 +16,7 @@
     <Grid RowDefinitions="0.1*, *">
 
         <!-- NAVBAR -->
-        <controls:CustomMapNavBar SearchText="{Binding SearchText}"
-                                  SearchResultList="{Binding SearchResultList}"/>
+        <controls:CustomMapNavBar SearchText="{Binding SearchText}" />
 
         <ListView Grid.Row="1"
                   x:Name="pinsListView"
