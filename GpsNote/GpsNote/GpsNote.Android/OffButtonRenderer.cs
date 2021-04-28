@@ -42,7 +42,7 @@ namespace GpsNote.Droid
 
         private void SetColors()
         {
-            Control.SetTextColor(Element.IsEnabled ? Element.TextColor.ToAndroid() : Android.Graphics.Color.LightGray);
+            Control.SetTextColor(Element.IsEnabled ? Element.TextColor.ToAndroid() : Android.Graphics.Color.SlateGray);
         }
     }
 }
