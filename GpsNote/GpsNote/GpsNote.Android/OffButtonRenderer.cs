@@ -43,6 +43,7 @@ namespace GpsNote.Droid
         private void SetColors()
         {
             Control.SetTextColor(Element.IsEnabled ? Element.TextColor.ToAndroid() : Android.Graphics.Color.SlateGray);
+            Control.SetAllCaps(false);
         }
     }
 }

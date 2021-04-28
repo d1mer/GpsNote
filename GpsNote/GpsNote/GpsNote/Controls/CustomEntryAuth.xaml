@@ -17,7 +17,9 @@
                        TextChanged="Entry_TextChanged"
                        Text="{Binding TextEntry}"
                        HeightRequest="45"
-                       VerticalOptions="CenterAndExpand"/>
+                       VerticalOptions="CenterAndExpand"
+                       FontFamily="Montserrat-Light"
+                       FontSize="18"/>
 
                 <Image x:Name="image"
                        Grid.Column="1"

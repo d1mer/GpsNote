@@ -754,7 +754,7 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to or.
+        ///   Looks up a localized string similar to  or .
         /// </summary>
         internal static string OrLabel {
             get {

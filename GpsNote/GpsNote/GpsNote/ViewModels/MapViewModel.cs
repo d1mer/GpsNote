@@ -49,7 +49,7 @@ namespace GpsNote.ViewModels
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
 
-            Task.Run(() => RequestLocationPermission());
+            //Task.Run(() => RequestLocationPermission());
         }
 
 
@@ -168,6 +168,8 @@ namespace GpsNote.ViewModels
         {
             base.Initialize(parameters);
 
+            Task.Run(() => RequestLocationPermission());
+
             InitialCameraUpdate = CameraUpdateFactory.NewCameraPosition(_cameraSettingsService.GetInitialCameraSettings());
 
             Task.Run(() => GetPinsFromDatabaseAsync());
@@ -221,7 +223,7 @@ namespace GpsNote.ViewModels
         {
             List<PinModel> userPins = await _pinService.GetUsersPinsAsync();
 
-            if (userPins != null)
+            if (userPins != null && userPins.Count > 0)
             {
                 List<Pin> pins = new List<Pin>();
                 Pin pin;

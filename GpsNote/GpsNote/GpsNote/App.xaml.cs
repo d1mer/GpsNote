@@ -59,8 +59,7 @@ namespace GpsNote
             }
             else
             {
-                //await NavigationService.NavigateAsync(nameof(MainTabbedPage));
-                await NavigationService.NavigateAsync(nameof(MainPage));
+                await NavigationService.NavigateAsync(nameof(MainTabbedPage));
             }
         }
 

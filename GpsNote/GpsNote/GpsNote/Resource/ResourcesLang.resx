@@ -349,7 +349,7 @@
     <value>this email wasn't found</value>
   </data>
   <data name="OrLabel" xml:space="preserve">
-    <value>or</value>
+    <value> or </value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Password</value>

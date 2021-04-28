@@ -70,7 +70,6 @@ namespace GpsNote.Controls
                                     typeof(bool),
                                     typeof(CustomMap),
                                     defaultValue: false,
-                                    defaultBindingMode: BindingMode.TwoWay,
                                     propertyChanged: OnIsMyLocationButtonVisiblePropertyChanged);
 
 

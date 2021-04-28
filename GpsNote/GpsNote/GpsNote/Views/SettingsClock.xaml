@@ -14,7 +14,7 @@
           BackgroundColor="Transparent">
 
         <!-- NAVIGATION BAR -->
-        <Grid ColumnDefinitions="0.1*, 0.9*">
+        <Grid ColumnDefinitions="*">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -30,12 +30,11 @@
             </Image>
 
             <!-- TITLE LABEL -->
-            <Label Grid.Column="1"
+            <Label Grid.Column="0"
                        Text="{Binding Title}" 
                        Style="{StaticResource navBarTitle}"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="Center"
-                       Margin="40, 0"/>
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
 
         </Grid>
         

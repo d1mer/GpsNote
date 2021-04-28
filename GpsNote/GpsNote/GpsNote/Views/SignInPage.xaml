@@ -14,7 +14,8 @@
           Background="Transparent">
 
         <!-- NAVIGATION BAR -->
-        <Grid ColumnDefinitions="0.4*, 0.6*">
+        <Grid ColumnDefinitions="*"
+              HorizontalOptions="FillAndExpand">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -30,9 +31,10 @@
             </Image>
 
             <!-- TITLE LABEL -->
-            <Label Grid.Column="1"
+            <Label Grid.Column="0"
                    Text="{Binding Title}" 
                    Style="{StaticResource navBarTitle}"
+                   HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
         </Grid>
@@ -54,7 +56,6 @@
 
                 <!-- EMAIL LABEL -->
                 <Label Text="{Binding Resource[EmailLabel]}"
-                   FontSize="Medium"
                    Margin="15, 0"/>
 
 
@@ -74,7 +75,6 @@
 
                 <!-- PASSWORD LABEL -->
                 <Label Text="{Binding Resource[PasswordLabel]}"
-                   FontSize="Medium"
                    Margin="15, 0"/>
 
                 <!-- PASSWORD ENTRY-->
@@ -98,25 +98,24 @@
                 Margin="0, 0, 0, 15"/>
 
             <StackLayout Grid.Row="3"
-                     VerticalOptions="Start"
-                     Spacing="20">
+                         VerticalOptions="Start"
+                         Spacing="20">
 
-                <Grid ColumnDefinitions="0.48*, 0.05*, 0.48*"
+                <Grid ColumnDefinitions="*"
                   Margin="0, 0, 0, 15">
 
                     <BoxView HeightRequest="1"
                          Style="{StaticResource separator}"/>
 
                     <!-- OR LABEL -->
-                    <Label Grid.Column="1"
+                    <Label Grid.Column="0"
                            Text="{Binding Resource[OrLabel]}"
                            TextColor="{StaticResource LightGray}"
-                           FontSize="Medium"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                             Dark={StaticResource Black}}"
+                           FontSize="Large"
                            VerticalOptions="Center"
-                           HorizontalOptions="Center"/>
-
-                    <BoxView Grid.Column="2"
-                         Style="{StaticResource separator}"/>
+                           HorizontalOptions="Center" />
 
                 </Grid>
 

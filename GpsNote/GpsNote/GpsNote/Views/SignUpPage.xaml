@@ -14,7 +14,8 @@
           Background="Transparent">
 
         <!-- NAVIGATION BAR -->
-        <Grid ColumnDefinitions="0.2*, 0.8*">
+        <Grid ColumnDefinitions="*"
+              HorizontalOptions="FillAndExpand">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -30,10 +31,10 @@
             </Image>
 
             <!-- TITLE LABEL -->
-            <Label Grid.Column="1"
+            <Label Grid.Column="0"
                    Text="{Binding Title}" 
                    Style="{StaticResource navBarTitle}"
-                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
         </Grid>
@@ -55,7 +56,6 @@
 
                 <!-- NAME LABEL -->
                 <Label Text="{Binding Resource[NameLabel]}"
-                   FontSize="Medium"
                    Margin="15, 0"/>
 
 
@@ -73,7 +73,6 @@
 
                 <!-- EMAIL LABEL -->
                 <Label Text="{Binding Resource[EmailLabel]}"
-                   FontSize="Medium"
                    Margin="15, 0"/>
 
                 <!-- EMAIL ENTRY-->
@@ -100,26 +99,28 @@
                      VerticalOptions="Start"
                      Spacing="20">
 
-                <Grid ColumnDefinitions="0.45*, 0.1*, 0.45*"
+                <Grid ColumnDefinitions="*"
                   Margin="0, 0, 0, 15">
 
                     <BoxView HeightRequest="1"
                          Style="{StaticResource separator}"/>
 
                     <!-- OR LABEL -->
-                    <Label Grid.Column="1"
-                       Text="{Binding Resource[OrLabel]}"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
-
-                    <BoxView Grid.Column="2"
-                         Style="{StaticResource separator}"/>
+                    <Label Grid.Column="0"
+                           Text="{Binding Resource[OrLabel]}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontSize="Large"
+                           TextColor="{StaticResource LightGray}"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                             Dark={StaticResource Black}}"/>
 
                 </Grid>
 
                 <Grid Grid.Row="4"
                       ColumnDefinitions="*, *, *"
                       Margin="0, 0, 0, 50"
+                      ColumnSpacing="10"
                       VerticalOptions="Start"
                       HeightRequest="55">
 

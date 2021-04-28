@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace GpsNote.ViewModels
 {
@@ -229,7 +230,7 @@ namespace GpsNote.ViewModels
 
                         NavigationParameters parameter = new NavigationParameters();
                         parameter.Add(Constants.NEW_USER_EMAIL, Email);
-                        await NavigationService.NavigateAsync($"{nameof(MainPage)}/{nameof(SignInPage)}", parameter);
+                        await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainPage)}/{nameof(SignInPage)}", parameter);
                     }
                     else
                     {

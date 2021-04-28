@@ -349,7 +349,7 @@
     <value>почта с таким адресом не найдена</value>
   </data>
   <data name="OrLabel" xml:space="preserve">
-    <value>или</value>
+    <value> или </value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Пароль</value>

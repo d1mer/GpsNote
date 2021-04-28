@@ -7,6 +7,7 @@ namespace GpsNote.Views
     {
         public MainTabbedPage()
         {
+            InitializeComponent();
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
     }

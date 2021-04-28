@@ -16,8 +16,8 @@
 
             <Image Source="pic_enter_page.png"
                    VerticalOptions="End"
-                   Scale="1.5"
                    Margin="0, 30"/>
+            
             <Label Grid.Row="1"
                    Text="MapNotepad"
                    FontFamily="Montserrat-Bold"

@@ -7,19 +7,14 @@
                         xmlns:prism="http://prismlibrary.com"
                         prism:ViewModelLocator.AutowireViewModel="True"
                         Title="{Binding Title}"
+                        NavigationPage.HasBackButton="False"
+                        NavigationPage.HasNavigationBar="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
-                                               Dark={StaticResource Black}}">
+                                                          Dark={StaticResource Black}}">
 
-    <Grid>
+    <Grid RowDefinitions="0.1*, 0.9*">
 
-        <Grid.RowDefinitions>
-
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="*"/>
-            
-        </Grid.RowDefinitions>
-        
-        <!-- NAVBAR -->
+         <!-- NAVBAR --> 
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
                                   SearchResultList="{Binding SearchResultList}"/>
 

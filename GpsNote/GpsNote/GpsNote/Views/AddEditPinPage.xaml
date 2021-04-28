@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <!-- NAVIGATION BAR -->
-        <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*">
+        <Grid ColumnDefinitions="*">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -39,18 +39,18 @@
             </Image>
 
             <!-- TITLE LABEL -->
-            <Label Grid.Column="1"
+            <Label Grid.Column="0"
                    Text="{Binding Title}" 
                    Style="{StaticResource navBarTitle}"
-                   HorizontalOptions="CenterAndExpand"
+                   HorizontalOptions="Center"
                    VerticalOptions="Center"/>
 
             <!-- SAVE IMAGE -->
-            <Image Grid.Column="2"
+            <Image Grid.Column="0"
                    Source="ic_save.png"
                    HorizontalOptions="End"
                    Margin="0, 0, 15, 0"
-                   VerticalOptions="Center">
+                   VerticalOptions="End">
 
                 <Image.GestureRecognizers>
 

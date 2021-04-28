@@ -29,6 +29,7 @@
                CornerRadius="6"
                Padding="0"
                VerticalOptions="End"
+               HasShadow="False"
                BackgroundColor="{AppThemeBinding Light={StaticResource LightWhiteGray},
                                                  Dark={StaticResource DarkGray2}}">
 

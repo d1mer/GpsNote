@@ -74,7 +74,10 @@
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource Black},
                                             Dark={StaticResource SystemWhite}}" />
-            
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
             <Setter Property="FontSize"
                     Value="Medium"/>
             
@@ -85,10 +88,13 @@
             
             <Setter Property="Margin"
                     Value="10, 0, 0, 0" />
-            
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
             <Setter Property="FontSize"
-                    Value="Medium" />
-            
+                    Value="18"/>
+
         </Style>
 
 
@@ -172,15 +178,13 @@
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Light={StaticResource Black}, 
                                             Dark={StaticResource SystemWhite}}"/>
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Bold" />
+
             <Setter Property="FontSize"
                     Value="Large"/>
-            
-            <Setter Property="FontAttributes"
-                    Value="Bold"/>
-            
-            <Setter Property="HorizontalOptions"
-                    Value="Start" />
-            
+
         </Style>
 
         <!-- separator-->
