@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views"
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="GpsNote.Views.SettingsPage"
+                        xmlns:prism="http://prismlibrary.com"
+                        prism:ViewModelLocator.AutowireViewModel="True"
+                        NavigationPage.HasNavigationBar="False"
+                        NavigationPage.HasBackButton="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
+
+    
+
+
+    <Grid RowDefinitions="0.1*, *"
+          Background="Transparent">
+
+        <!-- NAVIGATION BAR -->
+        <Grid ColumnDefinitions="*"
+              Background="Transparent">
+
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start"
+                   Margin="10, 0, 0, 0">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <!-- TITLE LABEL -->
+            <Label Grid.Column="0"
+                   Text="{Binding Title}" 
+                   Style="{StaticResource navBarTitle}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+        </Grid>
+
+        <!-- CONTENT -->
+        <StackLayout Grid.Row="1"
+                     Background="Transparent">
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <Grid ColumnDefinitions="0.8*, 0.2*"
+              Margin="20, 20, 15, 20">
+
+                <!-- DARK THEME LABEL -->
+                <Label Grid.Column="0"
+                   Text="{Binding Resource[DarkThemeLabel]}"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand"/>
+
+                <!-- DARK THEME TOOGLE -->
+                <Switch x:Name="switch"
+                    Grid.Column="1"
+                    IsToggled="{Binding IsToogled}"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand"/>
+
+            </Grid>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <Grid ColumnDefinitions="0.8*, 0.2*"
+              Margin="20, 20, 15, 20">
+
+                <!-- LANGUAGE LABEL -->
+                <Label Grid.Column="0"
+                   Text="{Binding Resource[LanguageLabel]}"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand"/>
+
+                <!-- ARROW IMAGE  -->
+                <Image  Grid.Column="1"
+                    Source="ic_left_gray.png"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand">
+
+                    <Image.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding LanguageArrowTap}"/>
+
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <Grid ColumnDefinitions="0.8*, 0.2*"
+              Margin="20, 20, 15, 20">
+
+                <!-- CLOCK COLOR LABEL -->
+                <Label Grid.Column="0"
+                   Text="{Binding Resource[ColorClockLabel]}"
+                   FontSize="Large"
+                   VerticalOptions="Center"
+                   HorizontalOptions="StartAndExpand"/>
+
+                <!-- ARROW IMAGE  -->
+                <Image  Grid.Column="1"
+                    Source="ic_left_gray.png"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="CenterAndExpand">
+
+                    <Image.GestureRecognizers>
+
+                        <TapGestureRecognizer Command="{Binding ClockColorArrowTap}"/>
+
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+        </StackLayout>
+        
+    </Grid>
+       
+</views:BaseContentPage>

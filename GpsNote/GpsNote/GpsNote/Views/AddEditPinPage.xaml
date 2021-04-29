@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views"
+                         xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="GpsNote.Views.AddEditPinPage"
+                        xmlns:controls="clr-namespace:GpsNote.Controls"
+                        xmlns:prism="http://prismlibrary.com"
+                        
+                        NavigationPage.HasNavigationBar="False"
+                        NavigationPage.HasBackButton="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                   Dark={StaticResource Black}}">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            
+        </Grid.RowDefinitions>
+
+        <!-- NAVIGATION BAR -->
+        <Grid ColumnDefinitions="*">
+
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"
+                   Margin="10, 0, 0, 0">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <!-- TITLE LABEL -->
+            <Label Grid.Column="0"
+                   Text="{Binding Title}" 
+                   Style="{StaticResource navBarTitle}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <!-- SAVE IMAGE -->
+            <Image Grid.Column="0"
+                   Source="ic_save.png"
+                   HorizontalOptions="End"
+                   Margin="0, 0, 15, 0"
+                   VerticalOptions="End">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding SaveTapCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+        </Grid>
+
+        <!-- CONTENT -->
+        <Grid Grid.Row="1"
+              Margin="20, 5, 20, 0">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+
+            </Grid.RowDefinitions>
+
+            <StackLayout Margin="0, 0, 0, 10">
+
+                <!-- PIN LABEL -->
+                <Label Text="{Binding Resource[LabelAddPinLabel]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+
+                <!-- PIN LABEL ENTRY-->
+                <controls:CustomEntryAuth ImageSource="ic_clear.png"
+                                      TextEntry="{Binding LabelPinText}"
+                                      ErrorText="{Binding LabelPinError}"
+                                      PlaceholderText="{Binding Resource[EnterLabelPinPlaceholder]}"
+                                      TapImage="{Binding TapLabelImage}"/>
+
+
+            </StackLayout>
+            
+
+            <StackLayout Grid.Row="1"
+                         Margin="0, 0, 0, 15">
+
+                <!-- DESCRIPTION LABEL -->
+                <Label Text="{Binding Resource[DescriptionLabel]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+                <!-- DESCRIPTION ENTRY-->
+                <controls:CustomEntryAuth
+                      ImageSource="ic_clear.png"
+                      TextEntry="{Binding DescriptionText}"
+                      TapImage="{Binding TapDescriptionImage}"
+                      PlaceholderText="{Binding Resource[DescriptionPlaceholder]}"/>
+
+            </StackLayout>
+
+
+            <StackLayout Grid.Row="2"
+                         Margin="0, 0, 0, 15">
+
+                <!-- COORDINATES LABEL -->
+                <Label Text="{Binding Resource[CoordinatesLabel]}"
+                   FontSize="Medium"
+                   Margin="15, 0"/>
+
+                <Grid ColumnDefinitions="*, *">
+
+                    <!-- LONGTITUDE ENTRY-->
+                    <controls:CustomEntryAuth
+                      ImageSource="ic_clear.png"
+                      TextEntry="{Binding LongitudePinText}"
+                      TapImage="{Binding TapLongtitudeImage}"
+                      ErrorText="{Binding LongtitudePinError}"
+                      PlaceholderText="{Binding Resource[LongtitudePlaceholder]}"/>
+
+                    <!-- LATITUDE ENTRY-->
+                    <controls:CustomEntryAuth
+                      Grid.Column="1"
+                      ImageSource="ic_clear.png"
+                      ErrorText="{Binding LatitudePinError}"
+                      TextEntry="{Binding LatitudePinText}"
+                      TapImage="{Binding TapLatitudeImage}"
+                      PlaceholderText="{Binding Resource[LatitudePlaceholder]}"/>
+
+                </Grid>
+
+            </StackLayout>
+
+        </Grid>
+
+        <!-- MAP -->
+        <controls:CustomMap Grid.Row="2"
+                            VerticalOptions="FillAndExpand"
+                            InitialCameraUpdate="{Binding InitialCameraUpdate}"
+                            PinsList="{Binding Pins}">
+
+            <controls:CustomMap.Behaviors>
+
+                <prism:EventToCommandBehavior EventName="MapClicked"
+                                              Command="{Binding MapTapCommand}"
+                                              EventArgsParameterPath="Point" />
+
+            </controls:CustomMap.Behaviors>
+
+        </controls:CustomMap>
+
+    </Grid>
+
+</views:BaseContentPage>

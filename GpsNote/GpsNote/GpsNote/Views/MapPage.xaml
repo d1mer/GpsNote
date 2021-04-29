@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views" 
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="GpsNote.Views.MapPage"
+                        xmlns:controls="clr-namespace:GpsNote.Controls"
+                        xmlns:prism="http://prismlibrary.com"
+                        prism:ViewModelLocator.AutowireViewModel="True"
+                        Title="{Binding Title}"
+                        NavigationPage.HasBackButton="False"
+                        NavigationPage.HasNavigationBar="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                          Dark={StaticResource Black}}">
+
+    <Grid RowDefinitions="0.07*, 0.9*">
+
+         <!-- NAVBAR -->
+        <controls:CustomMapNavBar SearchText="{Binding SearchText}"
+                                  LeftIconTapCommand="{Binding SettingsTapCommand}"
+                                  RightIconTapCommand="{Binding LogOutTapCommand}"
+                                  ExitSearch="{Binding ExitSearch}"/>
+
+        <!-- MAP -->
+        <controls:CustomMap x:Name="map"
+                            Grid.Row="1"
+                            IsMoveCamera="{Binding IsMoveCamera}"
+                            CameraMovingPosition="{Binding MovingCameraPosition}"
+                            InitialCameraUpdate="{Binding InitialCameraUpdate}"
+                            PinsList="{Binding Pins}"
+                            IsMyLocationButtonVisible="{Binding MyLocationButtonVisibility}">
+
+            <controls:CustomMap.Behaviors>
+
+                <prism:EventToCommandBehavior EventName="CameraIdled"
+                                              Command="{Binding CameraIdLedCommand}"
+                                              EventArgsParameterPath="Position" />
+
+                <prism:EventToCommandBehavior EventName="MapClicked"
+                                              Command="{Binding MapTapCommand}" />
+
+                <prism:EventToCommandBehavior EventName="PinClicked"
+                                              Command="{Binding PinClickedCommand}"
+                                              EventArgsParameterPath="Pin" />
+
+            </controls:CustomMap.Behaviors>
+
+        </controls:CustomMap>
+
+        <!-- SEARCH LISTVIEW -->
+        <ListView Grid.Row="1"
+                  x:Name="searchResultList"
+                  ItemsSource="{Binding SearchResultList}"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  SeparatorVisibility="None"
+                  VerticalOptions="Start"
+                  Background="Transparent"
+                  IsVisible="{Binding IsSearchListVisible}"
+                  RowHeight="{Binding ListRowHeight}"
+                  HeightRequest="{Binding ListHeiqhtRequest}">
+
+            <ListView.Behaviors>
+
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              Command="{Binding Path=BindingContext.ListItemTapCommand, 
+                                                        Source={x:Reference searchResultList}}"
+                                                        EventArgsParameterPath="Item" />
+
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ViewCell>
+
+                        <ViewCell.View>
+
+                            <StackLayout Background="Transparent">
+
+                                 <!--SEPARATOR--> 
+                                <BoxView Style="{StaticResource separator}"/>
+
+                                <Grid ColumnDefinitions="0.2*, 0.8*"
+                                      Background="Transparent"
+                                      Padding="0, 0, 20, 10">
+
+                                     <!--IMAGE PIN--> 
+                                    <Image Source="ic_pin_gray.png"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand" />
+
+                                    <StackLayout Grid.Column="1"
+                                                 Background="Transparent"
+                                                 Spacing="10">
+
+                                         <!--PIN LABEL--> 
+                                        <Label Text="{Binding Label}"
+                                               FontAttributes="Bold"
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
+
+                                         <!--PIN ADDRESS--> 
+                                        <Label Text="{Binding Address}"
+                                               FontSize="Medium"
+                                               LineBreakMode="TailTruncation"/>
+
+                                    </StackLayout>
+
+                                </Grid>
+
+                            </StackLayout>
+
+                        </ViewCell.View>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </Grid>
+
+</views:BaseContentPage>

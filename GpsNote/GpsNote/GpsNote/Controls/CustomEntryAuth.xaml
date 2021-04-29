@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GpsNote.Controls.CustomEntryAuth">
+
+    <StackLayout>
+
+        <Frame x:Name="frame"
+               Style="{StaticResource frameStyle}"
+               HasShadow="False">
+
+            <Grid ColumnDefinitions="0.9*, 0.1*">
+
+
+
+                <Entry x:Name="entry"
+                       TextChanged="Entry_TextChanged"
+                       Text="{Binding TextEntry}"
+                       HeightRequest="45"
+                       VerticalOptions="CenterAndExpand"
+                       FontFamily="Montserrat-Light"
+                       FontSize="18"/>
+
+                <Image x:Name="image"
+                       Grid.Column="1"
+                       Style="{StaticResource customEntryImage}">
+
+                    <Image.GestureRecognizers>
+
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+
+                    </Image.GestureRecognizers>
+                    
+                </Image>
+                       
+            </Grid>    
+                       
+        </Frame>       
+                       
+        <Label x:Name="errorLabel"
+               Style="{StaticResource errorLabel}" />
+
+    </StackLayout>
+    
+</ContentView>

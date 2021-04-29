@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views"
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="GpsNote.Views.NotesPage"
+                        xmlns:prism="http://prismlibrary.com" 
+                        xmlns:controls="clr-namespace:GpsNote.Controls"
+                        prism:ViewModelLocator.AutowireViewModel="True"
+                        Title="{Binding Title}"
+                        NavigationPage.HasBackButton="False"
+                        NavigationPage.HasNavigationBar="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
+
+
+    <Grid RowDefinitions="0.1*, *">
+
+        <!-- NAVBAR -->
+        <controls:CustomMapNavBar SearchText="{Binding SearchText}" />
+
+        <ListView Grid.Row="1"
+                  x:Name="pinsListView"
+                  ItemsSource="{Binding PinsList}"
+                  HasUnevenRows="True"
+                  SelectionMode="None"
+                  SeparatorVisibility="None"
+                  Background="Transparent">
+
+            <ListView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <ViewCell>
+
+                        <ViewCell.ContextActions>
+
+                            <MenuItem IconImageSource="ic_edit.png" 
+                                      Text="{Binding Path=BindingContext.Resource[EditText],
+                                                     Source={x:Reference pinsListView}}"
+                                      Command="{Binding Path=BindingContext.UpdateTapCommand, 
+                                                Source={x:Reference pinsListView}}"  
+                                      CommandParameter="{Binding .}"/>
+
+                            <MenuItem IconImageSource="ic_delete.png" 
+                                      Text="{Binding Path=BindingContext.Resource[DeleteText],
+                                                     Source={x:Reference pinsListView}}"
+                                      Command="{Binding Path=BindingContext.DeleteTapCommand, 
+                                                Source={x:Reference pinsListView}}"
+                                      CommandParameter="{Binding .}"/>
+
+                        </ViewCell.ContextActions>
+
+                        <ViewCell.View>
+
+                            <StackLayout Background="Transparent">
+
+                               <!-- SEPARATOR -->
+                                <BoxView Style="{StaticResource separator}" />
+
+                                <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*"
+                                      Padding="0, 0, 0, 10">
+
+                                    <!-- IMAGE HEART -->
+                                    <ImageButton Source="{Binding ImagePath}"
+                                                 BackgroundColor="Transparent"
+                                                 Margin="15, 5"
+                                                 Command="{Binding Path=BindingContext.HeartImageTapCommand, 
+                                                                   Source={x:Reference pinsListView}}"
+                                                 CommandParameter="{Binding .}">
+
+                                    </ImageButton>
+
+                                    <StackLayout Grid.Column="1"
+                                                 Background="Transparent">
+
+                                        <!-- PIN LABEL -->
+                                        <Label Text="{Binding Label}"
+                                               FontAttributes="Bold"
+                                               FontSize="Medium"
+                                               LineBreakMode="NoWrap"/>
+
+                                        <Grid ColumnDefinitions="*, *"
+                                              
+                                              Background="Transparent">
+
+                                            <!-- LONGTITUDE LABEL -->
+                                            <Label Text="{Binding Longtitude}"
+                                                   FontSize="Small"/>
+
+                                            <!-- LATITUDE LABEL -->
+                                            <Label Grid.Column="1"
+                                                   Text="{Binding Latitude}"
+                                                   FontSize="Small" />
+
+                                        </Grid>
+
+                                    </StackLayout>
+
+                                    <!-- IMAGE ARROW -->
+                                    <ImageButton Grid.Column="2"
+                                                 Source="ic_left_gray.png"
+                                                 BackgroundColor="Transparent"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Center"
+                                                 Command="{Binding Path=BindingContext.ArrowImageTapCommand, 
+                                                                   Source={x:Reference pinsListView}}"
+                                                 CommandParameter="{Binding .}">
+
+                                    </ImageButton>
+
+                                </Grid>
+
+                            </StackLayout>
+
+                        </ViewCell.View>
+
+                    </ViewCell>
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+        <!-- ADD BUTTON -->
+        <Button Grid.Row="1" 
+                ImageSource="ic_plus.png"
+                FontAttributes="None"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightBlue},
+                                                  Dark={StaticResource DarkBlue}}"
+                BorderRadius ="28"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                WidthRequest="56"
+                HeightRequest="56"
+                Margin="0,0,20,20"
+                Command="{Binding AddEditPinTapCommand}"/>
+
+    </Grid>
+
+</views:BaseContentPage>

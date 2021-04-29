@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views"
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        x:Class="GpsNote.Views.MainPage"
+                        NavigationPage.HasNavigationBar="False"
+                        NavigationPage.HasBackButton="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
+
+    <Grid RowDefinitions="7*, 3*">
+
+
+
+        <Grid RowDefinitions="0.8*, 0.2*">
+
+            <Image Source="pic_enter_page.png"
+                   VerticalOptions="End"
+                   Margin="0, 30"/>
+            
+            <Label Grid.Row="1"
+                   Text="MapNotepad"
+                   FontFamily="Montserrat-Bold"
+                   FontSize="26"
+                   CharacterSpacing="0.04"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Start"
+                   TextColor="{StaticResource LightBlue}"/>
+        </Grid>
+
+        <StackLayout Grid.Row="1"
+                     VerticalOptions="End"
+                     Padding="20"
+                     Spacing="20">
+
+            <StackLayout.Margin>
+
+                <OnPlatform x:TypeArguments="Thickness"
+                            iOS="0,0,0,10"/>
+            </StackLayout.Margin>
+
+            <Button Text="{Binding Resource[LoginButton]}"
+                    Style="{StaticResource mainButton1}"
+                    Command="{Binding SignInTapCommand}"/>
+
+            <Button Text="{Binding Resource[CreateAccountButton]}"
+                    Style="{StaticResource mainButton2}"
+                    Command="{Binding SignUpTapCommand}"
+                    />
+
+        </StackLayout>
+    </Grid>
+    
+</views:BaseContentPage>
+   

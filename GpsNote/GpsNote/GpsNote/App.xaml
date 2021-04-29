@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="GpsNote.App">
+    <Application.Resources>
+        
+        <!-- SKIASHARP COLORS -->
+        <x:String x:Key="grayFillClock">#F1F3FD</x:String>
+        <x:String x:Key="lightBlueClock">#C7CDF5</x:String>
+        <x:String x:Key="darkBlueClock">#596EFB</x:String>
+        <x:String x:Key="lightRedClock">#F5C7C7</x:String>
+        <x:String x:Key="darkRedClock">#DD4949</x:String>
+        <x:String x:Key="lightGreenClock">#00FFB1</x:String>
+        <x:String x:Key="darkGreenClock">#32D27F</x:String>
+
+        <!-- Colors -->
+        <Color x:Key="LightBlue">#596EFB</Color>
+        <Color x:Key="LightBlue2">#273BC6</Color>
+        <Color x:Key="LightBlue3">#192680</Color>
+        <Color x:Key="LightGrayBackground">#C7CDF5</Color>
+        <Color x:Key="LightWhiteGray">#F1F3FD</Color>
+        <Color x:Key="LightRed">#F24545</Color>
+        <Color x:Key="DarkBlue">#7485FB</Color>
+        <Color x:Key="DarkBlue2">#5F73FA</Color>
+        <Color x:Key="DarkBlue3">#3953FE</Color>
+        <Color x:Key="DarkGrayBackground">#3D4475</Color>
+        <Color x:Key="DarkGray2">#33374E</Color>
+        <Color x:Key="DarkRed">#FFA545F</Color>
+        <Color x:Key="SystemWhite">#FEFEFD</Color>
+        <Color x:Key="LightGray">#D7DDE8</Color>
+        <Color x:Key="Gray">#858E9E</Color>
+        <Color x:Key="DarkGray">#3D4E61</Color>
+        <Color x:Key="Black">#1E242B</Color>
+
+      
+        <!-- NAVIGATION PAGE STYLE -->
+        <Style TargetType="NavigationPage">
+
+            <Setter Property="BarBackgroundColor"
+                    Value="Transparent" />
+
+        </Style>
+
+        <!-- Page -->
+        <Style TargetType="Page">
+
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource SystemWhite}, 
+                                            Dark={StaticResource Black}}" />
+
+            <Setter Property="NavigationPage.HasBackButton"
+                    Value="False" />
+
+            <Setter Property="NavigationPage.HasNavigationBar"
+                    Value="False"/>
+
+        </Style>
+
+        <!-- BUTTON -->
+        <Style TargetType="Button">
+            
+            <Setter Property="TextTransform"
+                    Value="None"/>
+            
+            <Setter Property="FontSize"
+                    Value="Medium" />
+            
+        </Style>
+      
+        <!-- LABEL -->
+        <Style TargetType="Label">
+            
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black},
+                                            Dark={StaticResource SystemWhite}}" />
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter Property="FontSize"
+                    Value="Medium"/>
+            
+        </Style>
+          
+        <!-- ENTRY -->
+        <Style TargetType="Entry">
+            
+            <Setter Property="Margin"
+                    Value="10, 0, 0, 0" />
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter Property="FontSize"
+                    Value="18"/>
+
+        </Style>
+
+
+        <!-- NAMED STYLES -->
+
+        <!-- mainButton1 -->
+        <Style x:Key="mainButton1" TargetType="Button">
+            
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue}, 
+                                            Dark={StaticResource LightBlue}}"/>
+            
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource SystemWhite},
+                                            Dark={StaticResource SystemWhite}}" />
+
+            <Setter Property="CornerRadius"
+                    Value="1"/>
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter Property="FontSize"
+                    Value="18"/>
+
+        </Style>
+
+        <!-- mainButton2 -->
+        <Style x:Key="mainButton2" TargetType="Button">
+            
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Light={StaticResource SystemWhite}, 
+                                            Dark={StaticResource Black}}"/>
+            
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue},
+                                            Dark={StaticResource LightBlue}}" />
+            
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource LightBlue},
+                                            Dark={StaticResource LightBlue}}" />
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Medium" />
+
+            <Setter Property="FontSize"
+                    Value="18"/>
+
+            <Setter Property="BorderWidth"
+                    Value="1" />
+
+            <Setter Property="CornerRadius"
+                    Value="1"/>
+
+        </Style>
+
+        <!-- alternativeLoginButton -->
+        <Style x:Key="alternativeLoginButton" TargetType="Button">
+
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource Gray},
+                                            Dark={StaticResource SystemWhite}}" />
+
+            <Setter Property="BorderWidth"
+                    Value="1" />
+
+            <Setter Property="Margin"
+                    Value="3, 0" />
+
+            <Setter Property="CornerRadius"
+                    Value="2"/>
+
+        </Style>
+
+        <!-- navBarTitle -->
+        <Style x:Key="navBarTitle" TargetType="Label">
+            
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black}, 
+                                            Dark={StaticResource SystemWhite}}"/>
+
+            <Setter Property="FontFamily"
+                    Value="Montserrat-Bold" />
+
+            <Setter Property="FontSize"
+                    Value="Large"/>
+
+        </Style>
+
+        <!-- separator-->
+        <Style x:Key="separator" TargetType="BoxView">
+            
+            <Setter Property="Color"
+                    Value="{AppThemeBinding Light={StaticResource LightGray},
+                                            Dark={StaticResource Gray}}" />
+
+            <Setter Property="VerticalOptions"
+                    Value="Center" />
+
+            <Setter Property="HeightRequest"
+                    Value="1"/>
+            
+        </Style>
+
+        <!-- errorLabel -->
+        <Style x:Key="errorLabel" TargetType="Label">
+            
+            <Setter Property="FontSize"
+                    Value="Small" />
+
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource LightRed},
+                                            Dark={StaticResource DarkRed}}" />
+
+            <Setter Property="Margin"
+                    Value="15, 0"/>
+
+            <Setter Property="IsVisible"
+                    Value="False" />
+            
+        </Style>
+
+
+        <!-- frameStyle -->
+        <Style x:Key="frameStyle" TargetType="Frame">
+            
+            <Setter Property="CornerRadius"
+                    Value="4"/>
+            
+            <Setter Property="BorderColor"
+                    Value="{StaticResource LightGray}" />
+            
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            
+            <Setter Property="Padding"
+                    Value="0" />
+            
+        </Style>
+
+        <!-- frameErrorAlert -->
+        <Style x:Key="frameErrorAlert" TargetType="Frame">
+            
+            <Setter Property="CornerRadius"
+                    Value="4"/>
+            
+            <Setter Property="BorderColor"
+                    Value="{AppThemeBinding Light={StaticResource LightRed},
+                                            Dark={StaticResource DarkRed}}" />
+            
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            
+            <Setter Property="Padding"
+                    Value="0" />
+            
+        </Style>
+
+        <!-- customEntryImage -->
+        <Style x:Key="customEntryImage" TargetType="Image">
+
+            <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+
+            <Setter Property="Margin"
+                    Value="0, 0, 10, 0"/>
+
+            <Setter Property="IsVisible"
+                    Value="false"/>
+            
+        </Style>
+
+    </Application.Resources>
+    
+</prism:PrismApplication>

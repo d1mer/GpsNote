@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rg="http://rotorgames.com"
+             xmlns:controls="clr-namespace:GpsNote.Controls"
+             CloseWhenBackgroundIsClicked="True"
+             AndroidTalkbackAccessibilityWorkaround="True"
+             x:Class="GpsNote.Views.Clock.ClockPopupPage"
+             BackgroundColor="Transparent"
+             Padding="20, 65">
+
+    <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
+          BackgroundColor="White">
+
+        <Grid ColumnDefinitions="0.9*, 0.1*">
+            
+            <!-- LABELPIN LABEL-->
+            <Label Text="{Binding LabelPin}"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="20, 0, 0, 0"/>
+            
+            <!-- IMAGE CLOSE POPUP -->
+            <Image Source="ic_clear.png"
+                   Grid.Column="1" 
+                   Margin="0, 0, 5, 0">
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            
+        </Grid>
+
+        <Grid ColumnDefinitions="0.3*, 0.7*"
+              Grid.Row="1">
+
+            <!-- TIME LABEL -->
+            <Label Text="{Binding TimeString}"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   VerticalOptions="Start"
+                   HorizontalOptions="End"/>
+
+            <!-- TIMEZONEID LABEL-->
+            <Label Text="{Binding TimeZoneID}" 
+                   Grid.Column="1"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"/>
+
+        </Grid>
+
+        <controls:CustomCanvas Grid.Row="2"
+                               Margin="0, 0, 0, 15"
+                               TimeZoneLocalTime="{Binding TimeZoneDateTime}"
+                               TimerAlive="{Binding IsTimerAlive}" />
+
+    </Grid>
+
+</rg:PopupPage>

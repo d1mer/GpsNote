@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views" 
+                        xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:resources="clr-namespace:GpsNote.Resource"
+                        x:Class="GpsNote.Views.SettingsClock"
+                        NavigationPage.HasNavigationBar="False"
+                        NavigationPage.HasBackButton="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
+
+
+    <Grid RowDefinitions="0.1*, *"
+          BackgroundColor="Transparent">
+
+        <!-- NAVIGATION BAR -->
+        <Grid ColumnDefinitions="*">
+
+            <!-- BACK ARROW IMAGE -->
+            <Image Source="ic_left_blue.png"
+                   HorizontalOptions="Start"
+                   Margin="10, 0, 0, 0">
+
+                <Image.GestureRecognizers>
+
+                    <TapGestureRecognizer Command="{Binding BackPressedCommand}"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            <!-- TITLE LABEL -->
+            <Label Grid.Column="0"
+                       Text="{Binding Title}" 
+                       Style="{StaticResource navBarTitle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+
+        </Grid>
+        
+        <!-- CONTENT -->
+        <StackLayout Grid.Row="1"
+                     Background="Transparent"
+                     RadioButtonGroup.GroupName="ClockColor"
+                     RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <RadioButton Content="{x:Static resources:ResourcesLang.BlueText}"
+                     Value="Blue"
+                     FontSize="Medium"
+                     Margin="15"/>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <RadioButton Content="{x:Static resources:ResourcesLang.RedText}"
+                      Value="Red"
+                     FontSize="Medium"
+                     Margin="15"/>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+            <RadioButton Content="{x:Static resources:ResourcesLang.GreenText}"
+                      Value="Green"
+                     FontSize="Medium"
+                     Margin="15"/>
+
+            <BoxView Style="{StaticResource separator}"/>
+
+
+        </StackLayout>
+
+    </Grid>
+
+</views:BaseContentPage>
