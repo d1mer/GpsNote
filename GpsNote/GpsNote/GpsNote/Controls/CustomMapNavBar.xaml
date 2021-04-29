@@ -12,35 +12,37 @@
 
             <!-- SETTINGS IMAGE BUTTON -->
             <ImageButton BindingContext="{x:Reference Name=Entry}"
-                     Grid.Column="0"
-                     x:Name="settingsButton"
-                     Source="ic_settings.png"
-                     BackgroundColor="Transparent"
-                     VerticalOptions="CenterAndExpand"
-                     Command="{Binding LeftIconTapCommand}"/>
+                         Grid.Column="0"
+                         x:Name="settingsButton"
+                         Source="ic_settings.png"
+                         BackgroundColor="Transparent"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Command="{Binding LeftIconTapCommand}"/>
 
 
 
             <!-- FRAME -->
             <Frame Grid.Column="1"
-               x:Name="searchBar"
-               CornerRadius="4"
-               Padding="0"
-               VerticalOptions="Center"
-               HasShadow="False"
-               BackgroundColor="{AppThemeBinding Light={StaticResource LightWhiteGray},
+                   x:Name="searchBar"
+                   CornerRadius="4"
+                   Padding="0"
+                   VerticalOptions="Center"
+                   HasShadow="False"
+                   HeightRequest="40"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource LightWhiteGray},
                                                  Dark={StaticResource DarkGray2}}">
 
                 <Grid ColumnDefinitions="0.9*, 0.1*">
 
                     <!-- SEARCH ENTRY -->
                     <Entry x:Name="searchEntry"
-                       VerticalOptions="End"
-                       FontSize="16"
-                       BackgroundColor="Transparent"
-                       Placeholder="{Binding Resource[SearchPlaceholder]}"
-                       Focused="SearchBar_Focused"
-                       TextChanged="SearchEntry_TextChanged"/>
+                           VerticalOptions="Center"
+                           FontSize="16"
+                           BackgroundColor="Transparent"
+                           Placeholder="{Binding Resource[SearchPlaceholder]}"
+                           Focused="SearchBar_Focused"
+                           TextChanged="SearchEntry_TextChanged"/>
 
                     <!-- CLEAR IMAGE -->
                     <ImageButton x:Name="imageClear"

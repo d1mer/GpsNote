@@ -53,8 +53,8 @@ namespace GpsNote.ViewModels
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
             Task.Run(() => RequestLocationPermission());
 
-            IsSearchListVisible = false;
             SearchText = string.Empty;
+            IsSearchListVisible = false;
             ListRowHeight = 100;
         }
 
@@ -277,8 +277,12 @@ namespace GpsNote.ViewModels
                 IsSearchListVisible = true;
 
                 var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
-                ListHeiqhtRequest = ListRowHeight * list.Count;
-                SearchResultList = new ObservableCollection<Pin>(list);
+                //ListHeiqhtRequest = ListRowHeight * list.Count;
+
+                if(list != null)
+                {
+                    SearchResultList = new ObservableCollection<Pin>(list);
+                } 
             }
         }
 
@@ -320,7 +324,7 @@ namespace GpsNote.ViewModels
                     {Constants.DISPLAY_PIN, pin }
                 };
 
-                await NavigationService.NavigateAsync(nameof(PinInfoPage), parameter);
+                await NavigationService.NavigateAsync(nameof(PinInfoPage), parameter, true, true);
                 
             }
         }

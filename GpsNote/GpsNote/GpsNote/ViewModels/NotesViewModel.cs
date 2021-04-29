@@ -18,7 +18,7 @@ using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {
-    public class NotesViewModel : ViewModelBase, IInitializeAsync
+    public class NotesViewModel : ViewModelBase
     {
         private IPageDialogService _dialogService;
         private IPinService        _pinService;
@@ -106,7 +106,7 @@ namespace GpsNote.ViewModels
             {
                 PinViewModel pinViewModel = PinsList.FirstOrDefault(p => p.Id == editPin.Id);
 
-                if(pinViewModel != null)
+                if (pinViewModel != null)
                 {
                     int index = PinsList.IndexOf(pinViewModel);
                     PinsList.RemoveAt(index);
@@ -119,16 +119,13 @@ namespace GpsNote.ViewModels
             }
         }
 
-        #endregion
-
-
-        #region -- Implement IInitializeAsync interface --
-
-        public async Task InitializeAsync(INavigationParameters parameters)
+        public async override void Initialize(INavigationParameters parameters)
         {
+            base.Initialize(parameters);
+
             List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
 
-            if (pinsModel.Count != 0)
+            if (pinsModel != null && pinsModel.Count != 0)
             {
                 PinsList = new ObservableCollection<PinViewModel>();
                 PinViewModel pinViewModel;

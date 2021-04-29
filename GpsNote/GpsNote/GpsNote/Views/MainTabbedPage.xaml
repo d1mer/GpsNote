@@ -16,7 +16,10 @@
     </TabbedPage.Behaviors>
 
     <TabbedPage.Children>
+        
         <local:MapPage IconImageSource="ic_map.png"/>
+        
         <local:NotesPage IconImageSource="ic_pin.png"/>
+        
     </TabbedPage.Children>
 </TabbedPage>

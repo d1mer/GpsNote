@@ -38,7 +38,7 @@ namespace GpsNote.Services.PinService
             {
                 try
                 {
-                    userPins = await _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.AuthorizedUserID);
+                    userPins = (List<PinModel>)await _repositoryService.GetAllAsync<PinModel>(p => p.Owner == _settingsService.AuthorizedUserID);
                 }
                 catch(Exception ex)
                 {

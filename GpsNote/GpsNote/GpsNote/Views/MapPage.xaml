@@ -78,14 +78,14 @@
 
                             <StackLayout Background="Transparent">
 
-                                <!-- SEPARATOR -->
+                                 <!--SEPARATOR--> 
                                 <BoxView Style="{StaticResource separator}"/>
 
                                 <Grid ColumnDefinitions="0.2*, 0.8*"
                                       Background="Transparent"
                                       Padding="0, 0, 20, 10">
 
-                                    <!-- IMAGE PIN -->
+                                     <!--IMAGE PIN--> 
                                     <Image Source="ic_pin_gray.png"
                                            VerticalOptions="CenterAndExpand"
                                            HorizontalOptions="CenterAndExpand" />
@@ -94,13 +94,13 @@
                                                  Background="Transparent"
                                                  Spacing="10">
 
-                                        <!-- PIN LABEL -->
+                                         <!--PIN LABEL--> 
                                         <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
                                                FontSize="Medium"
                                                LineBreakMode="NoWrap"/>
 
-                                        <!-- PIN ADDRESS -->
+                                         <!--PIN ADDRESS--> 
                                         <Label Text="{Binding Address}"
                                                FontSize="Medium"
                                                LineBreakMode="TailTruncation"/>

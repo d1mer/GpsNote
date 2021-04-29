@@ -25,7 +25,9 @@ namespace GpsNote.Controls
                                     typeof(string),
                                     typeof(CustomMapNavBar),
                                     defaultValue: string.Empty,
-                                    defaultBindingMode: BindingMode.TwoWay);
+                                    defaultBindingMode: BindingMode.OneWay,
+                                    propertyChanged: SearchTextPropertyChanged);
+
 
         public string SearchText
         {
@@ -141,7 +143,23 @@ namespace GpsNote.Controls
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SearchText = e.NewTextValue;
+            if(SearchText == null)
+            {
+                SearchText = string.Empty;
+;           }
+
+            SearchText = (string)e.NewTextValue;
+        }
+
+
+        private static void SearchTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomMapNavBar navBar = bindable as CustomMapNavBar;
+
+            if(navBar != null)
+            {
+                navBar.SearchText = (string)newValue;
+            }
         }
 
         #endregion
