@@ -164,22 +164,25 @@ namespace GpsNote.ViewModels
                 }
                 else
                 {
-                    _oldPinsList = null;
-                    PinsList = new ObservableCollection<PinViewModel>();
-
-                    List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
-
-                    if (pinsModel != null && pinsModel.Count != 0)
+                    if(_oldPinsList != null)
                     {
-                        PinViewModel pinViewModel;
+                        _oldPinsList = null;
+                        PinsList = new ObservableCollection<PinViewModel>();
 
-                        foreach (PinModel pinModel in pinsModel)
+                        List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
+
+                        if (pinsModel != null && pinsModel.Count != 0)
                         {
-                            pinViewModel = pinModel.ToPinViewModel();
-                            pinViewModel.ImagePath = pinModel.IsEnable ? "ic_like_blue.png" : "ic_like_gray.png";
-                            PinsList.Add(pinViewModel);
+                            PinViewModel pinViewModel;
+
+                            foreach (PinModel pinModel in pinsModel)
+                            {
+                                pinViewModel = pinModel.ToPinViewModel();
+                                pinViewModel.ImagePath = pinModel.IsEnable ? "ic_like_blue.png" : "ic_like_gray.png";
+                                PinsList.Add(pinViewModel);
+                            }
                         }
-                    }
+                    }          
                 }
             }
         }
