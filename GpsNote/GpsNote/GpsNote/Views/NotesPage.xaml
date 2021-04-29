@@ -13,7 +13,7 @@
                                                Dark={StaticResource Black}}">
 
 
-    <Grid RowDefinitions="0.1*, *">
+    <Grid RowDefinitions="Auto, *">
 
         <!-- NAVBAR -->
         <controls:CustomMapNavBar SearchText="{Binding SearchText}" />

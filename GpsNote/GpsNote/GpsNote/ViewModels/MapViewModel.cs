@@ -3,31 +3,28 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Xamarin.Forms.GoogleMaps;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using GpsNote.Services.MapCameraSettingsService;
 using GpsNote.Services.PinService;
 using GpsNote.Models;
 using GpsNote.Extensions;
 using GpsNote.Services.Permissions;
-using GpsNote.Views.Clock;
 using GpsNote.Services.TimeZone;
 using GpsNote.Services.Localization;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System.ComponentModel;
 using GpsNote.Views.PinInfo;
-using System.Windows.Input;
-using Xamarin.Forms;
 using GpsNote.Views;
 
 namespace GpsNote.ViewModels
 {
     public class MapViewModel : ViewModelBase
     {
-        private readonly IPageDialogService _dialogService;
         private readonly IPinService _pinService;
         private readonly IMapCameraSettingsService _cameraSettingsService;
         private readonly IPermissionsService _permissionsService;
@@ -42,7 +39,6 @@ namespace GpsNote.ViewModels
                             IPermissionsService permissionsService,
                             ITimeZoneService timeZoneService) : base(navigationService, localizationService)
         {
-            _dialogService = dialogService;
             _pinService = pinService;
             _cameraSettingsService = cameraSettingsService;
             _permissionsService = permissionsService;
@@ -55,7 +51,6 @@ namespace GpsNote.ViewModels
 
             SearchText = string.Empty;
             IsSearchListVisible = false;
-            ListRowHeight = 100;
         }
 
 
@@ -89,19 +84,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref movingCameraPosition, value);
         }
 
-        private bool isVisibleSearcBar = false;
-        public bool IsVisibleSearcBar
-        {
-            get => isVisibleSearcBar;
-            set => SetProperty(ref isVisibleSearcBar, value);
-        }
-
-        private bool isVisibleSearchButton = true;
-        public bool IsVisibleSearchButton
-        {
-            get => isVisibleSearchButton;
-            set => SetProperty(ref isVisibleSearchButton, value);
-        }
 
         private bool myLocationbuttonsVisibility = true;
         public bool MyLocationButtonVisibility
@@ -125,20 +107,6 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref searchResultList, value);
         }
 
-        private int listRowHeight = 100;
-        public int ListRowHeight
-        {
-            get => listRowHeight;
-            set => SetProperty(ref listRowHeight, value);
-        }
-
-        private int listHeiqhtRequest;
-        public int ListHeiqhtRequest
-        {
-            get => listHeiqhtRequest;
-            set => SetProperty(ref listHeiqhtRequest, value);
-        }
-
         private string searchText;
         public string SearchText
         {
@@ -156,12 +124,6 @@ namespace GpsNote.ViewModels
 
         private DelegateCommand<Object> cameraIdLedCommand;
         public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? new DelegateCommand<Object>(OnCameraLed);
-
-        private DelegateCommand searchButtonTapCommand;
-        public DelegateCommand SearchButtonTapCommand => searchButtonTapCommand ?? new DelegateCommand(OnSearchButtonTap);
-
-        private DelegateCommand<object> unfocusedSearchbarCommand;
-        public DelegateCommand<object> UnfocusedSearchbarCommand => unfocusedSearchbarCommand ?? new DelegateCommand<object>(OnUnfocusedSearch);
 
         private DelegateCommand<object> mapTapCommand;
         public DelegateCommand<object> MapTapCommand => mapTapCommand ?? new DelegateCommand<object>(OnMapClick);
@@ -224,6 +186,7 @@ namespace GpsNote.ViewModels
                 if (!string.IsNullOrWhiteSpace(SearchText))
                 {
                     IsSearchListVisible = true;
+                    ExitSearch = false;
                     OnSearchPin(SearchText);
                 }
                 else
@@ -263,21 +226,14 @@ namespace GpsNote.ViewModels
             }
         }
 
-        private void OnSearchButtonTap()
-        {
-            IsVisibleSearcBar = true;
-            IsVisibleSearchButton = false;
-            MyLocationButtonVisibility = false;
-        }
-
         private void OnSearchPin(string newText)
         {
             if (!string.IsNullOrWhiteSpace(newText))
             {
                 IsSearchListVisible = true;
 
-                var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
-                //ListHeiqhtRequest = ListRowHeight * list.Count;
+                var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase) &&
+                                           p.IsVisible == true).ToList();
 
                 if(list != null)
                 {
@@ -294,22 +250,16 @@ namespace GpsNote.ViewModels
             {
                 MovingCameraPosition = pin.Position;
                 IsMoveCamera = true;
+                SearchResultList.Clear();
+                IsSearchListVisible = false;
+                ExitSearch = true;
             }
-        }
-
-        private void OnUnfocusedSearch(object obj)
-        {
-            IsVisibleSearcBar = false;
-            IsVisibleSearchButton = true;
-            MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
-            IsSearchListVisible = false;
         }
 
         private void OnMapClick(object obj)
         {
+            IsSearchListVisible = false;
             ExitSearch = true;
-            IsVisibleSearcBar = false;
-            IsVisibleSearchButton = true;
             MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
         }
 

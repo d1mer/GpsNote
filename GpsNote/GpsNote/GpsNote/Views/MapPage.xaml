@@ -9,10 +9,11 @@
                         Title="{Binding Title}"
                         NavigationPage.HasBackButton="False"
                         NavigationPage.HasNavigationBar="False"
+                        x:Name="MainMap"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                           Dark={StaticResource Black}}">
 
-    <Grid RowDefinitions="0.07*, 0.9*">
+    <Grid RowDefinitions="Auto, *">
 
          <!-- NAVBAR -->
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
@@ -46,80 +47,70 @@
 
         </controls:CustomMap>
 
-        <!-- SEARCH LISTVIEW -->
-        <ListView Grid.Row="1"
-                  x:Name="searchResultList"
-                  ItemsSource="{Binding SearchResultList}"
-                  HasUnevenRows="True"
-                  SelectionMode="None"
-                  SeparatorVisibility="None"
-                  VerticalOptions="Start"
-                  Background="Transparent"
-                  IsVisible="{Binding IsSearchListVisible}"
-                  RowHeight="{Binding ListRowHeight}"
-                  HeightRequest="{Binding ListHeiqhtRequest}">
 
-            <ListView.Behaviors>
+        <StackLayout Grid.Row="1"
+                     BindableLayout.ItemsSource="{Binding SearchResultList}"
+                     VerticalOptions="Start"
+                     IsVisible="{Binding IsSearchListVisible}"
+                     Background="Transparent">
 
-                <prism:EventToCommandBehavior EventName="ItemTapped"
-                                              Command="{Binding Path=BindingContext.ListItemTapCommand, 
-                                                        Source={x:Reference searchResultList}}"
-                                                        EventArgsParameterPath="Item" />
-
-            </ListView.Behaviors>
-
-            <ListView.ItemTemplate>
+            <BindableLayout.ItemTemplate>
 
                 <DataTemplate>
 
-                    <ViewCell>
+                    <StackLayout Background="Transparent">
 
-                        <ViewCell.View>
+                        <StackLayout.GestureRecognizers>
 
-                            <StackLayout Background="Transparent">
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ListItemTapCommand,
+                                                                    Source={x:Reference MainMap}}"
+                                                  CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
 
-                                 <!--SEPARATOR--> 
-                                <BoxView Style="{StaticResource separator}"/>
+                        <StackLayout Background="Transparent">
 
-                                <Grid ColumnDefinitions="0.2*, 0.8*"
+                            <!--SEPARATOR-->
+                            <BoxView Style="{StaticResource separator}"/>
+
+                            <Grid ColumnDefinitions="0.2*, 0.8*"
                                       Background="Transparent"
-                                      Padding="0, 0, 20, 10">
+                                      Padding="0, 10, 20, 10">
 
-                                     <!--IMAGE PIN--> 
-                                    <Image Source="ic_pin_gray.png"
+                                <!--IMAGE PIN-->
+                                <Image Source="ic_pin_gray.png"
                                            VerticalOptions="CenterAndExpand"
                                            HorizontalOptions="CenterAndExpand" />
 
-                                    <StackLayout Grid.Column="1"
-                                                 Background="Transparent"
-                                                 Spacing="10">
+                                <StackLayout Grid.Column="1"
+                                             Background="Transparent"
+                                             Spacing="2"
+                                             VerticalOptions="Center">
 
-                                         <!--PIN LABEL--> 
-                                        <Label Text="{Binding Label}"
-                                               FontAttributes="Bold"
-                                               FontSize="Medium"
-                                               LineBreakMode="NoWrap"/>
+                                    <!--PIN LABEL-->
+                                    <Label Text="{Binding Label}"
+                                           FontFamily="Montserrat-Bold"
+                                           FontSize="14"
+                                           LineBreakMode="NoWrap"/>
 
-                                         <!--PIN ADDRESS--> 
-                                        <Label Text="{Binding Address}"
-                                               FontSize="Medium"
+                                    <!--PIN ADDRESS-->
+                                    <Label Text="{Binding Address}"
+                                           FontFamily="Montserrat-Medium"
+                                               FontSize="14"
                                                LineBreakMode="TailTruncation"/>
 
-                                    </StackLayout>
+                                </StackLayout>
 
-                                </Grid>
+                            </Grid>
 
-                            </StackLayout>
+                        </StackLayout>
 
-                        </ViewCell.View>
-
-                    </ViewCell>
+                    </StackLayout>
 
                 </DataTemplate>
 
-            </ListView.ItemTemplate>
+            </BindableLayout.ItemTemplate>
 
-        </ListView>
+        </StackLayout>
 
     </Grid>
 

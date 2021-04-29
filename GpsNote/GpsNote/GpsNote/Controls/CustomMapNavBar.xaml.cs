@@ -25,7 +25,7 @@ namespace GpsNote.Controls
                                     typeof(string),
                                     typeof(CustomMapNavBar),
                                     defaultValue: string.Empty,
-                                    defaultBindingMode: BindingMode.OneWay,
+                                    defaultBindingMode: BindingMode.OneWayToSource,
                                     propertyChanged: SearchTextPropertyChanged);
 
 

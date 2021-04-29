@@ -18,21 +18,23 @@
 
                 <!-- PIN LABEL -->
                 <Label Text="{Binding Label}"
-                   FontAttributes="Bold"
-                   FontSize="Medium"
-                   LineBreakMode="NoWrap"/>
+                       FontFamily="Montserrat-Bold"
+                       FontSize="16"
+                       LineBreakMode="NoWrap"/>
 
                 <Grid ColumnDefinitions="*, *"
-                  Background="Transparent">
+                      Background="Transparent">
 
                     <!-- LONGTITUDE LABEL -->
                     <Label Text="{Binding Longtitude}"
-                       FontSize="Medium"/>
+                           FontFamily="Montserrat-Light"
+                           FontSize="16"/>
 
                     <!-- LATITUDE LABEL -->
                     <Label Grid.Column="1"
-                       Text="{Binding Latitude}"
-                       FontSize="Medium" />
+                           Text="{Binding Latitude}"
+                           FontFamily="Montserrat-Light"
+                           FontSize="16" />
 
                 </Grid>
 
@@ -57,7 +59,8 @@
         <BoxView Style="{StaticResource separator}"/>
 
         <Label LineBreakMode="WordWrap"
-               FontSize="Medium"
+               FontFamily="Montserrat-Light"
+               FontSize="16"
                IsVisible="{Binding IsVisibleDescription}"
                Text="{Binding Description}"
                Background="Transparent"
