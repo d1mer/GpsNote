@@ -1,72 +1,70 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:GpsNote.Controls"
-             x:Class="GpsNote.Controls.CustomMapNavBar">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:GpsNote.Controls" 
+             x:Class="GpsNote.Controls.CustomMapNavBar"
+             x:Name="Entry">
 
 
-    <Grid x:Name="grid"
-          ColumnDefinitions="0.15*, 0.85*, 0.15*"
-          Padding="0, 7, 0, 0" >
+        <Grid x:Name="grid"
+              ColumnDefinitions="0.15*, 0.85*, 0.15*"
+              Padding="0, 7, 0, 0">
 
-        <!-- SETTINGS IMAGE BUTTON -->
-        <ImageButton Grid.Column="0"
+            <!-- SETTINGS IMAGE BUTTON -->
+            <ImageButton BindingContext="{x:Reference Name=Entry}"
+                     Grid.Column="0"
                      x:Name="settingsButton"
                      Source="ic_settings.png"
                      BackgroundColor="Transparent"
                      VerticalOptions="CenterAndExpand"
-                     Command="{Binding GoToTapCommand}"/>
+                     Command="{Binding LeftIconTapCommand}"/>
 
 
 
-        <!-- FRAME -->
-        <Frame Grid.Column="1"
+            <!-- FRAME -->
+            <Frame Grid.Column="1"
                x:Name="searchBar"
                CornerRadius="4"
                Padding="0"
-               VerticalOptions="End"
+               VerticalOptions="Center"
                HasShadow="False"
                BackgroundColor="{AppThemeBinding Light={StaticResource LightWhiteGray},
                                                  Dark={StaticResource DarkGray2}}">
 
-            <Grid ColumnDefinitions="0.9*, 0.1*">
-                
-                <!-- SEARCH ENTRY -->
-                <Entry x:Name="searchEntry"
+                <Grid ColumnDefinitions="0.9*, 0.1*">
+
+                    <!-- SEARCH ENTRY -->
+                    <Entry x:Name="searchEntry"
                        VerticalOptions="End"
-                       FontSize="14"
+                       FontSize="16"
                        BackgroundColor="Transparent"
                        Placeholder="{Binding Resource[SearchPlaceholder]}"
                        Focused="SearchBar_Focused"
                        TextChanged="SearchEntry_TextChanged"/>
-                
-                <!-- CLEAR IMAGE -->
-                <Image x:Name="imageClear"
-                       Source="ic_clear.png"
-                       Grid.Column="1"
-                       IsVisible="false"
-                       Style="{StaticResource customEntryImage}">
 
-                    <Image.GestureRecognizers>
+                    <!-- CLEAR IMAGE -->
+                    <ImageButton x:Name="imageClear"
+                             Source="ic_clear.png"
+                             Grid.Column="1"
+                             IsVisible="false"
+                             Style="{StaticResource customEntryImage}"
+                             BackgroundColor="Transparent"
+                             Clicked="ImageClear_Tapped"/>
 
-                        <TapGestureRecognizer Tapped="ImageClear_Tapped"/>
+                </Grid>
 
-                    </Image.GestureRecognizers>
+            </Frame>
 
-                </Image>
-
-            </Grid>
-
-        </Frame>
-
-        <!-- LOGOUT IMAGE BUTTON -->
-        <ImageButton Grid.Column="2"
+            <!-- LOGOUT IMAGE BUTTON -->
+            <ImageButton BindingContext="{x:Reference Name=Entry}"
+                     Grid.Column="2"
                      x:Name="logOutButton"
                      Source="ic_exid.png"
                      BackgroundColor="Transparent"
                      VerticalOptions="CenterAndExpand"
                      HorizontalOptions="CenterAndExpand"                   
-                     Clicked="LogOutButton_Clicked" />
-        
-    </Grid>
+                     Command="{Binding RightIconTapCommand}" />
+
+        </Grid>
 
 </ContentView>

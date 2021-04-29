@@ -7,20 +7,15 @@ using Prism.Navigation;
 using GpsNote.Views;
 using GpsNote.Services.Authorization;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace GpsNote.Controls
 {
     public partial class CustomMapNavBar : ContentView
     {
-        private bool search = false;
-        private INavigationService _navigationService;
-        private IAuthorizationService _authorizationService;
-
         public CustomMapNavBar()
         {
             InitializeComponent();
-
-            SetServices();
         }
 
         #region -- Public properties --
@@ -29,7 +24,8 @@ namespace GpsNote.Controls
             BindableProperty.Create(nameof(SearchText),
                                     typeof(string),
                                     typeof(CustomMapNavBar),
-                                    defaultValue: string.Empty);
+                                    defaultValue: string.Empty,
+                                    defaultBindingMode: BindingMode.TwoWay);
 
         public string SearchText
         {
@@ -38,28 +34,49 @@ namespace GpsNote.Controls
         }
 
 
-        public static readonly BindableProperty GoToTapCommandProperty =
-            BindableProperty.Create(nameof(GoToTapCommand),
+        public static readonly BindableProperty LeftIconTapCommandProperty =
+            BindableProperty.Create(nameof(LeftIconTapCommand),
                                     typeof(ICommand),
                                     typeof(CustomMapNavBar),
                                     defaultValue: default(ICommand),
                                     defaultBindingMode: BindingMode.TwoWay,
-                                    propertyChanged: GoToTapCommandPropertyChanged);
+                                    propertyChanged: LeftIconTapCommandPropertyChanged);
 
-        private static void GoToTapCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+
+        public ICommand LeftIconTapCommand
         {
-            CustomMapNavBar navBar = bindable as CustomMapNavBar;
-
-            if(navBar != null)
-            {
-                navBar.GoToTapCommand = (ICommand)newValue;
-            }
+            get => (ICommand)GetValue(LeftIconTapCommandProperty);
+            set => SetValue(LeftIconTapCommandProperty, value);
         }
 
-        public ICommand GoToTapCommand
+
+        public static readonly BindableProperty RightIconTapCommandProperty =
+            BindableProperty.Create(nameof(RightIconTapCommand),
+                                    typeof(ICommand),
+                                    typeof(CustomMapNavBar),
+                                    defaultValue: default(ICommand),
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: RightIconTapCommandPropertyChanged);
+
+        public ICommand RightIconTapCommand
         {
-            get => (ICommand)GetValue(GoToTapCommandProperty);
-            set => SetValue(GoToTapCommandProperty, value);
+            get => (ICommand)GetValue(RightIconTapCommandProperty);
+            set => SetValue(RightIconTapCommandProperty, value);
+        }
+
+
+        public static readonly BindableProperty ExitSearchProperty =
+            BindableProperty.Create(nameof(ExitSearch),
+                                    typeof(bool),
+                                    typeof(CustomMapNavBar),
+                                    defaultValue: true,
+                                    defaultBindingMode: BindingMode.TwoWay,
+                                    propertyChanged: ExitSearchPropertyChanged);
+
+        public bool ExitSearch
+        {
+            get => (bool)GetValue(ExitSearchProperty);
+            set => SetValue(ExitSearchProperty, value);
         }
 
         #endregion
@@ -67,34 +84,48 @@ namespace GpsNote.Controls
 
         #region -- Private helpers --
 
-        private async void SettingsButton_Clicked(object sender, EventArgs e)
+        private static void LeftIconTapCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (search)
+            CustomMapNavBar navBar = bindable as CustomMapNavBar;
+
+            if (navBar != null)
             {
-                logOutButton.IsVisible = true;
-                Grid.SetColumnSpan(searchBar, 1);
-                grid.HorizontalOptions = LayoutOptions.FillAndExpand;
-                grid.Padding = new Thickness(0, 7, 0, 0);
-                imageClear.IsVisible = false;
-                settingsButton.Source = "ic_settings.png";
-                searchEntry.Text = string.Empty;
-                search = false;
-            }
-            else
-            {
-                await _navigationService.NavigateAsync(nameof(SettingsPage));
+                navBar.LeftIconTapCommand = (ICommand)newValue;
             }
         }
 
-        private void LogOutButton_Clicked(object sender, EventArgs e)
+        private static void RightIconTapCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            _authorizationService.LogOut();
-            _navigationService.NavigateAsync($"/{nameof(MainPage)}");
+            CustomMapNavBar navBar = bindable as CustomMapNavBar;
+
+            if (navBar != null)
+            {
+                navBar.RightIconTapCommand = (ICommand)newValue;
+            }
+        }
+
+        private static void ExitSearchPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            CustomMapNavBar navBar = bindable as CustomMapNavBar;
+
+            if(navBar != null)
+            {
+                if ((bool)newValue)
+                {
+                    navBar.logOutButton.IsVisible = true;
+                    Grid.SetColumnSpan(navBar.searchBar, 1);
+                    navBar.grid.HorizontalOptions = LayoutOptions.FillAndExpand;
+                    navBar.grid.Padding = new Thickness(0, 7, 0, 0);
+                    navBar.imageClear.IsVisible = false;
+                    navBar.settingsButton.Source = "ic_settings.png";
+                    navBar.searchEntry.Text = string.Empty;
+                }
+            }
         }
 
         private void SearchBar_Focused(object sender, FocusEventArgs e)
         {
-            search = true;
+            ExitSearch = false;
             logOutButton.IsVisible = false;
             Grid.SetColumnSpan(searchBar, 2);
             grid.Padding = new Thickness(0, 7, 15, 3);
@@ -111,16 +142,6 @@ namespace GpsNote.Controls
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = e.NewTextValue;
-        }
-
-        private void SetServices()
-        {
-            if(_navigationService == null)
-            {
-                App app = (App)Application.Current;
-                _navigationService = app.Container.Resolve<INavigationService>();
-                _authorizationService = app.Container.Resolve<IAuthorizationService>();
-            }
         }
 
         #endregion

@@ -55,10 +55,11 @@ namespace GpsNote.ViewModels
 
             IsSearchListVisible = false;
             SearchText = string.Empty;
+            ListRowHeight = 100;
         }
 
 
-        #region -- Publics -- 
+        #region -- Public properties -- 
 
         private CameraUpdate initialCameraUpdate;
         public CameraUpdate InitialCameraUpdate
@@ -145,6 +146,13 @@ namespace GpsNote.ViewModels
             set => SetProperty(ref searchText, value);
         }
 
+        private bool exitSearch;
+        public bool ExitSearch
+        {
+            get => exitSearch;
+            set => SetProperty(ref exitSearch, value);
+        }
+
 
         private DelegateCommand<Object> cameraIdLedCommand;
         public DelegateCommand<Object> CameraIdLedCommand => cameraIdLedCommand ?? new DelegateCommand<Object>(OnCameraLed);
@@ -166,6 +174,9 @@ namespace GpsNote.ViewModels
 
         private ICommand settingsTapCommand;
         public ICommand SettingsTapCommand => settingsTapCommand ?? new DelegateCommand(OnGoToSettings);
+
+        private ICommand logOutTapCommand;
+        public ICommand LogOutTapCommand => logOutTapCommand ?? new DelegateCommand(OnLogOut);
 
 
         #endregion
@@ -191,7 +202,6 @@ namespace GpsNote.ViewModels
             }
         }
 
-
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -211,7 +221,15 @@ namespace GpsNote.ViewModels
 
             if(args.PropertyName == nameof(SearchText))
             {
-                OnSearchPin(SearchText);
+                if (!string.IsNullOrWhiteSpace(SearchText))
+                {
+                    IsSearchListVisible = true;
+                    OnSearchPin(SearchText);
+                }
+                else
+                {
+                    IsSearchListVisible = false;
+                }
             }
         }
 
@@ -256,7 +274,10 @@ namespace GpsNote.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(newText))
             {
+                IsSearchListVisible = true;
+
                 var list = Pins.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
+                ListHeiqhtRequest = ListRowHeight * list.Count;
                 SearchResultList = new ObservableCollection<Pin>(list);
             }
         }
@@ -282,6 +303,7 @@ namespace GpsNote.ViewModels
 
         private void OnMapClick(object obj)
         {
+            ExitSearch = true;
             IsVisibleSearcBar = false;
             IsVisibleSearchButton = true;
             MyLocationButtonVisibility = _permissionsService.CheckLocationPermission();
@@ -318,7 +340,20 @@ namespace GpsNote.ViewModels
 
         private async void OnGoToSettings()
         {
-            await NavigationService.NavigateAsync(nameof(MainPage)); 
+            if(ExitSearch)
+            {
+                await NavigationService.NavigateAsync(nameof(SettingsPage));
+            }
+            else if(!ExitSearch)
+            {
+                ExitSearch = true;
+            }
+           
+        }
+
+        private void OnLogOut()
+        {
+            NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 
         #endregion

@@ -12,12 +12,13 @@
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                           Dark={StaticResource Black}}">
 
-    <Grid RowDefinitions="0.1*, 0.9*">
+    <Grid RowDefinitions="0.07*, 0.9*">
 
-         <!-- NAVBAR --> 
+         <!-- NAVBAR -->
         <controls:CustomMapNavBar SearchText="{Binding SearchText}"
-                                  GoToTapCommand="{Binding SettingsTapCommand}"
-                                 />
+                                  LeftIconTapCommand="{Binding SettingsTapCommand}"
+                                  RightIconTapCommand="{Binding LogOutTapCommand}"
+                                  ExitSearch="{Binding ExitSearch}"/>
 
         <!-- MAP -->
         <controls:CustomMap x:Name="map"
@@ -54,7 +55,9 @@
                   SeparatorVisibility="None"
                   VerticalOptions="Start"
                   Background="Transparent"
-                  IsVisible="{Binding IsSearchListVisible}">
+                  IsVisible="{Binding IsSearchListVisible}"
+                  RowHeight="{Binding ListRowHeight}"
+                  HeightRequest="{Binding ListHeiqhtRequest}">
 
             <ListView.Behaviors>
 
@@ -80,13 +83,12 @@
 
                                 <Grid ColumnDefinitions="0.2*, 0.8*"
                                       Background="Transparent"
-                                      Padding="0, 0, 0, 10">
+                                      Padding="0, 0, 20, 10">
 
                                     <!-- IMAGE PIN -->
                                     <Image Source="ic_pin_gray.png"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="Center"
-                                           Margin="15, 5"/>
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand" />
 
                                     <StackLayout Grid.Column="1"
                                                  Background="Transparent"
@@ -101,7 +103,7 @@
                                         <!-- PIN ADDRESS -->
                                         <Label Text="{Binding Address}"
                                                FontSize="Medium"
-                                               LineBreakMode="NoWrap"/>
+                                               LineBreakMode="TailTruncation"/>
 
                                     </StackLayout>
 
