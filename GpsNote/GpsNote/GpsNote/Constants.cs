@@ -40,5 +40,9 @@ namespace GpsNote
 
         // Popups
         public const string TUPLE = "tuple";
+
+        // Language
+        public const string RU = "ru";
+        public const string EN = "en-US";
     }
 }

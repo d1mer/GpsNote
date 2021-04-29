@@ -1,15 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views" 
+<views:BaseContentPage  xmlns:views="clr-namespace:GpsNote.Views"
                         xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:resources="clr-namespace:GpsNote.Resource"
-                        x:Class="GpsNote.Views.SettingsClock"
+                        x:Class="GpsNote.Views.SettingsLanguage"
                         NavigationPage.HasNavigationBar="False"
                         NavigationPage.HasBackButton="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
-                                                          Dark={StaticResource Black}}">
-
-
+                                               Dark={StaticResource Black}}">
     <Grid RowDefinitions="0.1*, *"
           BackgroundColor="Transparent">
 
@@ -31,45 +29,39 @@
 
             <!-- TITLE LABEL -->
             <Label Grid.Column="0"
-                       Text="{Binding Title}" 
-                       Style="{StaticResource navBarTitle}"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
+                   Text="{Binding Title}" 
+                   Style="{StaticResource navBarTitle}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
 
         </Grid>
-        
+
         <!-- CONTENT -->
         <StackLayout Grid.Row="1"
                      Background="Transparent"
-                     RadioButtonGroup.GroupName="ClockColor"
-                     RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
+                     RadioButtonGroup.GroupName="Language"
+                     RadioButtonGroup.SelectedValue="{Binding LanguageSelection}">
 
             <BoxView Style="{StaticResource separator}"/>
 
-            <RadioButton Content="{Binding Resource[BlueText]}"
-                     Value="Blue"
-                     FontSize="Medium"
-                     Margin="15"/>
+            <RadioButton Content="{Binding Resource[EnglishText]}"
+                         IsChecked="{Binding IsCheckedEn}"
+                         Value="en-US"
+                         FontSize="Medium"
+                         Margin="15"/>
 
             <BoxView Style="{StaticResource separator}"/>
 
-            <RadioButton Content="{Binding Resource[RedText]}"
-                      Value="Red"
-                     FontSize="Medium"
-                     Margin="15"/>
+            <RadioButton Content="{Binding Resource[RussianText]}"
+                         IsChecked="{Binding IsCheckedRu}"
+                         Value="ru"
+                         FontSize="Medium"
+                         Margin="15"/>
 
             <BoxView Style="{StaticResource separator}"/>
-
-            <RadioButton Content="{Binding Resource[GreenText]}"
-                      Value="Green"
-                     FontSize="Medium"
-                     Margin="15"/>
-
-            <BoxView Style="{StaticResource separator}"/>
-
 
         </StackLayout>
 
     </Grid>
-
+    
 </views:BaseContentPage>

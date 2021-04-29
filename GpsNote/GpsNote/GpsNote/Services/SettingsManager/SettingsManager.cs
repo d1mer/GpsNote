@@ -61,8 +61,8 @@ namespace GpsNote.Services.SettingsService
         }
 
         public string Lang 
-        {
-            get => Preferences.Get(nameof(Lang), string.Empty);
+        { 
+            get => Preferences.Get(nameof(Lang), Constants.EN);
             set => Preferences.Set(nameof(Lang), value);
         }
 
@@ -75,7 +75,6 @@ namespace GpsNote.Services.SettingsService
             LastZoom = default(double);
             LastBearing = default(double);
             LastTilt = default(double);
-            LocationPermission = false;
         }
 
         #endregion

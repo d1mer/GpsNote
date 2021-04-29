@@ -14,6 +14,7 @@ namespace GpsNote.ViewModels
     {
         private IAuthorizationService _authorizationService;
         private IThemeService _themeService;
+        private OSAppTheme _appTheme;
 
 
         public SettingsViewModel(INavigationService navigationService,
@@ -43,10 +44,30 @@ namespace GpsNote.ViewModels
         private DelegateCommand clockColorArrowTap;
         public DelegateCommand ClockColorArrowTap => clockColorArrowTap ?? new DelegateCommand(OnClockSettingsTapAsync);
 
+        private DelegateCommand languageArrowTap;
+        public DelegateCommand LanguageArrowTap => languageArrowTap ?? new DelegateCommand(OnLanguageSettingsTapAsync);
+
         #endregion
 
 
         #region -- Overrides --
+
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+
+            _appTheme = (OSAppTheme)_themeService.Theme;
+
+            switch (_appTheme)
+            {
+                case OSAppTheme.Light:
+                    IsToogled = false;
+                    break;
+                case OSAppTheme.Dark:
+                    IsToogled = true;
+                    break;
+            }
+        }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
@@ -66,7 +87,7 @@ namespace GpsNote.ViewModels
         private async void OnLogoutAsync()
         {
             _authorizationService.LogOut();
-            await NavigationService.NavigateAsync($"/{nameof(MainPage)}");
+            await NavigationService.NavigateAsync(nameof(MainPage));
         }
 
         private void OnBackPressed()
@@ -92,6 +113,11 @@ namespace GpsNote.ViewModels
         private async void OnClockSettingsTapAsync()
         {
             await NavigationService.NavigateAsync(nameof(SettingsClock));
+        }
+
+        private async void OnLanguageSettingsTapAsync()
+        {
+            await NavigationService.NavigateAsync(nameof(SettingsLanguage));
         }
 
         #endregion

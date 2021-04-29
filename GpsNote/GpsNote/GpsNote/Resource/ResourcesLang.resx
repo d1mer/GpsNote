@@ -222,6 +222,9 @@
   <data name="EmailLabel" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EnglishText" xml:space="preserve">
+    <value>En</value>
+  </data>
   <data name="EnterEmailPlaceholder" xml:space="preserve">
     <value>Enter email</value>
   </data>
@@ -381,11 +384,17 @@
   <data name="RedText" xml:space="preserve">
     <value>Red</value>
   </data>
+  <data name="RussianText" xml:space="preserve">
+    <value>Ru</value>
+  </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Search</value>
   </data>
   <data name="SettingsClockTitle" xml:space="preserve">
     <value>Color of the clock</value>
+  </data>
+  <data name="SettingsLanguageTitle" xml:space="preserve">
+    <value>Language selection</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Settings</value>
@@ -395,9 +404,6 @@
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>email taken</value>
-  </data>
-  <data name="Title6" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Title7" xml:space="preserve">
     <value>1</value>

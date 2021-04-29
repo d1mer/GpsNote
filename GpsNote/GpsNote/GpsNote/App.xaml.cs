@@ -94,6 +94,7 @@ namespace GpsNote
             containerRegistry.RegisterForNavigation<SignUpPage2, SignUpViewModel2>();
             containerRegistry.RegisterForNavigation<SettingsClock, SettingsClockViewModel>();
             containerRegistry.RegisterForNavigation<PinInfoPage, PinInfoViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsLanguage, SettingsLanguageViewModel>();
         }
     }
 }

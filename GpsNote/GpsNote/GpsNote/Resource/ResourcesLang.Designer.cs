@@ -376,6 +376,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to En.
+        /// </summary>
+        internal static string EnglishText {
+            get {
+                return ResourceManager.GetString("EnglishText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter email.
         /// </summary>
         internal static string EnterEmailPlaceholder {
@@ -853,6 +862,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ru.
+        /// </summary>
+        internal static string RussianText {
+            get {
+                return ResourceManager.GetString("RussianText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string SearchPlaceholder {
@@ -867,6 +885,15 @@ namespace GpsNote.Resource {
         internal static string SettingsClockTitle {
             get {
                 return ResourceManager.GetString("SettingsClockTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language selection.
+        /// </summary>
+        internal static string SettingsLanguageTitle {
+            get {
+                return ResourceManager.GetString("SettingsLanguageTitle", resourceCulture);
             }
         }
         
@@ -894,15 +921,6 @@ namespace GpsNote.Resource {
         internal static string TakenEmailError {
             get {
                 return ResourceManager.GetString("TakenEmailError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Title6 {
-            get {
-                return ResourceManager.GetString("Title6", resourceCulture);
             }
         }
         
