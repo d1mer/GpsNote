@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Input;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Prism.Commands;
@@ -16,12 +16,13 @@ using GpsNote.Extensions;
 using GpsNote.Views;
 using GpsNote.Services.Localization;
 
+
 namespace GpsNote.ViewModels
 {
     public class NotesViewModel : ViewModelBase
     {
         private IPageDialogService _dialogService;
-        private IPinService        _pinService;
+        private readonly IPinService _pinService;
         private List<PinViewModel> _oldPinsList = null;
 
 
@@ -30,10 +31,11 @@ namespace GpsNote.ViewModels
                               IPinService pinService, 
                               IPageDialogService dialogService) : base(navigationService, localizationService)
         {
-            _dialogService = dialogService;
             _pinService = pinService;
+            _dialogService = dialogService;
 
             Title = Resource["PinsTitle"];
+            SearchText = string.Empty;
         }
 
 
@@ -47,7 +49,7 @@ namespace GpsNote.ViewModels
         }
 
         private List<PinViewModel> searchResultList;
-        public List<PinViewModel> PinViewModel
+        public List<PinViewModel> SearchResultList
         {
             get => searchResultList;
             set => SetProperty(ref searchResultList, value);
@@ -59,6 +61,19 @@ namespace GpsNote.ViewModels
             get => pinsList;
             set => SetProperty(ref pinsList, value);
         }
+
+        private bool exitSearch;
+        public bool ExitSearch
+        {
+            get => exitSearch;
+            set => SetProperty(ref exitSearch, value);
+        }
+
+        private ICommand settingsTapCommand;
+        public ICommand SettingsTapCommand => settingsTapCommand ?? new DelegateCommand(OnGoToSettings);
+
+        private ICommand logOutTapCommand;
+        public ICommand LogOutTapCommand => logOutTapCommand ?? new DelegateCommand(OnLogOut);
 
         private DelegateCommand addEditPinTapCommand;
         public DelegateCommand AddEditPinTapCommand => addEditPinTapCommand ?? new DelegateCommand(OnAddEditPinAsync);
@@ -78,10 +93,6 @@ namespace GpsNote.ViewModels
         private DelegateCommand<object> updateTapCommand;
         public DelegateCommand<object> UpdateTapCommand => updateTapCommand ?? 
             new DelegateCommand<object>(OnUpdatePinAsync);
-
-        private DelegateCommand<object> searchTextChangedCommand;
-        public DelegateCommand<object> SearchTextChangedCommand => searchTextChangedCommand ?? 
-            new DelegateCommand<object>(OnSearchPin);
 
         #endregion
 
@@ -123,11 +134,12 @@ namespace GpsNote.ViewModels
         {
             base.Initialize(parameters);
 
+            PinsList = new ObservableCollection<PinViewModel>();
+
             List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
 
             if (pinsModel != null && pinsModel.Count != 0)
             {
-                PinsList = new ObservableCollection<PinViewModel>();
                 PinViewModel pinViewModel;
 
                 foreach (PinModel pinModel in pinsModel)
@@ -135,6 +147,39 @@ namespace GpsNote.ViewModels
                     pinViewModel = pinModel.ToPinViewModel();
                     pinViewModel.ImagePath = pinModel.IsEnable ? "ic_like_blue.png" : "ic_like_gray.png";
                     PinsList.Add(pinViewModel);
+                }
+            }
+        }
+
+        protected async override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            if (args.PropertyName == nameof(SearchText))
+            {
+                if (!string.IsNullOrWhiteSpace(SearchText))
+                {
+                    ExitSearch = false;
+                    OnSearchPin(SearchText);
+                }
+                else
+                {
+                    _oldPinsList = null;
+                    PinsList = new ObservableCollection<PinViewModel>();
+
+                    List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
+
+                    if (pinsModel != null && pinsModel.Count != 0)
+                    {
+                        PinViewModel pinViewModel;
+
+                        foreach (PinModel pinModel in pinsModel)
+                        {
+                            pinViewModel = pinModel.ToPinViewModel();
+                            pinViewModel.ImagePath = pinModel.IsEnable ? "ic_like_blue.png" : "ic_like_gray.png";
+                            PinsList.Add(pinViewModel);
+                        }
+                    }
                 }
             }
         }
@@ -167,9 +212,6 @@ namespace GpsNote.ViewModels
                 }
                 else
                 {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                           "This pin is not found in db",
-                                                           "Cancel");
                     pinViewModel.IsEnabled = !pinViewModel.IsEnabled;
                     pinViewModel.ImagePath = pinViewModel.IsEnabled ? "ic_like_blue.png" : "ic_like_gray.png";
                 }
@@ -229,24 +271,20 @@ namespace GpsNote.ViewModels
 
         private void OnSearchPin(object obj)
         {
-            //string newText = obj as string;
+            string newText = obj as string;
 
-            //if (_oldPinsList == null)
-            //    _oldPinsList = PinsList.ToList();
+            if (_oldPinsList == null)
+            {
+                _oldPinsList = PinsList.ToList();
+            }
 
-            //if (string.IsNullOrWhiteSpace(newText))
-            //{
-            //    PinsList = new ObservableCollection<PinViewModel>(_oldPinsList);
-            //    _oldPinsList = null;
-            //}
+            if(PinsList.Count == 0)
+            {
+                PinsList = new ObservableCollection<PinViewModel>(_oldPinsList);
+            }
 
-            //if(PinsList.Count == 0)
-            //{
-            //    PinsList = new ObservableCollection<PinViewModel>(_oldPinsList);
-            //}
-
-            //var list = PinsList.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
-            //PinsList = new ObservableCollection<PinViewModel>(list);
+            var list = PinsList.Where(p => p.Label.Contains(newText, StringComparison.OrdinalIgnoreCase)).ToList();
+            PinsList = new ObservableCollection<PinViewModel>(list);
         }
 
         private async void OnArrowImageTapAsync(object obj)
@@ -264,6 +302,40 @@ namespace GpsNote.ViewModels
 
                 await NavigationService.SelectTabAsync(nameof(MapPage), parameters);
             }
+        }
+
+        private async void OnGoToSettings()
+        {
+            if (ExitSearch)
+            {
+                await NavigationService.NavigateAsync(nameof(SettingsPage));
+            }
+            else if (!ExitSearch)
+            {
+                ExitSearch = true;
+                SearchText = string.Empty;
+                //PinsList = new ObservableCollection<PinViewModel>();
+
+                //List<PinModel> pinsModel = await _pinService.GetUsersPinsAsync();
+
+                //if (pinsModel != null && pinsModel.Count != 0)
+                //{
+                //    PinViewModel pinViewModel;
+
+                //    foreach (PinModel pinModel in pinsModel)
+                //    {
+                //        pinViewModel = pinModel.ToPinViewModel();
+                //        pinViewModel.ImagePath = pinModel.IsEnable ? "ic_like_blue.png" : "ic_like_gray.png";
+                //        PinsList.Add(pinViewModel);
+                //    }
+                //}
+            }
+
+        }
+
+        private void OnLogOut()
+        {
+            NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 
         #endregion

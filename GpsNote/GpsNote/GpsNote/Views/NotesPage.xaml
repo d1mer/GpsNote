@@ -9,6 +9,7 @@
                         Title="{Binding Title}"
                         NavigationPage.HasBackButton="False"
                         NavigationPage.HasNavigationBar="False"
+                        x:Name="ListPins"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
 
@@ -16,7 +17,10 @@
     <Grid RowDefinitions="Auto, *">
 
         <!-- NAVBAR -->
-        <controls:CustomMapNavBar SearchText="{Binding SearchText}" />
+        <controls:CustomMapNavBar SearchText="{Binding SearchText}"
+                                  LeftIconTapCommand="{Binding SettingsTapCommand}"
+                                  RightIconTapCommand="{Binding LogOutTapCommand}"
+                                  ExitSearch="{Binding ExitSearch}"/>
 
         <ListView Grid.Row="1"
                   x:Name="pinsListView"
@@ -54,7 +58,7 @@
 
                             <StackLayout Background="Transparent">
 
-                               <!-- SEPARATOR -->
+                                <!-- SEPARATOR -->
                                 <BoxView Style="{StaticResource separator}" />
 
                                 <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*"
