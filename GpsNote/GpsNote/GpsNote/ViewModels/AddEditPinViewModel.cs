@@ -29,7 +29,7 @@ namespace GpsNote.ViewModels
                                    ILocalizationService localizationService,
                                    IPageDialogService dialogService,
                                    IPinService pinService,
-                                   IAuthorizationService authorizeService) : base(navigationService,        localizationService)
+                                   IAuthorizationService authorizeService) : base(navigationService, localizationService)
         {
             _pinService = pinService;
             _dialogService = dialogService;
@@ -286,18 +286,21 @@ namespace GpsNote.ViewModels
 
             if (pinModel != null)
             {
-                pinModel.Label = LabelPinText;
-                pinModel.Description = DescriptionText;
-                pinModel.Owner = _authorizationService.GetCurrentUserID();
-                pinModel.IsEnable = editPinViewModel.IsEnabled;
-                pinModel.Latitude = Pins[0].Position.Latitude;
-                pinModel.Longitude = Pins[0].Position.Longitude;
-                int rows = await _pinService.UpdatePinModelAsync(pinModel);
-
-                if(rows <= 0)
+                if(double.TryParse(LongitudePinText, out double longtitudeValue) && double.TryParse(LatitudePinText, out  double latitudeValue))
                 {
-                    pinModel = null;
-                }
+                    pinModel.Label = LabelPinText;
+                    pinModel.Description = DescriptionText;
+                    pinModel.Owner = _authorizationService.GetCurrentUserID();
+                    pinModel.IsEnable = editPinViewModel.IsEnabled;
+                    pinModel.Latitude = latitudeValue;
+                    pinModel.Longitude = longtitudeValue;
+                    int rows = await _pinService.UpdatePinModelAsync(pinModel);
+
+                    if (rows <= 0)
+                    {
+                        pinModel = null;
+                    }
+                } 
             }
 
             return pinModel;
