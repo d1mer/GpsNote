@@ -2,6 +2,8 @@
 
 namespace GpsNote.Models
 {
+    //[Serializable()]
+    //[JsonProperty("TimeZoneResponse")]
     public class TimeZoneResponse
     {
         [JsonPropertyName("dstOffset")]

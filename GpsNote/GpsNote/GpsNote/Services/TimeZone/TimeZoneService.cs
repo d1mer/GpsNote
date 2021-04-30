@@ -1,5 +1,6 @@
 ﻿using GpsNote.Models;
 using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace GpsNote.Services.TimeZone
 
         public async Task<TimeZoneResponse> GetTimeZoneAsync(Position position)
         {
-            TimeZoneResponse timeZoneResponse = null;
+            TimeZoneResponse timeZoneResponse = default(TimeZoneResponse);
             NetworkAccess networkAccess = Connectivity.NetworkAccess;
             
             if(networkAccess == NetworkAccess.Internet)
@@ -48,8 +49,10 @@ namespace GpsNote.Services.TimeZone
         private string BuildRequest(Position position)
         {
             StringBuilder request = new StringBuilder(Constants.BASE_URI_TIMEZONE_API);
+            string latitude = position.Latitude.ToString("G", CultureInfo.InvariantCulture);
+            string longtitude = position.Longitude.ToString("G", CultureInfo.InvariantCulture);
 
-            request.Append($"location={position.Latitude},{position.Longitude}&");
+            request.Append($"location={latitude},{longtitude}&");
             request.Append($"timestamp={GetTimeStamp()}&");
             request.Append($"key={Constants.GPSNOTE_KEY}");
 
