@@ -1,24 +1,24 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace GpsNote.Models
 {
-    //[Serializable()]
-    //[JsonProperty("TimeZoneResponse")]
+    [Serializable()]
     public class TimeZoneResponse
     {
-        [JsonPropertyName("dstOffset")]
+        [JsonProperty("dstOffset")]
         public int DstOffset { get; set; }
 
-        [JsonPropertyName("rawOffset")]
+        [JsonProperty("rawOffset")]
         public int RawOffset { get; set; }
 
-        [JsonPropertyName("status")]
+        [JsonProperty("status")]
         public string Status { get; set; }
 
-        [JsonPropertyName("timeZoneId")]
+        [JsonProperty("timeZoneId")]
         public string TimeZoneID { get; set; }
 
-        [JsonPropertyName("timeZoneName")]
+        [JsonProperty("timeZoneName")]
         public string TimeZoneName { get; set; }
     }
 }

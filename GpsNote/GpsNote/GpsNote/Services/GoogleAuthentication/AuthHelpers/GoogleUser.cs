@@ -1,26 +1,26 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace GpsNote.Services.GoogleAuthentication.AuthHelpers
 {
     public class GoogleUser
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public string Id { get; set; }
-        [JsonPropertyName("email")]
+        [JsonProperty("email")]
         public string Email { get; set; }
-        [JsonPropertyName("verified_email")]
+        [JsonProperty("verified_email")]
         public bool VerifiedEmail { get; set; }
-        [JsonPropertyName("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
-        [JsonPropertyName("given_name")]
+        [JsonProperty("given_name")]
         public string GivenName { get; set; }
-        [JsonPropertyName("family_name")]
+        [JsonProperty("family_name")]
         public string FamilyName { get; set; }
-        [JsonPropertyName("link")]
+        [JsonProperty("link")]
         public string Link { get; set; }
-        [JsonPropertyName("picture")]
+        [JsonProperty("picture")]
         public string Picture { get; set; }
-        [JsonPropertyName("gender")]
+        [JsonProperty("gender")]
         public string Gender { get; set; }
     }
 }

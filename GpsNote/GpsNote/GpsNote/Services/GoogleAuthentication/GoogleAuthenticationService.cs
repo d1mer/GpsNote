@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xamarin.Auth;
 using Xamarin.Forms;
@@ -10,6 +9,7 @@ using GpsNote.Services.SettingsService;
 using GpsNote.Models;
 using GpsNote.Services.RepositoryService;
 using GpsNote.Views;
+using Newtonsoft.Json;
 
 namespace GpsNote.Services.GoogleAuthentication
 {
@@ -83,7 +83,7 @@ namespace GpsNote.Services.GoogleAuthentication
                 if (response != null)
                 {
                     string userJson = await response.GetResponseTextAsync();
-                    googleUser = JsonSerializer.Deserialize<GoogleUser>(userJson);
+                    googleUser = JsonConvert.DeserializeObject<GoogleUser>(userJson);
                 }
 
                 if(googleUser != null)
