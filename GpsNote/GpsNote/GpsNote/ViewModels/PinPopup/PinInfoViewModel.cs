@@ -3,14 +3,11 @@ using GpsNote.Models;
 using GpsNote.Services.Localization;
 using GpsNote.Services.PinService;
 using GpsNote.Services.TimeZone;
+using GpsNote.Views;
 using GpsNote.Views.Clock;
 using Prism.Commands;
-using Prism.Common;
 using Prism.Navigation;
 using Prism.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms.GoogleMaps;
 
 namespace GpsNote.ViewModels.PinPopup
@@ -22,7 +19,7 @@ namespace GpsNote.ViewModels.PinPopup
         private readonly IPageDialogService _dialogService;
         private Pin pin;
 
-        public PinInfoViewModel(INavigationService navigationService, 
+        public PinInfoViewModel(INavigationService navigationService,
                                 ILocalizationService localizationService,
                                 IPinService pinService,
                                 ITimeZoneService timeZoneService,
@@ -55,8 +52,8 @@ namespace GpsNote.ViewModels.PinPopup
         private string longtitude;
         public string Longtitude
         {
-            get => longtitude; 
-            set => SetProperty(ref longtitude, value); 
+            get => longtitude;
+            set => SetProperty(ref longtitude, value);
         }
 
         private string latitude;
@@ -87,13 +84,13 @@ namespace GpsNote.ViewModels.PinPopup
         {
             base.Initialize(parameters);
 
-            if(parameters.TryGetValue<Pin>(Constants.DISPLAY_PIN, out pin))
+            if (parameters.TryGetValue<Pin>(Constants.DISPLAY_PIN, out pin))
             {
-                if(pin != null)
+                if (pin != null)
                 {
                     PinModel pinModel = await _pinService.FindPinModelAsync(p => p.Label == pin.Label);
 
-                    if(pinModel != null)
+                    if (pinModel != null)
                     {
                         if (!string.IsNullOrWhiteSpace(pinModel.Description))
                         {
@@ -120,7 +117,7 @@ namespace GpsNote.ViewModels.PinPopup
 
         private async void OnShowClockAsync()
         {
-            if(pin != null)
+            if (pin != null)
             {
                 TimeZoneResponse timeZoneResponse = await _timeZoneService.GetTimeZoneAsync(pin.Position);
 
@@ -129,17 +126,19 @@ namespace GpsNote.ViewModels.PinPopup
                     (Pin, TimeZoneResponse) tup = (pin, timeZoneResponse);
 
                     NavigationParameters parameter = new NavigationParameters
-                {
-                   {Constants.TUPLE, tup }
-                };
+                    {
+                        {Constants.TUPLE, tup }
+                    };
 
-                    await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
+                    //await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
+                    await NavigationService.GoBackAsync(parameter);
+                    //await NavigationService.NavigateAsync(nameof(MapPage), parameter);
                 }
                 else
                 {
                     await _dialogService.DisplayAlertAsync("Error get TimeZone", timeZoneResponse.Status, "Cancel");
                 }
-            }          
+            }
         }
         #endregion
     }

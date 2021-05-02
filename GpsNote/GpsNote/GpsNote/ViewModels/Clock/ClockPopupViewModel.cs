@@ -72,7 +72,7 @@ namespace GpsNote.ViewModels.Clock
             {
                 LabelPin = tup.Item1.Label;
                 TimeZoneDateTime = GetDateTime(tup.Item2);
-                TimeString = TimeZoneDateTime.ToString("hh:mm");
+                TimeString = TimeZoneDateTime.ToString("HH:mm");
                 TimeZoneID = tup.Item2.TimeZoneID;
 
                 DateTime dt = TimeZoneDateTime;
@@ -80,7 +80,7 @@ namespace GpsNote.ViewModels.Clock
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
                     dt = dt.AddSeconds(1);
-                    TimeString = dt.ToString("hh:mm");
+                    TimeString = dt.ToString("HH:mm");
                     return IsTimerAlive;
                 });
             }

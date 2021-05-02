@@ -20,6 +20,7 @@ using GpsNote.Services.Localization;
 using System.ComponentModel;
 using GpsNote.Views.PinInfo;
 using GpsNote.Views;
+using GpsNote.Views.Clock;
 
 namespace GpsNote.ViewModels
 {
@@ -164,7 +165,7 @@ namespace GpsNote.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
@@ -174,6 +175,12 @@ namespace GpsNote.ViewModels
             {
                 MovingCameraPosition = position;
                 IsMoveCamera = true;
+            }
+            else if (parameters.TryGetValue<(Pin, TimeZoneResponse)>(Constants.TUPLE, out (Pin, TimeZoneResponse) tup))
+            {
+                NavigationParameters parameter = new NavigationParameters();
+                parameter.Add(Constants.TUPLE, tup);
+                await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
             }
         }
 

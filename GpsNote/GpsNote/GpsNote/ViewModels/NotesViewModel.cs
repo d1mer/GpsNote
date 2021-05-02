@@ -16,7 +16,6 @@ using GpsNote.Extensions;
 using GpsNote.Views;
 using GpsNote.Services.Localization;
 
-
 namespace GpsNote.ViewModels
 {
     public class NotesViewModel : ViewModelBase
