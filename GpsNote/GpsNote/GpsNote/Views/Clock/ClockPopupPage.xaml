@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:rg="http://rotorgames.com"
-             xmlns:controls="clr-namespace:GpsNote.Controls"
-             CloseWhenBackgroundIsClicked="True"
-             AndroidTalkbackAccessibilityWorkaround="True"
-             x:Class="GpsNote.Views.Clock.ClockPopupPage"
-             BackgroundColor="Transparent"
-             Padding="20, 65">
+<popup:BasePopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:rg="http://rotorgames.com"
+                     xmlns:popup="clr-namespace:GpsNote.Views"
+                     xmlns:controls="clr-namespace:GpsNote.Controls"
+                     CloseWhenBackgroundIsClicked="True"
+                     AndroidTalkbackAccessibilityWorkaround="True"
+                     x:Class="GpsNote.Views.Clock.ClockPopupPage"
+                     BackgroundColor="Transparent"
+                     Padding="20, 65">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="White">
@@ -59,4 +60,4 @@
 
     </Grid>
 
-</rg:PopupPage>
+</popup:BasePopupPage>

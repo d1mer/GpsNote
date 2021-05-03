@@ -1,64 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<rg:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:rg="http://rotorgames.com"
-             BackgroundClickedCommand="{Binding PopupCloseCommand}"
-             BackgroundColor="Transparent"
-             x:Class="GpsNote.Views.PinInfo.PinInfoPage">
+<popup:BasePopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:popup="clr-namespace:GpsNote.Views"
+                     BackgroundColor="Transparent"
+                     x:Class="GpsNote.Views.PinInfo.PinInfoPage">
 
-    <StackLayout VerticalOptions="EndAndExpand"
+    <StackLayout>
+
+        <StackLayout.GestureRecognizers>
+
+            <TapGestureRecognizer Command="{Binding PopupCloseCommand}" />
+
+        </StackLayout.GestureRecognizers>
+
+        <StackLayout VerticalOptions="EndAndExpand"
                  HorizontalOptions="FillAndExpand"
                  Background="Transparent">
 
-        <StackLayout Orientation="Horizontal"
-                     Background="Transparent">
+            <StackLayout Orientation="Horizontal">
 
-            <StackLayout Background="Transparent"
-                         Padding="20">
+                <StackLayout Padding="20">
 
-                <!-- PIN LABEL -->
-                <Label Text="{Binding Label}"
+                    <!-- PIN LABEL -->
+                    <Label Text="{Binding Label}"
                        FontFamily="Montserrat-Bold"
                        FontSize="16"
                        LineBreakMode="NoWrap"/>
 
-                <Grid ColumnDefinitions="*, *"
-                      Background="Transparent">
+                    <Grid ColumnDefinitions="*, *">
 
-                    <!-- LONGTITUDE LABEL -->
-                    <Label Text="{Binding Longtitude}"
+                        <!-- LONGTITUDE LABEL -->
+                        <Label Text="{Binding Longtitude}"
                            FontFamily="Montserrat-Light"
                            FontSize="16"/>
 
-                    <!-- LATITUDE LABEL -->
-                    <Label Grid.Column="1"
+                        <!-- LATITUDE LABEL -->
+                        <Label Grid.Column="1"
                            Text="{Binding Latitude}"
                            FontFamily="Montserrat-Light"
                            FontSize="16" />
 
-                </Grid>
+                    </Grid>
 
-            </StackLayout>
+                </StackLayout>
 
-            <Image Source="ic_clock.png"
+                <Image Source="ic_clock.png"
                    HorizontalOptions="EndAndExpand"
                    VerticalOptions="CenterAndExpand"
                    Margin="15, 20, 30, 15">
 
-                <Image.GestureRecognizers>
+                    <Image.GestureRecognizers>
 
-                    <TapGestureRecognizer Command="{Binding ImageClockTap}"/>
-                    
-                </Image.GestureRecognizers>
-                
-            </Image>
+                        <TapGestureRecognizer Command="{Binding ImageClockTap}"/>
 
-        </StackLayout>
+                    </Image.GestureRecognizers>
 
-        <!-- SEPARATOR -->
-        <BoxView Style="{StaticResource separator}"/>
+                </Image>
 
-        <Label LineBreakMode="WordWrap"
+            </StackLayout>
+
+            <!-- SEPARATOR -->
+            <BoxView Style="{StaticResource separator}"/>
+
+            <Label LineBreakMode="WordWrap"
                FontFamily="Montserrat-Light"
                FontSize="16"
                IsVisible="{Binding IsVisibleDescription}"
@@ -66,6 +70,8 @@
                Background="Transparent"
                Margin="20, 10, 20, 20"/>
 
+        </StackLayout>
+        
     </StackLayout>
 
-</rg:PopupPage>
+</popup:BasePopupPage>
