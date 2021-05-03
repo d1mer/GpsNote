@@ -109,6 +109,7 @@
     <Compile Include="AndroidInitializer.cs" />
     <Compile Include="CustomEntryRenderer.cs" />
     <Compile Include="CustomUrlSchemeInterceptorActivity.cs" />
+    <Compile Include="ExtendedTabbedPageRenderer.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="OffButtonRenderer.cs" />
