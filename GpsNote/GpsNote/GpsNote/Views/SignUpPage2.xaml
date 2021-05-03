@@ -30,7 +30,7 @@
 
             <!-- TITLE LABEL -->
             <Label Grid.Column="0"
-                   Text="{Binding Title}" 
+                   Text="{Binding Resource[CreateAccountTitle]}" 
                    Style="{StaticResource navBarTitle}"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"/>

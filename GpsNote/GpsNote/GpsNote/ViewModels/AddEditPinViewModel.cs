@@ -34,8 +34,6 @@ namespace GpsNote.ViewModels
             _pinService = pinService;
             _dialogService = dialogService;
             _authorizationService = authorizeService;
-
-            Title = Resource["AddPinTitle"];
         }
 
 
@@ -258,9 +256,9 @@ namespace GpsNote.ViewModels
                 }
                 else
                 {
-                    await _dialogService.DisplayAlertAsync("Error",
-                                                     "Database error.\nPin not saved / updated",
-                                                     "Cancel");
+                    await _dialogService.DisplayAlertAsync(Resource["ErrorText"],
+                                                     Resource["PinSaveError"],
+                                                     Resource["CancelText"]);
                 }
             }
             else

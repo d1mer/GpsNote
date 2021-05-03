@@ -32,7 +32,7 @@
 
             <!-- TITLE LABEL -->
             <Label Grid.Column="0"
-                   Text="{Binding Title}" 
+                   Text="{Binding Resource[LoginTitle]}" 
                    Style="{StaticResource navBarTitle}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>

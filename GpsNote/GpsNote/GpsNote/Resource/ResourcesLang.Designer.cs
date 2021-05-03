@@ -423,15 +423,6 @@ namespace GpsNote.Resource {
         /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
-        internal static string Error13 {
-            get {
-                return ResourceManager.GetString("Error13", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
         internal static string Error14 {
             get {
                 return ResourceManager.GetString("Error14", resourceCulture);
@@ -736,6 +727,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        internal static string MapTitle {
+            get {
+                return ResourceManager.GetString("MapTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string NameLabel {
@@ -786,6 +786,15 @@ namespace GpsNote.Resource {
         internal static string PasswordMismatchError {
             get {
                 return ResourceManager.GetString("PasswordMismatchError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database error.\nPin not saved / updated.
+        /// </summary>
+        internal static string PinSaveError {
+            get {
+                return ResourceManager.GetString("PinSaveError", resourceCulture);
             }
         }
         
@@ -921,15 +930,6 @@ namespace GpsNote.Resource {
         internal static string TakenEmailError {
             get {
                 return ResourceManager.GetString("TakenEmailError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 1.
-        /// </summary>
-        internal static string Title7 {
-            get {
-                return ResourceManager.GetString("Title7", resourceCulture);
             }
         }
         

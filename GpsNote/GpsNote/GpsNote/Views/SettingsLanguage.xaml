@@ -29,7 +29,7 @@
 
             <!-- TITLE LABEL -->
             <Label Grid.Column="0"
-                   Text="{Binding Title}" 
+                   Text="{Binding Resource[SettingsLanguageTitle]}" 
                    Style="{StaticResource navBarTitle}"
                    HorizontalOptions="Center"
                    VerticalOptions="Center"/>

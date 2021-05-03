@@ -45,7 +45,7 @@ namespace GpsNote.ViewModels
             _permissionsService = permissionsService;
             _timeZoneService = timeZoneService;
 
-            Title = "Map";
+            Title = Resource["MapTitle"];
 
             InitialCameraUpdate = CameraUpdateFactory.NewPosition(new Position(0, 0));
             Task.Run(() => RequestLocationPermission());

@@ -24,8 +24,6 @@ namespace GpsNote.ViewModels
         {
             _authorizationService = authorizationService;
             _themeService = themeService;
-
-            Title = Resource["SettingsTitle"];
         }
 
 

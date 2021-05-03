@@ -342,6 +342,9 @@
   <data name="LongtitudePlaceholder" xml:space="preserve">
     <value>Долгота</value>
   </data>
+  <data name="MapTitle" xml:space="preserve">
+    <value>Карта</value>
+  </data>
   <data name="NameLabel" xml:space="preserve">
     <value>Имя</value>
   </data>
@@ -359,6 +362,9 @@
   </data>
   <data name="PasswordMismatchError" xml:space="preserve">
     <value>пароли не совпадают</value>
+  </data>
+  <data name="PinSaveError" xml:space="preserve">
+    <value>Ошибка базы данных.\nМетка не сохранена / обновлена</value>
   </data>
   <data name="PinsTitle" xml:space="preserve">
     <value>Метки</value>
@@ -404,9 +410,6 @@
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>такой адрес уже занят</value>
-  </data>
-  <data name="Title7" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Title8" xml:space="preserve">
     <value>1</value>

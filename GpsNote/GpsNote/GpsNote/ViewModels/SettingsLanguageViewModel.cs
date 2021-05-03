@@ -13,7 +13,7 @@ namespace GpsNote.ViewModels
         public SettingsLanguageViewModel(INavigationService navigationService, 
                                          ILocalizationService localizationService) : base(navigationService, localizationService)
         {
-            Title = Resource["SettingsLanguageTitle"];
+            
         }
 
         #region -- Public properties --

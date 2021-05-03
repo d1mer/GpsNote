@@ -1,17 +1,14 @@
-﻿using GpsNote.Enums;
+﻿using System.ComponentModel;
+using Xamarin.Forms;
+using Prism.Commands;
+using Prism.Navigation;
+using Prism.Services;
+using GpsNote.Enums;
 using GpsNote.Helpers;
 using GpsNote.Services.Authentication;
 using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.Localization;
 using GpsNote.Views;
-using Prism.Commands;
-using Prism.Navigation;
-using Prism.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using Xamarin.Forms;
 
 namespace GpsNote.ViewModels
 {
@@ -30,8 +27,6 @@ namespace GpsNote.ViewModels
             _authenticationService = authenticationService;
             _googleAuthenticationService = googleAuthenticationService;
             _dialogService = pageDialogService;
-
-            Title = Resource["CreateAccountTitle"];
 
             ImageSourcePassword = "ic_eye_off.png";
             ImageSourceConfirmPassword = "ic_eye_off.png";

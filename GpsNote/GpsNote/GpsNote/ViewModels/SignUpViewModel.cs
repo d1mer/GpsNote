@@ -23,8 +23,6 @@ namespace GpsNote.ViewModels
         {
             _googleAuthenticationService = googleAuthenticationService;
             _authenticationService = authenticationService;
-
-            Title = Resource["CreateAccountTitle"];
         }
 
 

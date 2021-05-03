@@ -237,9 +237,6 @@
   <data name="EnterPasswordPlaceholder" xml:space="preserve">
     <value>Enter password</value>
   </data>
-  <data name="Error13" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="Error14" xml:space="preserve">
     <value>1</value>
   </data>
@@ -342,6 +339,9 @@
   <data name="LongtitudePlaceholder" xml:space="preserve">
     <value>Longtitude</value>
   </data>
+  <data name="MapTitle" xml:space="preserve">
+    <value>Map</value>
+  </data>
   <data name="NameLabel" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -359,6 +359,9 @@
   </data>
   <data name="PasswordMismatchError" xml:space="preserve">
     <value>passwords mismatch</value>
+  </data>
+  <data name="PinSaveError" xml:space="preserve">
+    <value>Database error.\nPin not saved / updated</value>
   </data>
   <data name="PinsTitle" xml:space="preserve">
     <value>Pins</value>
@@ -404,9 +407,6 @@
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>email taken</value>
-  </data>
-  <data name="Title7" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="Title8" xml:space="preserve">
     <value>1</value>

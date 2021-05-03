@@ -18,8 +18,6 @@ namespace GpsNote.ViewModels
                                       IColorService colorService) : base(navigationService, localizationService)
         {
             _colorService = colorService;
-
-            Title = Resource["SettingsClockTitle"];
         }
 
 

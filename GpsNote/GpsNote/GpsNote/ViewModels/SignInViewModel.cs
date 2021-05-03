@@ -33,8 +33,6 @@ namespace GpsNote.ViewModels
             _authenticationService = authenticationService;
             _googleAuthenticationService = googleAuthenticationService;
 
-            Title = Resource["LoginTitle"];
-
             ImageSource = "ic_eye_off.png";
             ShowPassword = false;
             Password = string.Empty;
