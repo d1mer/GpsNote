@@ -8,8 +8,7 @@
                         NavigationPage.HasBackButton="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
-    <Grid RowDefinitions="0.1*, *"
-          BackgroundColor="Transparent">
+    <Grid RowDefinitions="0.1*, *">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*">
@@ -38,7 +37,6 @@
 
         <!-- CONTENT -->
         <StackLayout Grid.Row="1"
-                     Background="Transparent"
                      RadioButtonGroup.GroupName="Language"
                      RadioButtonGroup.SelectedValue="{Binding LanguageSelection}">
 

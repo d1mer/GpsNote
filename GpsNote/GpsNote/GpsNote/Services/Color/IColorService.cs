@@ -15,5 +15,7 @@ namespace GpsNote.Services.Color
         void SaveCurrentColor(Colors color);
 
         int GetCurrentColor();
+
+        bool IsDarkTheme();
     }
 }

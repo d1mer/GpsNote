@@ -10,7 +10,8 @@
                                                Dark={StaticResource Black}}">
 
     <Grid RowDefinitions="0.1*, *"
-          Background="Transparent">
+          BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                          Dark={StaticResource Black}}">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*">

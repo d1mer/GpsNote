@@ -15,7 +15,8 @@
 
         <StackLayout VerticalOptions="EndAndExpand"
                  HorizontalOptions="FillAndExpand"
-                 Background="Transparent">
+                 BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
             <StackLayout Orientation="Horizontal">
 

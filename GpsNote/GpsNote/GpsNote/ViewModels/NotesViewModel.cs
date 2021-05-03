@@ -15,6 +15,7 @@ using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Extensions;
 using GpsNote.Views;
 using GpsNote.Services.Localization;
+using GpsNote.Services.Authorization;
 
 namespace GpsNote.ViewModels
 {
@@ -23,15 +24,18 @@ namespace GpsNote.ViewModels
         private IPageDialogService _dialogService;
         private readonly IPinService _pinService;
         private List<PinViewModel> _oldPinsList = null;
+        private readonly IAuthorizationService _authorizationService;
 
 
         public NotesViewModel(INavigationService navigationService,
                               ILocalizationService localizationService,
                               IPinService pinService, 
-                              IPageDialogService dialogService) : base(navigationService, localizationService)
+                              IPageDialogService dialogService,
+                              IAuthorizationService authorizationService) : base(navigationService, localizationService)
         {
             _pinService = pinService;
             _dialogService = dialogService;
+            _authorizationService = authorizationService;
 
             Title = Resource["PinsTitle"];
             SearchText = string.Empty;
@@ -322,6 +326,7 @@ namespace GpsNote.ViewModels
 
         private void OnLogOut()
         {
+            _authorizationService.LogOut();
             NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 

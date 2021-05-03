@@ -7,11 +7,12 @@
                         NavigationPage.HasNavigationBar="False"
                         NavigationPage.HasBackButton="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
-                                               Dark={StaticResource Black}}">
+                                                          Dark={StaticResource Black}}">
 
 
     <Grid RowDefinitions="0.1*, *"
-          Background="Transparent">
+          BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                            Dark={StaticResource Black}}">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*"
@@ -41,7 +42,9 @@
 
         <!-- CONTENT -->
         <Grid  Grid.Row="1"
-           Margin="20, 5, 20, 0">
+               Margin="20, 5, 20, 0"
+               BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                 Dark={StaticResource Black}}">
 
             <Grid.RowDefinitions>
 

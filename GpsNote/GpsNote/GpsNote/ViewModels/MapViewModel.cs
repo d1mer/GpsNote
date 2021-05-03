@@ -21,6 +21,7 @@ using System.ComponentModel;
 using GpsNote.Views.PinInfo;
 using GpsNote.Views;
 using GpsNote.Views.Clock;
+using GpsNote.Services.Authorization;
 
 namespace GpsNote.ViewModels
 {
@@ -30,6 +31,7 @@ namespace GpsNote.ViewModels
         private readonly IMapCameraSettingsService _cameraSettingsService;
         private readonly IPermissionsService _permissionsService;
         private readonly ITimeZoneService _timeZoneService;
+        private readonly IAuthorizationService _authorizationService;
 
 
         public MapViewModel(INavigationService navigationService,
@@ -38,12 +40,14 @@ namespace GpsNote.ViewModels
                             IPinService pinService, 
                             IMapCameraSettingsService cameraSettingsService,
                             IPermissionsService permissionsService,
-                            ITimeZoneService timeZoneService) : base(navigationService, localizationService)
+                            ITimeZoneService timeZoneService,
+                            IAuthorizationService authorizationService) : base(navigationService, localizationService)
         {
             _pinService = pinService;
             _cameraSettingsService = cameraSettingsService;
             _permissionsService = permissionsService;
             _timeZoneService = timeZoneService;
+            _authorizationService = authorizationService;
 
             Title = Resource["MapTitle"];
 
@@ -314,6 +318,7 @@ namespace GpsNote.ViewModels
 
         private void OnLogOut()
         {
+            _authorizationService.LogOut();
             NavigationService.NavigateAsync($"/{nameof(MainPage)}");
         }
 

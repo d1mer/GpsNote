@@ -7,15 +7,18 @@
                         NavigationPage.HasNavigationBar="False"
                         NavigationPage.HasBackButton="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
-                                               Dark={StaticResource Black}}">
+                                                          Dark={StaticResource Black}}">
 
 
     <Grid RowDefinitions="0.1*, *"
-          Background="Transparent">
+          BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                            Dark={StaticResource Black}}">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*"
-              HorizontalOptions="FillAndExpand">
+              HorizontalOptions="FillAndExpand"
+              BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                Dark={StaticResource Black}}">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -41,7 +44,9 @@
 
         <!-- CONTENT -->
         <Grid Grid.Row="1"
-              Margin="20, 5, 20, 0">
+              Margin="20, 5, 20, 0"
+              BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                                Dark={StaticResource Black}}">
 
             <Grid.RowDefinitions>
 
@@ -56,7 +61,7 @@
 
                 <!-- EMAIL LABEL -->
                 <Label Text="{Binding Resource[EmailLabel]}"
-                   Margin="15, 0"/>
+                       Margin="15, 0"/>
 
 
                 <!-- EMAIL ENTRY-->

@@ -13,12 +13,12 @@
     
 
 
-    <Grid RowDefinitions="0.1*, *"
-          Background="Transparent">
+    <Grid RowDefinitions="0.1*, *">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*"
-              Background="Transparent">
+              BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
             <!-- BACK ARROW IMAGE -->
             <Image Source="ic_left_blue.png"
@@ -43,8 +43,7 @@
         </Grid>
 
         <!-- CONTENT -->
-        <StackLayout Grid.Row="1"
-                     Background="Transparent">
+        <StackLayout Grid.Row="1">
 
             <BoxView Style="{StaticResource separator}"/>
 

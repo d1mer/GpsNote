@@ -20,16 +20,13 @@ namespace GpsNote.Controls
         private readonly SKPaint _digitsFillPaint;
         private static DateTime _dateTime;
         private static bool _timerAlive;
+        private readonly SKColor _backgroundColor;
+        private readonly SKColor _faceColor;
+        private readonly SKColor _digitColor;
 
 
         public CustomCanvas()
         {
-            _grayFillPaint = new SKPaint
-            {
-                Style = SKPaintStyle.Fill,
-                Color = Xamarin.Forms.Color.FromHex(App.Current.Resources["grayFillClock"] as string).ToSKColor()
-            };
-
             _lightStrokePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
@@ -42,19 +39,42 @@ namespace GpsNote.Controls
                 StrokeWidth = 2
             };
 
-            _digitsFillPaint = new SKPaint
-            {
-                Style = SKPaintStyle.Fill,
-                Color = SKColors.Black
-            };
-
             _dateTime = default(DateTime);
             _timerAlive = false;
 
             SetColorService();
             _lightStrokePaint.Color = _colorService.GetCurrentLightColor();
             _darkStrokePaint.Color = _colorService.GetCurrentDarkColor();
-            
+
+            if (_colorService.IsDarkTheme())
+            {
+                _backgroundColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["blackClock"] as string).ToSKColor();
+
+                _faceColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["faceDarkClock"] as string).ToSKColor();
+
+                _digitColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["systemWhiteClock"] as string).ToSKColor();
+            }
+            else
+            {
+                _backgroundColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["systemWhiteClock"] as string).ToSKColor();
+
+                _faceColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["grayFillClock"] as string).ToSKColor();
+
+                _digitColor = Xamarin.Forms.Color.FromHex(App.Current.Resources["blackClock"] as string).ToSKColor();
+            }
+
+            _grayFillPaint = new SKPaint
+            {
+                Style = SKPaintStyle.Fill,
+                Color = _faceColor
+            };
+
+            _digitsFillPaint = new SKPaint
+            {
+                Style = SKPaintStyle.Fill,
+                Color = _digitColor
+            };
+
             _timerAlive = true;
             this.PaintSurface += OnCustomCanvas_PaintSurface;
 
@@ -107,7 +127,7 @@ namespace GpsNote.Controls
             SKSurface surface = e.Surface;
             SKCanvas canvas = surface.Canvas;
 
-            canvas.Clear(SKColors.White);
+            canvas.Clear(_backgroundColor);
 
             int width = e.Info.Width;
             int height = e.Info.Height;

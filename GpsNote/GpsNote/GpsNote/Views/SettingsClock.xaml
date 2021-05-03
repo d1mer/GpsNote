@@ -10,8 +10,7 @@
                                                           Dark={StaticResource Black}}">
 
 
-    <Grid RowDefinitions="0.1*, *"
-          BackgroundColor="Transparent">
+    <Grid RowDefinitions="0.1*, *">
 
         <!-- NAVIGATION BAR -->
         <Grid ColumnDefinitions="*">
@@ -40,7 +39,6 @@
         
         <!-- CONTENT -->
         <StackLayout Grid.Row="1"
-                     Background="Transparent"
                      RadioButtonGroup.GroupName="ClockColor"
                      RadioButtonGroup.SelectedValue="{Binding ColorSelection}">
 

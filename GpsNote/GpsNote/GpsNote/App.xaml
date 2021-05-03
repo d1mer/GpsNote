@@ -13,6 +13,9 @@
         <x:String x:Key="darkRedClock">#DD4949</x:String>
         <x:String x:Key="lightGreenClock">#00FFB1</x:String>
         <x:String x:Key="darkGreenClock">#32D27F</x:String>
+        <x:String x:Key="blackClock">#1E242B</x:String>
+        <x:String x:Key="systemWhiteClock">#FEFEFD</x:String>
+        <x:String x:Key="faceDarkClock">#33374E</x:String>
 
         <!-- Colors -->
         <Color x:Key="LightBlue">#596EFB</Color>
@@ -95,6 +98,25 @@
             <Setter Property="FontSize"
                     Value="18"/>
 
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black},
+                                            Dark={StaticResource SystemWhite}}"/>
+
+            <Setter Property="PlaceholderColor"
+                    Value="{AppThemeBinding Light={StaticResource Gray},
+                                            Dark={StaticResource LightGray}}" />
+
+        </Style>
+        
+        <!-- RADIOBUTTON -->
+        <Style TargetType="RadioButton">
+
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Light={StaticResource Black},
+                                            Dark={StaticResource SystemWhite}}" />
         </Style>
 
 

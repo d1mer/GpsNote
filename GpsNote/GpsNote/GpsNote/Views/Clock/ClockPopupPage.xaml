@@ -7,11 +7,11 @@
                      CloseWhenBackgroundIsClicked="True"
                      AndroidTalkbackAccessibilityWorkaround="True"
                      x:Class="GpsNote.Views.Clock.ClockPopupPage"
-                     BackgroundColor="Transparent"
                      Padding="20, 65">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
-          BackgroundColor="White">
+          BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
         <Grid ColumnDefinitions="0.9*, 0.1*">
             

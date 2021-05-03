@@ -28,7 +28,8 @@
                   HasUnevenRows="True"
                   SelectionMode="None"
                   SeparatorVisibility="None"
-                  Background="Transparent">
+                  BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
             <ListView.ItemTemplate>
 
@@ -56,7 +57,9 @@
 
                         <ViewCell.View>
 
-                            <StackLayout Background="Transparent">
+                            <StackLayout BackgroundColor="{AppThemeBinding 
+                                                          Light={StaticResource SystemWhite},
+                                                          Dark={StaticResource Black}}">
 
                                 <!-- SEPARATOR -->
                                 <BoxView Style="{StaticResource separator}" />
@@ -75,7 +78,8 @@
                                     </ImageButton>
 
                                     <StackLayout Grid.Column="1"
-                                                 Background="Transparent">
+                                                 BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
                                         <!-- PIN LABEL -->
                                         <Label Text="{Binding Label}"
@@ -84,8 +88,8 @@
                                                LineBreakMode="NoWrap"/>
 
                                         <Grid ColumnDefinitions="*, *"
-                                              
-                                              Background="Transparent">
+                                              BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
+                                               Dark={StaticResource Black}}">
 
                                             <!-- LONGTITUDE LABEL -->
                                             <Label Text="{Binding Longtitude}"

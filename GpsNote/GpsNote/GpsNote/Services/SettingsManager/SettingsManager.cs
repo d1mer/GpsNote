@@ -69,7 +69,6 @@ namespace GpsNote.Services.SettingsService
         public void CleanUpAuthorizedUser()
         {
             AuthorizedUserID = -1;
-            DarkTheme = false;
             LastLatitude = default(double);
             LastLongitude = default(double);
             LastZoom = default(double);

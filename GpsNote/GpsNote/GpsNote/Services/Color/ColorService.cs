@@ -71,6 +71,11 @@ namespace GpsNote.Services.Color
             return _settingsManager.CurrentClockColor;
         }
 
+        public bool IsDarkTheme()
+        {
+            return _settingsManager.DarkTheme;
+        }
+
         #endregion
     }
 }
