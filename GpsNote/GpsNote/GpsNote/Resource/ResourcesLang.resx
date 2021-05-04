@@ -126,57 +126,6 @@
   <data name="BlueText" xml:space="preserve">
     <value>Blue</value>
   </data>
-  <data name="Button10" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button11" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button12" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button13" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button14" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button15" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button16" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button17" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button18" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button19" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button20" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button3" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button4" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button5" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button6" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button7" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button8" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="CancelText" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -237,42 +186,6 @@
   <data name="EnterPasswordPlaceholder" xml:space="preserve">
     <value>Enter password</value>
   </data>
-  <data name="Error14" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error15" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error16" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error17" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error18" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error19" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error20" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error21" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error22" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error23" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error24" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Error25" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ErrorSaveDbText" xml:space="preserve">
     <value>Error save to database</value>
   </data>
@@ -284,33 +197,6 @@
   </data>
   <data name="InvalidPasswordError" xml:space="preserve">
     <value>invalid password. password must be from 8 to 16 characters</value>
-  </data>
-  <data name="Label15" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label16" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label17" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label18" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label19" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label2" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label20" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label3" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Label4" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="LabelAddPinLabel" xml:space="preserve">
     <value>Label</value>
@@ -366,24 +252,6 @@
   <data name="PinsTitle" xml:space="preserve">
     <value>Pins</value>
   </data>
-  <data name="Placeholder14" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder15" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder2" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder3" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder4" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Placeholder5" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="RedText" xml:space="preserve">
     <value>Red</value>
   </data>
@@ -407,9 +275,6 @@
   </data>
   <data name="TakenEmailError" xml:space="preserve">
     <value>email taken</value>
-  </data>
-  <data name="Title8" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="UnknownError" xml:space="preserve">
     <value>unknown error</value>

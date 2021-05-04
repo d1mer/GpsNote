@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GpsNote.Enums;
-using GpsNote.Helpers;
 using GpsNote.Models;
 using GpsNote.Services.Authorization;
 using GpsNote.Services.RepositoryService;

@@ -105,7 +105,6 @@
   <ItemGroup>
     <Compile Include="BasePopupPageRenderer.cs" />
     <Compile Include="CustomEntryRenderer.cs" />
-    <Compile Include="CustomTabbedPageRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />

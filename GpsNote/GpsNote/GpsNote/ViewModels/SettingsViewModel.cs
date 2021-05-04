@@ -6,7 +6,6 @@ using GpsNote.Services.Authorization;
 using GpsNote.Views;
 using GpsNote.Services.Theme;
 using GpsNote.Services.Localization;
-using System;
 
 namespace GpsNote.ViewModels
 {

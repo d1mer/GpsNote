@@ -1,11 +1,7 @@
-﻿using GpsNote.Services.Color;
-using GpsNote.Services.Localization;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+using GpsNote.Services.Color;
+using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels
 {

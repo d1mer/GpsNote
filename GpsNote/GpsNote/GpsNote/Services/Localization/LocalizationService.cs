@@ -1,12 +1,10 @@
-﻿using GpsNote.Resource;
-using GpsNote.Services.SettingsService;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
-using System.Text;
 using Xamarin.Forms;
+using GpsNote.Resource;
+using GpsNote.Services.SettingsService;
+
 
 namespace GpsNote.Services.Localization
 {

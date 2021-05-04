@@ -4,8 +4,7 @@
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         x:Class="GpsNote.Views.AddEditPinPage"
                         xmlns:controls="clr-namespace:GpsNote.Controls"
-                        xmlns:prism="http://prismlibrary.com"
-                        
+                        xmlns:prism="http://prismlibrary.com"                   
                         NavigationPage.HasNavigationBar="False"
                         NavigationPage.HasBackButton="False"
                         BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},

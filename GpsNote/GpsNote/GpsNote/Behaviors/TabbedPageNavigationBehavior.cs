@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Xamarin.Forms;
 using Prism.Behaviors;
 using Prism.Common;
 using Prism.Navigation;
-using Xamarin.Forms;
 
 namespace GpsNote.Behaviors
 {

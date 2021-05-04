@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using Xamarin.Forms.GoogleMaps;
-using Prism.Ioc;
-using Prism.Navigation;
-using GpsNote.Views;
-using GpsNote.Services.Authorization;
 using System.Windows.Input;
-using System.ComponentModel;
+using Xamarin.Forms;
+
 
 namespace GpsNote.Controls
 {

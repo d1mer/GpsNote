@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Services.SettingsService;
-using GpsNote;
 
 namespace GpsNote.Services.MapCameraSettingsService
 {

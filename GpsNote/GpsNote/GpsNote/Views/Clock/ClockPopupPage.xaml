@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <popup:BasePopupPage xmlns="http://xamarin.com/schemas/2014/forms"
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                     xmlns:rg="http://rotorgames.com"
                      xmlns:popup="clr-namespace:GpsNote.Views"
                      xmlns:controls="clr-namespace:GpsNote.Controls"
                      CloseWhenBackgroundIsClicked="True"
@@ -9,7 +8,7 @@
                      x:Class="GpsNote.Views.Clock.ClockPopupPage"
                      NavigationPage.HasBackButton="False"
                      NavigationPage.HasNavigationBar="False"
-                     Padding="20, 165">
+                     Padding="20, 100">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},

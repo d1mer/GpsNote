@@ -4,7 +4,7 @@ namespace GpsNote.Services.SettingsService
 {
     public class SettingsManager : ISettingsManager
     {
-        #region -- Implement ISettings --
+        #region -- ISettings implemented  --
 
         public int AuthorizedUserID
         {

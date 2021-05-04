@@ -1,9 +1,6 @@
-﻿using GpsNote.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms.GoogleMaps;
+using GpsNote.Models;
 
 namespace GpsNote.Services.TimeZone
 {

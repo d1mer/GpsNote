@@ -1,11 +1,7 @@
-﻿using GpsNote.Services.Localization;
-using GpsNote.Views;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+using GpsNote.Services.Localization;
+using GpsNote.Views;
 
 namespace GpsNote.ViewModels
 {

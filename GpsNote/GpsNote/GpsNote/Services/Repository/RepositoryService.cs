@@ -21,7 +21,6 @@ namespace GpsNote.Services.RepositoryService
 
         }
 
-
         #region -- IRepository implementation --
 
         public Task<T> GetEntityAsync<T>(Expression<Func<T, bool>> predicate) 

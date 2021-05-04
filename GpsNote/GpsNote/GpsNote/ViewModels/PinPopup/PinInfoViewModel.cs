@@ -130,9 +130,7 @@ namespace GpsNote.ViewModels.PinPopup
                         {Constants.TUPLE, tup }
                     };
 
-                    //await NavigationService.NavigateAsync(nameof(ClockPopupPage), parameter);
                     await NavigationService.GoBackAsync(parameter);
-                    //await NavigationService.NavigateAsync(nameof(MapPage), parameter);
                 }
                 else
                 {

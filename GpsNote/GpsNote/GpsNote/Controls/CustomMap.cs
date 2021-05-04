@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
-using GpsNote;
 
 namespace GpsNote.Controls
 {

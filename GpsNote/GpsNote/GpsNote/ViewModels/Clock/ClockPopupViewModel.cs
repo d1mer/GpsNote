@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
-using SkiaSharp;
-using SkiaSharp.Views.Forms;
 using Xamarin.Forms.GoogleMaps;
-using GpsNote.Models;
 using Prism.Navigation;
 using Prism.Commands;
-using Rg.Plugins.Popup.Services;
+using GpsNote.Models;
 using GpsNote.Services.Localization;
 
 namespace GpsNote.ViewModels.Clock

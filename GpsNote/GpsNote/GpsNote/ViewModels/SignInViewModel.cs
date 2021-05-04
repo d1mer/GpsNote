@@ -9,7 +9,6 @@ using GpsNote.Services.Authentication;
 using GpsNote.Services.GoogleAuthentication;
 using GpsNote.Services.Localization;
 using GpsNote.Helpers;
-using Xamarin.Forms;
 
 namespace GpsNote.ViewModels
 {

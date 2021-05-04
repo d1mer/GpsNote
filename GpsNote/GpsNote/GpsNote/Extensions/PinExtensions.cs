@@ -1,8 +1,8 @@
-﻿using GpsNote.Models;
-using GpsNote.ViewModels.ExtentedViewModels;
+﻿using System;
 using Xamarin.Forms.GoogleMaps;
 using GpsNote.Helpers;
-using System;
+using GpsNote.Models;
+using GpsNote.ViewModels.ExtentedViewModels;
 
 namespace GpsNote.Extensions
 {

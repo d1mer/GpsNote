@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Text;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 using Prism.Ioc;
 using GpsNote.Services.Color;
-using Prism;
+
 
 namespace GpsNote.Controls
 {

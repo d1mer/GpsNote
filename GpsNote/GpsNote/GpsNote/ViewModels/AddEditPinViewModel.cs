@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Xamarin.Forms.GoogleMaps;
 using Prism.Commands;
 using Prism.Navigation;
@@ -11,8 +12,7 @@ using GpsNote.Services.PinService;
 using GpsNote.ViewModels.ExtentedViewModels;
 using GpsNote.Services.Localization;
 using GpsNote.Helpers;
-using System.ComponentModel;
-using GpsNote.Views;
+
 
 namespace GpsNote.ViewModels
 {
