@@ -18,6 +18,15 @@
                  BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
 
+            <StackLayout.Margin>
+
+                <OnPlatform x:TypeArguments="Thickness">
+
+                    <On Platform="iOS" Value="0,0,0,80"/>
+                </OnPlatform>
+            </StackLayout.Margin>
+              
+
             <StackLayout Orientation="Horizontal">
 
                 <StackLayout Padding="20">

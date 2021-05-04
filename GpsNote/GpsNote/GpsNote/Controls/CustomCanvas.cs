@@ -132,13 +132,14 @@ namespace GpsNote.Controls
             int width = e.Info.Width;
             int height = e.Info.Height;
 
-            float radius = (width / 10f) < (height / 10f) ? width / 10f : height / 10f;
+            float radius = (width / 10f) < (height / 10f) ? width / 11f : height / 11f;
 
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(width / 200f);
 
 
             canvas.DrawCircle(0, 0, radius, _grayFillPaint);
+            
             canvas.DrawCircle(0, 0, radius + 1, _lightStrokePaint);
             canvas.DrawCircle(0, 0, 2, _darkStrokePaint);
 

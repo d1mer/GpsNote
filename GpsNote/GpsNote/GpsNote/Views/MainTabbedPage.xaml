@@ -8,6 +8,8 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="GpsNote.Views.MainTabbedPage"
+            NavigationPage.HasNavigationBar="False"
+                        NavigationPage.HasBackButton="False"
             BarBackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                  Dark={StaticResource Black}}">
 

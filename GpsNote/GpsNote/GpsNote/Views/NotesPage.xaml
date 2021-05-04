@@ -37,75 +37,78 @@
 
                     <ViewCell>
 
-                        <ViewCell.ContextActions>
-
-                            <MenuItem IconImageSource="ic_edit.png" 
-                                      Text="{Binding Path=BindingContext.Resource[EditText],
-                                                     Source={x:Reference pinsListView}}"
-                                      Command="{Binding Path=BindingContext.UpdateTapCommand, 
-                                                Source={x:Reference pinsListView}}"  
-                                      CommandParameter="{Binding .}"/>
-
-                            <MenuItem IconImageSource="ic_delete.png" 
-                                      Text="{Binding Path=BindingContext.Resource[DeleteText],
-                                                     Source={x:Reference pinsListView}}"
-                                      Command="{Binding Path=BindingContext.DeleteTapCommand, 
-                                                Source={x:Reference pinsListView}}"
-                                      CommandParameter="{Binding .}"/>
-
-                        </ViewCell.ContextActions>
-
                         <ViewCell.View>
 
-                            <StackLayout BackgroundColor="{AppThemeBinding 
+                            <SwipeView>
+
+                                <SwipeView.RightItems>
+
+                                    <SwipeItem Text="{Binding Path=BindingContext.Resource[DeleteText]}"
+                                               IconImageSource="ic_edit.png" 
+                                               BackgroundColor="LightPink"
+                                               Command="{Binding Path=BindingContext.DeleteTapCommand, 
+                                                         Source={x:Reference pinsListView}}"  
+                                               CommandParameter="{Binding .}" />
+
+                                    <SwipeItem Text="{Binding Path=BindingContext.Resource[EditText]}"
+                                               IconImageSource="ic_delete.png" 
+                                               BackgroundColor="LightGreen"
+                                               Command="{Binding Path=BindingContext.UpdateTapCommand, 
+                                                         Source={x:Reference pinsListView}}"  
+                                               CommandParameter="{Binding .}" />
+
+                                    
+                                </SwipeView.RightItems>
+
+                                <StackLayout BackgroundColor="{AppThemeBinding 
                                                           Light={StaticResource SystemWhite},
                                                           Dark={StaticResource Black}}">
 
-                                <!-- SEPARATOR -->
-                                <BoxView Style="{StaticResource separator}" />
+                                    <!-- SEPARATOR -->
+                                    <BoxView Style="{StaticResource separator}" />
 
-                                <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*"
+                                    <Grid ColumnDefinitions="0.2*, 0.6*, 0.2*"
                                       Padding="0, 0, 0, 10">
 
-                                    <!-- IMAGE HEART -->
-                                    <ImageButton Source="{Binding ImagePath}"
+                                        <!-- IMAGE HEART -->
+                                        <ImageButton Source="{Binding ImagePath}"
                                                  BackgroundColor="Transparent"
                                                  Margin="15, 5"
                                                  Command="{Binding Path=BindingContext.HeartImageTapCommand, 
                                                                    Source={x:Reference pinsListView}}"
                                                  CommandParameter="{Binding .}">
 
-                                    </ImageButton>
+                                        </ImageButton>
 
-                                    <StackLayout Grid.Column="1"
+                                        <StackLayout Grid.Column="1"
                                                  BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
 
-                                        <!-- PIN LABEL -->
-                                        <Label Text="{Binding Label}"
+                                            <!-- PIN LABEL -->
+                                            <Label Text="{Binding Label}"
                                                FontAttributes="Bold"
                                                FontSize="Medium"
                                                LineBreakMode="NoWrap"/>
 
-                                        <Grid ColumnDefinitions="*, *"
+                                            <Grid ColumnDefinitions="*, *"
                                               BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
                                                Dark={StaticResource Black}}">
 
-                                            <!-- LONGTITUDE LABEL -->
-                                            <Label Text="{Binding Longtitude}"
+                                                <!-- LONGTITUDE LABEL -->
+                                                <Label Text="{Binding Longtitude}"
                                                    FontSize="Small"/>
 
-                                            <!-- LATITUDE LABEL -->
-                                            <Label Grid.Column="1"
+                                                <!-- LATITUDE LABEL -->
+                                                <Label Grid.Column="1"
                                                    Text="{Binding Latitude}"
                                                    FontSize="Small" />
 
-                                        </Grid>
+                                            </Grid>
 
-                                    </StackLayout>
+                                        </StackLayout>
 
-                                    <!-- IMAGE ARROW -->
-                                    <ImageButton Grid.Column="2"
+                                        <!-- IMAGE ARROW -->
+                                        <ImageButton Grid.Column="2"
                                                  Source="ic_left_gray.png"
                                                  BackgroundColor="Transparent"
                                                  VerticalOptions="Center"
@@ -114,12 +117,13 @@
                                                                    Source={x:Reference pinsListView}}"
                                                  CommandParameter="{Binding .}">
 
-                                    </ImageButton>
+                                        </ImageButton>
 
-                                </Grid>
+                                    </Grid>
 
-                            </StackLayout>
+                                </StackLayout>
 
+                            </SwipeView>
                         </ViewCell.View>
 
                     </ViewCell>

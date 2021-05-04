@@ -7,7 +7,9 @@
                      CloseWhenBackgroundIsClicked="True"
                      AndroidTalkbackAccessibilityWorkaround="True"
                      x:Class="GpsNote.Views.Clock.ClockPopupPage"
-                     Padding="20, 65">
+                     NavigationPage.HasBackButton="False"
+                     NavigationPage.HasNavigationBar="False"
+                     Padding="20, 165">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},

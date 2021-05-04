@@ -22,88 +22,88 @@ namespace GpsNote.Droid
 {
     public class ExtendedTabbedPageRenderer : TabbedPageRenderer
     {
-        private TabLayout _TabBar;
-        protected TabLayout TabBar => _TabBar ?? SearchInChildren<TabLayout>();
+        //private TabLayout _TabBar;
+        //protected TabLayout TabBar => _TabBar ?? SearchInChildren<TabLayout>();
 
-        private ViewPager _Pager;
-        protected ViewPager Pager => _Pager ?? SearchInChildren<ViewPager>();
+        //private ViewPager _Pager;
+        //protected ViewPager Pager => _Pager ?? SearchInChildren<ViewPager>();
 
-        protected IVisualElementRenderer _tabBarRenderer;
+        //protected IVisualElementRenderer _tabBarRenderer;
 
         public ExtendedTabbedPageRenderer(Context context) : base(context)
         {
         }
 
-        #region -- Overrides --
+        //#region -- Overrides --
 
-        protected override void OnElementChanged(ElementChangedEventArgs<TabbedPage> e)
-        {
-            base.OnElementChanged(e);
+        //protected override void OnElementChanged(ElementChangedEventArgs<TabbedPage> e)
+        //{
+        //    base.OnElementChanged(e);
 
-            if (e.NewElement != null && _tabBarRenderer is null)
-            {
-                var tabbedPage = Element as ExtendedTabbedPage;
-                _tabBarRenderer = Platform.GetRenderer(tabbedPage.TabBarView);
+        //    if (e.NewElement != null && _tabBarRenderer is null)
+        //    {
+        //        var tabbedPage = Element as ExtendedTabbedPage;
+        //        _tabBarRenderer = Platform.GetRenderer(tabbedPage.TabBarView);
 
-                if (_tabBarRenderer is null)
-                {
-                    _tabBarRenderer = Platform.CreateRendererWithContext(tabbedPage.TabBarView, Context);
-                    Platform.SetRenderer(tabbedPage.TabBarView, _tabBarRenderer);
-                }
+        //        if (_tabBarRenderer is null)
+        //        {
+        //            _tabBarRenderer = Platform.CreateRendererWithContext(tabbedPage.TabBarView, Context);
+        //            Platform.SetRenderer(tabbedPage.TabBarView, _tabBarRenderer);
+        //        }
 
-                AddView(_tabBarRenderer.View);
+        //        AddView(_tabBarRenderer.View);
 
-                TabBar.Visibility = Android.Views.ViewStates.Gone;
-            }
-        }
+        //        TabBar.Visibility = Android.Views.ViewStates.Gone;
+        //    }
+        //}
 
-        protected override void OnLayout(bool changed, int l, int t, int r, int b)
-        {
-            TabBar.Visibility = Android.Views.ViewStates.Gone;
+        //protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        //{
+        //    TabBar.Visibility = Android.Views.ViewStates.Gone;
 
-            var tabbedPage = Element as ExtendedTabbedPage;
+        //    var tabbedPage = Element as ExtendedTabbedPage;
 
-            if (tabbedPage.TabBarPosition == ExtendedTabbedPage.TabBarPositionType.Top)
-            {
-                base.OnLayout(changed, l, t + (int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density), r, b);
+        //    if (tabbedPage.TabBarPosition == ExtendedTabbedPage.TabBarPositionType.Top)
+        //    {
+        //        base.OnLayout(changed, l, t + (int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density), r, b);
 
-                Pager.Layout(l, t + (int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density), r, b);
+        //        Pager.Layout(l, t + (int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density), r, b);
 
-                Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_tabBarRenderer.Element,
-                    new Rectangle(l, t, Context.FromPixels(r - l), tabbedPage.TabBarHeight));
-            }
-            else
-            {
-                base.OnLayout(changed, l, t, r, b - +(int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density));
+        //        Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_tabBarRenderer.Element,
+        //            new Rectangle(l, t, Context.FromPixels(r - l), tabbedPage.TabBarHeight));
+        //    }
+        //    else
+        //    {
+        //        base.OnLayout(changed, l, t, r, b - +(int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density));
 
-                Pager.Layout(l, t, r, b - +(int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density));
+        //        Pager.Layout(l, t, r, b - +(int)(tabbedPage.TabBarHeight * Context.Resources.DisplayMetrics.Density));
 
-                Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_tabBarRenderer.Element,
-                    new Rectangle(l, Context.FromPixels(b - t) - tabbedPage.TabBarHeight, Context.FromPixels(r - l), tabbedPage.TabBarHeight));
-            }
+        //        Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(_tabBarRenderer.Element,
+        //            new Rectangle(l, Context.FromPixels(b - t) - tabbedPage.TabBarHeight, Context.FromPixels(r - l), tabbedPage.TabBarHeight));
+        //    }
 
-            _tabBarRenderer.UpdateLayout();
-        }
+        //    _tabBarRenderer.UpdateLayout();
+        //}
 
-        #endregion
+        //#endregion
 
-        #region -- Private Helpers --
+        //#region -- Private Helpers --
 
-        private T SearchInChildren<T>() where T : class
-        {
-            T res = null;
+        //private T SearchInChildren<T>() where T : class
+        //{
+        //    T res = null;
 
-            for (int i = 0; i < ChildCount; i++)
-            {
-                if (GetChildAt(i) is T child)
-                {
-                    res = child;
-                }
-            }
+        //    for (int i = 0; i < ChildCount; i++)
+        //    {
+        //        if (GetChildAt(i) is T child)
+        //        {
+        //            res = child;
+        //        }
+        //    }
 
-            return res;
-        }
+        //    return res;
+        //}
 
-        #endregion
+        //#endregion
     }
 }
