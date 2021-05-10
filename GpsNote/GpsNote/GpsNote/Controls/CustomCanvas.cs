@@ -129,7 +129,7 @@ namespace GpsNote.Controls
             int width = e.Info.Width;
             int height = e.Info.Height;
 
-            float radius = (width / 10f) < (height / 10f) ? width / 11f : height / 11f;
+            float radius = width < height ? width / 12f : height / 12f;
 
             canvas.Translate(width / 2, height / 2);
             canvas.Scale(width / 200f);

@@ -44,14 +44,14 @@
                                 <SwipeView.RightItems>
 
                                     <SwipeItem Text="{Binding Path=BindingContext.Resource[DeleteText]}"
-                                               IconImageSource="ic_edit.png" 
+                                               IconImageSource="ic_delete.png" 
                                                BackgroundColor="LightPink"
                                                Command="{Binding Path=BindingContext.DeleteTapCommand, 
                                                          Source={x:Reference pinsListView}}"  
                                                CommandParameter="{Binding .}" />
 
                                     <SwipeItem Text="{Binding Path=BindingContext.Resource[EditText]}"
-                                               IconImageSource="ic_delete.png" 
+                                               IconImageSource="ic_edit.png" 
                                                BackgroundColor="LightGreen"
                                                Command="{Binding Path=BindingContext.UpdateTapCommand, 
                                                          Source={x:Reference pinsListView}}"  

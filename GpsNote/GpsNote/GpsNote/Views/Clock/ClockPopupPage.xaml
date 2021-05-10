@@ -8,7 +8,8 @@
                      x:Class="GpsNote.Views.Clock.ClockPopupPage"
                      NavigationPage.HasBackButton="False"
                      NavigationPage.HasNavigationBar="False"
-                     Padding="20, 100">
+                     Padding="20, 50"
+                     BackgroundColor="Transparent">
 
     <Grid RowDefinitions="0.15*, 0.15*, 0.7*"     
           BackgroundColor="{AppThemeBinding Light={StaticResource SystemWhite},
