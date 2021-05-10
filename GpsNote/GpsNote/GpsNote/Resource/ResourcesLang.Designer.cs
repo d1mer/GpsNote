@@ -160,6 +160,15 @@ namespace GpsNote.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete selected pin?.
+        /// </summary>
+        internal static string DeletePinText {
+            get {
+                return ResourceManager.GetString("DeletePinText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string DeleteText {
@@ -417,6 +426,15 @@ namespace GpsNote.Resource {
         internal static string NotFoundEmailError {
             get {
                 return ResourceManager.GetString("NotFoundEmailError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string OkText {
+            get {
+                return ResourceManager.GetString("OkText", resourceCulture);
             }
         }
         

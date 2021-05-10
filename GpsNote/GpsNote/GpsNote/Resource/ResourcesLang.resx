@@ -150,6 +150,9 @@
   <data name="DarkThemeLabel" xml:space="preserve">
     <value>Dark theme</value>
   </data>
+  <data name="DeletePinText" xml:space="preserve">
+    <value>Delete selected pin?</value>
+  </data>
   <data name="DeleteText" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="NotFoundEmailError" xml:space="preserve">
     <value>this email wasn't found</value>
+  </data>
+  <data name="OkText" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="OrLabel" xml:space="preserve">
     <value> or </value>

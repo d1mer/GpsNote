@@ -230,7 +230,7 @@ namespace GpsNote.ViewModels
 
             if(pinViewModel != null)
             {
-                string res = await _dialogService.DisplayActionSheetAsync("Delete selected pin?", "OK", "Cancel");
+                string res = await _dialogService.DisplayActionSheetAsync(Resource["DeletePinText"], Resource["OkText"], Resource["CancelText"]);
 
                 if (res == "OK")
                 {

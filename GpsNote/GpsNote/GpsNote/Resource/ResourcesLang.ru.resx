@@ -150,6 +150,9 @@
   <data name="DarkThemeLabel" xml:space="preserve">
     <value>Темная тема</value>
   </data>
+  <data name="DeletePinText" xml:space="preserve">
+    <value>Удалить выбранную метку?</value>
+  </data>
   <data name="DeleteText" xml:space="preserve">
     <value>Удалить</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="NotFoundEmailError" xml:space="preserve">
     <value>почта с таким адресом не найдена</value>
+  </data>
+  <data name="OkText" xml:space="preserve">
+    <value>Подтвердить</value>
   </data>
   <data name="OrLabel" xml:space="preserve">
     <value> или </value>
